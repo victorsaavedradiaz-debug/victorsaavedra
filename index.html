@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --oro: #c9a84c;
+    --oro-tenue: #8a6f2e;
+    --blanco: #f5f0ea;
+    --fondo: #0b0b0b;
+    --fondo-card: #131313;
+    --fondo-card2: #181818;
+    --borde: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fondo);
+    color: #d8d2c8;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,11,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.4rem 4rem;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    color: var(--oro);
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--oro); }
+
+  /* HERO */
+  .hero {
+    padding: 7rem 4rem 6rem;
+    border-bottom: 0.5px solid var(--borde);
+    max-width: 100%;
+    position: relative;
+    background-image: url('hero-bg.png');
+    background-size: auto 100%;
+    background-position: right center;
+    min-height: 600px;
+    background-color: #0b0b0b;
+    background-repeat: no-repeat;
+  }
+
+  .hero::before {
+    content: none;
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-nombre {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+  }
+
+  .hero-tagline {
+    font-size: 22px;
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    max-width: 560px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
+  }
+
+  .hero-etiqueta {
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  /* SECCIONES */
+  section {
+    padding: 5rem 4rem;
+    border-bottom: 0.5px solid var(--borde);
+  }
+
+  .section-label {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 0.5px;
+    width: 60px;
+    background: var(--oro-tenue);
+  }
+
+  /* OBRA */
+  .obra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+  }
+
+  .obra-card {
+    background: var(--fondo-card);
+    border: 0.5px solid #333;
+    padding: 2.5rem;
+    transition: border-color 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .obra-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--oro);
+    transition: height 0.4s ease;
+  }
+
+  .obra-card:hover { background: var(--fondo-card2); border-color: #444; }
+  .obra-card:hover::before { height: 100%; }
+
+  .obra-tipo {
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ddd;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .obra-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .obra-desc {
+    font-size: 17px;
+    color: #e0dbd4;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .obra-accion {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oro);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--oro-tenue);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .obra-accion:hover { border-color: var(--oro); }
+
+  /* TRAYECTORIA */
+  .trayectoria-texto { max-width: 680px; }
+
+  .trayectoria-texto p {
+    font-size: 17px;
+    color: #ccc6bc;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .trayectoria-texto p:last-child { margin-bottom: 0; }
+
+  /* CONTACTO */
+  .contacto-wrap { max-width: 560px; }
+
+  .contacto-wrap p {
+    font-size: 17px;
+    color: #c8c2b8;
+    line-height: 1.85;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+  }
+
+  .contacto-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #d8d2c8;
+    text-decoration: none;
+    border: 0.5px solid #444;
+    padding: 1rem 2rem;
+    transition: all 0.25s;
+  }
+
+  .contacto-email:hover { color: var(--oro); border-color: var(--oro); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: #666;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+  }
+
+  .footer-marca {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #555;
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; justify-content: center; }
+    .nav-links { gap: 1.5rem; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .hero-nombre { font-size: 48px; }
+    .hero-tagline { font-size: 18px; }
+    section { padding: 3.5rem 1.5rem; }
+    .obra-grid { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-links">
+    <li><a href="#obra">Obra</a></li>
+    <li><a href="#trayectoria">Trayectoria</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <h1 class="hero-nombre">Víctor<br>Saavedra</h1>
+  <p class="hero-tagline">Con la fea costumbre de pensar fuera de la caja.</p>
+</div>
+
+<section id="obra">
+  <p class="section-label">Obra</p>
+  <div class="obra-grid">
+
+    <div class="obra-card">
+      <p class="obra-tipo">Saga &nbsp;·&nbsp; Pedagogía financiera</p>
+      <h2 class="obra-titulo">Finanzas bajo sospecha</h2>
+      <p class="obra-desc">Una experiencia narrativa de formación financiera donde cada cifra es una pista y cada decisión revela una verdad empresarial.</p>
+      <a href="finanzas.html" class="obra-accion">Ver episodio piloto</a>
+    </div>
+
+    <div class="obra-card">
+      <p class="obra-tipo">Ensayo</p>
+      <h2 class="obra-titulo">El inversor inteligente ha muerto</h2>
+      <p class="obra-desc">Un ensayo crítico sobre la supervivencia del inversor clásico en un mercado donde los algoritmos aceleran las decisiones y las métricas tradicionales llegan tarde para interpretar la inversión que construye el futuro.</p>
+      <a href="ensayo.html" class="obra-accion">Leer introducción</a>
+    </div>
+
+    <div class="obra-card">
+      <p class="obra-tipo">Pensamientos publicados</p>
+      <h2 class="obra-titulo">Artículos y reflexiones</h2>
+      <p class="obra-desc">Una recopilación de artículos centrados en finanzas, inteligencia artificial y pensamiento crítico. Textos que combinan análisis, reflexión y una mirada propia sobre los cambios que están transformando la forma en que interpretamos la realidad económica, tecnológica y empresarial.</p>
+      <a href="articulos.html" class="obra-accion">Para leer</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="trayectoria">
+  <p class="section-label">Trayectoria</p>
+  <div class="trayectoria-texto">
+    <p>Mi trayectoria profesional se ha construido en torno a una idea constante: ayudar a comprender mejor la realidad económica y financiera para tomar mejores decisiones.</p>
+    <p>Durante años he combinado el análisis financiero, el asesoramiento empresarial y la docencia en programas de máster. Dos perspectivas que se alimentan mutuamente: la del asesor que trabaja con empresas reales y la del profesor que debe explicar con claridad conceptos complejos. De esa tensión nace un enfoque propio: los estados financieros no son documentos estáticos, son narraciones económicas que, bien leídas, revelan la verdadera salud de una organización.</p>
+    <p>Con el tiempo, mi trabajo ha evolucionado hacia una visión más integradora: finanzas, pensamiento crítico, tecnología e inteligencia artificial. Sigo explorando nuevas formas de análisis y comunicación porque creo que la forma en que entendemos nuestro entorno determina lo que somos capaces de hacer con él.</p>
+  </div>
+</section>
+
+<section id="contacto">
+  <p class="section-label">Contacto</p>
+  <div class="contacto-wrap">
+    <p>Para consultas sobre derechos de uso de obra literaria, colaboraciones editoriales o cualquier otro asunto.</p>
+    <a href="mailto:victor@victorsaavedra.com" class="contacto-email">
+      &#9656; &nbsp; victor@victorsaavedra.com
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 Víctor Saavedra &nbsp;·&nbsp; La Laguna, Canarias</span>
+  <span class="footer-marca">Analista · Autor</span>
+</footer>
+
+</body>
+</html>

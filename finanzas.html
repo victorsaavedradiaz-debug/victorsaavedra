@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finanzas bajo sospecha — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --oro: #c9a84c;
+    --oro-tenue: #8a6f2e;
+    --blanco: #f5f0ea;
+    --fondo: #0b0b0b;
+    --fondo-card: #131313;
+    --borde: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fondo);
+    color: #f0ece6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,11,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+  }
+
+  .nav-back {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e8e2d9;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-back:hover { color: var(--oro); }
+
+  .nav-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #e8e2d9;
+    font-weight: 400;
+  }
+
+  .cabecera {
+    padding: 5rem 4rem 4rem;
+    border-bottom: 0.5px solid var(--borde);
+    max-width: 900px;
+  }
+
+  .cabecera-tipo {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .cabecera-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--blanco);
+    line-height: 1.05;
+    margin-bottom: 0.8rem;
+  }
+
+  .cabecera-subtitulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #aaa;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .cabecera-desc {
+    font-size: 16px;
+    color: #e8e2d9;
+    line-height: 1.8;
+    max-width: 640px;
+  }
+
+  .video-wrap {
+    padding: 4rem;
+    border-bottom: 0.5px solid var(--borde);
+  }
+
+  .video-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #f0ece6;
+    text-decoration: none;
+    border: 0.5px solid #444;
+    padding: 1.2rem 2.5rem;
+    transition: all 0.25s;
+  }
+
+  .video-btn:hover { color: var(--oro); border-color: var(--oro); }
+
+  .video-btn-icon {
+    font-size: 20px;
+    color: var(--oro);
+  }
+
+  .cta-wrap {
+    padding: 4rem;
+    max-width: 560px;
+  }
+
+  .cta-wrap p {
+    font-size: 15px;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-wrap a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #f0ece6;
+    text-decoration: none;
+    border: 0.5px solid #444;
+    padding: 0.9rem 1.8rem;
+    transition: all 0.25s;
+  }
+
+  .cta-wrap a:hover { color: var(--oro); border-color: var(--oro); }
+
+  footer {
+    padding: 1.5rem 4rem;
+    border-top: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy { font-size: 12px; color: #444; letter-spacing: 0.08em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .cabecera { padding: 3rem 1.5rem 2.5rem; }
+    .cabecera-titulo { font-size: 36px; }
+    .video-wrap { padding: 2rem 1.5rem; }
+    .cta-wrap { padding: 2.5rem 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="victor-saavedra.html" class="nav-back">← Volver</a>
+  <span class="nav-titulo">Finanzas bajo sospecha</span>
+</nav>
+
+<div class="cabecera">
+  <p class="cabecera-tipo">Saga · Pedagogía financiera</p>
+  <h1 class="cabecera-titulo">Finanzas bajo sospecha</h1>
+  <p class="cabecera-desc">Víctor Drave no es un detective. Es un financiero forense. Y en Sterling Corp, los números mienten mejor que las personas.</p>
+</div>
+
+<div class="video-wrap">
+  <a href="https://youtu.be/SN4Fgr8wnUE" target="_blank" class="video-btn">
+    <span class="video-btn-icon">&#9654;</span>
+    Ver episodio piloto en YouTube
+  </a>
+</div>
+
+<div class="cta-wrap">
+  <p>Para consultas sobre derechos de uso de esta obra.</p>
+  <a href="mailto:victor@victorsaavedra.com">&#9656; &nbsp; Contactar</a>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+</footer>
+
+</body>
+</html>

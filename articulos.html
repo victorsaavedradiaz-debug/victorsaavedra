@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artículos y reflexiones — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --oro: #c9a84c;
+    --oro-tenue: #8a6f2e;
+    --blanco: #f5f0ea;
+    --fondo: #0b0b0b;
+    --fondo-card: #131313;
+    --fondo-card2: #181818;
+    --borde: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fondo);
+    color: #f0ece6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,11,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+  }
+
+  .nav-back {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #e8e2d9;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-back:hover { color: var(--oro); }
+
+  .nav-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e8e2d9;
+    font-weight: 400;
+  }
+
+  /* CABECERA */
+  .cabecera {
+    padding: 6rem 4rem 5rem;
+    border-bottom: 0.5px solid var(--borde);
+    max-width: 860px;
+  }
+
+  .cabecera-tipo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .cabecera-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--blanco);
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+  }
+
+  .cabecera-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: #e8e2d9;
+    line-height: 1.7;
+    max-width: 620px;
+    font-weight: 400;
+  }
+
+  /* BLOQUES */
+  .bloque {
+    padding: 5rem 4rem;
+    border-bottom: 0.5px solid var(--borde);
+  }
+
+  .bloque-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .bloque-label::after {
+    content: '';
+    display: block;
+    height: 0.5px;
+    width: 60px;
+    background: var(--oro-tenue);
+  }
+
+  /* TARJETA TRILOGÍA */
+  .tarjeta {
+    display: block;
+    background: var(--fondo-card);
+    border: 0.5px solid #333;
+    padding: 2.5rem;
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+    max-width: 700px;
+  }
+
+  .tarjeta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--oro);
+    transition: height 0.4s ease;
+  }
+
+  .tarjeta:hover { background: var(--fondo-card2); border-color: #bbb; }
+  .tarjeta:hover::before { height: 100%; }
+
+  .tarjeta-tipo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ccc;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+  }
+
+  .tarjeta-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--blanco);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .tarjeta-desc {
+    font-size: 15px;
+    color: #e8e2d9;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .tarjeta-accion {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--oro);
+    border-bottom: 0.5px solid var(--oro-tenue);
+    padding-bottom: 2px;
+  }
+
+  /* TARJETA NAF */
+  .tarjeta-naf {
+    max-width: 700px;
+    background: var(--fondo-card);
+    border: 0.5px solid #333;
+    padding: 2.5rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tarjeta-naf::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--oro);
+    transition: height 0.4s ease;
+  }
+
+  .tarjeta-naf:hover { background: var(--fondo-card2); border-color: #bbb; }
+  .tarjeta-naf:hover::before { height: 100%; }
+
+  .tarjeta-naf-acronimo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: #666;
+    position: absolute;
+    right: 2.5rem;
+    top: 1.5rem;
+    line-height: 1;
+  }
+
+  .tarjeta-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: #ccc;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 4rem;
+    border-top: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: #bbb;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .cabecera { padding: 3.5rem 1.5rem 3rem; }
+    .cabecera-titulo { font-size: 38px; }
+    .bloque { padding: 3rem 1.5rem; }
+    .tarjeta-naf-acronimo { display: none; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="victor-saavedra.html" class="nav-back">← Volver</a>
+  <span class="nav-titulo">Pensamientos publicados</span>
+</nav>
+
+<div class="cabecera">
+  <p class="cabecera-tipo">Pensamientos publicados</p>
+  <h1 class="cabecera-titulo">Artículos<br>y reflexiones</h1>
+  <p class="cabecera-desc">Textos sobre finanzas, inteligencia artificial y pensamiento crítico. Una mirada propia sobre los cambios que transforman la forma en que interpretamos la realidad económica y tecnológica.</p>
+</div>
+
+<div class="bloque">
+  <p class="bloque-label">Trilogía</p>
+  <a href="trilogia.html" class="tarjeta">
+    <p class="tarjeta-tipo">Tres artículos</p>
+    <h2 class="tarjeta-titulo">Las distorsiones del relato oficial</h2>
+    <p class="tarjeta-desc">La crisis que no se ve, el crecimiento que no crea valor y el individuo que ha perdido su centro. Tres piezas que se leen por separado y se entienden mejor juntas.</p>
+    <span class="tarjeta-accion">Leer la trilogía</span>
+  </a>
+</div>
+
+<div class="bloque">
+  <p class="bloque-label">Working Paper</p>
+  <a href="naf.html" class="tarjeta-naf">
+    <span class="tarjeta-naf-acronimo">NAF</span>
+    <p class="tarjeta-tipo">Working Paper · Bilingüe</p>
+    <h2 class="tarjeta-titulo">Neural Arbitration Framework</h2>
+    <p class="tarjeta-desc">Una propuesta arquitectónica sobre el problema de la alucinación en modelos de lenguaje. La alucinación no es un problema de conocimiento. Es un problema de arquitectura.</p>
+    <span class="tarjeta-accion">Leer abstract</span>
+  </a>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+</footer>
+
+</body>
+</html>

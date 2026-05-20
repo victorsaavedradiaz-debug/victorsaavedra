@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neural Arbitration Framework — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --oro: #c9a84c;
+    --oro-tenue: #8a6f2e;
+    --blanco: #f5f0ea;
+    --fondo: #0b0b0b;
+    --fondo-card: #131313;
+    --borde: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fondo);
+    color: #f0ece6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,11,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+  }
+
+  .nav-back {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #e8e2d9;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-back:hover { color: var(--oro); }
+
+  .nav-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e8e2d9;
+    font-weight: 400;
+  }
+
+  /* CABECERA */
+  .cabecera {
+    padding: 5rem 4rem 4rem;
+    border-bottom: 0.5px solid var(--borde);
+    max-width: 860px;
+  }
+
+  .cabecera-tipo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .cabecera-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--blanco);
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+  }
+
+  .cabecera-acronimo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--oro);
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .cabecera-subtitulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e8e2d9;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+    line-height: 1.5;
+  }
+
+  .cabecera-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #e8e2d9;
+    letter-spacing: 0.05em;
+  }
+
+  /* PESTAÑAS */
+  .tabs-wrap {
+    padding: 4rem 4rem 0;
+  }
+
+  .tabs-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 0.5px solid var(--borde);
+    margin-bottom: 3rem;
+  }
+
+  .tab-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ccc;
+    background: none;
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -0.5px;
+    transition: all 0.25s;
+  }
+
+  .tab-btn:hover { color: #e8e2d9; }
+
+  .tab-btn.active {
+    color: var(--oro);
+    border-bottom-color: var(--oro);
+  }
+
+  .tab-content { display: none; max-width: 720px; padding-bottom: 5rem; }
+  .tab-content.active { display: block; }
+
+  .abstract-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  .abstract-texto p {
+    font-size: 16px;
+    color: #f0ece6;
+    line-height: 1.9;
+    margin-bottom: 1.4rem;
+    font-weight: 400;
+  }
+
+  /* CTA */
+  .naf-cta {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--fondo-card);
+    border: 0.5px solid var(--borde);
+    max-width: 720px;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 5rem;
+  }
+
+  .naf-cta p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e8e2d9;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .naf-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #f0ece6;
+    text-decoration: none;
+    border: 0.5px solid #444;
+    padding: 0.9rem 1.8rem;
+    transition: all 0.25s;
+  }
+
+  .naf-cta a:hover { color: var(--oro); border-color: var(--oro); }
+
+  footer {
+    padding: 1.5rem 4rem;
+    border-top: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: #bbb;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .cabecera { padding: 3rem 1.5rem 2.5rem; }
+    .cabecera-titulo { font-size: 36px; }
+    .tabs-wrap { padding: 2.5rem 1.5rem 0; }
+    .naf-cta { margin-left: 1.5rem; margin-right: 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="victor-saavedra.html" class="nav-back">← Volver</a>
+  <span class="nav-titulo">Pensamientos publicados</span>
+</nav>
+
+<div class="cabecera">
+  <p class="cabecera-tipo">Working Paper</p>
+  <h1 class="cabecera-titulo">Neural Arbitration Framework</h1>
+  <p class="cabecera-acronimo">NAF</p>
+  <p class="cabecera-subtitulo">A Conceptual Architecture and Research Agenda for Epistemic Arbitration in Large Language Models</p>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('en')">English</button>
+    <button class="tab-btn" onclick="switchTab('es')">Español</button>
+  </div>
+
+  <div id="tab-en" class="tab-content active">
+    <p class="abstract-label">Abstract</p>
+    <div class="abstract-texto">
+      <p>In 1962, Gazzaniga and Sperry studied patients with severe epilepsy whose corpus callosum —the structure connecting the two cerebral hemispheres— had been surgically severed as a treatment to reduce seizures. By interrupting communication between hemispheres, they observed an unexpected phenomenon: the left hemisphere generated coherent narrative explanations for actions that had actually been initiated by the right hemisphere, without the former having real access to that information. They named this mechanism &ldquo;the interpreter&rdquo;: a cognitive system that constructs plausible accounts in the absence of real knowledge, unable to recognize the limits of what it knows. Its function is not deception. It is integration. The left hemisphere is, by nature, a narrative machine that closes even when it should not.</p>
+      <p>Sixty years later, we have built systems that do the same thing at scale. Large language models produce fluent, confident, and internally coherent responses in zones where their training is incomplete, ambiguous, or absent. This phenomenon is called hallucination: the production of confident, apparently grounded output in the absence of real knowledge. This paper argues that hallucination is not an external defect correctable by verification layers, but an architectural consequence: current language systems lack the functional equivalent of a dedicated epistemic monitoring mode — a hemisphere that does not generate narrative, but maps what the system does not know.</p>
+      <p>The Neural Arbitration Framework (NAF) formalizes this distinction as a two-hemisphere architecture with a five-phase arbitration protocol. The NAF's distinctive claim is not merely temporal but functional: the epistemic process has interruptive authority over narrative closure. The NAF does not necessarily introduce new signals; it introduces a new organizational principle — one in which uncertainty detection can interrupt generation rather than merely annotating it after the fact.</p>
+    </div>
+  </div>
+
+  <div id="tab-es" class="tab-content">
+    <p class="abstract-label">Resumen</p>
+    <div class="abstract-texto">
+      <p>En 1962, Gazzaniga y Sperry estudiaron pacientes con epilepsia severa a quienes se había seccionado el cuerpo calloso —la estructura que conecta los dos hemisferios cerebrales— como tratamiento para reducir las convulsiones. Al interrumpir la comunicación entre hemisferios, observaron un fenómeno inesperado: el hemisferio izquierdo generaba explicaciones narrativas coherentes para acciones que en realidad habían sido iniciadas por el hemisferio derecho, sin que el primero tuviera acceso real a esa información. A este mecanismo lo denominaron &ldquo;el intérprete&rdquo;: un sistema cognitivo que construye relatos plausibles en ausencia de conocimiento real, incapaz de reconocer los límites de lo que sabe. Su función no es el engaño. Es la integración. El hemisferio izquierdo es, por naturaleza, una máquina narrativa que cierra incluso cuando no debería.</p>
+      <p>Sesenta años después, hemos construido sistemas que hacen lo mismo a escala. Los modelos de lenguaje de gran escala producen respuestas fluidas, seguras e internamente coherentes en zonas donde su entrenamiento es incompleto, ambiguo o ausente. A este fenómeno se le denomina alucinación: la producción de output confiado y aparentemente fundamentado en ausencia de conocimiento real. Este artículo argumenta que las alucinaciones no son un defecto externo corregible mediante capas de verificación, sino una consecuencia arquitectónica: los sistemas de lenguaje actuales carecen del equivalente funcional de un modo dedicado a la monitorización epistémica — un hemisferio que no genera narrativa, sino que mapea lo que el sistema no sabe.</p>
+      <p>El Neural Arbitration Framework (NAF) formaliza esta distinción como una arquitectura de dos hemisferios con un protocolo de arbitraje de cinco fases. La afirmación distintiva del NAF no es meramente temporal, sino funcional: el proceso epistémico tiene autoridad para interrumpir el cierre narrativo. El NAF no introduce necesariamente señales nuevas; introduce un nuevo principio organizativo — uno en el que la detección de incertidumbre puede interrumpir la generación en lugar de meramente anotarla a posteriori.</p>
+    </div>
+  </div>
+</div>
+
+<div class="naf-cta">
+  <p>El documento completo está disponible bajo petición. Para solicitar una copia del working paper o consultar sobre posibles colaboraciones editoriales.</p>
+  <a href="mailto:victor@victorsaavedra.com">&#9656; &nbsp; Solicitar documento</a>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+</footer>
+
+<script>
+function switchTab(lang) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.getElementById('tab-' + lang).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

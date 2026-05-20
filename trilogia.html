@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las distorsiones del relato oficial — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --oro: #c9a84c;
+    --oro-tenue: #8a6f2e;
+    --blanco: #f5f0ea;
+    --fondo: #0b0b0b;
+    --fondo-card: #131313;
+    --fondo-card2: #181818;
+    --borde: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fondo);
+    color: #f0ece6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,11,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+  }
+
+  .nav-back {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e8e2d9;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-back:hover { color: var(--oro); }
+
+  .nav-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    color: #e8e2d9;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  /* CABECERA */
+  .cabecera {
+    padding: 6rem 4rem 5rem;
+    border-bottom: 0.5px solid var(--borde);
+    max-width: 860px;
+  }
+
+  .cabecera-tipo {
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .cabecera-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--blanco);
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+  }
+
+  .cabecera-desc {
+    font-size: 18px;
+    color: #e8e2d9;
+    line-height: 1.8;
+    max-width: 620px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* ARTÍCULOS */
+  .articulos-wrap {
+    padding: 5rem 4rem 6rem;
+  }
+
+  .articulo-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding: 2.5rem 0;
+    border-bottom: 0.5px solid var(--borde);
+    text-decoration: none;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .articulo-item:first-child { border-top: 0.5px solid var(--borde); }
+
+  .articulo-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px;
+    height: 0;
+    background: var(--oro);
+    transition: height 0.4s ease;
+  }
+
+  .articulo-item:hover::before { height: 100%; }
+
+  .articulo-numero {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: #2a2a2a;
+    line-height: 1;
+    padding-top: 0.2rem;
+    transition: color 0.3s;
+  }
+
+  .articulo-item:hover .articulo-numero { color: var(--oro-tenue); }
+
+  .articulo-contenido { padding-left: 1rem; }
+
+  .articulo-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+    font-style: italic;
+  }
+
+  .articulo-subtitulo {
+    font-size: 17px;
+    color: #f0ece6;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .articulo-desc {
+    font-size: 16px;
+    color: #e0dbd4;
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  .articulo-leer {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--oro);
+    border-bottom: 0.5px solid var(--oro-tenue);
+    padding-bottom: 2px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 4rem;
+    border-top: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy { font-size: 12px; color: #444; letter-spacing: 0.08em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .cabecera { padding: 3.5rem 1.5rem 3rem; }
+    .cabecera-titulo { font-size: 38px; }
+    .articulos-wrap { padding: 3rem 1.5rem 4rem; }
+    .articulo-item { grid-template-columns: 40px 1fr; gap: 1rem; }
+    .articulo-numero { font-size: 36px; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="victor-saavedra.html" class="nav-back">← Volver</a>
+  <span class="nav-titulo">Pensamientos publicados</span>
+</nav>
+
+<div class="cabecera">
+  <p class="cabecera-tipo">Trilogía</p>
+  <h1 class="cabecera-titulo">Las distorsiones<br>del relato oficial</h1>
+  <p class="cabecera-desc">Tres artículos sobre las fracturas silenciosas de la economía contemporánea: la crisis que no se ve, el crecimiento que no crea valor y el individuo que ha perdido su centro.</p>
+</div>
+
+<div class="articulos-wrap">
+
+  <a href="articulo1.html" class="articulo-item">
+    <span class="articulo-numero">I</span>
+    <div class="articulo-contenido">
+      <h2 class="articulo-titulo">Una crisis travestida</h2>
+      <p class="articulo-subtitulo">Simulación de estabilidad en una economía que se descompone</p>
+      <p class="articulo-desc">¿Y si la crisis ya no se manifiesta en forma de colapso repentino, sino como un deterioro silencioso, camuflado bajo una apariencia de estabilidad? Una hipótesis incómoda sobre las métricas que ya no capturan lo que ocurre.</p>
+      <span class="articulo-leer">Leer artículo</span>
+    </div>
+  </a>
+
+  <a href="articulo2.html" class="articulo-item">
+    <span class="articulo-numero">II</span>
+    <div class="articulo-contenido">
+      <h2 class="articulo-titulo">La trampa del crecimiento</h2>
+      <p class="articulo-subtitulo">Cuando el mérito no cuenta, el crecimiento es solo apariencia</p>
+      <p class="articulo-desc">Muchas empresas presentan cifras de crecimiento al alza. Pero al observar su estructura de costes y resultados, lo que aparece no es eficiencia ni rentabilidad sostenida. El mercado ya no premia al más eficiente, sino al mejor conectado.</p>
+      <span class="articulo-leer">Leer artículo</span>
+    </div>
+  </a>
+
+  <a href="articulo3.html" class="articulo-item">
+    <span class="articulo-numero">III</span>
+    <div class="articulo-contenido">
+      <h2 class="articulo-titulo">El actor fracturado</h2>
+      <p class="articulo-subtitulo">Cuando la acción humana pierde su centro en una economía desplazada</p>
+      <p class="articulo-desc">No es solo el sistema el que colapsa. Es el actor el que se fractura. Y cuando eso ocurre, ya no importa que el escenario siga en pie: la función ha terminado.</p>
+      <span class="articulo-leer">Leer artículo</span>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  <span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+</footer>
+
+</body>
+</html>

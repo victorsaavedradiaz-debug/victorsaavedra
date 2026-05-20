@@ -108,26 +108,23 @@
     border-bottom: 0.5px solid var(--borde);
   }
 
-  .video-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #f0ece6;
-    text-decoration: none;
-    border: 0.5px solid #444;
-    padding: 1.2rem 2.5rem;
-    transition: all 0.25s;
+  .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    padding-bottom: 50.625%;
+    height: 0;
+    overflow: hidden;
+    background: #000;
   }
 
-  .video-btn:hover { color: var(--oro); border-color: var(--oro); }
-
-  .video-btn-icon {
-    font-size: 20px;
-    color: var(--oro);
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
   }
 
   .cta-wrap {
@@ -193,10 +190,14 @@
 </div>
 
 <div class="video-wrap">
-  <a href="https://youtu.be/SN4Fgr8wnUE" target="_blank" class="video-btn">
-    <span class="video-btn-icon">&#9654;</span>
-    Ver episodio piloto en YouTube
-  </a>
+  <div class="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/SN4Fgr8wnUE"
+      title="Finanzas bajo sospecha — Episodio piloto"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
 </div>
 
 <div class="cta-wrap">

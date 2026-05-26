@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --oro: #c9a84c;
     --oro-tenue: #8a6f2e;
@@ -17,218 +16,51 @@
     --fondo-card: #131313;
     --borde: #2a2a2a;
   }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--fondo); color: #e0dbd4; font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.85; min-height: 100vh; }
 
-  body {
-    background: var(--fondo);
-    color: #f0ece6;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 1.75;
-    min-height: 100vh;
-  }
-
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(11,11,11,0.96);
-    backdrop-filter: blur(8px);
-    border-bottom: 0.5px solid var(--borde);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.4rem 4rem;
-  }
-
-  .nav-back {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: #e8e2d9;
-    text-decoration: none;
-    transition: color 0.25s;
-  }
-
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(11,11,11,0.96); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 4rem; }
+  .nav-back { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; letter-spacing: 0.1em; color: #c8c2b8; text-decoration: none; transition: color 0.25s; }
   .nav-back:hover { color: var(--oro); }
+  .nav-titulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #c8c2b8; font-weight: 400; }
 
-  .nav-titulo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #e8e2d9;
-    font-weight: 400;
-  }
+  .cabecera { padding: 5rem 4rem 4rem; border-bottom: 0.5px solid var(--borde); max-width: 860px; }
+  .cabecera-tipo { font-family: 'Cormorant Garamond', serif; font-size: 20px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 1rem; }
+  .cabecera-titulo { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--blanco); line-height: 1.05; margin-bottom: 0.5rem; }
+  .cabecera-acronimo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--oro); font-weight: 400; margin-bottom: 1rem; }
+  .cabecera-subtitulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #e8e2d9; font-weight: 400; margin-bottom: 0.5rem; max-width: 700px; line-height: 1.5; }
+  .cabecera-autor { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #bbb; margin-top: 1rem; }
 
-  /* CABECERA */
-  .cabecera {
-    padding: 5rem 4rem 4rem;
-    border-bottom: 0.5px solid var(--borde);
-    max-width: 860px;
-  }
-
-  .cabecera-tipo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--oro);
-    font-weight: 500;
-    margin-bottom: 1rem;
-  }
-
-  .cabecera-titulo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    color: var(--blanco);
-    line-height: 1.05;
-    margin-bottom: 0.5rem;
-  }
-
-  .cabecera-acronimo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--oro);
-    font-weight: 400;
-    margin-bottom: 1rem;
-  }
-
-  .cabecera-subtitulo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #e8e2d9;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-    max-width: 700px;
-    line-height: 1.5;
-  }
-
-  .cabecera-meta {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    color: #e8e2d9;
-    letter-spacing: 0.05em;
-  }
-
-  /* PESTAÑAS */
-  .tabs-wrap {
-    padding: 4rem 4rem 0;
-  }
-
-  .tabs-nav {
-    display: flex;
-    gap: 0;
-    border-bottom: 0.5px solid var(--borde);
-    margin-bottom: 3rem;
-  }
-
-  .tab-btn {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #ccc;
-    background: none;
-    border: none;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -0.5px;
-    transition: all 0.25s;
-  }
-
+  .tabs-wrap { padding: 4rem 4rem 0; }
+  .tabs-nav { display: flex; gap: 0; border-bottom: 0.5px solid var(--borde); margin-bottom: 3rem; }
+  .tab-btn { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; background: none; border: none; padding: 1rem 2rem; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: all 0.25s; }
   .tab-btn:hover { color: #e8e2d9; }
-
-  .tab-btn.active {
-    color: var(--oro);
-    border-bottom-color: var(--oro);
-  }
-
-  .tab-content { display: none; max-width: 720px; padding-bottom: 5rem; }
+  .tab-btn.active { color: var(--oro); border-bottom-color: var(--oro); }
+  .tab-content { display: none; max-width: 720px; padding-bottom: 4rem; }
   .tab-content.active { display: block; }
 
-  .abstract-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--oro);
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-  }
+  .abstract-label { font-family: 'Cormorant Garamond', serif; font-size: 20px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 1.5rem; }
+  .abstract-texto p { font-size: 16px; color: #e0dbd4; line-height: 1.9; margin-bottom: 1.4rem; font-weight: 400; }
 
-  .abstract-texto p {
-    font-size: 16px;
-    color: #f0ece6;
-    line-height: 1.9;
-    margin-bottom: 1.4rem;
-    font-weight: 400;
-  }
+  .descargas { padding: 3rem 4rem 5rem; border-top: 0.5px solid var(--borde); max-width: 760px; }
+  .descargas-label { font-family: 'Cormorant Garamond', serif; font-size: 20px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+  .descargas-label::after { content: ''; display: block; height: 0.5px; width: 60px; background: var(--oro-tenue); }
+  .descargas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 600px; }
+  .descarga-btn { display: flex; flex-direction: column; gap: 0.4rem; background: var(--fondo-card); border: 0.5px solid #333; padding: 1.5rem 2rem; text-decoration: none; transition: border-color 0.25s, background 0.25s; }
+  .descarga-btn:hover { border-color: var(--oro); background: #181818; }
+  .descarga-idioma { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--blanco); font-weight: 400; }
+  .descarga-detalle { font-size: 12px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; }
+  .descarga-icono { font-size: 22px; color: var(--oro); margin-top: 0.5rem; }
 
-  /* CTA */
-  .naf-cta {
-    margin-top: 3rem;
-    padding: 2rem;
-    background: var(--fondo-card);
-    border: 0.5px solid var(--borde);
-    max-width: 720px;
-    margin-left: 4rem;
-    margin-right: 4rem;
-    margin-bottom: 5rem;
-  }
-
-  .naf-cta p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #e8e2d9;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-
-  .naf-cta a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #f0ece6;
-    text-decoration: none;
-    border: 0.5px solid #444;
-    padding: 0.9rem 1.8rem;
-    transition: all 0.25s;
-  }
-
-  .naf-cta a:hover { color: var(--oro); border-color: var(--oro); }
-
-  footer {
-    padding: 1.5rem 4rem;
-    border-top: 0.5px solid var(--borde);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-copy {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    color: #bbb;
-    letter-spacing: 0.08em;
-  }
+  footer { padding: 1.5rem 4rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #555; letter-spacing: 0.08em; }
 
   @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-titulo { display: none; }
-    .cabecera { padding: 3rem 1.5rem 2.5rem; }
-    .cabecera-titulo { font-size: 36px; }
+    nav { padding: 1.2rem 1.5rem; } .nav-titulo { display: none; }
+    .cabecera { padding: 3rem 1.5rem 2.5rem; } .cabecera-titulo { font-size: 36px; }
     .tabs-wrap { padding: 2.5rem 1.5rem 0; }
-    .naf-cta { margin-left: 1.5rem; margin-right: 1.5rem; }
+    .descargas { padding: 2.5rem 1.5rem 4rem; }
+    .descargas-grid { grid-template-columns: 1fr; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
   }
 </style>
@@ -245,12 +77,13 @@
   <h1 class="cabecera-titulo">Neural Arbitration Framework</h1>
   <p class="cabecera-acronimo">NAF</p>
   <p class="cabecera-subtitulo">A Conceptual Architecture and Research Agenda for Epistemic Arbitration in Large Language Models</p>
+  <p class="cabecera-autor">Víctor Saavedra &nbsp;·&nbsp; Version 5.1 &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; SSRN Preprint</p>
 </div>
 
 <div class="tabs-wrap">
   <div class="tabs-nav">
-    <button class="tab-btn active" onclick="switchTab('en')">English</button>
-    <button class="tab-btn" onclick="switchTab('es')">Español</button>
+    <button class="tab-btn active" onclick="switchTab(event, 'en')">English</button>
+    <button class="tab-btn" onclick="switchTab(event, 'es')">Español</button>
   </div>
 
   <div id="tab-en" class="tab-content active">
@@ -272,9 +105,20 @@
   </div>
 </div>
 
-<div class="naf-cta">
-  <p>El documento completo está disponible bajo petición. Para solicitar una copia del working paper o consultar sobre posibles colaboraciones editoriales.</p>
-  <a href="mailto:victor@victorsaavedra.com">&#9656; &nbsp; Solicitar documento</a>
+<div class="descargas">
+  <p class="descargas-label">Descargar documento completo</p>
+  <div class="descargas-grid">
+    <a href="naf_english.pdf" download class="descarga-btn">
+      <span class="descarga-idioma">English version</span>
+      <span class="descarga-detalle">PDF · Working Paper</span>
+      <span class="descarga-icono">&#8595;</span>
+    </a>
+    <a href="naf_espanol.pdf" download class="descarga-btn">
+      <span class="descarga-idioma">Versión en español</span>
+      <span class="descarga-detalle">PDF · Working Paper</span>
+      <span class="descarga-icono">&#8595;</span>
+    </a>
+  </div>
 </div>
 
 <footer>
@@ -282,7 +126,7 @@
 </footer>
 
 <script>
-function switchTab(lang) {
+function switchTab(event, lang) {
   document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
   document.getElementById('tab-' + lang).classList.add('active');

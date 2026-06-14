@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Un ajuste fiscal necesario, ejecutado de un modo que ninguna doctrina seria autoriza. Cinco casos del gobierno de Milei indefendibles incluso para un libertario.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La motosierra sin doctrina — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --oro: #c9a84c;
+    --oro-tenue: #8a6f2e;
+    --blanco: #f5f0ea;
+    --fondo: #0b0b0b;
+    --fondo-card: #131313;
+    --borde: #2a2a2a;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--fondo); color: #f0ece6; font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; line-height: 1.75; min-height: 100vh; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(11,11,11,0.96); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 4rem; }
+  .nav-back { font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #e8e2d9; text-decoration: none; transition: color 0.25s; }
+  .nav-back:hover { color: var(--oro); }
+  .nav-titulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #e8e2d9; font-weight: 400; }
+  .articulo-wrap { max-width: 720px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+  .articulo-tipo { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 1rem; }
+  .articulo-titulo { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--blanco); line-height: 1.05; margin-bottom: 0.8rem; }
+  .articulo-subtitulo { font-family: 'Cormorant Garamond', serif; font-size: 20px !important; font-style: normal; color: #c8c2b8 !important; font-weight: 400; margin-bottom: 3rem; }
+  .articulo-separador { width: 60px; height: 0.5px; background: var(--oro-tenue); margin-bottom: 3rem; }
+  .articulo-wrap p { font-size: 16px; color: #e0dbd4; line-height: 1.9; margin-bottom: 1.4rem; font-weight: 400; }
+  .articulo-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: #e0dbd4; margin-top: 2.5rem; margin-bottom: 1rem; }
+  .articulo-wrap p .etq { color: var(--blanco); font-weight: 500; }
+  .articulo-tesis { font-family: 'Cormorant Garamond', serif; font-size: 25px; font-style: italic; font-weight: 400; color: var(--blanco); line-height: 1.4; margin: 2.4rem 0; padding-left: 1.4rem; border-left: 2px solid var(--oro); }
+  .articulo-imagen { width: 100%; max-width: 520px; height: auto; display: block; margin: 0 auto 3rem; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+  .anexo-nota { font-size: 14px !important; font-style: italic; color: #b8b2a8 !important; margin-bottom: 1.5rem !important; }
+  .anexo-tabla { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-family: 'Montserrat', sans-serif; }
+  .anexo-tabla th { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--oro); font-weight: 500; text-align: left; padding: 0.75rem 0.8rem; border-bottom: 0.5px solid var(--oro-tenue); vertical-align: top; }
+  .anexo-tabla td { font-size: 13.5px; padding: 0.75rem 0.8rem; border-bottom: 0.5px solid var(--borde); color: #d8d3cc; line-height: 1.6; vertical-align: top; }
+  .anexo-tabla td:first-child { color: var(--blanco); font-weight: 500; width: 22%; }
+  .anexo-tabla td:last-child { color: #b8b2a8; width: 18%; }
+  .articulo-firma { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: #b8b2a8; margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--borde); }
+  .nav-articulos { margin-top: 3rem; padding-top: 2rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; }
+  .nav-articulos a { font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro); text-decoration: none; transition: color 0.25s; }
+  .nav-articulos a:hover { color: #f0ece6; }
+  footer { padding: 1.5rem 4rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #bbb; letter-spacing: 0.08em; }
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .articulo-wrap { padding: 3.5rem 1.5rem 4rem; }
+    .articulo-titulo { font-size: 36px; }
+    .anexo-tabla th, .anexo-tabla td { padding: 0.6rem 0.5rem; }
+    .anexo-tabla td:first-child, .anexo-tabla td:last-child { width: auto; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="articulos.html" class="nav-back">← Artículos</a>
+  <span class="nav-titulo">Pensamientos publicados</span>
+</nav>
+
+<div class="articulo-wrap">
+  <p class="articulo-tipo">Artículo de opinión · Junio de 2026</p>
+  <h1 class="articulo-titulo">La motosierra sin doctrina</h1>
+  <p class="articulo-subtitulo">Cinco ejecuciones del gobierno de Milei que ningún libertario debería defender</p>
+  <div class="articulo-separador"></div>
+  <img src="img-articulo4.png" alt="La motosierra sin doctrina" class="articulo-imagen">
+
+  <p>La pregunta llega siempre con la trampa puesta: si eres libertario, ¿defiendes esto? Y &#8220;esto&#8221; es un hombre en silla de ruedas que pierde su pensión sin que nadie le avise, o cinco mil toneladas de comida pudriéndose en un galpón mientras una olla popular raspa el fondo. La trampa consiste en presentar la crueldad como corolario lógico de una doctrina. Desarmar la confusión exige una distinción que casi nadie hace: la que separa el principio de la ejecución.</p>
+
+  <p>Un ajuste fiscal puede ser necesario y, aun así, ejecutarse de un modo que ninguna doctrina seria autoriza. El liberalismo austríaco &#8212;el de Hayek, el de Huerta de Soto, a quien el propio Milei condecoró como &#8220;coloso de las ideas&#8221;&#8212; se sostiene sobre dos columnas que rara vez se nombran juntas: el imperio de la ley y la eficiencia. La primera exige reglas iguales, previsibles, no discrecionales. La segunda aborrece el desperdicio de recursos escasos.</p>
+
+  <p>Mi tesis es incómoda para los dos bandos (Pro-Milei vs Anti-Milei).</p>
+
+  <p class="articulo-tesis">Las ejecuciones más cuestionadas del gobierno argentino no fallan por exceso de libertarismo, sino por su ausencia.</p>
+
+  <p>Violan las dos columnas a la vez. Lo que sigue son cinco expedientes con la misma anatomía, un principio argumentable y una ejecución que se cae sola y, al final, la cadena documental para que cualquiera la verifique.</p>
+
+  <h2>I. Los alimentos que se dejaron pudrir</h2>
+  <p><span class="etq">El principio.</span> Cortar la transferencia a comedores intermediados por organizaciones bajo sospecha de administración fraudulenta de fondos sociales. Argumentable: algunas estaban efectivamente investigadas.</p>
+  <p><span class="etq">La ejecución.</span> El Ministerio de Capital Humano mantuvo más de cinco mil toneladas de alimentos &#8212;ya comprados por la gestión anterior&#8212; inmovilizadas en los depósitos de Villa Martelli y Tafí Viejo, con partidas próximas a su vencimiento, mientras recortaba la asistencia. El juez federal Casanello intimó a presentar un plan de distribución; el Gobierno resistió y elevó la disputa hacia la Corte Suprema.</p>
+  <p><span class="etq">Por qué no se sostiene.</span> El gasto ya estaba hecho. Dejar caducar un recurso existente no ahorra un solo peso: es destrucción neta de valor. La eficiencia, primera deidad del austríaco, prohíbe exactamente esto.</p>
+
+  <h2>II. Las pensiones auditadas a ciegas</h2>
+  <p><span class="etq">El principio.</span> Revisar un beneficio cuya cobertura saltó del 18 % al 41 % de los titulares de Certificado Único de Discapacidad entre 2018 y 2022. Un crecimiento así huele a otorgamiento laxo, y auditarlo es legítimo.</p>
+  <p><span class="etq">La ejecución.</span> El cribado se hizo a ciegas. Casi la mitad de las cartas de citación no llegó a destino; hubo convocatorias a domicilios inexistentes; personas con discapacidad de nacimiento perdieron la pensión sin enterarse hasta que el dinero no apareció en su cuenta. Y el remate: la propia Agencia Nacional de Discapacidad, encargada de la purga anticorrupción, terminó salpicada por un presunto esquema de coimas que estalló con los audios de su extitular.</p>
+  <p><span class="etq">Por qué no se sostiene.</span> Hayek lo escribió con todas las letras: lo que distingue a un país libre del gobierno arbitrario es que las reglas se apliquen igual a todos y sin discrecionalidad. Citar a un fantasma y quitar un derecho sin notificación es la negación de esa idea.</p>
+
+  <h2>III. El hospital vaciado</h2>
+  <p><span class="etq">El principio.</span> Aquí la coartada doctrinal es la más floja, porque no hay subsidio que recortar: hay un hospital pediátrico de referencia. La única salida austríaca honesta sería proponer una privatización ordenada. No fue lo que ocurrió.</p>
+  <p><span class="etq">La ejecución.</span> Entre diciembre de 2023 y mayo de 2025 renunciaron más de doscientos profesionales del Garrahan &#8212;entre ellos medio centenar de médicos de planta&#8212; ahogados por el congelamiento salarial. Las transferencias a los hospitales de gestión descentralizada cayeron en torno al 17 % real.</p>
+  <p><span class="etq">Por qué no se sostiene.</span> Vaciar de capital humano un activo que tardó décadas en formarse, sin ningún privado montándose en paralelo, no es transición: es demolición sin plano de obra nueva. Ni eficiente ni reglada.</p>
+
+  <h2>IV. Los medicamentos que el jubilado dejó de recibir</h2>
+  <p><span class="etq">El principio.</span> El PAMI fue durante décadas una caja opaca. Sanearlo tiene lógica liberal genuina.</p>
+  <p><span class="etq">La ejecución.</span> El vademécum gratuito pasó de unos tres mil a unos dos mil fármacos; se eliminó la cobertura del 100 % en los que la tenían; y se dejó caer el programa Remediar, que durante casi un cuarto de siglo cubrió el grueso de las patologías crónicas en la atención primaria. Todo ello tras retirar el impuesto PAIS, una de las fuentes de financiamiento, sin reemplazo. Primero se quitó el ingreso; después se descubrió que faltaba para el gasto.</p>
+  <p><span class="etq">Por qué no se sostiene.</span> Se cortó el oxígeno antes de instalar el respirador. Ningún autor de la tradición &#8212;ni el más radical&#8212; escribió que se debiera suprimir un suministro vital existente antes de que la alternativa estuviera operativa.</p>
+
+  <h2>V. Los medicamentos oncológicos (DADSE)</h2>
+  <p><span class="etq">El principio.</span> El caso fundacional y el más grave. Auditar compras presuntamente irregulares de medicación de alto costo.</p>
+  <p><span class="etq">La ejecución.</span> La DADSE se intervino &#8220;para reorganizarla&#8221; a comienzos de 2024 y se disolvió por decreto a fin de año. En el ínterin, la entrega de medicación a pacientes sin cobertura se interrumpió. Una federación de profesionales contabilizó al menos sesenta muertes asociadas a esas demoras durante 2024 &#8212;cifra de origen sindical, conviene decirlo&#8212;. La justificación de corrupción que el Gobierno esgrimió fue desestimada: un juez archivó la causa al no hallar delito, y otro debió ordenar por cautelar la entrega urgente de lo retenido.</p>
+  <p><span class="etq">Por qué no se sostiene.</span> Las dos columnas otra vez, ahora con sangre. Cortar un tratamiento que no negocia plazos, amparándose en una corrupción que la justicia no encontró, es discrecionalidad pura con costo humano.</p>
+
+  <h2>El patrón</h2>
+  <p>Vistos juntos, los cinco no son errores sueltos sino cuatro modos de fallo que se repiten: la destrucción de valor (la comida que se pudre), el colapso del debido proceso (las pensiones auditadas a ciegas), la ausencia de sustituto o secuenciación (los medicamentos que se dejaron de percibir) y, el más corrosivo, la reproducción de la casta &#8212;el aparato del ajuste incurriendo en la corrupción que decía combatir&#8212;. Ninguno de los cuatro lo salva la doctrina, porque los cuatro contradicen las dos columnas que la sostienen (ley y eficiencia).</p>
+
+  <h2>La conclusión</h2>
+  <p>El patrón no es ideológico, sino operativo. Se puede defender el equilibrio fiscal, la reducción del gasto y un Estado limitado y, al mismo tiempo, condenar estas ejecuciones &#8212;no a pesar de ser libertario, sino precisamente por serlo&#8212;. Porque limitar el poder del Estado no consiste únicamente en reducir su tamaño: también exige someter su actuación a la ley, impedir la arbitrariedad administrativa y proteger al ciudadano frente a los abusos de quienes ejercen temporalmente ese poder.</p>
+  <p>El ajuste era necesario. Negarlo supondría ignorar la gravedad de los desequilibrios acumulados y la imposibilidad de sostener indefinidamente una estructura pública financiada mediante déficit, deuda e inflación. Pero reconocer esa necesidad no obliga a justificar cualquier procedimiento empleado para alcanzarlo. La urgencia económica no suspende las garantías jurídicas, del mismo modo que la reducción del gasto no convierte automáticamente en legítima toda decisión adoptada en su nombre.</p>
+  <p>Estas formas concretas de ejecutar el ajuste son indefendibles incluso bajo los estándares proclamados por quienes las firmaron. No se puede invocar la libertad mientras se actúa mediante notificaciones defectuosas, domicilios inexistentes, expedientes opacos o decisiones administrativas que impiden cualquier defensa efectiva. Tampoco puede presentarse como eficiencia una actuación que destruye bienes, desperdicia alimentos o castiga indiscriminadamente a quienes no tuvieron ocasión real de corregir, recurrir o responder.</p>
+  <p>La coherencia ideológica se demuestra precisamente cuando los principios limitan también a quienes los invocan. El imperio de la ley no es un obstáculo burocrático que deba apartarse cuando incomoda al poder; es la frontera que separa una reforma legítima de una actuación arbitraria. La motosierra que respeta esa frontera corta gasto, privilegios, estructuras innecesarias y redes clientelares. La que cita a domicilios inexistentes, niega el derecho de defensa y deja pudrir la comida no está reduciendo el Estado: está reproduciendo su peor versión.</p>
+  <p>Y cuando el instrumento destinado a terminar con el abuso acaba utilizando sus mismos métodos, lo que se corta ya no es solamente gasto. Se corta la seguridad jurídica, la confianza en las instituciones y, finalmente, la legitimidad moral del propio ajuste.</p>
+
+  <h2>Anexo · Cadena de trazabilidad</h2>
+  <p class="anexo-nota">Pendiente de cotejo documental directo. Las normas se listan según constan en la prensa y las actuaciones judiciales.</p>
+  <table class="anexo-tabla">
+    <thead>
+      <tr>
+        <th>Caso</th>
+        <th>Normas y actuaciones</th>
+        <th>Fuente a verificar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Zona Fría (contexto)</td>
+        <td>Ley 25.565 (2002); Ley 27.637 (2021, ampliación); Decreto 943/2025 (Subsidios Energéticos Focalizados); Resolución 219/2025 (Sec. de Energía); Decreto 465/2024.</td>
+        <td>Boletín Oficial</td>
+      </tr>
+      <tr>
+        <td>Alimentos retenidos</td>
+        <td>Causa por demora en la entrega (Juzgado Federal, juez Casanello); intimación a presentar plan de distribución en 72 h; apelación del Procurador del Tesoro elevando la disputa a la Corte Suprema. Depósitos: Villa Martelli (Vicente López) y Tafí Viejo (Tucumán).</td>
+        <td>CIJ / Boletín Oficial</td>
+      </tr>
+      <tr>
+        <td>Pensiones por discapacidad (ANDIS)</td>
+        <td>Ley 27.793 (Emergencia en Discapacidad); veto presidencial del 4/08/2025; Decreto 681/2025 (promulgación con suspensión de la ejecución, art. 2); Decisión Administrativa 24/2025; Decreto 843/2024 y Resolución 187/2025 (acreditación de invalidez laboral); amparo colectivo, Juzgado Federal de Campana, exp. 44025/2025.</td>
+        <td>CIJ / Boletín Oficial</td>
+      </tr>
+      <tr>
+        <td>PAMI / Remediar</td>
+        <td>Reducción del vademécum gratuito (de ~3.000 a ~2.000 fármacos); fin del programa Remediar; Resolución INSSJP 1107/2026 (médicos de cabecera); retiro del impuesto PAIS sin reemplazo de financiamiento.</td>
+        <td>INSSJP / Boletín Oficial</td>
+      </tr>
+      <tr>
+        <td>Medicamentos oncológicos (DADSE)</td>
+        <td>Decisión Administrativa 76/2024 (transferencia de la DADSE); Decreto 1138/2024 (disolución y creación de la DINADIC); medida cautelar del 30/12/2024 (Juzgado Civil y Comercial Federal N.º 2, juez Dos Santos); archivo de la causa de presuntas irregularidades (juez Ercolini).</td>
+        <td>CIJ / Boletín Oficial</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="articulo-firma">
+    Víctor Saavedra &nbsp;·&nbsp; Profesor · Analista · Observador incómodo de los relatos económicos
+  </div>
+
+  <div class="nav-articulos">
+    <a href="articulos.html">← Todos los artículos</a>
+    <span></span>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+</footer>
+
+<script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -66,12 +66,46 @@
     font-weight: 400;
   }
 
+  /* SELECTOR DE IDIOMA */
+  .lang-switch {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2.4rem 2rem 0;
+    border-bottom: 0.5px solid var(--borde);
+  }
+
+  .lang-tab {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #7a746c;
+    padding: 0 0 1.3rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
+  }
+
+  .lang-tab:hover { color: #cfc8bd; }
+
+  .lang-tab.active {
+    color: var(--oro);
+    border-bottom-color: var(--oro);
+  }
+
+  .lang-block { display: none; }
+  .lang-block.active { display: block; }
+
   /* FICHA */
   .ficha {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5rem 2rem 4rem;
+    padding: 4rem 2rem 4rem;
     border-bottom: 0.5px solid var(--borde);
     text-align: center;
   }
@@ -206,24 +240,46 @@
 
   /* FOOTER */
   footer {
-    padding: 1.5rem 4rem;
+    padding: 2rem 4rem 2.5rem;
     border-top: 0.5px solid var(--borde);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    text-align: center;
   }
 
-  .footer-copy { font-size: 12px; color: #444; letter-spacing: 0.08em; }
+  .footer-copy { font-size: 12px; color: #555; letter-spacing: 0.08em; }
+
+  .footer-licencia {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: #6a6a6a;
+    letter-spacing: 0.03em;
+    max-width: 640px;
+  }
+
+  .footer-licencia a { color: #8a8a8a; text-decoration: none; border-bottom: 0.5px solid #3a3a3a; transition: color 0.25s, border-color 0.25s; }
+  .footer-licencia a:hover { color: var(--oro); border-color: var(--oro); }
+  .footer-licencia .cc-en { color: #5a5a5a; font-style: italic; }
+  .footer-licencia .cc-iconos { font-weight: 600; letter-spacing: 0.05em; color: #7a7a7a; border: 0.5px solid #3a3a3a; border-radius: 3px; padding: 0.15rem 0.5rem; font-size: 10.5px; white-space: nowrap; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-titulo { display: none; }
+    .lang-switch { gap: 2.2rem; padding: 2rem 1.5rem 0; }
+    .lang-tab { font-size: 14px; padding-bottom: 1.1rem; }
     .ficha { padding: 3rem 1.5rem 2.5rem; }
     .ficha img { width: 140px; }
     .ficha-titulo { font-size: 34px; }
     .intro-wrap { padding: 3rem 1.5rem 4rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+    footer { padding: 1.5rem 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
   }
 </style>
 </head>
@@ -234,85 +290,189 @@
   <span class="nav-titulo">El inversor inteligente ha muerto</span>
 </nav>
 
-<div class="ficha">
-  <img src="portada-ensayo.png" alt="El inversor inteligente ha muerto — Víctor Saavedra">
-  <p class="ficha-tipo">Ensayo</p>
-  <h1 class="ficha-titulo">El inversor inteligente<br>ha muerto</h1>
-  <p class="ficha-subtitulo">Las métricas que dejaron de advertir riesgo</p>
-  <div class="ficha-separador"></div>
+<div class="lang-switch">
+  <button class="lang-tab active" id="tab-es" onclick="setLang('es')">Español</button>
+  <button class="lang-tab" id="tab-en" onclick="setLang('en')">English</button>
 </div>
 
-<div class="intro-wrap">
-  <h2 class="intro-titulo">Introducción</h2>
+<!-- ============================= ESPAÑOL ============================= -->
+<div class="lang-block active" id="lang-es">
 
-  <blockquote class="intro-tesis" style="margin-bottom: 2rem;">
-    <p>&ldquo;Analizó con rigor, leyó las métricas con precisión, tuvo la paciencia que el mercado exige. Y, aun así, sentía que algo se le escapaba. Era su propio aliento, ese que se corta cuando la inversión se desangra y no podemos hacer nada.&rdquo;</p>
-    <p style="margin-top: 0.5rem; font-size: 14px; color: #888; font-style: normal;">— Finanzas bajo sospecha</p>
-  </blockquote>
-
-  <p>Durante décadas, el análisis fundamental clásico ofreció algo que pocas disciplinas intelectuales pueden ofrecer: una promesa que se cumplía. Si este análisis se aplicaba con rigor, si se leían bien los estados financieros, si se separaba el precio del valor y se tenía la paciencia suficiente, el tiempo acababa dando la razón: el precio convergía hacia el valor y el análisis riguroso era recompensado. No siempre. No en todos los casos. Pero con una consistencia suficiente como para que el marco se convirtiera en la columna vertebral del análisis de inversión durante más de medio siglo.</p>
-
-  <p>Esa promesa descansaba sobre unos supuestos que nadie formulaba expresamente, porque parecían evidentes. El crecimiento reflejaba demanda real. La rentabilidad medía eficiencia. La caja confirmaba que todo aquello era verdad. Y el tiempo, el gran corrector, se encargaba de que precio y valor convergieran.</p>
-
-  <p>Este ensayo parte de una premisa difícil de ignorar: en determinados entornos contemporáneos, esos supuestos han dejado de ser universales. Las métricas siguen siendo correctas, pero lo que ha cambiado es su significado.</p>
-
-  <h3 class="intro-seccion-titulo">Un desfase silencioso</h3>
-
-  <p>El cambio no llegó con nuevas normas contables ni con una ola de quiebras. No hay un momento preciso en que el marco dejara de funcionar. La transformación fue acumulativa, técnica y organizativa, y se manifestó de tres formas que los estados financieros no están diseñados para registrar.</p>
-
-  <p>La primera: la inversión empezó a preceder sistemáticamente a la demanda. En una parte creciente de la actividad económica, especialmente en los ecosistemas tecnológicos intensivos en capital, la infraestructura se despliega antes de que exista un cliente final que la valide. El crecimiento es real. Pero ya no confirma lo que históricamente confirmaba.</p>
-
-  <p>La segunda: la rentabilidad dejó de ser exclusivamente consecuencia de eficiencia. En sistemas muy concentrados, los márgenes pueden reflejar escasez temporal, poder de posición o &ldquo;rentas de fase&rdquo; que desaparecen cuando el desequilibrio que las genera se corrige. La métrica no distingue entre ventaja competitiva duradera y renta transitoria.</p>
-
-  <p>La tercera: la caja, que durante décadas funcionó como la validación final del análisis, puede financiar un sistema que aún no ha cerrado su ciclo económico. Liquidez real, pero vinculada a un proceso todavía incompleto.</p>
-
-  <p>Ninguno de estos fenómenos invalida los estados financieros. Lo que cuestionan es la inferencia automática que el análisis fundamental clásico extraía de ellos.</p>
-
-  <h3 class="intro-seccion-titulo">La paradoja</h3>
-
-  <p>Ahí reside el problema más difícil de aceptar.</p>
-
-  <p>El análisis no falla porque las cifras estén mal. Falla porque las cifras están bien, y precisamente por eso generan una sensación de seguridad que el sistema ya no puede garantizar. Cuanto más sólidas parecen las métricas, mayor es la confianza del inversor. Pero cuanto mayor es esa confianza, más tarde llega el diagnóstico. Para entonces, el equilibrio que la sostenía ya se ha roto.</p>
-
-  <p>Vale la pena distinguir dos planos que durante décadas avanzaron alineados y hoy tienden a separarse. El plano financiero es lo que muestran las métricas: ingresos, márgenes, retornos, flujos de caja. El plano económico es lo que hay detrás: si esos resultados proceden de una creación de valor autónoma y sostenible, o de condiciones temporales del sistema que los hacen posibles.</p>
-
-  <p>Cuando ambos planos se separan, y este ensayo argumenta que en determinados entornos eso sucede, las métricas siguen registrando actividad real, pero dejan de describir lo que ocurre en la base.</p>
-
-  <h3 class="intro-seccion-titulo">Lo que este ensayo hace, y lo que no hace</h3>
-
-  <p>Este ensayo no es un ataque al value investing. Es una revisión crítica de sus límites actuales. No pretende enterrar una tradición intelectual, sino entender por qué, aplicada sin adaptación, puede conducir a conclusiones tardías en determinados contextos.</p>
-
-  <p>Conviene precisarlo desde el principio: el análisis fundamental clásico sigue siendo válido para la mayor parte del tejido empresarial. El problema aparece allí donde los ciclos se comprimen, la inversión se adelanta a la validación y la actividad económica deja de organizarse como una cadena lineal de oferta y demanda. En esos entornos y solo en ellos, el marco heredado empieza a mostrar un desfase que no siempre puede corregirse mediante simples ajustes metodológicos.</p>
-
-  <p>Este estudio no pretende levantar un nuevo sistema sobre las ruinas del anterior. Pretende señalar algo más decisivo: que la pérdida de anticipación en el análisis no se corrige con una batería distinta de indicadores, sino revisando las condiciones bajo las cuales esos indicadores adquieren significado. Ofrecer una nueva promesa de certeza sería reproducir, con otro lenguaje, el mismo error.</p>
-
-  <p>Lo que sí hace es algo previo y necesario: retirar una falsa seguridad. La idea de que analizar mejor, por sí solo, garantiza anticipar el riesgo.</p>
-
-  <p>La tesis que recorre todo el texto es esta:</p>
-
-  <div class="intro-tesis">
-    <p>&ldquo;El análisis fundamental clásico ya no captura con fidelidad determinadas dinámicas económicas propias de los nuevos ecosistemas empresariales. No porque mida mal. Sino porque el sistema al que se aplica ha dejado de ser lineal.&rdquo;</p>
+  <div class="ficha">
+    <img src="portada-ensayo.png" alt="El inversor inteligente ha muerto — Víctor Saavedra">
+    <p class="ficha-tipo">Ensayo</p>
+    <h1 class="ficha-titulo">El inversor inteligente<br>ha muerto</h1>
+    <p class="ficha-subtitulo">Las métricas que dejaron de advertir riesgo</p>
+    <div class="ficha-separador"></div>
   </div>
 
-  <h3 class="intro-seccion-titulo">El recorrido</h3>
+  <div class="intro-wrap">
+    <h2 class="intro-titulo">Introducción</h2>
 
-  <p>La Parte I disecciona los mecanismos concretos por los que cada familia de métricas pierde capacidad interpretativa en determinados entornos: el crecimiento, la rentabilidad y la caja. En los tres casos el problema no está en la métrica. Está en lo que se infiere de ella.</p>
+    <blockquote class="intro-tesis" style="margin-bottom: 2rem;">
+      <p>&ldquo;Analizó con rigor, leyó las métricas con precisión, tuvo la paciencia que el mercado exige. Y, aun así, sentía que algo se le escapaba. Era su propio aliento, ese que se corta cuando la inversión se desangra y no podemos hacer nada.&rdquo;</p>
+      <p style="margin-top: 0.5rem; font-size: 14px; color: #888; font-style: normal;">— Finanzas bajo sospecha</p>
+    </blockquote>
 
-  <p>La Parte II aplica ese diagnóstico con rigor empírico: identifica qué métricas concretas pierden capacidad anticipatoria, en qué condiciones lo hacen y qué tipo de error inducen cuando se interpretan desde los supuestos tradicionales del análisis fundamental. Incluye también el análisis del tiempo como mecanismo corrector: una función que el marco clásico daba por garantizada y que, en determinados contextos actuales, ha dejado de operar con la misma eficacia.</p>
+    <p>Durante décadas, el análisis fundamental clásico ofreció algo que pocas disciplinas intelectuales pueden ofrecer: una promesa que se cumplía. Si este análisis se aplicaba con rigor, si se leían bien los estados financieros, si se separaba el precio del valor y se tenía la paciencia suficiente, el tiempo acababa dando la razón: el precio convergía hacia el valor y el análisis riguroso era recompensado. No siempre. No en todos los casos. Pero con una consistencia suficiente como para que el marco se convirtiera en la columna vertebral del análisis de inversión durante más de medio siglo.</p>
 
-  <p>La Parte III somete el argumento a su prueba más exigente: un caso real donde las métricas no fallan por debilidad técnica, sino que funcionan exactamente como cabría esperar. Y es precisamente ahí donde el desfase se vuelve más revelador.</p>
+    <p>Esa promesa descansaba sobre unos supuestos que nadie formulaba expresamente, porque parecían evidentes. El crecimiento reflejaba demanda real. La rentabilidad medía eficiencia. La caja confirmaba que todo aquello era verdad. Y el tiempo, el gran corrector, se encargaba de que precio y valor convergieran.</p>
 
-  <p>La pregunta central no es si las métricas han dejado de servir. La pregunta es otra: qué ocurre cuando siguen funcionando, cuando parecen confirmar la solidez del modelo y, aun así, llegan demasiado tarde. Este ensayo parte de esa anomalía: el momento en que el análisis no fracasa por error, sino por fidelidad a un mundo que ya ha cambiado. Porque tal vez el mayor riesgo no esté en que las cifras mientan. Tal vez esté en algo más difícil de detectar: que digan la verdad con precisión, pero sobre una relación entre inversión, demanda y rentabilidad que ya ha empezado a resquebrajarse.</p>
+    <p>Este ensayo parte de una premisa difícil de ignorar: en determinados entornos contemporáneos, esos supuestos han dejado de ser universales. Las métricas siguen siendo correctas, pero lo que ha cambiado es su significado.</p>
 
-  <div class="ensayo-cta">
-    <p>Para consultas sobre derechos de uso de esta obra.</p>
-    <a href="mailto:vsaavedradiaz@gmail.com">&#9656; &nbsp; Contactar</a>
+    <h3 class="intro-seccion-titulo">Un desfase silencioso</h3>
+
+    <p>El cambio no llegó con nuevas normas contables ni con una ola de quiebras. No hay un momento preciso en que el marco dejara de funcionar. La transformación fue acumulativa, técnica y organizativa, y se manifestó de tres formas que los estados financieros no están diseñados para registrar.</p>
+
+    <p>La primera: la inversión empezó a preceder sistemáticamente a la demanda. En una parte creciente de la actividad económica, especialmente en los ecosistemas tecnológicos intensivos en capital, la infraestructura se despliega antes de que exista un cliente final que la valide. El crecimiento es real. Pero ya no confirma lo que históricamente confirmaba.</p>
+
+    <p>La segunda: la rentabilidad dejó de ser exclusivamente consecuencia de eficiencia. En sistemas muy concentrados, los márgenes pueden reflejar escasez temporal, poder de posición o &ldquo;rentas de fase&rdquo; que desaparecen cuando el desequilibrio que las genera se corrige. La métrica no distingue entre ventaja competitiva duradera y renta transitoria.</p>
+
+    <p>La tercera: la caja, que durante décadas funcionó como la validación final del análisis, puede financiar un sistema que aún no ha cerrado su ciclo económico. Liquidez real, pero vinculada a un proceso todavía incompleto.</p>
+
+    <p>Ninguno de estos fenómenos invalida los estados financieros. Lo que cuestionan es la inferencia automática que el análisis fundamental clásico extraía de ellos.</p>
+
+    <h3 class="intro-seccion-titulo">La paradoja</h3>
+
+    <p>Ahí reside el problema más difícil de aceptar.</p>
+
+    <p>El análisis no falla porque las cifras estén mal. Falla porque las cifras están bien, y precisamente por eso generan una sensación de seguridad que el sistema ya no puede garantizar. Cuanto más sólidas parecen las métricas, mayor es la confianza del inversor. Pero cuanto mayor es esa confianza, más tarde llega el diagnóstico. Para entonces, el equilibrio que la sostenía ya se ha roto.</p>
+
+    <p>Vale la pena distinguir dos planos que durante décadas avanzaron alineados y hoy tienden a separarse. El plano financiero es lo que muestran las métricas: ingresos, márgenes, retornos, flujos de caja. El plano económico es lo que hay detrás: si esos resultados proceden de una creación de valor autónoma y sostenible, o de condiciones temporales del sistema que los hacen posibles.</p>
+
+    <p>Cuando ambos planos se separan, y este ensayo argumenta que en determinados entornos eso sucede, las métricas siguen registrando actividad real, pero dejan de describir lo que ocurre en la base.</p>
+
+    <h3 class="intro-seccion-titulo">Lo que este ensayo hace, y lo que no hace</h3>
+
+    <p>Este ensayo no es un ataque al value investing. Es una revisión crítica de sus límites actuales. No pretende enterrar una tradición intelectual, sino entender por qué, aplicada sin adaptación, puede conducir a conclusiones tardías en determinados contextos.</p>
+
+    <p>Conviene precisarlo desde el principio: el análisis fundamental clásico sigue siendo válido para la mayor parte del tejido empresarial. El problema aparece allí donde los ciclos se comprimen, la inversión se adelanta a la validación y la actividad económica deja de organizarse como una cadena lineal de oferta y demanda. En esos entornos y solo en ellos, el marco heredado empieza a mostrar un desfase que no siempre puede corregirse mediante simples ajustes metodológicos.</p>
+
+    <p>Este estudio no pretende levantar un nuevo sistema sobre las ruinas del anterior. Pretende señalar algo más decisivo: que la pérdida de anticipación en el análisis no se corrige con una batería distinta de indicadores, sino revisando las condiciones bajo las cuales esos indicadores adquieren significado. Ofrecer una nueva promesa de certeza sería reproducir, con otro lenguaje, el mismo error.</p>
+
+    <p>Lo que sí hace es algo previo y necesario: retirar una falsa seguridad. La idea de que analizar mejor, por sí solo, garantiza anticipar el riesgo.</p>
+
+    <p>La tesis que recorre todo el texto es esta:</p>
+
+    <div class="intro-tesis">
+      <p>&ldquo;El análisis fundamental clásico ya no captura con fidelidad determinadas dinámicas económicas propias de los nuevos ecosistemas empresariales. No porque mida mal. Sino porque el sistema al que se aplica ha dejado de ser lineal.&rdquo;</p>
+    </div>
+
+    <h3 class="intro-seccion-titulo">El recorrido</h3>
+
+    <p>La Parte I disecciona los mecanismos concretos por los que cada familia de métricas pierde capacidad interpretativa en determinados entornos: el crecimiento, la rentabilidad y la caja. En los tres casos el problema no está en la métrica. Está en lo que se infiere de ella.</p>
+
+    <p>La Parte II aplica ese diagnóstico con rigor empírico: identifica qué métricas concretas pierden capacidad anticipatoria, en qué condiciones lo hacen y qué tipo de error inducen cuando se interpretan desde los supuestos tradicionales del análisis fundamental. Incluye también el análisis del tiempo como mecanismo corrector: una función que el marco clásico daba por garantizada y que, en determinados contextos actuales, ha dejado de operar con la misma eficacia.</p>
+
+    <p>La Parte III somete el argumento a su prueba más exigente: un caso real donde las métricas no fallan por debilidad técnica, sino que funcionan exactamente como cabría esperar. Y es precisamente ahí donde el desfase se vuelve más revelador.</p>
+
+    <p>La pregunta central no es si las métricas han dejado de servir. La pregunta es otra: qué ocurre cuando siguen funcionando, cuando parecen confirmar la solidez del modelo y, aun así, llegan demasiado tarde. Este ensayo parte de esa anomalía: el momento en que el análisis no fracasa por error, sino por fidelidad a un mundo que ya ha cambiado. Porque tal vez el mayor riesgo no esté en que las cifras mientan. Tal vez esté en algo más difícil de detectar: que digan la verdad con precisión, pero sobre una relación entre inversión, demanda y rentabilidad que ya ha empezado a resquebrajarse.</p>
+
+    <div class="ensayo-cta">
+      <p>Para consultas sobre derechos de uso de esta obra.</p>
+      <a href="mailto:vsaavedradiaz@gmail.com">&#9656; &nbsp; Contactar</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= ENGLISH ============================= -->
+<div class="lang-block" id="lang-en">
+
+  <div class="ficha">
+    <img src="portada-ensayo.png" alt="The Intelligent Investor Is Dead — Víctor Saavedra">
+    <p class="ficha-tipo">Essay</p>
+    <h1 class="ficha-titulo">The Intelligent Investor<br>Is Dead</h1>
+    <p class="ficha-subtitulo">The metrics that stopped warning of risk</p>
+    <div class="ficha-separador"></div>
+  </div>
+
+  <div class="intro-wrap">
+    <h2 class="intro-titulo">Introduction</h2>
+
+    <blockquote class="intro-tesis" style="margin-bottom: 2rem;">
+      <p>&ldquo;He analyzed with rigor, read the metrics with precision, kept the patience the market demands. And still, he felt that something was escaping him. It was his own breath, the kind that catches when an investment bleeds out and there is nothing to be done.&rdquo;</p>
+      <p style="margin-top: 0.5rem; font-size: 14px; color: #888; font-style: normal;">— Finance Under Suspicion</p>
+    </blockquote>
+
+    <p>For decades, classical fundamental analysis offered something few intellectual disciplines can offer: a promise it kept. If this analysis was applied with rigor, if the financial statements were read well, if price was separated from value and one had enough patience, time would eventually prove you right: price converged toward value and rigorous analysis was rewarded. Not always. Not in every case. But with enough consistency for the framework to become the backbone of investment analysis for more than half a century.</p>
+
+    <p>That promise rested on assumptions no one spelled out, precisely because they seemed self-evident. Growth reflected real demand. Profitability measured efficiency. Cash confirmed that all of it was true. And time, the great corrector, saw to it that price and value converged.</p>
+
+    <p>This essay begins from a premise that is difficult to ignore: in certain contemporary environments, those assumptions have ceased to be universal. The metrics are still correct, but what has changed is their meaning.</p>
+
+    <h3 class="intro-seccion-titulo">A silent gap</h3>
+
+    <p>The change did not arrive with new accounting standards or a wave of bankruptcies. There is no precise moment at which the framework stopped working. The transformation was cumulative, technical and organizational, and it showed itself in three ways that financial statements are not designed to record.</p>
+
+    <p>The first: investment began to systematically precede demand. In a growing share of economic activity, especially in capital-intensive technological ecosystems, infrastructure is deployed before a final customer exists to validate it. Growth is real. But it no longer confirms what it once confirmed.</p>
+
+    <p>The second: profitability ceased to be exclusively a consequence of efficiency. In highly concentrated systems, margins can reflect temporary scarcity, positional power or &ldquo;phase rents&rdquo; that vanish when the imbalance producing them is corrected. The metric does not distinguish between durable competitive advantage and transitory rent.</p>
+
+    <p>The third: cash, which for decades served as the final validation of the analysis, can finance a system that has not yet closed its economic cycle. Real liquidity, but tied to a process that is still incomplete.</p>
+
+    <p>None of these phenomena invalidates the financial statements. What they call into question is the automatic inference that classical fundamental analysis drew from them.</p>
+
+    <h3 class="intro-seccion-titulo">The paradox</h3>
+
+    <p>Here lies the hardest thing to accept.</p>
+
+    <p>The analysis does not fail because the figures are wrong. It fails because the figures are right, and precisely for that reason they generate a sense of security the system can no longer guarantee. The more solid the metrics appear, the greater the investor&rsquo;s confidence. But the greater that confidence, the later the diagnosis arrives. By then, the equilibrium that sustained it has already broken.</p>
+
+    <p>It is worth distinguishing two planes that advanced in alignment for decades and today tend to separate: the financial and the economic. The financial plane is what the metrics show: revenue, margins, returns, cash flows. The economic plane is what lies behind them: whether those results come from autonomous and sustainable value creation, or from temporary conditions of the system that make them possible.</p>
+
+    <p>When the two planes separate, and this essay argues that in certain environments they do, the metrics keep recording real activity, but they stop describing what is happening at the base.</p>
+
+    <h3 class="intro-seccion-titulo">What this essay does, and what it does not do</h3>
+
+    <p>This essay is not an attack on value investing. It is a critical review of its present limits. It does not seek to bury an intellectual tradition, but to understand why, applied without adaptation, it can lead to late conclusions in certain contexts.</p>
+
+    <p>It is worth making clear from the outset: classical fundamental analysis remains valid for the greater part of the business landscape. The problem appears where cycles compress, investment runs ahead of validation, and economic activity ceases to organize itself as a linear chain of supply and demand. In those environments, and only in them, the inherited framework begins to show a gap that cannot always be corrected through simple methodological adjustments.</p>
+
+    <p>This study does not set out to raise a new system on the ruins of the old one. It sets out to point to something more decisive: that the loss of anticipation in analysis is not corrected with a different battery of indicators, but by revisiting the conditions under which those indicators acquire meaning. To offer a new promise of certainty would be to reproduce, in another language, the same error.</p>
+
+    <p>What it does do is something prior and necessary: to withdraw a false security. The idea that analyzing better, on its own, guarantees anticipating risk.</p>
+
+    <p>The thesis that runs through the entire text is this:</p>
+
+    <div class="intro-tesis">
+      <p>&ldquo;Classical fundamental analysis no longer captures with fidelity certain economic dynamics characteristic of the new business ecosystems. Not because it measures badly. But because the system to which it is applied has ceased to be linear.&rdquo;</p>
+    </div>
+
+    <h3 class="intro-seccion-titulo">The path ahead</h3>
+
+    <p>Part I dissects the concrete mechanisms by which each family of metrics loses interpretive capacity in certain environments: growth, profitability and cash. In all three cases the problem is not in the metric. It is in what is inferred from it.</p>
+
+    <p>Part II applies that diagnosis with empirical rigor: it identifies which specific metrics lose anticipatory capacity, under what conditions they do so, and what kind of error they induce when read through the traditional assumptions of fundamental analysis. It also includes the analysis of time as a correcting mechanism — a function the classical framework took for granted and which, in certain present-day contexts, has ceased to operate with the same effectiveness.</p>
+
+    <p>Part III subjects the argument to its most demanding test: a real case where the metrics do not fail through technical weakness, but work exactly as one would expect. And it is precisely there that the gap becomes most revealing.</p>
+
+    <p>The central question is not whether the metrics have stopped working. The question is another: what happens when they keep working, when they seem to confirm the model&rsquo;s soundness and, even so, arrive too late. This essay begins from that anomaly: the moment when analysis does not fail through error, but through fidelity to a world that has already changed. Because perhaps the greatest risk is not that the figures lie. Perhaps it lies in something harder to detect: that they tell the truth with precision, but about a relationship between investment, demand and profitability that has already begun to crack.</p>
+
+    <div class="ensayo-cta">
+      <p>For inquiries regarding usage rights to this work.</p>
+      <a href="mailto:vsaavedradiaz@gmail.com">&#9656; &nbsp; Contact</a>
+    </div>
   </div>
 </div>
 
 <footer>
-  <span class="footer-copy">© 2025 Víctor Saavedra &nbsp;·&nbsp; La Laguna, Canarias</span>
+  <span class="footer-copy">© 2026 Víctor Saavedra &nbsp;·&nbsp; La Laguna, Canarias</span>
+  <div class="footer-licencia">
+    <span class="cc-iconos">CC BY-NC-ND 4.0</span>
+    <span>Esta obra se comparte bajo licencia <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" target="_blank" rel="noopener">Creative Commons Atribución&#8211;NoComercial&#8211;SinObraDerivada 4.0</a>. &nbsp;<span class="cc-en">This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en" target="_blank" rel="noopener">Creative Commons BY-NC-ND 4.0</a>.</span></span>
+  </div>
 </footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.lang-block').forEach(function (b) { b.classList.remove('active'); });
+    document.querySelectorAll('.lang-tab').forEach(function (t) { t.classList.remove('active'); });
+    document.getElementById('lang-' + lang).classList.add('active');
+    document.getElementById('tab-' + lang).classList.add('active');
+    document.documentElement.lang = lang;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 
 <script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

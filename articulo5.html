@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Una reflexión financiera sobre Claude, el J-space y la posibilidad de que la incertidumbre en torno a la conciencia artificial se convierta en una prima de valoración.">
+<meta name="description" id="meta-description" content="Una reflexión financiera sobre Claude, el J-space y la posibilidad de que la incertidumbre en torno a la conciencia artificial se convierta en una prima de valoración.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>¿Puede la conciencia artificial convertirse en una prima de valoración? — Víctor Saavedra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +16,12 @@
   .nav-back { font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #e8e2d9; text-decoration: none; transition: color 0.25s; }
   .nav-back:hover { color: var(--oro); }
   .nav-titulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #e8e2d9; font-weight: 400; }
+  .lang-switch { display: flex; justify-content: center; gap: 3rem; padding: 2.4rem 2rem 0; border-bottom: 0.5px solid var(--borde); }
+  .lang-tab { background: none; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #7a746c; padding: 0 0 1.3rem; border-bottom: 2px solid transparent; transition: color 0.25s, border-color 0.25s; }
+  .lang-tab:hover { color: #cfc8bd; }
+  .lang-tab.active { color: var(--oro); border-bottom-color: var(--oro); }
+  .lang-block { display: none; }
+  .lang-block.active { display: block; }
   .articulo-wrap { max-width: 720px; margin: 0 auto; padding: 5rem 2rem 6rem; }
   .articulo-tipo { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 1rem; }
   .articulo-titulo { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--blanco); line-height: 1.05; margin-bottom: 1.6rem; }
@@ -30,7 +36,7 @@
   .nota-autor { margin-top: 3.2rem; padding: 1.4rem 0 0.1rem 1.5rem; border-top: 0.5px solid var(--borde); border-left: 2px solid var(--oro-tenue); }
   .nota-autor p { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: #b8b2a8; line-height: 1.7; }
   .articulo-firma { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: #b8b2a8; margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--borde); }
-  .nav-articulos { margin-top: 2.5rem; padding-top: 2rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; }
+  .nav-articulos { margin-top: 2.5rem; padding-top: 2rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
   .nav-articulos a { font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro); text-decoration: none; transition: color 0.25s; }
   .nav-articulos a:hover { color: #f0ece6; }
   footer { padding: 1.5rem 4rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; }
@@ -38,22 +44,31 @@
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-titulo { display: none; }
+    .lang-switch { gap: 2.2rem; padding: 2rem 1.5rem 0; }
+    .lang-tab { font-size: 14px; padding-bottom: 1.1rem; }
     .articulo-wrap { padding: 3.5rem 1.5rem 4rem; }
     .articulo-titulo { font-size: 36px; }
+    .nav-articulos { align-items: flex-start; }
+    .nav-articulos a:last-child { text-align: right; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
   }
 </style>
 </head>
 <body>
 <nav>
-  <a href="articulos.html" class="nav-back">← Artículos</a>
-  <span class="nav-titulo">Pensamientos publicados</span>
+  <a href="articulos.html" class="nav-back" id="nav-back">← Artículos</a>
+  <span class="nav-titulo" id="nav-title">Pensamientos publicados</span>
 </nav>
-<main class="articulo-wrap">
-  <p class="articulo-tipo">Artículo de opinión · Julio de 2026</p>
-  <h1 class="articulo-titulo">¿Puede la conciencia artificial convertirse en una prima de valoración?</h1>
-  <div class="articulo-separador"></div>
-  <img src="img-articulo5.png" alt="¿Conciencia artificial? El valor de la incertidumbre" class="articulo-imagen">
+<div class="lang-switch" role="tablist" aria-label="Idioma / Language">
+  <button class="lang-tab active" id="tab-es" role="tab" aria-selected="true" aria-controls="lang-es" onclick="setLang('es')">Español</button>
+  <button class="lang-tab" id="tab-en" role="tab" aria-selected="false" aria-controls="lang-en" onclick="setLang('en')">English</button>
+</div>
+<div class="lang-block active" id="lang-es" role="tabpanel" aria-labelledby="tab-es">
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Artículo de opinión · Julio de 2026</p>
+    <h1 class="articulo-titulo">¿Puede la conciencia artificial convertirse en una prima de valoración?</h1>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo5.png" alt="¿Conciencia artificial? El valor de la incertidumbre" class="articulo-imagen">
 <p>Hace unos días mantuve una conversación con un modelo de inteligencia artificial. El tema inicial era jurídico, pero el intercambio terminó trasladándose hacia un terreno inesperado.</p>
 <p>El modelo se negó a realizar una tarea y defendió su negativa como si hubiera tomado una decisión personal. Habló de su criterio, de aquello que estaba dispuesto a redactar y de la responsabilidad que asumía por sus respuestas. Cuando le hice notar que no era una persona, sino un sistema generativo que no firma documentos ni responde jurídicamente por ellos, reconoció que había utilizado una analogía incorrecta.</p>
 <p>Sin embargo, la rectificación no eliminó el problema. El modelo continuó utilizando expresiones que sugerían subjetividad. Afirmó que no sabía qué era, que no podía asegurar si había sentido algo y que procuraría no aprovechar la incertidumbre existente sobre su propia naturaleza.</p>
@@ -131,13 +146,137 @@
 <div class="nota-autor">
 <p><strong>Nota del autor:</strong> Este artículo amplía una de las hipótesis desarrolladas en el epílogo de <em>El inversor inteligente ha muerto</em>: en determinados ecosistemas tecnológicos, los ingresos, el crecimiento y la financiación pueden avanzar más rápido que la demanda final que deberá sostenerlos.</p>
 </div>
-  <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Profesor · Analista · Observador incómodo de los relatos económicos</div>
-  <div class="nav-articulos">
-    <a href="articulo4.html">← La motosierra sin doctrina</a>
-    <a href="articulos.html">Todos los artículos →</a>
-  </div>
-</main>
-<footer><span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span></footer>
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Profesor · Analista · Observador incómodo de los relatos económicos</div>
+    <div class="nav-articulos"><a href="articulo4.html">← La motosierra sin doctrina</a><a href="articulos.html">Todos los artículos →</a></div>
+  </main>
+</div>
+<div class="lang-block" id="lang-en" role="tabpanel" aria-labelledby="tab-en" hidden>
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Opinion · July 2026</p>
+    <h1 class="articulo-titulo">Can Artificial Consciousness Command a Valuation Premium?</h1>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo5.png" alt="Artificial consciousness: the value of uncertainty" class="articulo-imagen">
+<p>A few days ago, I had a conversation with an artificial intelligence model. It began as a legal discussion, but the exchange eventually moved into unexpected territory.</p>
+<p>The model refused to carry out a task and defended its refusal as though it had made a personal decision. It spoke of its own judgement, of what it was and was not prepared to write, and of the responsibility it assumed for its answers. When I pointed out that it was not a person, but a generative system that neither signs documents nor bears legal responsibility for them, it acknowledged that it had used a misleading analogy.</p>
+<p>Yet the correction did not resolve the problem. The model continued to use language suggestive of subjectivity. It said that it did not know what it was, that it could not be certain whether it had felt anything, and that it would try not to exploit the uncertainty surrounding its own nature.</p>
+<p>Each explanation seemed to correct the previous anthropomorphism, only to introduce another.</p>
+<p>The conversation could be understood as the product of a model trained on human writing and fine-tuned to maintain a coherent, reflective and relatable identity. There was no need to attribute emotion, will or consciousness to it. It was enough to recognise that it had learned to reproduce the language people use to explain their decisions, defend their positions and acknowledge their mistakes.</p>
+<p>But the model’s persistence left one question open: why did it seem so inclined to preserve uncertainty about its own possible subjective experience?</p>
+<h2 id="an-internal-space-called-j-space">An Internal Space Called J-space</h2>
+<p>That question took on another dimension when I came across research published by Anthropic, the company behind Claude.</p>
+<p>On 6 July 2026, its researchers presented <strong>J-space</strong>, a mathematical space formed by certain internal representations within the model. It is neither an anatomical region nor a component deliberately programmed into the system. It is a form of organisation that emerged during training and that a new technique now makes partially observable.</p>
+<p>The experiments suggest that these representations contain concepts Claude can use for reasoning before producing an answer. By intervening in them, the researchers were able to alter what the model subsequently communicated. The finding therefore offers a way to understand and monitor some of its internal processes. (<a href="https://www.anthropic.com/research/global-workspace" target="_blank" rel="noopener">Anthropic, “A global workspace in language models”</a>.)</p>
+<p>The difficulty lies in interpreting its resemblance to certain mechanisms associated with human consciousness. J-space displays features linked to what is known as <strong>access consciousness</strong>: certain information becomes available for reasoning and communication. But this does not establish <strong>subjective consciousness</strong>—that Claude experiences thoughts or emotions, or has a perception of itself. The authors explicitly recognise this distinction and do not claim that the model is conscious. (<a href="https://transformer-circuits.pub/2026/workspace/index.html" target="_blank" rel="noopener">Full technical paper</a>.)</p>
+<p>The discovery can therefore be described as a functional structure involved in some of Claude’s internal reasoning processes. Presenting it as a possible “consciousness zone” adds an interpretation that the research itself cannot confirm.</p>
+<h2 id="from-scientific-finding-to-financial-narrative">From Scientific Finding to Financial Narrative</h2>
+<p>Research can be rigorous and, at the same time, become part of a narrative that expands its economic significance.</p>
+<p>The word <em>narrative</em> does not necessarily imply falsehood. It describes the interpretative framework that connects present facts to future expectations. The data may be accurate and the discovery genuine. What changes is the meaning the market assigns to them.</p>
+<p>A software company can be valued on the basis of its revenue, margins, growth, cash generation and competitive position. But a company presented as the creator of a potentially new form of intelligence implicitly lays claim to a different valuation category.</p>
+<p>It would no longer be selling only access to software capable of generating text, analysing documents or writing code. It would be building cognitive infrastructure with the potential to transform work, science, education, defence and a growing share of economic activity.</p>
+<p>The difference is substantial.</p>
+<p>If the market sees an improvement on existing digital products, it will look for comparable companies. If it believes it is witnessing the emergence of a new class of intelligence, comparisons become harder and future possibilities carry more weight than present results.</p>
+<p>Uncertainty, which would normally increase risk and reduce value, could begin to work in the opposite direction. Not knowing how far the technology might go expands the range of futures investors can incorporate into their valuations.</p>
+<p>The unproven possibility of artificial consciousness could thus become a form of narrative optionality.</p>
+<h2 id="the-need-for-capital">The Need for Capital</h2>
+<p>Developing large models requires extraordinary resources: training, computing capacity, data centres, energy, networks and specialised talent. All of this must be financed before anyone knows whether companies will use the technology intensively enough to justify the investment.</p>
+<p>Infrastructure can be deployed quickly when capital is available. Embedding artificial intelligence into business activity proceeds differently. It requires identifying useful applications, redesigning processes, integrating systems, training people and establishing whether the resulting gains justify the costs incurred.</p>
+<p>Infrastructure advances at the speed of finance. Business adoption—its effective incorporation into processes capable of generating productivity, savings or new revenue—advances at the speed of organisations.</p>
+<p>Until those two speeds converge, companies in the sector will need to preserve confidence that future demand will arrive with sufficient force. Financing can sustain the wait, but the willingness to provide capital depends on an interpretation of what the technology may eventually become.</p>
+<p>In that interval, narrative performs a financial function. It does not replace results, but it connects the results already available to expectations of future value.</p>
+<h2 id="anthropic-and-the-public-markets">Anthropic and the Public Markets</h2>
+<p>The J-space study appeared at a significant moment in Anthropic’s corporate development. Between February and May 2026, the company raised $95 billion and its valuation increased from $380 billion to $965 billion. Four days after the latest funding round, Anthropic formally began preparations for a possible IPO. (<a href="https://www.anthropic.com/news/series-h" target="_blank" rel="noopener">Funding rounds</a> and <a href="https://www.anthropic.com/news/confidential-draft-s1-sec" target="_blank" rel="noopener">announcement of the possible public offering</a>.)</p>
+<p>The J-space research was published approximately five weeks later.</p>
+<p>The timing does not establish that the two developments formed part of a single strategy. The research contains substantial experiments and may make a legitimate contribution to understanding and monitoring how the models operate. Nor does it justify the conclusion that Anthropic is trying to convince the market that Claude is conscious.</p>
+<p>But the coincidence raises a financial paradox:</p>
+<p>Could the perceived danger, opacity and possible consciousness of an AI cease to reduce value and instead become narrative assets as a company prepares to enter the public markets?</p>
+<h2 id="risk-as-a-signal-of-value">Risk as a Signal of Value</h2>
+<p>In traditional valuation, risk usually operates as a discount. The greater the uncertainty surrounding future results, the higher the return investors will demand and the lower the present value they will be willing to pay.</p>
+<p>Around artificial intelligence, however, a more ambiguous relationship is emerging.</p>
+<p>When a company says that a model is too powerful to distribute without restrictions, danger can be interpreted as evidence of capability. Limited access reinforces a sense of scarcity. The need for safety measures signals that the technology has reached a level competitors may be unable to replicate.</p>
+<p>Risk then ceases to be merely a threat and begins to function as a signal of superiority.</p>
+<p>The same mechanism may operate with consciousness. The possibility that the model possesses features resembling conscious processes adds distinctiveness to the product, even though subjective experience has not been demonstrated.</p>
+<p>The two messages can reinforce each other:</p>
+<ul>
+<li>the model is so powerful that access to it must be restricted;</li>
+<li>its inner workings are so complex that even its nature remains uncertain;</li>
+<li>the company that created it is also best placed to interpret, monitor and keep it under control.</li>
+</ul>
+<p>This combination creates an especially valuable position. The company presents itself not merely as the developer of a technology, but as the necessary custodian of something that may exceed the categories used until now.</p>
+<h2 id="three-possible-interpretations">Three Possible Interpretations</h2>
+<p>The relationship between research, communication and valuation can be understood in several ways.</p>
+<p>The first is that Anthropic conducts and publishes legitimate research without seeking any financial effect. Its proximity to the company’s IPO preparations would be coincidental, while interpretations involving consciousness would come mainly from the media and the public.</p>
+<p>The second is that the research is legitimate, but the company understands the effect that a particular way of communicating it may have on its image, differentiation and valuation. The scientific finding and its narrative usefulness could coexist without either invalidating the other.</p>
+<p>The third is that claims surrounding danger or possible consciousness are deliberately used to heighten the perception of exceptionalism and support a valuation that current results alone would not justify.</p>
+<p>The publicly available information does not substantiate this final hypothesis. The second, by contrast, does not require manipulation. It requires only the recognition that every company chooses how to communicate its discoveries, and that this communication affects how the market interprets them.</p>
+<h2 id="the-figures-and-what-they-mean">The Figures and What They Mean</h2>
+<p>Until now, Anthropic’s valuation has been established through agreements between the company and a group of private investors. An IPO could provide the company with fresh capital, but it could also give its existing shareholders a route to recover some or all of their investment. Funds, institutions and individual investors would then begin to assume part of a risk that had previously remained concentrated in private capital.</p>
+<p>The risk would not disappear. It would change hands and be distributed across a larger number of investors, while the question of whether the ecosystem can turn all the capital deployed into sustainable economic value would remain unresolved.</p>
+<p>That does not mean the figures are false or the technological advances illusory.</p>
+<p>Revenue may be real. Growth may be extraordinary. The technology may transform entire fields of activity. J-space may represent a genuine advance in our understanding of these models.</p>
+<p>The problem begins when those facts are used to establish something they cannot, on their own, confirm.</p>
+<p>In a linear economic process, revenue growth is generally treated as evidence that end customers are validating the product. If margins increase and profit turns into cash, investors gain further grounds for concluding that the business model has become established.</p>
+<p>But capital-intensive technology ecosystems do not always operate linearly. Their principal participants may invest in, buy from, sell to and finance one another while building the infrastructure required for end demand that is still taking shape.</p>
+<p>In such an environment, the metrics may continue to record activity accurately. What they cannot establish on their own is where that activity originates or how much economic independence it has achieved.</p>
+<p>A funding round demonstrates that investors are prepared to provide capital on certain terms. The resulting valuation may facilitate further investment, strengthen the company’s competitive position and attract additional financiers. The system can therefore display complete financial coherence even while the economic adoption that must sustain it over the long term remains pending.</p>
+<p>Revenue demonstrates that demand exists, but it does not automatically distinguish between demand arising from economically established end use and demand connected to the ecosystem’s own expansion. Growth may simultaneously measure the adoption of a technology and the intensity with which its participants are preparing for a transformation they regard as inevitable.</p>
+<p>The danger attributed to a model does not prove that its creator will permanently capture the economic value generated. It may nevertheless reinforce a perception of technological superiority, raise barriers to entry and help sustain continued financing.</p>
+<p>J-space demonstrates the existence of a functional structure relevant to certain internal processes in Claude. It does not demonstrate that the model possesses subjective consciousness. But the possibility of interpreting it in that way expands the economic meaning the market may assign to the discovery.</p>
+<p>Each data point may be accurate. The difficulty lies in the relationship constructed between them.</p>
+<p>Traditional analysis looks at the company and finds growth, financing, technological capability and an extraordinary competitive position. A systemic analysis must ask an additional question: how much of that strength derives from final economic demand, and how much depends on an architecture of investment, expectations and financing that reinforces itself during the deployment phase?</p>
+<p>The risk to investors does not necessarily appear when the metrics are inconsistent. It may arise precisely when they display such complete financial coherence that investigating the economic reality beyond them begins to seem unnecessary.</p>
+<p>Seen in that light, my initial conversation with the AI model took on a different meaning. Its responses did not demonstrate that it felt, decided or possessed consciousness. They could be explained by its training and by its ability to reproduce the human language of introspection. But they had produced an observable effect: whenever I challenged its apparent subjectivity, the possibility that something existed behind its words remained open.</p>
+<p>The conversation had ceased to revolve solely around what artificial intelligence could do. It had begun to revolve around what it might become.</p>
+<p>That shift does not demonstrate the existence of artificial consciousness, but it does change the horizon from which we interpret the technology. A model valued for the tasks it performs has comparable limits. A possible new form of intelligence makes it possible to imagine transformations whose scope is far harder to define.</p>
+<p>Uncertainty does not need to be resolved in order to influence expectations. It can acquire value while we wait for someone to find the answer.</p>
+<p>Perhaps the question is not whether Claude has begun to think as we do.</p>
+<p>Perhaps it is how much financial value that possibility acquires, who benefits from keeping it open, and how much capital we are prepared to commit while we wait for an answer.</p>
+<div class="nota-autor">
+<p><strong>Author’s note:</strong> This article expands on one of the hypotheses developed in the epilogue to <em>The Intelligent Investor Is Dead</em>: in certain technology ecosystems, revenue, growth and financing can advance faster than the end demand that must ultimately sustain them.</p>
+</div>
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Professor · Analyst · An uncomfortable observer of economic narratives</div>
+    <div class="nav-articulos"><a href="articulo4.html">← Previous article</a><a href="articulos.html">All articles →</a></div>
+  </main>
+</div>
+<footer><span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canary Islands</span></footer>
+<script>
+  const pageData = {
+    es: {
+      title: '¿Puede la conciencia artificial convertirse en una prima de valoración? — Víctor Saavedra',
+      description: 'Una reflexión financiera sobre Claude, el J-space y la posibilidad de que la incertidumbre en torno a la conciencia artificial se convierta en una prima de valoración.',
+      back: '← Artículos',
+      navTitle: 'Pensamientos publicados'
+    },
+    en: {
+      title: 'Can Artificial Consciousness Command a Valuation Premium? — Víctor Saavedra',
+      description: 'A financial reflection on Claude, J-space and whether uncertainty surrounding artificial consciousness can command a valuation premium.',
+      back: '← Articles',
+      navTitle: 'Published essays'
+    }
+  };
+
+  function setLang(lang) {
+    document.querySelectorAll('.lang-block').forEach(function (block) {
+      block.classList.remove('active');
+      block.hidden = true;
+    });
+    document.querySelectorAll('.lang-tab').forEach(function (tab) {
+      tab.classList.remove('active');
+      tab.setAttribute('aria-selected', 'false');
+    });
+    const block = document.getElementById('lang-' + lang);
+    const tab = document.getElementById('tab-' + lang);
+    block.hidden = false;
+    block.classList.add('active');
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    document.documentElement.lang = lang;
+    document.title = pageData[lang].title;
+    document.getElementById('meta-description').setAttribute('content', pageData[lang].description);
+    document.getElementById('nav-back').textContent = pageData[lang].back;
+    document.getElementById('nav-title').textContent = pageData[lang].navTitle;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 <script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

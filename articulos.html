@@ -151,6 +151,7 @@
 
   .tarjeta:hover { background: var(--fondo-card2); border-color: #bbb; }
   .tarjeta:hover::before { height: 100%; }
+  .tarjeta + .tarjeta { margin-top: 1.5rem; }
 
   .tarjeta-tipo {
     font-family: 'Cormorant Garamond', serif;
@@ -286,7 +287,13 @@
 
 <div class="bloque">
   <p class="bloque-label">Opinión</p>
-  <a href="articulo4.html" class="tarjeta">
+  <a href="articulo5.html" class="tarjeta">
+    <p class="tarjeta-tipo">Artículo · Julio 2026</p>
+    <h2 class="tarjeta-titulo">¿Puede la conciencia artificial convertirse en una prima de valoración?</h2>
+    <p class="tarjeta-desc">La opacidad, la peligrosidad y la posible conciencia de una inteligencia artificial podrían dejar de descontar valor y comenzar a crearlo. Una reflexión sobre Claude, el J-space y la construcción de expectativas ante el mercado público.</p>
+    <span class="tarjeta-accion">Leer el artículo</span>
+  </a>
+  <a href="articulo4.html" class="tarjeta tarjeta-secundaria">
     <p class="tarjeta-tipo">Artículo · Junio 2026</p>
     <h2 class="tarjeta-titulo">La motosierra sin doctrina</h2>
     <p class="tarjeta-desc">El ajuste era necesario; estas formas de ejecutarlo, indefendibles incluso para un libertario. Cuatro casos del actual gobierno argentino donde reducir el Estado se confundió con liberar al poder de sus límites.</p>

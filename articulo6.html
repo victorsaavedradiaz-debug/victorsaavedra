@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="description" id="meta-description" content="Un gravamen aparentemente insignificante puede alterar precios, decisiones y la geografía de toda una cadena de valor.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo 3 euros pueden cambiar el comportamiento del mercado — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --oro: #c9a84c; --oro-tenue: #8a6f2e; --blanco: #f5f0ea; --fondo: #0b0b0b; --borde: #2a2a2a; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--fondo); color: #f0ece6; font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; line-height: 1.75; min-height: 100vh; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(11,11,11,0.96); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 4rem; }
+  .nav-back { font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #e8e2d9; text-decoration: none; transition: color 0.25s; }
+  .nav-back:hover { color: var(--oro); }
+  .nav-titulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #e8e2d9; font-weight: 400; }
+  .lang-switch { display: flex; justify-content: center; gap: 3rem; padding: 2.4rem 2rem 0; border-bottom: 0.5px solid var(--borde); }
+  .lang-tab { background: none; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #7a746c; padding: 0 0 1.3rem; border-bottom: 2px solid transparent; transition: color 0.25s, border-color 0.25s; }
+  .lang-tab:hover { color: #cfc8bd; }
+  .lang-tab.active { color: var(--oro); border-bottom-color: var(--oro); }
+  .lang-block { display: none; }
+  .lang-block.active { display: block; }
+  .articulo-wrap { max-width: 720px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+  .articulo-tipo { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 1rem; }
+  .articulo-titulo { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--blanco); line-height: 1.05; margin-bottom: 1.6rem; }
+  .articulo-separador { width: 60px; height: 0.5px; background: var(--oro-tenue); margin-bottom: 3rem; }
+  .articulo-imagen { width: 100%; max-width: 520px; height: auto; display: block; margin: 0 auto 3rem; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+  .articulo-wrap p { font-size: 16px; color: #e0dbd4; line-height: 1.9; margin-bottom: 1.4rem; font-weight: 400; }
+  .articulo-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: #e0dbd4; line-height: 1.2; margin-top: 3rem; margin-bottom: 1.2rem; }
+  .articulo-wrap .destacado { font-family: 'Cormorant Garamond', serif; font-size: 21px; line-height: 1.55; color: var(--blanco); margin: 2.3rem 0; padding: 1.25rem 0 1.25rem 1.5rem; border-left: 2px solid var(--oro-tenue); }
+  .articulo-wrap .cierre-pregunta { text-align: center; color: var(--oro); letter-spacing: 0.08em; margin-top: 3.8rem; }
+  .articulo-wrap a { color: #c8c1b7; text-decoration-color: var(--oro-tenue); text-underline-offset: 3px; }
+  .articulo-wrap a:hover { color: var(--oro); }
+  .articulo-firma { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: #b8b2a8; margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--borde); }
+  .nav-articulos { margin-top: 2.5rem; padding-top: 2rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .nav-articulos a { font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro); text-decoration: none; transition: color 0.25s; }
+  .nav-articulos a:hover { color: #f0ece6; }
+  footer { padding: 1.5rem 4rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #bbb; letter-spacing: 0.08em; }
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .lang-switch { gap: 2.2rem; padding: 2rem 1.5rem 0; }
+    .lang-tab { font-size: 14px; padding-bottom: 1.1rem; }
+    .articulo-wrap { padding: 3.5rem 1.5rem 4rem; }
+    .articulo-titulo { font-size: 36px; }
+    .articulo-wrap .destacado { font-size: 19px; padding-left: 1.1rem; }
+    .nav-articulos { align-items: flex-start; }
+    .nav-articulos a:last-child { text-align: right; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="articulos.html" class="nav-back" id="nav-back">← Artículos</a>
+  <span class="nav-titulo" id="nav-title">Pensamientos publicados</span>
+</nav>
+
+<div class="lang-switch" role="tablist" aria-label="Idioma / Language">
+  <button class="lang-tab active" id="tab-es" role="tab" aria-selected="true" aria-controls="lang-es" onclick="setLang('es')">Español</button>
+  <button class="lang-tab" id="tab-en" role="tab" aria-selected="false" aria-controls="lang-en" onclick="setLang('en')">English</button>
+</div>
+
+<div class="lang-block active" id="lang-es" role="tabpanel" aria-labelledby="tab-es">
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Artículo de opinión · Julio de 2026</p>
+    <h1 class="articulo-titulo">Cómo 3 euros pueden cambiar el comportamiento del mercado</h1>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo6.png" alt="Tres monedas de un euro sobre adoquines mojados" class="articulo-imagen">
+<p>Hay decisiones económicas que llaman la atención por su magnitud y otras que pasan inadvertidas precisamente porque parecen insignificantes. Tres euros pertenecen, en apariencia, al segundo grupo. No alteran una nómina, no modifican una cuenta de resultados y difícilmente provocan una crisis de consumo. Sin embargo, cuando esos tres euros se aplican sobre millones de operaciones y recaen, además, sobre los productos de menor precio, dejan de ser una cantidad irrelevante para convertirse en una señal capaz de modificar el comportamiento del mercado.</p>
+<p>Desde el 1 de julio de 2026, la Unión Europea aplica temporalmente un derecho de aduana fijo de 3 euros a las mercancías incluidas en envíos de hasta 150 euros procedentes de fuera de la Unión. La medida sustituye provisionalmente la exención arancelaria de la que disfrutaban estos envíos y permanecerá vigente, en principio, hasta el 1 de julio de 2028, cuando deberían comenzar a aplicarse los aranceles ordinarios correspondientes a cada producto.</p>
+<p>La precisión es importante: no se trata necesariamente de tres euros por paquete ni de tres euros por cada unidad física. El cálculo se realiza atendiendo a las diferentes categorías arancelarias contenidas en el envío. Si un paquete incluye dos juguetes, un abrigo y tres frascos de champú, contiene tres categorías diferentes y soportaría un gravamen total de nueve euros. Así lo explica el propio Consejo de la Unión Europea al describir el funcionamiento de la medida.</p>
+<p>La justificación oficial parece razonable. La Unión Europea sostiene que la anterior exención generaba una competencia desigual para los comerciantes europeos, incentivaba la infravaloración de las mercancías, dificultaba los controles de seguridad y aumentaba el impacto medioambiental asociado a la fragmentación de los envíos. Según los datos citados por el Consejo, en 2024 el 91 % de los envíos de comercio electrónico con un valor inferior a 150 euros procedía de China y hasta un 65 % de los pequeños paquetes podía estar infravalorado.</p>
+<p>Hasta aquí, el argumento institucional.</p>
+<p>Pero lo que me interesa no es discutir si Europa tiene motivos para intervenir. Los tiene. Lo que me interesa es observar qué ocurre cuando intenta corregir el mercado mediante una cantidad fija.</p>
+<h2>Un Arancel Fijo No Afecta A Todos Por Igual</h2>
+<p>Un arancel porcentual conserva una relación directa con el valor del producto. Si el porcentaje fuera del 10 %, un artículo de 10 euros soportaría un euro y otro de 100 euros soportaría diez. La carga relativa sería la misma.</p>
+<p>Un gravamen fijo funciona de otra manera. Si una compra de 5 euros queda afectada por un coste adicional de 3 euros, la carga equivale al 60 % de su precio. Si el producto cuesta 30 euros, representa un 10 %. Y si cuesta 100 euros, solamente un 3 %. La cuantía es idéntica, pero su impacto económico no lo es.</p>
+<p>La medida, por tanto, no penaliza especialmente el origen extracomunitario de los productos más caros. Penaliza, sobre todo, el modelo de negocio basado en enviar individualmente artículos de muy bajo precio desde fuera de la Unión.</p>
+<p>No es una diferencia menor. Una persona puede aceptar pagar tres euros adicionales por un producto de cincuenta, pero probablemente se replantee una compra cuyo precio inicial era de dos o tres euros. En ese segmento, el gravamen puede borrar buena parte de la ventaja que justificaba acudir a una plataforma extranjera.</p>
+<p>Por eso, además de una medida recaudatoria, se trata de un incentivo que altera decisiones, sea o no deliberado ese propósito.</p>
+<h2 class="cierre-pregunta">¿Quién Paga Realmente Los Tres Euros?</h2>
+<p>La respuesta inmediata sería el consumidor, pero la incidencia real depende del poder de negociación de cada eslabón: el vendedor, la plataforma o el operador logístico. El coste puede trasladarse al precio final, absorberse mediante un recorte de margen, subvencionarse en determinados productos o compensarse elevando el importe mínimo del pedido.</p>
+<p>Quién asuma finalmente el coste importa menos que el efecto agregado que genera. Ahí comienza el verdadero efecto de los tres euros: una cantidad que parece pequeña, observada operación por operación, puede alterar millones de decisiones cuando se aplica de manera sistemática. El dato relevante es el conjunto de comportamientos que la medida induce, más que el coste de un envío aislado.</p>
+<h2>La Respuesta Probablemente No Será Abandonar Europa</h2>
+<p>Sería ingenuo pensar que las grandes plataformas extracomunitarias se limitarán a aceptar una pérdida permanente de competitividad. Cuando una norma encarece un modelo operativo, las empresas no suelen abandonar automáticamente el mercado: modifican el modelo.</p>
+<p>La reacción más lógica consistiría en reducir el envío individual desde el país de origen y aumentar la importación en grandes lotes. Los productos entrarían agrupados, se almacenarían dentro de la Unión y posteriormente se distribuirían al consumidor como mercancía ya situada en territorio europeo.</p>
+<p>Esta posibilidad es una inferencia económica, no una finalidad declarada por las instituciones europeas. Sin embargo, encaja con la estructura del incentivo. Si el problema se concentra en millones de pequeños envíos directos, la respuesta empresarial natural es sustituirlos por importaciones consolidadas y distribución interior.</p>
+<p>El vendedor extranjero no desaparecería. Cambiaría su arquitectura logística. Para competir eficazmente ya no bastaría con disponer de una fábrica, una plataforma digital y un sistema de transporte internacional. Serían necesarios almacenes europeos, inventarios locales, operadores aduaneros, capacidad para anticipar la demanda y una red de distribución de última milla.</p>
+<p>Eso elevaría las barreras de entrada. Los pequeños vendedores tendrían más dificultades para adaptarse, mientras que las grandes plataformas contarían con capital, tecnología y volumen suficientes para reorganizar sus cadenas de suministro.</p>
+<p>La medida concebida para equilibrar la competencia podría, por tanto, producir simultáneamente otro efecto: favorecer la concentración del mercado entre los operadores capaces de absorber la nueva complejidad.</p>
+<h2>El Verdadero Cambio Puede Estar En La Cadena De Valor</h2>
+<p>Cuando se habla de protección del comercio europeo, solemos imaginar una sustitución sencilla: el consumidor deja de comprar un producto asiático y empieza a adquirir otro fabricado en Europa. Pero esa no es la única respuesta posible, ni necesariamente la más probable.</p>
+<p>El producto puede continuar fabricándose en Asia y seguir vendiéndose a través de la misma plataforma. Lo que cambiaría sería el lugar donde se almacena, se clasifica y se distribuye. Una parte mayor de la cadena de valor se trasladaría al interior de la Unión sin que necesariamente se trasladara la producción.</p>
+<p>Europa podría captar actividad logística, recaudación, control aduanero e información sobre las mercancías. Las grandes plataformas conservarían el acceso al consumidor europeo. Los operadores logísticos ganarían volumen y relevancia. Los pequeños exportadores se volverían más dependientes de los intermediarios capaces de proporcionarles infraestructura dentro del mercado comunitario.</p>
+<p>En ese escenario, los principales beneficiarios no serían necesariamente los fabricantes europeos que compiten con los productos importados. Podrían ser los grandes almacenes, los centros de distribución, los operadores aduaneros, las plataformas con inventario local y las empresas que controlan los puntos de entrada de las mercancías.</p>
+<p>La Unión Europea presenta la medida como parte de una reforma más amplia dirigida a mejorar la equidad, la seguridad y la sostenibilidad del comercio electrónico. También ha previsto un futuro centro europeo de datos aduaneros y estudia una tasa de gestión distinta del arancel, cuyo importe y aplicación todavía deben determinarse.</p>
+<p>Todo ello apunta a algo más profundo que una simple subida de precios. Europa está intentando recuperar capacidad de supervisión sobre un flujo comercial que había crecido con mayor rapidez que sus mecanismos de control.</p>
+<h2>Lo Que Realmente Consigue Europa</h2>
+<p>Hasta aquí podría parecer que Europa está intentando proteger a sus comerciantes frente a la competencia de las plataformas extracomunitarias. Sin embargo, existe otra lectura menos evidente y, desde mi punto de vista, mucho más interesante.</p>
+<p>Quizá Europa haya comprendido que ya no puede impedir que una parte importante de los productos consumidos por sus ciudadanos se fabrique en Asia. Tampoco parece probable que pueda sustituir a corto plazo el dominio comercial y tecnológico alcanzado por las grandes plataformas chinas.</p>
+<p>Pero puede hacer algo diferente: obligarlas a introducir una parte mayor de su cadena de valor dentro del territorio europeo.</p>
+<p>Mientras cada producto viaja directamente desde China hasta el domicilio de un consumidor, Europa recibe la mercancía en el último momento. El producto ya se ha fabricado, vendido y cobrado. La Unión solo interviene en la frontera, enfrentándose a millones de paquetes de escaso valor cuya supervisión resulta costosa y limitada.</p>
+<p>El escenario cambia cuando la plataforma importa grandes lotes, mantiene inventarios en Europa y distribuye posteriormente cada pedido desde un almacén comunitario.</p>
+<p>La fabricación puede seguir estando en China y la venta puede continuar bajo el control de una plataforma china, pero entre ambas aparece una infraestructura localizada en Europa: puertos, almacenes, centros de clasificación, sistemas informáticos, operadores aduaneros, transportistas, trabajadores y redes de última milla.</p>
+<p class="destacado"><strong>Europa no recupera necesariamente la producción ni el control de la venta. Recupera el territorio por el que debe pasar la operación.</strong></p>
+<p>Y quien controla el territorio en el que se almacena y distribuye la mercancía obtiene algo más valioso que tres euros: obtiene trazabilidad, capacidad de inspección, actividad económica, inversión logística y una base mucho más accesible sobre la que aplicar sus normas.</p>
+<p>El cambio también altera la posición negociadora de las plataformas. Una empresa que envía productos desde miles de kilómetros de distancia puede modificar con relativa facilidad sus rutas comerciales. Una empresa que ha invertido en almacenes, trabajadores, tecnología e inventarios dentro de la Unión se vuelve más dependiente del mercado europeo y de sus decisiones regulatorias.</p>
+<p>Los tres euros funcionarían así como una palanca, orientada más a modificar el modelo basado en millones de pequeños envíos individuales que a encarecer aisladamente los artículos baratos. La alternativa más eficiente sería introducir la mercancía de forma consolidada y completar dentro de Europa las últimas fases de la cadena de valor.</p>
+<p>El producto continuaría siendo asiático. La plataforma podría seguir siendo china. El consumidor seguiría comprando en la misma aplicación. Pero una parte mucho mayor de la operación económica habría quedado atrapada dentro del perímetro europeo.</p>
+<h2>La Paradoja</h2>
+<p>La medida que aparentemente pretende frenar a las grandes plataformas podría terminar acelerando su implantación física en Europa. Sin embargo, eso no significa necesariamente que la estrategia haya fracasado.</p>
+<p>Europa podría estar aceptando que no controla el origen de la producción ni el canal de venta y concentrándose en aquello que todavía puede controlar: el acceso a quinientos millones de consumidores y las condiciones bajo las cuales las mercancías llegan hasta ellos.</p>
+<p>Visto de esta manera, el gravamen no sería solamente una barrera aduanera. Sería una invitación difícil de rechazar: si una plataforma quiere conservar el mercado europeo, tendrá que acercar a Europa sus mercancías, sus almacenes, sus operadores y una parte creciente de su estructura.</p>
+<p class="destacado"><strong>Europa no habría conseguido que dejáramos de comprar productos chinos. Habría conseguido que China tuviera que traer hasta Europa una parte de la infraestructura necesaria para vendérnoslos.</strong></p>
+<p>La reconfiguración de la cadena de valor no modificaría necesariamente el origen de los productos ni el control de las ventas. Cambiaría el lugar en el que se almacena la mercancía, se organiza su distribución y se genera una parte creciente del valor económico.</p>
+<p>Quizá los tres euros nunca fueran el verdadero objetivo. Pero tampoco sé si atraer hacia Europa una parte de la cadena de valor respondía a una estrategia deliberada del legislador o si fue simplemente el resultado de una carambola económica: una consecuencia surgida al intentar resolver un problema diferente.</p>
+<p>En cualquiera de los dos casos, la medida podría terminar haciendo algo mucho más importante que recaudar tres euros: utilizar el acceso al consumidor europeo para obligar a las grandes plataformas extranjeras a trasladar al territorio de la Unión una parte de su estructura logística y operativa.</p>
+<h2 class="cierre-pregunta">¿ESTRATEGIA O CARAMBOLA?</h2>
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Profesor · Analista · Observador incómodo de los relatos económicos</div>
+    <div class="nav-articulos"><a href="articulo5.html">← ¿Conciencia artificial?</a><a href="articulos.html">Todos los artículos →</a></div>
+  </main>
+</div>
+
+<div class="lang-block" id="lang-en" role="tabpanel" aria-labelledby="tab-en" hidden>
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Opinion · July 2026</p>
+    <h1 class="articulo-titulo">How €3 Can Change Market Behaviour</h1>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo6.png" alt="Three one-euro coins on wet cobblestones" class="articulo-imagen">
+<p>Some economic decisions command attention because of their scale; others go unnoticed precisely because they appear trivial. Three euros would seem to belong to the latter category. They do not change a salary, alter a company’s bottom line or trigger a collapse in consumption. Yet when those three euros are applied to millions of transactions—and fall, moreover, on the cheapest goods—they cease to be an immaterial sum and become a signal capable of changing market behaviour.</p>
+<p>Since 1 July 2026, the European Union has temporarily imposed a flat customs duty of €3 on goods contained in consignments worth up to €150 arriving from outside the bloc. The measure provisionally replaces the tariff exemption previously enjoyed by such consignments and is, in principle, due to remain in force until 1 July 2028, when the standard tariffs applicable to each product should take effect.</p>
+<p>The distinction matters: the charge is not necessarily €3 per parcel, nor €3 for every physical item. It is calculated according to the different tariff categories represented in a consignment. A parcel containing two toys, one coat and three bottles of shampoo falls into three separate categories and would therefore incur a total charge of €9. This is how the Council of the European Union itself describes the measure.</p>
+<p>The official rationale is plausible. The European Union argues that the previous exemption placed European retailers at a competitive disadvantage, encouraged the undervaluation of goods, hampered safety checks and increased the environmental cost associated with splitting orders into multiple consignments. According to figures cited by the Council, China accounted for 91 per cent of e-commerce consignments worth less than €150 in 2024, while as many as 65 per cent of small parcels may have been undervalued.</p>
+<p>So much for the institutional case.</p>
+<p>My concern, however, is not whether Europe has grounds to intervene. It does. What interests me is what happens when it tries to correct the market through a flat charge.</p>
+<h2>A Flat Tariff Does Not Affect Everyone Equally</h2>
+<p>An ad valorem tariff maintains a direct relationship with a product’s value. At a rate of 10 per cent, a €10 item would incur a charge of €1, while a €100 item would incur €10. The relative burden would be identical.</p>
+<p>A flat charge works differently. If a €5 purchase attracts an additional cost of €3, the burden is equivalent to 60 per cent of its price. On a €30 product, it is 10 per cent; on a €100 product, just 3 per cent. The amount is the same, but its economic impact is not.</p>
+<p>The measure therefore does not particularly penalise higher-priced goods simply because they come from outside the EU. Above all, it penalises the business model of shipping very low-cost items individually from outside the Union.</p>
+<p>This is no small distinction. A consumer may accept paying an extra €3 for a €50 product, but will probably think twice about a purchase originally priced at €2 or €3. In that segment, the charge may wipe out much of the price advantage that made a foreign platform attractive in the first place.</p>
+<p>Beyond raising revenue, then, the measure creates an incentive that changes decisions, whether or not that is its intended purpose.</p>
+<h2 class="cierre-pregunta">Who Really Pays The Three Euros?</h2>
+<p>The immediate answer would be the consumer, but the actual incidence depends on the bargaining power of each link in the chain: the seller, the platform or the logistics operator. The cost may be passed on in the final price, absorbed through lower margins, subsidised on selected products or offset by raising the minimum order value.</p>
+<p>Who ultimately bears the cost matters less than the aggregate effect it produces. This is where the true impact of the three euros begins: a sum that looks small on any single transaction can alter millions of decisions when applied systematically. What matters is the pattern of behaviour the measure induces, rather than the cost of an isolated consignment.</p>
+<h2>The Likely Response Is Not To Leave Europe</h2>
+<p>It would be naïve to think that major non-EU platforms will simply accept a permanent loss of competitiveness. When a regulation makes an operating model more expensive, companies do not usually abandon the market automatically; they change the model.</p>
+<p>The most logical response would be to reduce individual shipments from the country of origin and increase imports in bulk. Goods would enter in consolidated loads, be stored within the Union and then distributed to consumers as stock already located in Europe.</p>
+<p>This is an economic inference, not an objective stated by the European institutions. Yet it fits the incentive structure. If the problem is concentrated in millions of small direct consignments, the natural corporate response is to replace them with consolidated imports and domestic distribution.</p>
+<p>The foreign seller would not disappear. Its logistics architecture would change. Competing effectively would no longer require only a factory, a digital platform and an international transport network. It would also demand European warehouses, local inventories, customs agents, demand-forecasting capacity and a last-mile distribution network.</p>
+<p>That would raise barriers to entry. Smaller sellers would find it harder to adapt, while the large platforms would have the capital, technology and scale needed to reorganise their supply chains.</p>
+<p>A measure designed to level the competitive playing field could therefore have another effect at the same time: encouraging market concentration among the operators capable of absorbing the added complexity.</p>
+<h2>The Real Shift May Be In The Value Chain</h2>
+<p>When European commerce is discussed in protectionist terms, we tend to imagine a straightforward substitution: consumers stop buying an Asian product and buy one made in Europe instead. But that is not the only possible response, nor necessarily the most likely.</p>
+<p>The product may continue to be made in Asia and sold through the same platform. What would change is where it is stored, sorted and distributed. A larger share of the value chain would move inside the Union without production necessarily following it.</p>
+<p>Europe could capture logistics activity, revenue collection, customs oversight and information about the goods. Large platforms would retain access to European consumers. Logistics operators would gain volume and importance. Small exporters would become more dependent on intermediaries capable of providing infrastructure within the single market.</p>
+<p>In that scenario, the main beneficiaries would not necessarily be European manufacturers competing with imported goods. They might instead be warehouse operators, distribution centres, customs agents, platforms holding local inventory and the companies that control the gateways through which goods enter Europe.</p>
+<p>The European Union presents the measure as part of a broader reform intended to make e-commerce fairer, safer and more sustainable. It has also proposed a future EU Customs Data Hub and is considering a handling fee separate from the tariff, whose amount and application have yet to be determined.</p>
+<p>All this points to something more profound than a simple price increase. Europe is trying to regain oversight of a trade flow that has expanded faster than the mechanisms designed to police it.</p>
+<h2>What Europe Really Gains</h2>
+<p>So far, it might seem that Europe is trying to protect its retailers from competition by non-EU platforms. Yet there is another, less obvious interpretation—and, in my view, a far more interesting one.</p>
+<p>Perhaps Europe has recognised that it can no longer prevent a large share of the goods consumed by its citizens from being made in Asia. Nor does it seem likely, in the short term, to displace the commercial and technological dominance achieved by the major Chinese platforms.</p>
+<p>But it can do something else: compel them to bring a larger share of their value chain inside European territory.</p>
+<p>When each product travels directly from China to a consumer’s home, Europe encounters the goods only at the final stage. The product has already been made, sold and paid for. The Union intervenes only at the border, facing millions of low-value parcels that are costly and difficult to monitor.</p>
+<p>The picture changes when a platform imports in bulk, holds inventory in Europe and subsequently fulfils each order from a warehouse within the Union.</p>
+<p>Manufacturing may remain in China and sales may remain under the control of a Chinese platform, but an infrastructure located in Europe emerges between the two: ports, warehouses, sorting centres, IT systems, customs agents, hauliers, workers and last-mile networks.</p>
+<p class="destacado"><strong>Europe does not necessarily regain production or control over sales. It regains control over the territory through which the transaction must pass.</strong></p>
+<p>And whoever controls the territory in which goods are stored and distributed gains something more valuable than three euros: traceability, inspection capacity, economic activity, logistics investment and a far more accessible base on which to enforce its rules.</p>
+<p>The shift also changes the platforms’ bargaining position. A company shipping products from thousands of miles away can alter its trade routes relatively easily. A company that has invested in warehouses, workers, technology and inventory within the Union becomes more dependent on the European market—and on its regulatory decisions.</p>
+<p>In this way, the three euros would act as a lever aimed less at making individual cheap goods more expensive than at changing a model built on millions of small, separate consignments. The most efficient alternative would be to bring goods in as consolidated freight and complete the final stages of the value chain within Europe.</p>
+<p>The product would remain Asian. The platform might remain Chinese. The consumer would continue buying through the same app. But a much larger share of the economic activity would have been drawn inside Europe’s perimeter.</p>
+<h2>The Paradox</h2>
+<p>A measure ostensibly intended to curb the large platforms could end up accelerating their physical expansion in Europe. That would not necessarily mean the strategy had failed.</p>
+<p>Europe may be accepting that it does not control where goods are produced or the channel through which they are sold, and focusing instead on what it can still control: access to 500mn consumers and the terms on which goods reach them.</p>
+<p>Seen in this light, the charge would be more than a customs barrier. It would be an offer that is hard to refuse: if a platform wants to retain access to the European market, it will have to bring its goods, warehouses, operators and a growing share of its infrastructure closer to Europe.</p>
+<p class="destacado"><strong>Europe would not have stopped us buying Chinese goods. It would have made China bring to Europe part of the infrastructure needed to sell them to us.</strong></p>
+<p>Reconfiguring the value chain would not necessarily change where goods originate or who controls the sale. It would change where they are stored, where their distribution is organised and where a growing share of their economic value is created.</p>
+<p>Perhaps the three euros were never the real objective. Yet I cannot say whether drawing part of the value chain into Europe was a deliberate legislative strategy or simply an economic fluke: an unintended consequence of trying to solve a different problem.</p>
+<p>Either way, the measure could ultimately do something far more consequential than collect three euros: use access to European consumers to force large foreign platforms to relocate part of their logistics and operating infrastructure inside the Union.</p>
+<h2 class="cierre-pregunta">STRATEGY OR FLUKE?</h2>
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Professor · Analyst · An uncomfortable observer of economic narratives</div>
+    <div class="nav-articulos"><a href="articulo5.html">← Previous article</a><a href="articulos.html">All articles →</a></div>
+  </main>
+</div>
+
+<footer><span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canary Islands</span></footer>
+
+<script>
+  const pageData = {
+    es: {
+      title: 'Cómo 3 euros pueden cambiar el comportamiento del mercado — Víctor Saavedra',
+      description: 'Un gravamen aparentemente insignificante puede alterar precios, decisiones y la geografía de toda una cadena de valor.',
+      back: '← Artículos',
+      navTitle: 'Pensamientos publicados'
+    },
+    en: {
+      title: 'How €3 Can Change Market Behaviour — Víctor Saavedra',
+      description: 'A seemingly trivial levy can reshape prices, decisions and the geography of an entire value chain.',
+      back: '← Articles',
+      navTitle: 'Published essays'
+    }
+  };
+
+  function setLang(lang) {
+    document.querySelectorAll('.lang-block').forEach(function (block) {
+      block.classList.remove('active');
+      block.hidden = true;
+    });
+
+    document.querySelectorAll('.lang-tab').forEach(function (tab) {
+      tab.classList.remove('active');
+      tab.setAttribute('aria-selected', 'false');
+    });
+
+    const block = document.getElementById('lang-' + lang);
+    const tab = document.getElementById('tab-' + lang);
+    block.hidden = false;
+    block.classList.add('active');
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    document.documentElement.lang = lang;
+    document.title = pageData[lang].title;
+    document.getElementById('meta-description').setAttribute('content', pageData[lang].description);
+    document.getElementById('nav-back').textContent = pageData[lang].back;
+    document.getElementById('nav-title').textContent = pageData[lang].navTitle;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+<script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

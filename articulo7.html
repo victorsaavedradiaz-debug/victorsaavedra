@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="description" id="meta-description" content="Dos posiciones razonables sobre la valoración de la IA y una pregunta que el mercado aún no ha resuelto: si funcionará lo suficiente para superar lo que el precio ya descuenta.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El debate al que le falta una pregunta — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --oro: #c9a84c; --oro-tenue: #8a6f2e; --blanco: #f5f0ea; --fondo: #0b0b0b; --borde: #2a2a2a; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--fondo); color: #f0ece6; font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; line-height: 1.75; min-height: 100vh; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(11,11,11,0.96); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 4rem; }
+  .nav-back { font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #e8e2d9; text-decoration: none; transition: color 0.25s; }
+  .nav-back:hover { color: var(--oro); }
+  .nav-titulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #e8e2d9; font-weight: 400; }
+  .lang-switch { display: flex; justify-content: center; gap: 3rem; padding: 2.4rem 2rem 0; border-bottom: 0.5px solid var(--borde); }
+  .lang-tab { background: none; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #7a746c; padding: 0 0 1.3rem; border-bottom: 2px solid transparent; transition: color 0.25s, border-color 0.25s; }
+  .lang-tab:hover { color: #cfc8bd; }
+  .lang-tab.active { color: var(--oro); border-bottom-color: var(--oro); }
+  .lang-block { display: none; }
+  .lang-block.active { display: block; }
+  .articulo-wrap { max-width: 720px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+  .articulo-tipo { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 1rem; }
+  .articulo-titulo { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--blanco); line-height: 1.05; margin-bottom: 0.9rem; }
+  .articulo-subtitulo { font-family: 'Cormorant Garamond', serif; font-size: 20px !important; color: #c8c2b8 !important; font-weight: 400; line-height: 1.45 !important; margin-bottom: 2.4rem !important; }
+  .articulo-separador { width: 60px; height: 0.5px; background: var(--oro-tenue); margin-bottom: 3rem; }
+  .articulo-imagen { width: 100%; max-width: 520px; height: auto; display: block; margin: 0 auto 3rem; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+  .articulo-wrap p { font-size: 16px; color: #e0dbd4; line-height: 1.9; margin-bottom: 1.4rem; font-weight: 400; }
+  .articulo-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: #e0dbd4; line-height: 1.2; margin-top: 3rem; margin-bottom: 1.2rem; }
+  .articulo-wrap a { color: #c8c1b7; text-decoration-color: var(--oro-tenue); text-underline-offset: 3px; }
+  .articulo-wrap a:hover { color: var(--oro); }
+  .articulo-firma { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: #b8b2a8; margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--borde); }
+  .nav-articulos { margin-top: 2.5rem; padding-top: 2rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .nav-articulos a { font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro); text-decoration: none; transition: color 0.25s; }
+  .nav-articulos a:hover { color: #f0ece6; }
+  footer { padding: 1.5rem 4rem; border-top: 0.5px solid var(--borde); display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #bbb; letter-spacing: 0.08em; }
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .lang-switch { gap: 2.2rem; padding: 2rem 1.5rem 0; }
+    .lang-tab { font-size: 14px; padding-bottom: 1.1rem; }
+    .articulo-wrap { padding: 3.5rem 1.5rem 4rem; }
+    .articulo-titulo { font-size: 36px; }
+    .articulo-subtitulo { font-size: 19px !important; }
+    .nav-articulos { align-items: flex-start; }
+    .nav-articulos a:last-child { text-align: right; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="articulos.html" class="nav-back" id="nav-back">← Artículos</a>
+  <span class="nav-titulo" id="nav-title">Pensamientos publicados</span>
+</nav>
+
+<div class="lang-switch" role="tablist" aria-label="Idioma / Language">
+  <button class="lang-tab active" id="tab-es" role="tab" aria-selected="true" aria-controls="lang-es" onclick="setLang('es')">Español</button>
+  <button class="lang-tab" id="tab-en" role="tab" aria-selected="false" aria-controls="lang-en" onclick="setLang('en')">English</button>
+</div>
+
+<div class="lang-block active" id="lang-es" role="tabpanel" aria-labelledby="tab-es">
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Artículo de opinión · Agosto de 2026</p>
+    <h1 class="articulo-titulo">El debate al que le falta una pregunta</h1>
+    <p class="articulo-subtitulo">Dos posiciones razonables y una cuestión que ninguna resuelve por sí sola.</p>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo7.png" alt="Caja registradora antigua con el cajón vacío en una calle adoquinada de noche" class="articulo-imagen">
+<p>El mercado se ha dividido en dos posiciones.</p>
+<p>Una considera que las grandes tecnológicas estadounidenses, en particular las Siete Magníficas, han alcanzado valoraciones difíciles de sostener. Señala patrones familiares de las burbujas anteriores: concentración bursátil extrema, inversiones de una magnitud sin precedentes, proyecciones de crecimiento que se autoalimentan y una narrativa tecnológica capaz de convertir casi cualquier gasto en promesa de rentabilidad futura.</p>
+<p>La otra rechaza esa comparación. Argumenta que las empresas del ciclo actual no son compañías sin ingresos ni modelo de negocio, como lo fueron muchas protagonistas de la burbuja puntocom. Microsoft, Alphabet, Amazon, Meta y Nvidia generan beneficios, flujo de caja y ventajas competitivas reales. La demanda de servicios cloud, capacidad de computación y semiconductores existe y se puede medir.</p>
+<p>Ambas posiciones tienen fundamento. Ninguna resuelve por sí sola la pregunta que importa al inversor, que no es si la inteligencia artificial funcionará (es razonable asumir que lo hará), sino si funcionará lo suficiente como para superar lo que el precio ya descuenta.</p>
+<h2>Una buena tecnología no siempre es una buena inversión</h2>
+<p>Identificar correctamente una transformación tecnológica no basta. Hay que determinar cuánto se está pagando por participar en ella.</p>
+<p>Una empresa puede aumentar ingresos, mejorar beneficios y reforzar su posición competitiva, y aun así ofrecer una rentabilidad bursátil mediocre, si esas mejoras ya estaban incorporadas en el precio de entrada.</p>
+<p>Tomemos una compañía que gana 10 dólares por acción y cotiza a 200. El mercado paga 20 veces beneficios porque espera un crecimiento considerable.</p>
+<p>Cinco años después, la empresa ha cumplido: el beneficio ha subido un 50%, hasta 15 dólares por acción. El mercado, sin embargo, ya no está dispuesto a pagar 20 veces beneficios, sino 13.</p>
+<p>El resultado: 15 × 13 = 195.</p>
+<p>La empresa ha crecido, la tesis tecnológica se ha confirmado, y la acción vale algo menos que al principio. El negocio no ha fallado. Ha fallado el precio pagado por él.</p>
+<p>Esta distinción explica por qué una revolución tecnológica puede producir enormes avances económicos sin garantizar buenas rentabilidades a todos sus inversores.</p>
+<h2>Lo que el mercado está pagando hoy</h2>
+<p>A cierre de julio de 2026, el S&amp;P 500 cotizaba en torno a 20 veces los beneficios esperados para los próximos doce meses, por encima de su media de diez años. El consenso proyectaba un crecimiento de beneficios próximo al 25%, revisado después al alza hasta superar el 29% con los resultados de Alphabet, para el conjunto de 2026. No es un mercado que descuente un escenario mediocre. Incorpora una expansión empresarial muy exigente.</p>
+<p>El liderazgo, además, está concentrado: las diez mayores compañías estadounidenses representan alrededor de un tercio del valor del índice, y las ampliaciones habituales del concepto de Siete Magníficas superan el 40% de su peso.</p>
+<p>La concentración por sí sola no demuestra una burbuja. Los índices siempre han estado dominados por las empresas más exitosas de cada época. Pero sí aumenta la dependencia del mercado respecto a un grupo reducido de compañías y, sobre todo, respecto a un mismo conjunto de expectativas: crecimiento elevado, liderazgo tecnológico sostenido y rentabilidad extraordinaria sobre el capital invertido.</p>
+<p>El mercado no paga solo por la IA actual. Paga por los beneficios que espera que la IA produzca durante muchos años todavía por llegar.</p>
+<h2>El argumento de quienes ven una burbuja</h2>
+<p>La posición crítica parte de una observación verificable: el gasto crece más rápido que la evidencia disponible sobre su rentabilidad final.</p>
+<p>Alphabet invirtió 44.900 millones de dólares en capex durante el segundo trimestre de 2026, el doble que un año antes. Esa inversión superó su propio flujo de caja operativo de 39.100 millones, dejando un flujo de caja libre negativo por primera vez en su historia como cotizada. Para cubrir el desfase, la compañía emitió 49.600 millones en acciones y convertibles obligatorios y 20.300 millones en deuda senior, duplicando con creces su deuda a largo plazo desde diciembre.</p>
+<p>Amazon sigue un patrón similar. Su previsión de capex para 2026 partía de 200.000 millones de dólares; el 30 de julio, en la presentación de resultados del segundo trimestre, la elevó a 220.000 millones, atribuyendo el ajuste al encarecimiento de los componentes de memoria. Microsoft, por su parte, declaró 41.000 millones de inversión trimestral, con aproximadamente dos tercios destinados a activos de vida corta, principalmente procesadores y unidades gráficas.</p>
+<p>El dato relevante no es solo el volumen del gasto. Es su forma de financiación. Cuando la inversión se cubre con caja generada internamente, el riesgo lo asume la propia empresa contra su balance ya construido. Cuando se cubre emitiendo deuda y capital nuevo a un ritmo creciente, el riesgo se traslada a la estructura financiera de la compañía, y el listón para que la inversión resulte rentable ya no es solo generar ingresos. Es generar los suficientes para cubrir el coste de esa financiación antes de que las condiciones de mercado cambien.</p>
+<p>La historia empresarial está llena de sectores que transformaron la economía y, al mismo tiempo, destruyeron capital porque demasiadas compañías invirtieron en la misma oportunidad al mismo tiempo. Los ferrocarriles, las telecomunicaciones e internet cambiaron el mundo. Eso no impidió que buena parte de sus inversores perdiera dinero.</p>
+<h2>El argumento de quienes rechazan el catastrofismo</h2>
+<p>La comparación automática con la burbuja puntocom tiene sus propios problemas.</p>
+<p>Las principales beneficiarias del ciclo actual no son proyectos especulativos sin ingresos. Son algunas de las empresas más rentables y líquidas de la economía mundial, con negocios publicitarios, sistemas operativos y plataformas cloud capaces de financiar internamente buena parte de sus inversiones, incluso cuando además recurren a los mercados de deuda.</p>
+<p>Existen, además, señales concretas de monetización. A comienzos de agosto, más del 85% de las compañías del S&amp;P 500 que habían presentado resultados superaba las estimaciones del consenso, muy por encima de la media histórica. Las empresas vinculadas a la infraestructura de IA figuraban entre los principales motores de ese crecimiento.</p>
+<p>Google Cloud creció con fuerza y su cartera de contratos se disparó. Azure y los productos empresariales de Microsoft mantuvieron avances significativos. AWS elevó su beneficio operativo de 10.200 a 16.600 millones de dólares en un solo año, con un margen operativo que superó el 39%.</p>
+<p>No se trata, por tanto, de una narrativa completamente separada de los fundamentales. La IA ya genera ventas, contratos y beneficios verificables. Quienes defienden las valoraciones actuales pueden argumentar que el capex no solo representa un coste: construye barreras de entrada. Cuanto más cara y escasa sea la infraestructura necesaria, más difícil será que un competidor nuevo replique la posición de las plataformas dominantes.</p>
+<h2>Un problema que ninguno de los dos bandos discute lo suficiente</h2>
+<p>Hay una tercera cuestión que no encaja limpiamente en ninguno de los dos argumentos anteriores: la circularidad de una parte del ecosistema.</p>
+<p>Un grupo reducido de compañías aparece simultáneamente como proveedor, inversor y cliente dentro de la misma cadena de gasto. Nvidia invierte en OpenAI y le vende los chips que necesita. OpenAI compromete cientos de miles de millones en contratos de infraestructura con proveedores cloud como Oracle. Esos proveedores, a su vez, compran los chips de Nvidia para cumplir esos contratos. Análisis publicados a lo largo de 2026 estiman en más de 800.000 millones de dólares el volumen total de acuerdos de este tipo, con compromisos individuales como el pacto de Oracle con OpenAI (300.000 millones a cinco años) o el compromiso de inversión de Nvidia en OpenAI (hasta 100.000 millones).</p>
+<p>El mecanismo no es fraudulento ni necesariamente insano. Construir capacidad de computación es extraordinariamente caro y los componentes más avanzados siguen siendo escasos, así que asegurar suministro mediante compromisos de compra cruzados con financiación tiene una lógica operativa defendible. Pero el efecto contable es que un mismo dólar puede aparecer registrado como inversión en un balance y como ingreso en otro, inflando la apariencia de demanda real sin que quede claro cuánta demanda final la sostiene.</p>
+<p>El caso de OpenAI ilustra la tensión. La compañía proyecta pérdidas del orden de 14.000 millones de dólares en 2026, casi el triple que en 2025, mientras compromete infraestructura por importes muy superiores a sus ingresos actuales, apostando a que la demanda de 2028 y 2029 justificará el gasto de hoy. Si esa demanda no llega al ritmo previsto, el ajuste no se limitaría a una compañía: se transmitiría a lo largo de toda la cadena de proveedores que ha construido capacidad contando con esos contratos.</p>
+<p>Esta dimensión no aparece con fuerza ni en el argumento de la burbuja ni en el del catastrofismo rechazado. El primero se centra en el volumen del gasto de las grandes plataformas cotizadas; el segundo, en sus beneficios ya demostrados. Ninguno de los dos incorpora plenamente que una parte del crecimiento reportado por estas empresas depende de contrapartes cuya solvencia futura es, en sí misma, la incógnita que el mercado está dando por resuelta.</p>
+<h2>Las Siete Magníficas no son una sola inversión</h2>
+<p>Tratar a las Siete Magníficas como un bloque homogéneo es otro problema del debate.</p>
+<p>No lo son. Nvidia vende la infraestructura esencial para entrenar y ejecutar modelos. Microsoft y Amazon compiten en servicios cloud. Alphabet combina búsqueda, publicidad, cloud y modelos propios. Meta usa la IA para mejorar la eficiencia de su publicidad. Apple parte de un ecosistema de dispositivos y servicios. Tesla depende de una combinación distinta de automoción, autonomía y expectativas a largo plazo. Sus valoraciones, márgenes, necesidades de capital y exposición a la circularidad descrita arriba son diferentes entre sí.</p>
+<p>Puede existir sobrevaloración en algunas de estas compañías y una valoración razonable en otras. Puede haber una burbuja concentrada en determinadas capas del ecosistema (proveedores de infraestructura marginales, negocios privados financiados a múltiplos extremos) sin que toda la industria tecnológica esté en una burbuja. Hablar de &quot;la burbuja de la IA&quot; como una realidad única simplifica tanto como afirmar que cualquier empresa relacionada con la IA merece hoy una valoración elevada.</p>
+<h2>El verdadero riesgo no es que la IA fracase</h2>
+<p>La tesis bajista más sólida no sostiene que la inteligencia artificial vaya a ser irrelevante. Sostiene que puede tener éxito y, al mismo tiempo, resultar más lenta de lo esperado, más costosa de desplegar, menos rentable por la competencia entre plataformas, más intensiva en capital de lo previsto y menos exclusiva para las compañías que hoy dominan el mercado.</p>
+<p>Los ingresos pueden crecer mientras los márgenes se reducen. La demanda puede aumentar mientras los precios de los servicios bajan. Una compañía puede ganar cuota de mercado y obtener, al mismo tiempo, una rentabilidad insuficiente sobre el capital invertido, sobre todo si ese capital procede de deuda emitida en condiciones que hoy parecen favorables y podrían no seguir siéndolo.</p>
+<p>Las grandes tecnológicas están dejando de ser negocios digitales poco intensivos en activos. La carrera de la IA exige infraestructura física, energía, terrenos y centros de datos, financiados en una proporción creciente con instrumentos que tienen coste y vencimiento. Cuanto más capital externo necesita una empresa para crecer, mayor tiene que ser el retorno de cada nueva unidad de inversión para justificar el riesgo asumido.</p>
+<p>La IA no necesita fracasar para decepcionar al mercado. Basta con que su rentabilidad económica quede por debajo de la que los precios actuales ya dan por hecha.</p>
+<h2>El papel de los tipos de interés</h2>
+<p>Las valoraciones no dependen únicamente de los beneficios esperados.</p>
+<p>Cuando los tipos de interés son bajos, los inversores pagan más por beneficios que llegarán dentro de muchos años. Cuando los tipos suben, esos beneficios futuros valen menos en términos actuales, y las empresas de crecimiento, cuya valoración depende en buena medida de flujos de caja lejanos, son especialmente sensibles a ese movimiento.</p>
+<p>Con un PER del S&amp;P 500 en torno a 20 veces y una rentabilidad elevada en los bonos del Tesoro, el mercado necesita que el crecimiento empresarial compense la alternativa que ofrece la renta fija. Si los tipos largos suben, el mercado podría exigir múltiplos menores, y en ese escenario los beneficios seguirían creciendo mientras la cotización ofrece una rentabilidad modesta. La empresa cumpliría su parte. El precio, no.</p>
+<h2>Lo que queda por saber</h2>
+<p>Los datos disponibles a día de hoy permiten defender las dos posiciones de partida, y también la tercera que rara vez se discute con el mismo detalle.</p>
+<p>Los escépticos tienen razón al señalar la concentración del índice, el nivel de las valoraciones y la magnitud del gasto financiado con deuda. Los optimistas tienen razón al recordar que existen beneficios reales, demanda verificable y balances extraordinarios detrás de las principales compañías del ciclo. Ninguno de los dos suele detenerse en un matiz previo: una parte de ese crecimiento que hoy figura como beneficio real, no como promesa futura, depende de contratos que una contraparte con cuentas mucho más frágiles todavía no ha pagado. El backlog de 300.000 millones que Oracle registra frente a OpenAI cuenta como crecimiento asegurado, pero OpenAI pierde del orden de 14.000 millones al año y solo cubrirá ese compromiso si los ingresos que proyecta para 2028 y 2029 llegan a materializarse. Si no llegan, ese crecimiento que las cuentas de hoy dan por bueno se revela retrospectivamente como un beneficio contingente, no consumado.</p>
+<p>La cuestión no se va a resolver debatiendo si la inteligencia artificial es revolucionaria. Probablemente lo sea. Se va a resolver observando cuánto flujo de caja adicional genera cada dólar invertido, qué parte de ese capital procede de deuda que habrá que devolver en unas condiciones que hoy se dan por descontadas, y cuánta de la demanda que sostiene los contratos actuales resulta ser demanda final y no un compromiso financiado por el propio proveedor que lo registra como ingreso.</p>
+<p>El mercado ya ha fijado su precio. Ahora corresponde a las empresas demostrar que pueden sostenerlo. Hasta entonces, ese precio funciona como una caja registradora que ya ha sumado la venta, aunque el cajón siga vacío.</p>
+<p>Esta distinción entre lo que ya se ha cobrado y lo que solo se ha proyectado es, en el fondo, la misma que recorre mi ensayo <a href="ensayo.html"><em>El inversor inteligente ha muerto</em></a>, donde la desarrollo con más detenimiento.</p>
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Profesor · Analista · Observador incómodo de los relatos económicos</div>
+    <div class="nav-articulos"><a href="articulo6.html">← Artículo anterior</a><a href="articulos.html">Todos los artículos →</a></div>
+  </main>
+</div>
+
+<div class="lang-block" id="lang-en" role="tabpanel" aria-labelledby="tab-en" hidden>
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Opinion · August 2026</p>
+    <h1 class="articulo-titulo">The Question Missing from the Debate</h1>
+    <p class="articulo-subtitulo">Two reasonable positions—and one question neither can answer on its own.</p>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo7.png" alt="An antique cash register with an empty drawer on a wet cobbled street at night" class="articulo-imagen">
+<p>The market has split into two camps.</p>
+<p>One argues that America’s largest technology companies—particularly the Magnificent Seven—have reached valuations that will be difficult to sustain. It points to familiar features of past bubbles: extreme market concentration, investment on an unprecedented scale, growth forecasts that reinforce themselves, and a technology narrative capable of turning almost any expenditure into a promise of future returns.</p>
+<p>The other rejects the comparison. Today’s leading companies, it argues, are not revenue-free businesses without viable models, as many of the dot-com era’s most prominent names were. Microsoft, Alphabet, Amazon, Meta and Nvidia generate earnings, cash flow and genuine competitive advantages. Demand for cloud services, computing capacity and semiconductors is real and measurable.</p>
+<p>Both positions have merit. Neither, however, answers the question that matters to investors. The issue is not whether artificial intelligence will work—it is reasonable to assume that it will—but whether it will work well enough to outperform what is already priced in.</p>
+<h2>A Good Technology Is Not Always a Good Investment</h2>
+<p>Recognising a technological transformation correctly is not enough. Investors must also ask how much they are paying to take part in it.</p>
+<p>A company can grow revenue, improve earnings and strengthen its competitive position, yet still deliver mediocre shareholder returns if those improvements were already embedded in the entry price.</p>
+<p>Take a company earning $10 a share and trading at $200. The market is paying 20 times earnings because it expects substantial growth.</p>
+<p>Five years later, the company has delivered: earnings per share are up 50%, to $15. But the market is no longer willing to pay 20 times earnings; it will pay only 13.</p>
+<p>The result: 15 × 13 = 195.</p>
+<p>The company has grown, the technology thesis has been vindicated—and the shares are worth slightly less than they were at the outset. The business did not fail. The price paid for it did.</p>
+<p>That distinction explains why a technological revolution can create enormous economic progress without guaranteeing strong returns for every investor who backs it.</p>
+<h2>What the Market Is Pricing In Today</h2>
+<p>At the end of July 2026, the S&amp;P 500 was trading at roughly 20 times expected earnings over the next twelve months, above its ten-year average. Consensus estimates pointed to earnings growth of close to 25% for 2026 as a whole, later revised to more than 29% after Alphabet reported. This is not a market pricing in a mediocre outcome. It assumes exceptionally demanding corporate expansion.</p>
+<p>Leadership is also highly concentrated: the ten largest US companies account for around one-third of the index’s value, while broader versions of the Magnificent Seven grouping represent more than 40% of its weight.</p>
+<p>Concentration alone does not prove a bubble. Indices have always been dominated by the most successful companies of their time. But it does make the market more dependent on a small group of businesses—and, above all, on the same set of assumptions: high growth, enduring technological leadership and exceptional returns on invested capital.</p>
+<p>The market is not paying only for the AI that exists today. It is paying for the profits AI is expected to produce over many years still to come.</p>
+<h2>The Case for a Bubble</h2>
+<p>The sceptical case begins with a verifiable observation: spending is rising faster than the available evidence of its eventual return.</p>
+<p>Alphabet invested $44.9 billion in capex during the second quarter of 2026, twice as much as a year earlier. That exceeded its own operating cash flow of $39.1 billion, producing negative free cash flow for the first time in its history as a listed company. To bridge the gap, it raised $49.6 billion through equity and mandatory convertible securities and $20.3 billion through senior debt, more than doubling its long-term borrowings since December.</p>
+<p>Amazon is following a similar path. Its initial capex forecast for 2026 was $200 billion; on 30 July, alongside its second-quarter results, it raised the figure to $220 billion, blaming higher memory-component costs. Microsoft, meanwhile, reported $41 billion of quarterly investment, around two-thirds of it in short-lived assets, mainly CPUs and GPUs.</p>
+<p>The relevant issue is not simply the amount being spent. It is how that spending is financed. When investment is funded from internally generated cash, the company carries the risk against a balance sheet it has already built. When it is funded by issuing debt and new equity at an accelerating rate, the risk moves into the company’s financial structure. The hurdle is no longer merely to generate revenue, but to generate enough of it to cover the cost of that financing before market conditions change.</p>
+<p>Business history is full of industries that transformed the economy while destroying capital because too many companies invested in the same opportunity at the same time. Railways, telecommunications and the internet changed the world. That did not prevent many of their investors from losing money.</p>
+<h2>The Case Against the Doomsday Narrative</h2>
+<p>The automatic comparison with the dot-com bubble has problems of its own.</p>
+<p>Today’s main beneficiaries are not speculative ventures with no revenue. They are among the most profitable and liquid companies in the global economy, supported by advertising franchises, operating systems and cloud platforms capable of funding much of their investment internally—even when they also tap the debt markets.</p>
+<p>There are also tangible signs of monetisation. By early August, more than 85% of the S&amp;P 500 companies that had reported results had beaten consensus estimates, well above the historical average. Businesses tied to AI infrastructure were among the main drivers of that growth.</p>
+<p>Google Cloud grew sharply and its contract backlog surged. Azure and Microsoft’s enterprise products continued to post substantial gains. AWS increased operating income from $10.2 billion to $16.6 billion in a single year, lifting its operating margin above 39%.</p>
+<p>So this is not a narrative wholly detached from fundamentals. AI is already generating verifiable sales, contracts and profits. Defenders of current valuations can argue that capex is not merely a cost; it is also a barrier to entry. The more expensive and scarce the required infrastructure becomes, the harder it is for a new competitor to replicate the dominant platforms’ position.</p>
+<h2>A Problem Neither Side Discusses Enough</h2>
+<p>There is a third issue that does not fit neatly into either of those arguments: the circularity of part of the ecosystem.</p>
+<p>A small group of companies appears simultaneously as supplier, investor and customer within the same spending chain. Nvidia invests in OpenAI and sells it the chips it needs. OpenAI commits hundreds of billions of dollars to infrastructure contracts with cloud providers such as Oracle. Those providers, in turn, buy Nvidia chips to fulfil those contracts. Analyses published during 2026 put the total value of such arrangements at more than $800 billion, including individual commitments such as Oracle’s five-year, $300 billion agreement with OpenAI and Nvidia’s pledge to invest up to $100 billion in OpenAI.</p>
+<p>The mechanism is neither fraudulent nor necessarily unhealthy. Building computing capacity is extraordinarily expensive, and the most advanced components remain scarce, so securing supply through financed cross-purchase commitments has a defensible operational logic. But the accounting effect is that the same dollar can appear as an investment on one balance sheet and as revenue on another, making demand look larger without revealing how much end demand ultimately supports it.</p>
+<p>OpenAI illustrates the tension. The company is projecting losses of around $14 billion in 2026, almost three times the 2025 figure, while committing to infrastructure far beyond its current revenue base and betting that demand in 2028 and 2029 will justify today’s spending. If that demand does not arrive at the expected pace, the adjustment will not stop with one company. It will travel through the entire supplier chain that built capacity on the strength of those contracts.</p>
+<p>This dimension receives little attention from either side. The bubble argument focuses on the spending of large listed platforms; the anti-catastrophist case focuses on the profits they have already demonstrated. Neither fully incorporates the fact that part of the growth reported by these companies depends on counterparties whose future solvency is itself the unknown the market has already treated as resolved.</p>
+<h2>The Magnificent Seven Are Not a Single Investment</h2>
+<p>Treating the Magnificent Seven as a homogeneous block is another flaw in the debate.</p>
+<p>They are not. Nvidia sells the essential infrastructure used to train and run models. Microsoft and Amazon compete in cloud services. Alphabet combines search, advertising, cloud and its own models. Meta uses AI to improve the efficiency of its advertising business. Apple begins from an ecosystem of devices and services. Tesla rests on a different combination of automotive manufacturing, autonomy and long-term expectations. Their valuations, margins, capital requirements and exposure to the circularity described above are not the same.</p>
+<p>Some may be overvalued while others are reasonably priced. A bubble may exist in particular layers of the ecosystem—marginal infrastructure providers or private businesses financed at extreme multiples—without the entire technology industry being in a bubble. Treating “the AI bubble” as a single reality is no less simplistic than assuming that every company associated with AI deserves a high valuation.</p>
+<h2>The Real Risk Is Not That AI Fails</h2>
+<p>The strongest bearish thesis is not that artificial intelligence will prove irrelevant. It is that AI may succeed while taking longer than expected, costing more to deploy, earning lower returns because of competition between platforms, requiring more capital than anticipated and becoming less exclusive to the companies that dominate the market today.</p>
+<p>Revenue can rise while margins shrink. Demand can increase while service prices fall. A company can gain market share and still earn an inadequate return on invested capital—especially when that capital comes from debt issued on terms that look favourable today but may not remain so.</p>
+<p>The large technology companies are ceasing to be asset-light digital businesses. The AI race requires physical infrastructure, energy, land and data centres, financed increasingly through instruments with a cost and a maturity date. The more external capital a company needs in order to grow, the higher the return each additional unit of investment must earn to justify the risk.</p>
+<p>AI does not need to fail in order to disappoint the market. It only needs to deliver an economic return below the level current prices already assume.</p>
+<h2>The Role of Interest Rates</h2>
+<p>Valuations do not depend on expected profits alone.</p>
+<p>When interest rates are low, investors are willing to pay more for profits that will arrive many years in the future. When rates rise, those future profits are worth less in present terms, and growth companies—whose valuations depend heavily on distant cash flows—are particularly sensitive to the change.</p>
+<p>With the S&amp;P 500 trading at around 20 times earnings and Treasury yields still elevated, corporate growth must compensate investors for the alternative offered by fixed income. If long-term rates rise, the market may demand lower multiples. In that scenario, profits could continue to grow while the shares deliver only modest returns. The company would have done its part. The price would not.</p>
+<h2>What Remains Unknown</h2>
+<p>The available data support both of the opening positions—and also the third, which is rarely examined in equal depth.</p>
+<p>The sceptics are right to point to index concentration, valuation levels and the scale of debt-funded spending. The optimists are right to stress that the leading companies in this cycle are backed by real earnings, verifiable demand and exceptional balance sheets. Yet neither side usually pauses over an earlier distinction: some of the growth now recorded as real profit, rather than as a future promise, depends on contracts that a financially much weaker counterparty has not yet paid. Oracle’s $300 billion backlog with OpenAI is treated as secured growth, but OpenAI is losing around $14 billion a year and will be able to honour that commitment only if the revenue it projects for 2028 and 2029 materialises. If it does not, the growth today’s accounts present as assured will later be revealed as contingent rather than realised.</p>
+<p>The question will not be settled by arguing over whether artificial intelligence is revolutionary. It probably is. It will be settled by observing how much additional cash flow each invested dollar produces, how much of that capital comes from debt that must be repaid on terms currently taken for granted, and how much of the demand underpinning today’s contracts turns out to be end demand rather than a commitment financed by the same supplier that records it as revenue.</p>
+<p>The market has already set the price. It is now for the companies to prove they can sustain it. Until then, that price resembles a cash register that has already rung up the sale even though the drawer remains empty.</p>
+<p>This distinction between what has already been paid and what has merely been projected is also the distinction that runs through my essay <a href="ensayo.html"><em>The Intelligent Investor Is Dead</em></a>, where I explore it in greater depth.</p>
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Professor · Analyst · An uncomfortable observer of economic narratives</div>
+    <div class="nav-articulos"><a href="articulo6.html">← Previous article</a><a href="articulos.html">All articles →</a></div>
+  </main>
+</div>
+
+<footer><span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canary Islands</span></footer>
+
+<script>
+  const pageData = {
+    es: {
+      title: 'El debate al que le falta una pregunta — Víctor Saavedra',
+      description: 'Dos posiciones razonables sobre la valoración de la IA y una pregunta que el mercado aún no ha resuelto: si funcionará lo suficiente para superar lo que el precio ya descuenta.',
+      back: '← Artículos',
+      navTitle: 'Pensamientos publicados'
+    },
+    en: {
+      title: 'The Question Missing from the AI Valuation Debate — Víctor Saavedra',
+      description: 'Two reasonable views on AI valuations—and the unresolved question of whether future returns can exceed what markets have already priced in.',
+      back: '← Articles',
+      navTitle: 'Published essays'
+    }
+  };
+
+  function setLang(lang) {
+    document.querySelectorAll('.lang-block').forEach(function (block) {
+      block.classList.remove('active');
+      block.hidden = true;
+    });
+
+    document.querySelectorAll('.lang-tab').forEach(function (tab) {
+      tab.classList.remove('active');
+      tab.setAttribute('aria-selected', 'false');
+    });
+
+    const block = document.getElementById('lang-' + lang);
+    const tab = document.getElementById('tab-' + lang);
+    block.hidden = false;
+    block.classList.add('active');
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    document.documentElement.lang = lang;
+    document.title = pageData[lang].title;
+    document.getElementById('meta-description').setAttribute('content', pageData[lang].description);
+    document.getElementById('nav-back').textContent = pageData[lang].back;
+    document.getElementById('nav-title').textContent = pageData[lang].navTitle;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+<script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

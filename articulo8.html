@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="description" id="meta-description" content="Un análisis comparado de 2008, 2020 y 2022 que muestra por qué ningún activo protege frente a todos los riesgos y cómo construir una cartera más resistente.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anatomía de una cartera que busca refugio">
+<meta property="og:description" content="Tres crisis distintas revelan los límites del concepto de activo defensivo.">
+<meta property="og:image" content="https://victorsaavedra.com/img-articulo8.png">
+<meta property="og:url" content="https://victorsaavedra.com/articulo8.html">
+<link rel="canonical" href="https://victorsaavedra.com/articulo8.html">
+<title>Anatomía de una cartera que busca refugio — Víctor Saavedra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --oro:#c9a84c; --oro-tenue:#8a6f2e; --blanco:#f5f0ea; --fondo:#0b0b0b; --fondo-tabla:#131313; --borde:#2a2a2a; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--fondo); color:#f0ece6; font-family:'Montserrat',sans-serif; font-weight:400; font-size:17px; line-height:1.75; min-height:100vh; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(11,11,11,.96); backdrop-filter:blur(8px); border-bottom:.5px solid var(--borde); display:flex; justify-content:space-between; align-items:center; padding:1.4rem 4rem; }
+  .nav-back { font-size:13px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:#e8e2d9; text-decoration:none; transition:color .25s; }
+  .nav-back:hover { color:var(--oro); }
+  .nav-titulo { font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:#e8e2d9; font-weight:400; }
+  .lang-switch { display:flex; justify-content:center; gap:3rem; padding:2.4rem 2rem 0; border-bottom:.5px solid var(--borde); }
+  .lang-tab { background:none; border:none; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:16px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:#7a746c; padding:0 0 1.3rem; border-bottom:2px solid transparent; transition:color .25s,border-color .25s; }
+  .lang-tab:hover { color:#cfc8bd; }
+  .lang-tab.active { color:var(--oro); border-bottom-color:var(--oro); }
+  .lang-block { display:none; }
+  .lang-block.active { display:block; }
+  .articulo-wrap { max-width:820px; margin:0 auto; padding:5rem 2rem 6rem; }
+  .articulo-tipo { font-size:11px; letter-spacing:.25em; text-transform:uppercase; color:var(--oro); font-weight:500; margin-bottom:1rem; }
+  .articulo-titulo { font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:300; color:var(--blanco); line-height:1.05; margin-bottom:.9rem; }
+  .articulo-subtitulo { font-family:'Cormorant Garamond',serif; font-size:21px!important; color:#c8c2b8!important; font-weight:400; line-height:1.45!important; margin-bottom:2.4rem!important; }
+  .articulo-separador { width:60px; height:.5px; background:var(--oro-tenue); margin-bottom:3rem; }
+  .articulo-imagen { width:100%; max-width:520px; height:auto; display:block; margin:0 auto 3.5rem; box-shadow:0 20px 60px rgba(0,0,0,.7); }
+  .articulo-wrap p { font-size:16px; color:#e0dbd4; line-height:1.9; margin-bottom:1.4rem; font-weight:400; }
+  .articulo-wrap h2 { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:400; color:#f0ece6; line-height:1.2; margin-top:4.5rem; margin-bottom:1.35rem; padding-top:.2rem; }
+  .articulo-wrap h3 { font-family:'Cormorant Garamond',serif; font-size:25px; font-weight:400; color:#e0dbd4; line-height:1.25; margin-top:3rem; margin-bottom:1.15rem; }
+  .articulo-wrap h4 { font-family:'Montserrat',sans-serif; font-size:14px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--oro); margin:2.4rem 0 1rem; }
+  .articulo-wrap a { color:#c8c1b7; text-decoration-color:var(--oro-tenue); text-underline-offset:3px; }
+  .articulo-wrap a:hover { color:var(--oro); }
+  .articulo-wrap ul { margin:0 0 1.7rem 1.3rem; padding-left:.7rem; }
+  .articulo-wrap li { color:#e0dbd4; font-size:16px; line-height:1.8; margin-bottom:.55rem; padding-left:.35rem; }
+  .articulo-wrap li::marker { color:var(--oro); }
+  .idea-clave { border-left:2px solid var(--oro-tenue); margin:2rem 0 2.2rem; padding:.2rem 0 .2rem 1.35rem; }
+  .idea-clave p { font-family:'Cormorant Garamond',serif; font-size:21px!important; line-height:1.55!important; font-style:italic; color:#f0ece6!important; margin:0!important; }
+  .formula { font-weight:600!important; color:#f1ece4!important; letter-spacing:.01em; }
+  .nota-tabla { color:#aaa39a!important; font-size:13px!important; line-height:1.65!important; margin-top:-.4rem; }
+  .tabla-scroll { overflow-x:auto; margin:2rem 0 2.4rem; border:.5px solid #343434; background:var(--fondo-tabla); scrollbar-color:var(--oro-tenue) #171717; }
+  table { width:100%; min-width:620px; border-collapse:collapse; font-size:13px; line-height:1.45; }
+  th { background:#222; color:#f3eee7; font-weight:500; text-align:left; vertical-align:bottom; padding:.8rem .75rem; border-right:.5px solid #3a3a3a; border-bottom:1px solid #4a4a4a; }
+  td { color:#d6d0c8; vertical-align:top; padding:.72rem .75rem; border-right:.5px solid #303030; border-bottom:.5px solid #303030; }
+  th:last-child,td:last-child { border-right:0; }
+  tbody tr:last-child td { border-bottom:0; }
+  tbody tr:nth-child(even) { background:#171717; }
+  .referencia { font-size:13px!important; line-height:1.65!important; margin-bottom:.85rem!important; padding-left:1.15rem; text-indent:-1.15rem; color:#c9c3ba!important; }
+  .articulo-firma { font-family:'Cormorant Garamond',serif; font-size:15px; font-style:italic; color:#b8b2a8; margin-top:3.5rem; padding-top:1.5rem; border-top:.5px solid var(--borde); }
+  .nav-articulos { margin-top:2.5rem; padding-top:2rem; border-top:.5px solid var(--borde); display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .nav-articulos a { font-size:13px; letter-spacing:.15em; text-transform:uppercase; color:var(--oro); text-decoration:none; transition:color .25s; }
+  .nav-articulos a:hover { color:#f0ece6; }
+  footer { padding:1.5rem 4rem; border-top:.5px solid var(--borde); display:flex; justify-content:space-between; align-items:center; }
+  .footer-copy { font-family:'Cormorant Garamond',serif; font-size:13px; color:#bbb; letter-spacing:.08em; }
+  @media (max-width:768px) {
+    nav { padding:1.2rem 1.5rem; } .nav-titulo { display:none; }
+    .lang-switch { gap:2.2rem; padding:2rem 1.5rem 0; } .lang-tab { font-size:14px; padding-bottom:1.1rem; }
+    .articulo-wrap { padding:3.5rem 1.25rem 4rem; } .articulo-titulo { font-size:38px; } .articulo-subtitulo { font-size:19px!important; }
+    .articulo-wrap h2 { font-size:29px; margin-top:3.8rem; } .articulo-wrap h3 { font-size:23px; }
+    .tabla-scroll { margin-left:-.15rem; margin-right:-.15rem; } table { font-size:12px; } th,td { padding:.65rem .6rem; }
+    .nav-articulos { align-items:flex-start; } .nav-articulos a:last-child { text-align:right; }
+    footer { padding:1.5rem; flex-direction:column; gap:.5rem; }
+  }
+</style>
+</head>
+<body>
+<nav><a href="articulos.html" class="nav-back" id="nav-back">← Artículos</a><span class="nav-titulo" id="nav-title">Pensamientos publicados</span></nav>
+<div class="lang-switch" role="tablist" aria-label="Idioma / Language">
+  <button class="lang-tab active" id="tab-es" role="tab" aria-selected="true" aria-controls="lang-es" onclick="setLang('es')">Español</button>
+  <button class="lang-tab" id="tab-en" role="tab" aria-selected="false" aria-controls="lang-en" onclick="setLang('en')">English</button>
+</div>
+<div class="lang-block active" id="lang-es" role="tabpanel" aria-labelledby="tab-es">
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Artículo de análisis · Agosto de 2026</p>
+    <h1 class="articulo-titulo">Anatomía de una cartera que busca refugio</h1>
+    <p class="articulo-subtitulo">Un análisis comparado de tres crisis y de los límites del concepto de activo defensivo.</p>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo8.png" alt="Cartera protegida por un paraguas en una calle adoquinada bajo la lluvia" class="articulo-imagen">
+<h2>Introducción</h2>
+<p>En inversión se utilizan con frecuencia expresiones como <em>activo refugio</em>, <em>activo defensivo</em> o <em>inversión segura</em> para describir productos que deberían proteger el patrimonio durante periodos de crisis.</p>
+<p>Pero la experiencia histórica plantea una dificultad: el mismo activo puede proteger en una crisis y comportarse de forma muy distinta en otra.</p>
+<p>Este estudio explora esa idea mediante tres episodios de naturaleza diferente: la crisis financiera de 2008, la perturbación provocada por la pandemia de COVID-19 en 2020 y el episodio inflacionista y de subida de tipos de 2022.</p>
+<p>El análisis examina la renta variable, la renta fija de distinta duración y calidad crediticia, el oro, el efectivo, la vivienda, las materias primas y Bitcoin. Siempre que los datos lo permiten, se diferencia entre el comportamiento del activo durante los meses más críticos de la crisis y su resultado al finalizar el año.</p>
+<p>El objetivo no es identificar un activo universalmente seguro ni proponer una cartera óptima. La pregunta es más sencilla:</p>
+<blockquote class="idea-clave"><p><em>¿Tiene sentido hablar de activos refugio sin especificar primero de qué riesgo queremos refugiarnos?</em></p></blockquote>
+<p>La evidencia analizada sugiere que las etiquetas tradicionales pueden ocultar diferencias importantes. Los bonos de mayor duración pueden beneficiarse cuando bajan los tipos de interés, pero pueden sufrir pérdidas importantes cuando suben. La renta fija puede comportarse de forma muy distinta según la calidad crediticia. El oro y las materias primas no responden necesariamente igual. Bitcoin puede ofrecer elevadas rentabilidades en determinadas fases de recuperación sin actuar como refugio durante el momento de máximo estrés.</p>
+<p>La idea central es que la capacidad de protección no depende necesariamente de incluir activos considerados defensivos, sino de construir una cartera cuyos componentes respondan de manera diferente ante distintas fuentes de riesgo.</p>
+<h2>1. El problema: ¿qué llamamos refugio?</h2>
+<p>Cuando aumenta la incertidumbre, aparece casi siempre la misma pregunta:</p>
+<blockquote class="idea-clave"><p><em>¿Dónde me refugio?</em></p></blockquote>
+<p>La respuesta suele recurrir a categorías conocidas: efectivo, renta fija, oro, vivienda o, más recientemente, Bitcoin.</p>
+<p>La propia expresión <em>activo refugio</em> sugiere que existe algo parecido a una propiedad permanente: determinados activos protegerían mientras otros asumirían riesgo.</p>
+<p>Pero esa clasificación empieza a generar problemas cuando se observa lo ocurrido en distintas crisis.</p>
+<p>En 2008, algunos segmentos de renta fija resistieron bien mientras otros sufrieron pérdidas muy elevadas.</p>
+<p>En 2020, la deuda pública de mayor duración se benefició del desplome de los tipos de interés.</p>
+<p>En 2022, esa misma duración se convirtió en una fuente importante de pérdidas cuando los tipos subieron rápidamente.</p>
+<p>El activo no había cambiado de naturaleza, habían cambiado las condiciones que determinaban su precio.</p>
+<p>Ese contraste plantea una primera duda:</p>
+<blockquote class="idea-clave"><p><em>¿Estamos llamando refugio al activo o al comportamiento que esperamos de él bajo unas condiciones concretas?</em></p></blockquote>
+<p>La diferencia no es menor.</p>
+<p>Si confundimos ambas cosas, podemos terminar trasladando automáticamente una conclusión obtenida en una crisis a otra completamente distinta.</p>
+<p>Algo parecido ocurre con la renta fija.</p>
+<p>Hablar de ella como una categoría homogénea puede resultar cómodo, pero dentro de esa denominación conviven activos con sensibilidades muy diferentes al riesgo de crédito y a los tipos de interés.</p>
+<p>Un bono soberano de corto plazo y una emisión corporativa de baja calidad crediticia pertenecen formalmente a la renta fija, pero pueden responder de forma radicalmente distinta durante una crisis.</p>
+<p>La vivienda plantea otro problema.</p>
+<p>Su precio no se observa continuamente, por lo que puede transmitir una sensación de estabilidad que no necesariamente coincide con la evolución de su valor económico.</p>
+<p>El efectivo presenta la dificultad contraria: puede conservar perfectamente su importe nominal y, al mismo tiempo, perder poder adquisitivo cuando la inflación es elevada.</p>
+<p>Incluso el concepto de diversificación puede inducir a error.</p>
+<p>Una cartera puede contener muchos productos y continuar expuesta a una misma fuente de riesgo.</p>
+<p>Tener varios activos no garantiza que todos vayan a reaccionar de manera diferente cuando llega la crisis.</p>
+<p>Por tanto, quizá el error no esté en las categorías tradicionales. El error puede estar en atribuirles una capacidad defensiva permanente.</p>
+<p>Este trabajo parte precisamente de esa sospecha. No pretende demostrar que el oro sea o no sea refugio, que la renta fija sea o no sea defensiva o que Bitcoin pueda o no sustituir a determinados activos tradicionales.</p>
+<p>La pregunta es anterior:</p>
+<blockquote class="idea-clave"><p><em>¿Frente a qué queremos que nos proteja cada uno?</em></p></blockquote>
+<p>Para explorarla utilizaremos tres crisis que tuvieron orígenes diferentes.</p>
+<p>Si las etiquetas tradicionales fueran suficientes, los activos considerados defensivos deberían ofrecer una protección relativamente estable en los tres episodios.</p>
+<p>Si su comportamiento cambia de forma significativa cuando cambia la naturaleza de la crisis, entonces quizá la cuestión relevante no sea qué activo es refugio, sino qué riesgo estamos intentando cubrir.</p>
+<h2>2. Tres crisis, tres riesgos distintos</h2>
+<h3>2.1. Tipos de riesgos</h3>
+<p>Primero definamos qué entendemos por riesgo.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Fuente de riesgo</th><th>Significado en este trabajo</th></tr></thead><tbody><tr><td>Mercado</td><td>Posibilidad de pérdida por una caída general del precio de los activos</td></tr><tr><td>Crédito</td><td>Riesgo de que un emisor no pueda cumplir sus obligaciones o aumente la probabilidad percibida de impago</td></tr><tr><td>Tipos de interés</td><td>Riesgo de pérdida provocado por cambios en los tipos; afecta especialmente a los bonos de mayor duración</td></tr><tr><td>Inflación</td><td>Riesgo de que el aumento de precios reduzca el poder adquisitivo del patrimonio</td></tr><tr><td>Liquidez</td><td>Riesgo de no poder vender un activo rápidamente sin aceptar una pérdida significativa</td></tr><tr><td>Concentración</td><td>Riesgo de que una parte excesiva de la cartera dependa de una misma fuente de comportamiento</td></tr><tr><td>Divisa</td><td>Riesgo derivado de variaciones del tipo de cambio cuando el activo está denominado en una moneda distinta del euro</td></tr></tbody></table></div>
+<p>Estas fuentes de riesgo no son excluyentes. Una misma crisis puede activar varias simultáneamente, y un mismo activo puede estar expuesto a más de una.</p>
+<p>Por otro lado, para comprobar si la idea de <em>activo refugio</em> depende de la naturaleza de la crisis, necesitamos comparar episodios suficientemente diferentes entre sí.</p>
+<p>Por eso se han elegido <strong>2008, 2020 y 2022</strong>.</p>
+<p>No porque sean las tres crisis más importantes ni porque representen todos los escenarios posibles, sino porque cada una estuvo dominada por una combinación distinta de riesgos.</p>
+<p>La comparación es precisamente útil porque no se parecen.</p>
+<h3>2.2. 2008: crisis de crédito y liquidez</h3>
+<p>La crisis de 2008 estuvo estrechamente relacionada con el crédito, el elevado apalancamiento, el deterioro de los balances financieros y la pérdida de confianza entre las propias instituciones.</p>
+<p>Cuando esas tensiones se intensificaron, el problema dejó de limitarse a determinados activos y comenzó a afectar al funcionamiento del sistema financiero.</p>
+<p>La liquidez adquirió una importancia crítica y los bancos centrales tuvieron que intervenir de forma extraordinaria para mantener la financiación del sistema. El Banco Central Europeo modificó sus operaciones de refinanciación y amplió de forma sustancial la provisión de liquidez a las entidades (Banco Central Europeo, 2009).</p>
+<p>En 2008 confluyeron principalmente cuatro fuentes de riesgo:</p>
+<p class="formula"><strong>crédito + liquidez + desapalancamiento + caída de mercado</strong></p>
+<p>La pregunta será sencilla:</p>
+<blockquote class="idea-clave"><p><em>¿Qué activos protegieron cuando el problema estaba precisamente en el crédito y en el funcionamiento del sistema financiero?</em></p></blockquote>
+<h3>2.3. 2020: perturbación externa y paralización económica</h3>
+<p>La crisis de 2020 tuvo un origen completamente distinto.</p>
+<p>El sistema financiero no generó inicialmente la perturbación, aunque la perturbación terminó provocando también tensiones de liquidez y crédito.</p>
+<p>La expansión del COVID-19 y las medidas adoptadas para contenerla provocaron una interrupción abrupta de la actividad económica. Los confinamientos afectaron simultáneamente a oferta y demanda y la economía de la zona euro sufrió una contracción excepcional durante el año (Banco Central Europeo, 2021).</p>
+<p>El impacto sobre los mercados fue extremadamente rápido.</p>
+<p>Durante marzo aparecieron además importantes problemas de liquidez incluso en segmentos habitualmente considerados muy líquidos. El Banco Central Europeo documentó una fuerte volatilidad y un deterioro significativo de la liquidez en los mercados de renta fija (Banco Central Europeo, 2021).</p>
+<p>Sin embargo, la respuesta monetaria y fiscal también fue extraordinariamente rápida.</p>
+<p>Para nuestro análisis, 2020 representa principalmente:</p>
+<p class="formula"><strong>perturbación externa + caída de mercado + necesidad inmediata de liquidez</strong></p>
+<p>La pregunta cambia:</p>
+<blockquote class="idea-clave"><p>¿Qué activos protegieron cuando una paralización inesperada de la economía provocó una caída súbita de los mercados?</p></blockquote>
+<h3>2.4. 2022: inflación y subida de tipos</h3>
+<p>En 2022 volvió a cambiar el escenario.</p>
+<p>La inflación de la zona euro alcanzó una media anual del 8,4 %, frente al 2,6 % del año anterior. El Banco Central Europeo señala como factores principales el fuerte encarecimiento de la energía y los alimentos, la guerra en Ucrania, la persistencia de dificultades en las cadenas globales de suministro y el incremento de los costes de producción (Banco Central Europeo, 2023a).</p>
+<p>La respuesta fue un rápido endurecimiento de la política monetaria.</p>
+<p>El Banco Central Europeo comenzó a elevar sus tipos de interés y encadenó varias subidas importantes durante el año con el objetivo de frenar la inflación (Banco Central Europeo, 2022).</p>
+<p>Esto generó una situación especialmente interesante para nuestro estudio. Los tipos más altos podían perjudicar simultáneamente a la renta variable y a la renta fija, particularmente a los bonos de mayor duración. Al mismo tiempo, mantener el dinero en efectivo evitaba una pérdida nominal, pero no impedía que la inflación redujera su capacidad de compra.</p>
+<p>Para nuestro análisis, 2022 representa principalmente:</p>
+<p class="formula"><strong>inflación + subida de tipos de interés</strong></p>
+<p>La pregunta vuelve a cambiar:</p>
+<blockquote class="idea-clave"><p><em>¿Dónde está el refugio cuando pueden caer simultáneamente Bolsa y bonos y cuando incluso conservar intacto el dinero implica perder poder adquisitivo?</em></p></blockquote>
+<h3>2.5. El ejercicio comparativo</h3>
+<p>Los tres episodios pueden resumirse así:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Crisis</th><th>Fuente de riesgo dominante</th><th>Pregunta que plantea</th></tr></thead><tbody><tr><td>2008</td><td>Crédito, liquidez y desapalancamiento</td><td>¿Qué protege cuando falla el sistema financiero?</td></tr><tr><td>2020</td><td>Perturbación externa, mercado y liquidez</td><td>¿Qué activo permite mantener liquidez si los mercados se paralizan?</td></tr><tr><td>2022</td><td>Inflación y subida de tipos</td><td>¿Qué protege cuando caen simultáneamente Bolsa y bonos?</td></tr></tbody></table></div>
+<p>La tabla resume la lógica del ejercicio comparativo. No se busca determinar qué activo obtuvo la mayor rentabilidad acumulada, sino observar si los activos a los que habitualmente se atribuye una función defensiva conservaron esa función cuando cambió el tipo de crisis.</p>
+<p>Si un mismo activo protege en los tres escenarios, tendremos evidencia de una capacidad defensiva relativamente consistente.</p>
+<p>Si protege en uno y falla en otro, la etiqueta <em>refugio</em> necesitará una explicación adicional.</p>
+<p>Y si activos pertenecientes a una misma categoría reaccionan de forma muy diferente, quizá la propia categoría esté ocultando información relevante.</p>
+<p>Por tanto, los tres episodios no constituyen simplemente tres ejemplos históricos. Son tres preguntas distintas dirigidas a los mismos activos. Y es en sus respuestas donde intentaremos localizar qué es lo que normalmente no estamos viendo.</p>
+<h3>2.6. Criterios de comparación y límites metodológicos</h3>
+<p>En este artículo, afirmar que un activo «protegió» no significa simplemente que ganó dinero. Se tienen en cuenta cuatro cuestiones: si conservó el importe inicial, si mantuvo el poder adquisitivo, cómo se comportó durante los meses más críticos de cada crisis y qué resultado obtuvo al finalizar el año. Por tanto, las valoraciones de las tablas resumen la función defensiva que mostró cada activo. No son calificaciones estadísticas ni se obtienen mediante una fórmula única.</p>
+<p>El análisis se plantea desde la perspectiva de un inversor que opera en euros. Las rentabilidades disponibles en euros se presentan en esa moneda. Si la fuente solo publica el dato en dólares, se mantiene en dólares, ya que convertirlo correctamente exige tener en cuenta la evolución del tipo de cambio durante las mismas fechas. Los datos proceden de organismos públicos, proveedores de índices y productos financieros utilizados como referencia. Como estas fuentes no calculan siempre las rentabilidades del mismo modo ni abarcan exactamente los mismos periodos, las tablas permiten identificar tendencias generales, pero no reproducen una inversión real realizada en condiciones idénticas.</p>
+<p>La vivienda se representa mediante el Índice de Precios de Vivienda de España. Este índice refleja la evolución de los precios, pero no incluye los ingresos por alquiler, los gastos de compraventa y mantenimiento, los impuestos ni el efecto de una posible hipoteca. En el caso del efectivo, solo se considera la conservación del importe, sin descontar la pérdida causada por la inflación. Los tipos de los depósitos de 2008 se ofrecen únicamente como información de contexto, pues no corresponden a un contrato concreto. Bitcoin no se incluye en el análisis de 2008 porque todavía no existía como activo negociable.</p>
+<h2>3. Lo que ocurrió</h2>
+<p>La comparación de los tres episodios permite observar qué activos mantuvieron un comportamiento defensivo y cuáles dejaron de proteger cuando cambió el riesgo dominante.</p>
+<h3>3.1. La fotografía conjunta</h3>
+<p>La siguiente tabla resume el comportamiento observado en los principales canales de inversión. Combina resultados anuales, datos durante el episodio de tensión y evidencia cualitativa; cada caso se identifica en la propia celda o en las notas. Su objetivo es mostrar el patrón, no ofrecer una comparación estadística perfectamente homogénea.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Activo / Canal</th><th>2008</th><th>2020</th><th>2022</th><th>Lectura interpretativa</th></tr></thead><tbody><tr><td>Renta variable mundial</td><td>Fuerte pérdida</td><td>+6,33 % en EUR</td><td>−12,78 % en EUR</td><td>Activo de crecimiento, no refugio</td></tr><tr><td>Deuda pública EUR corta</td><td>Defensiva*</td><td>≈ −0,1 %</td><td>−4,3 %</td><td>Baja duración: menor sensibilidad a tipos</td></tr><tr><td>Deuda pública EUR larga</td><td>Favorecida por caída de tipos*</td><td>+4,2 %</td><td>−20,1 %</td><td>El mismo factor que protegió en 2020 amplificó las pérdidas en 2022</td></tr><tr><td>Bonos corporativos con grado de inversión (EUR)</td><td>Resultado positivo (lectura cualitativa)</td><td>Resistencia elevada</td><td>Pérdidas moderadas</td><td>La calidad crediticia importa</td></tr><tr><td>Bonos corporativos de alto rendimiento (EUR)</td><td>Fuertes pérdidas (lectura cualitativa)</td><td>Fuertes tensiones durante marzo</td><td>Pérdidas</td><td>Puede comportarse como activo de riesgo</td></tr><tr><td>Oro EUR</td><td>+9,38 %</td><td>+14,02 %</td><td>+6,00 %</td><td>Comportamiento diferenciado en los tres episodios</td></tr><tr><td>Materias primas amplias</td><td>Fuertes pérdidas</td><td>≈ −24 % en USD</td><td>≈ +26 % en USD</td><td>Extremadamente dependientes del tipo de crisis</td></tr><tr><td>Efectivo</td><td>0 % nominal</td><td>0 % nominal</td><td>0 % nominal</td><td>Preservación nominal; vulnerable a la inflación</td></tr><tr><td>Vivienda España</td><td>−5,4 % inicialmente; caída posterior prolongada</td><td>+1,5 % interanual en el cuarto trimestre</td><td>+5,5 % nominal en el índice</td><td>Como su precio no se actualiza a diario, las pérdidas pueden tardar en hacerse visibles.</td></tr><tr><td>Bitcoin</td><td>No aplicable</td><td>Fuerte caída durante el episodio de tensión y recuperación posterior</td><td>Pérdida anual muy elevada</td><td>Elevado potencial de recuperación, pero no refugio consistente</td></tr></tbody></table></div>
+<p class="nota-tabla">Leyenda: EUR = euro; USD = dólar estadounidense; bonos corporativos con grado de inversión = deuda empresarial con una calificación crediticia relativamente alta; bonos corporativos de alto rendimiento = deuda empresarial de menor calidad crediticia y mayor rendimiento esperado.</p>
+<ul>
+<li>En 2008 no se dispone para estas dos series de una reconstrucción pública tan homogénea como para 2020 y 2022. Su comportamiento se utiliza de forma cualitativa cuando no existe una cifra suficientemente trazable.</li>
+<li>Los datos del MSCI World Index muestran que la renta variable mundial ganó un 6,33 % en EUR en 2020 y perdió un 12,78 % en EUR en 2022 (MSCI, s. f.-b).</li>
+<li>Las fichas de los ETF de BlackRock permiten observar el contraste entre deuda pública de la eurozona con vencimientos de uno a tres años y deuda con vencimientos de siete a diez años; ambas rentabilidades se publican en EUR y con ingresos reinvertidos cuando corresponde (BlackRock, s. f.-a; BlackRock, s. f.-b).</li>
+<li>El Banco Central Europeo confirma que el valor en euros de sus tenencias de oro aumentó en 2022 como consecuencia de la subida del precio del metal expresado en euros (Banco Central Europeo, 2023b).</li>
+</ul>
+<h3>3.2. La renta fija no respondió siempre como refugio</h3>
+<p>El contraste más evidente aparece dentro de la propia renta fija.</p>
+<p>En 2008, los bonos corporativos con grado de inversión mostraron un comportamiento relativamente resistente, mientras que los bonos de alto rendimiento sufrieron pérdidas intensas. Dada la falta de una serie pública homogénea y plenamente individualizada para ambos segmentos, la comparación se mantiene en términos cualitativos (MSCI, s. f.-a; MSCI, s. f.-c).</p>
+<p>Ambos activos eran renta fija. La diferencia estaba principalmente en el riesgo de crédito.</p>
+<p>En 2020 apareció otra división.</p>
+<p>La deuda pública de corta duración permaneció prácticamente estable (−0,1 %), mientras la referencia de siete a diez años obtuvo un +4,2 % (BlackRock, s. f.-a; BlackRock, s. f.-b).</p>
+<p>La duración ayudó porque los tipos y las rentabilidades exigidas a los bonos disminuyeron.</p>
+<p>En 2022 ocurrió exactamente lo contrario.</p>
+<p>La deuda pública de uno a tres años perdió aproximadamente un 4,3 %, mientras que la de siete a diez años perdió cerca del 20,1 %. La duración pasó de ser una fuente de protección a una fuente de pérdida (BlackRock, s. f.-a; BlackRock, s. f.-b).</p>
+<p>Por tanto:</p>
+<p class="formula"><strong>“Renta fija” no describe suficientemente el riesgo que asume el inversor.</strong></p>
+<p>La calidad crediticia y la duración pueden resultar más importantes que la propia etiqueta.</p>
+<h3>3.3. El oro mostró la mayor continuidad</h3>
+<p>Entre los activos analizados, el oro presenta el comportamiento más estable entre los tres episodios:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Crisis</th><th>Variación anual del oro en EUR</th></tr></thead><tbody><tr><td>2008</td><td>+9,38 %</td></tr><tr><td>2020</td><td>+14,02 %</td></tr><tr><td>2022</td><td>+6,00 %</td></tr></tbody></table></div>
+<p class="nota-tabla"><strong>Leyenda:</strong> EUR = euro.</p>
+<p>El resultado merece atención porque las tres crisis tuvieron características muy diferentes y el oro terminó en positivo en los tres ejercicios.</p>
+<p>El Banco Central Europeo considera que el oro presenta características históricas de reserva de valor y señala que su comportamiento puede diferenciarse de otras clases de activos durante episodios de estrés (Banco Central Europeo, 2025).</p>
+<p>Pero el resultado no permite afirmar que vaya a funcionar siempre como refugio. Tres episodios históricos no constituyen una ley. El comportamiento del oro tampoco debe extrapolarse al conjunto de las materias primas, cuya respuesta fue muy diferente según la naturaleza de cada crisis.</p>
+<p>Lo que sí puede afirmarse es que, dentro de la muestra utilizada en este trabajo, fue el activo que mostró la mayor continuidad en su comportamiento defensivo.</p>
+<h3>3.4. Oro y materias primas no representan la misma protección</h3>
+<p>El oro no debe utilizarse como sinónimo del conjunto de las materias primas. En 2020, el oro terminó el año con una rentabilidad positiva en euros, mientras una cesta amplia de materias primas sufrió una caída aproximada del 24 % en dólares. En 2022, esa cesta ganó alrededor del 26 % en dólares, favorecida por el encarecimiento de la energía y las restricciones de oferta (S&amp;P Dow Jones Indices, s. f.).</p>
+<p>El contraste muestra que la categoría «activo real» es demasiado amplia para anticipar el comportamiento. El oro responde, entre otros factores, a la percepción de riesgo, los tipos reales, las divisas y la demanda de inversores y bancos centrales. Las materias primas dependen de forma más directa del equilibrio entre oferta y demanda de energía, metales y productos agrícolas. Por ello, ambos activos pueden desempeñar funciones diferentes dentro de una cartera.</p>
+<h3>3.5. Bitcoin mostró otra función</h3>
+<p>Bitcoin ofrece un contraste especialmente útil con el oro.</p>
+<p>Durante marzo de 2020, Bitcoin cayó con intensidad coincidiendo con el desplome de los mercados. En 2022 volvió a registrar una pérdida anual muy elevada. La ausencia de una fuente de precios individualizada en este artículo aconseja mantener la comparación en términos cualitativos.</p>
+<p>Su extraordinaria recuperación posterior a marzo de 2020 no cambia lo ocurrido durante el momento de máxima tensión.</p>
+<p>Bitcoin mostró una enorme capacidad para generar rentabilidad durante determinadas fases de recuperación, pero no una capacidad equivalente para proteger el capital durante la caída. Por tanto, los datos sugieren dos funciones distintas:</p>
+<p class="formula"><strong>oro: diversificación y posible protección durante estrés.</strong></p>
+<p class="formula"><strong>Bitcoin: potencial de crecimiento acompañado de elevada volatilidad.</strong></p>
+<p>Considerarlos sustitutos únicamente porque ambos puedan utilizarse como reserva alternativa de valor ocultaría una diferencia fundamental en su comportamiento observado.</p>
+<h3>3.6. El efectivo conserva el importe, pero no siempre el valor</h3>
+<p>El efectivo presenta aparentemente el comportamiento más sencillo: su importe nominal permanece intacto.</p>
+<p>En 2008 y especialmente en 2020, esta característica proporcionó una protección muy elevada.</p>
+<p>Pero 2022 mostró su límite. Con una inflación española del 5,7 % en diciembre, conservar exactamente el mismo saldo implicó perder poder adquisitivo. El Instituto Nacional de Estadística publica el Índice de Precios de Consumo utilizado para realizar este ajuste (Instituto Nacional de Estadística, s. f.-a).</p>
+<p>Por tanto: seguridad nominal y seguridad económica no son necesariamente lo mismo.</p>
+<p>El efectivo elimina prácticamente el riesgo de mercado inmediato, pero no elimina el riesgo de inflación.</p>
+<h3>3.7. Por qué las pérdidas de la vivienda tardan en hacerse visibles</h3>
+<p>La vivienda española cayó inicialmente solo un 5,4 % en 2008. Comparada con las pérdidas mucho mayores registradas por los mercados bursátiles, parecía extraordinariamente resistente. Pero su precio continuó deteriorándose durante años.</p>
+<p>En 2020, por el contrario, terminó el cuarto trimestre aproximadamente un <strong>1,5 % por encima</strong> del año anterior.</p>
+<p>En 2022 aumentó alrededor de un <strong>5,5 %</strong>, una cifra muy próxima a la inflación española del mismo periodo.</p>
+<p>El Instituto Nacional de Estadística mantiene la serie histórica del Índice de Precios de Vivienda utilizada para estas comparaciones (Instituto Nacional de Estadística, s. f.-b).</p>
+<p>La vivienda introduce así otra pregunta:</p>
+<blockquote class="idea-clave"><p><em>¿Es menos arriesgado aquello cuyo precio cambia menos o aquello cuya pérdida económica es menor?</em></p></blockquote>
+<p>No son necesariamente lo mismo.</p>
+<h2>4. Lo que no estábamos viendo</h2>
+<p>Después de comparar 2008, 2020 y 2022 aparece un patrón difícil de ignorar. Los activos tradicionalmente considerados defensivos no mantuvieron siempre la misma función. Algunos protegieron en una crisis y perjudicaron en otra, otros conservaron el capital nominal, pero no el poder adquisitivo. Y algunos activos que terminaron un ejercicio con fuertes ganancias habían sufrido durante el momento de máximo estrés pérdidas incompatibles con la idea habitual de refugio.</p>
+<p>El problema parece estar, por tanto, en la pregunta inicial. Si preguntamos:</p>
+<blockquote class="idea-clave"><p><em>¿qué activo es refugio?</em></p></blockquote>
+<p>puede ser demasiado impreciso. La pregunta relevante es:</p>
+<blockquote class="idea-clave"><p><em>¿frente a qué riesgo queremos que ese activo actúe como refugio?</em></p></blockquote>
+<h3>4.1. La etiqueta del producto no describe completamente su riesgo</h3>
+<p>La primera conclusión del análisis es que las categorías tradicionales contienen activos con comportamientos demasiado diferentes como para anticipar su función durante una crisis.</p>
+<p>La renta fija es el ejemplo más evidente. En 2008, la deuda corporativa de mayor calidad crediticia resistió mucho mejor que los bonos de alto rendimiento. En 2022, la deuda pública de corta duración perdió mucho menos que la de larga duración. En ambos casos todos los instrumentos podían describirse como renta fija. Sin embargo, esa denominación no explicaba qué iba a ocurrir cuando apareciera la crisis.</p>
+<p>Para entenderlo era necesario conocer algo más:</p>
+<ul>
+<li>calidad crediticia;</li>
+<li>duración;</li>
+<li>sensibilidad a los tipos;</li>
+<li>liquidez;</li>
+<li>y dependencia del ciclo económico.</li>
+</ul>
+<p>La etiqueta servía para clasificar el producto pero no bastaba para explicar su riesgo.</p>
+<h3>4.2. Lo que protege en una crisis puede ser vulnerable en la siguiente</h3>
+<p>La deuda pública de larga duración constituye probablemente el ejemplo más claro de todo el estudio.</p>
+<p>En 2020 obtuvo un resultado favorable. Los tipos de interés disminuyeron y el precio de los bonos de mayor duración se benefició especialmente. Dos años después ocurrió lo contrario, la inflación obligó a endurecer rápidamente la política monetaria y esa misma duración amplificó las pérdidas. El activo no había dejado de ser defensivo por un cambio en su denominación, simplemente había cambiado la variable que determinaba su comportamiento.</p>
+<p>Esto obliga a introducir una distinción fundamental:</p>
+<blockquote class="idea-clave"><p><em>un activo puede ser defensivo frente a una fuente de riesgo y vulnerable frente a otra.</em></p></blockquote>
+<p>La consecuencia es importante. Utilizar como protección el activo que funcionó en la crisis anterior puede preparar perfectamente una cartera para enfrentarse al problema que ya ocurrió y dejarla expuesta al siguiente.</p>
+<h3>4.3. Diversificar productos no significa diversificar riesgos</h3>
+<p>Una cartera puede contener renta variable, renta fija, fondos, materias primas y activos alternativos y continuar concentrada. La razón es sencilla: diferentes productos pueden depender de las mismas variables.</p>
+<ul>
+<li>Una subida de tipos puede perjudicar simultáneamente a acciones de larga duración económica y bonos de larga duración financiera.</li>
+<li>Un deterioro del crédito puede afectar tanto a determinados bonos corporativos como a empresas altamente endeudadas.</li>
+<li>Una crisis de liquidez puede provocar ventas simultáneas en activos que en circunstancias normales presentan correlaciones reducidas.</li>
+</ul>
+<p>Por tanto, contar productos no permite medir correctamente la diversificación.</p>
+<p>Lo relevante es preguntar:</p>
+<blockquote class="idea-clave"><p><em>¿qué tendría que ocurrir para que estas posiciones perdieran valor al mismo tiempo?</em></p></blockquote>
+<p>Si la respuesta es la misma para muchas de ellas, la cartera está más concentrada de lo que aparenta.</p>
+<p>Esta puede ser una de las ideas más importantes del artículo.</p>
+<p>La diversificación real no consiste solo en poseer activos diferentes, sino en depender de fuentes de riesgo diferentes.</p>
+<h3>4.4. La ausencia de volatilidad tampoco equivale a seguridad</h3>
+<p>La vivienda española durante la crisis iniciada en 2008 muestra otra forma de confusión.</p>
+<p>Mientras los mercados bursátiles reflejaron rápidamente grandes pérdidas, el precio agregado de la vivienda descendió de forma mucho más gradual. A primera vista, el inmueble parecía mucho más estable, pero el ajuste continuó durante varios años.</p>
+<p>El precio se movía menos porque se observaba con menor frecuencia y porque el proceso de valoración era diferente. No porque el riesgo económico hubiese desaparecido. Esta diferencia obliga a separar dos conceptos: <strong>volatilidad visible</strong> y <strong>pérdida patrimonial.</strong></p>
+<p>Un activo cuyo precio cambia diariamente puede parecer más arriesgado simplemente porque observamos cada movimiento. Otro puede experimentar una pérdida lenta y prolongada sin producir la misma sensación de inestabilidad. Por tanto, una cartera resistente no debería construirse únicamente buscando activos con poca volatilidad observable.</p>
+<h3>4.5. Tampoco basta con no perder dinero</h3>
+<p>El efectivo muestra el problema contrario. Su funcionamiento parece perfecto desde el punto de vista nominal:</p>
+<p class="formula">El importe nominal permanece intacto.</p>
+<p>Pero 2022 recuerda que el valor del dinero no depende únicamente de la cifra que aparece en una cuenta. Si los precios aumentan, la capacidad de compra disminuye.</p>
+<p>Esto significa que existen, al menos, dos formas diferentes de protección:</p>
+<ul>
+<li>preservar el capital nominal;</li>
+<li>preservar el poder adquisitivo.</li>
+</ul>
+<p>No siempre coinciden. Por tanto, decir que un activo “no pierde” puede ser cierto desde un punto de vista contable y falso desde un punto de vista económico.</p>
+<h3>4.6. Ganar después de una crisis no convierte un activo en refugio</h3>
+<p>Bitcoin introduce otra distinción importante.</p>
+<p>Después del desplome de marzo de 2020 experimentó una recuperación extraordinaria.</p>
+<p>Pero durante el momento de máxima tensión cayó con intensidad junto con los activos de riesgo.</p>
+<p>Confundir ambas fases puede producir una conclusión errónea.</p>
+<p>Un activo puede ser excelente para capturar una recuperación y muy malo para proteger durante el pánico. Son funciones diferentes: capacidad de protección y capacidad de recuperación o crecimiento.</p>
+<p>Un activo refugio debería juzgarse fundamentalmente por lo que ocurre cuando la protección es necesaria, no únicamente por su rentabilidad posterior.</p>
+<h3>4.7. El oro: la excepción más consistente, no una respuesta definitiva</h3>
+<p>Dentro de los tres episodios analizados, el oro fue el activo que mostró una mayor continuidad.</p>
+<p>Terminó 2008, 2020 y 2022 con rentabilidades positivas en euros. Eso lo convierte en un candidato especialmente interesante como elemento diversificador, pero incluso este resultado debe interpretarse con prudencia.</p>
+<p>Tres crisis no permiten concluir que el oro vaya a proteger frente a cualquier perturbación futura. Además, el oro mantiene volatilidad propia y puede sufrir periodos prolongados de pérdida fuera de los episodios analizados. Por tanto, el hallazgo no es: <strong>“el oro es el refugio correcto”.</strong></p>
+<p>Es otro:</p>
+<blockquote class="idea-clave"><p><em>dentro de las tres crisis estudiadas, el oro fue el activo que mostró el comportamiento defensivo más consistente frente a fuentes de riesgo diferentes.</em></p></blockquote>
+<p>La diferencia entre ambas afirmaciones es importante. La primera pretende establecer una regla. La segunda describe una evidencia.</p>
+<h3>4.8. El cambio de perspectiva</h3>
+<p>Después de analizar los tres episodios, parece más útil dejar de mirar una cartera únicamente por el tipo de producto que contiene y empezar a preguntarse qué función cumple cada posición y de qué riesgos depende su comportamiento.</p>
+<p>No basta con saber que una cartera tiene renta fija, oro, efectivo, vivienda o Bitcoin. Lo importante es entender qué esperamos que haga cada activo cuando aparece una crisis y qué puede provocar que deje de cumplir esa función. La evidencia analizada permite formular ahora con mayor precisión la intuición que dio origen a este trabajo.</p>
+<p><em>El error no parece estar en utilizar conceptos como refugio, defensivo o seguro. El error aparece cuando los tratamos como propiedades permanentes del activo y olvidamos especificar frente a qué riesgo esperamos que funcionen.</em></p>
+<p>La crisis de 2008 mostró la importancia del crédito y de la liquidez. La de 2020 mostró el valor de disponer de liquidez durante una venta generalizada de activos y la capacidad defensiva que podía aportar la duración en un entorno de caída de tipos. La de 2022 mostró exactamente el límite de esa misma protección cuando los tipos comenzaron a subir.</p>
+<p>El patrón común no está, por tanto, en encontrar un activo que gane siempre. Está en comprender que la protección cambia cuando cambia el riesgo<strong>.</strong> Y si esto es correcto, la consecuencia para la construcción de carteras es inmediata.</p>
+<p>Una cartera resistente no debería depender de acertar cuál será el próximo activo refugio.</p>
+<p>Debería intentar que ninguna fuente de riesgo por sí sola sea capaz de deteriorar simultáneamente una parte excesiva del patrimonio.</p>
+<p>Ese cambio de perspectiva conduce directamente a la pregunta que da título al siguiente capítulo:</p>
+<blockquote class="idea-clave"><p><em>¿Cómo es la anatomía de una cartera resistente?</em></p></blockquote>
+<h2>5. Anatomía de una cartera resistente</h2>
+<p>Si la protección depende de la fuente de riesgo, una cartera resistente no debería construirse buscando un único activo capaz de proteger frente a todo.</p>
+<p>Debería construirse combinando posiciones que cumplan funciones diferentes. La idea es sencilla:</p>
+<blockquote class="idea-clave"><p><em>No se trata de acumular activos considerados defensivos, sino de combinar inversiones que no reaccionen todas de la misma manera ante una misma crisis.</em></p></blockquote>
+<h3>5.1. Resistencia no significa ausencia de pérdidas</h3>
+<p>Una cartera resistente puede perder dinero. Pretender eliminar cualquier posibilidad de pérdida conduciría, en la práctica, a renunciar también a una parte importante de la rentabilidad potencial.</p>
+<p>La resistencia debe entenderse de otra forma.</p>
+<p>Una cartera será más resistente cuanto mayor sea su capacidad para:</p>
+<ul>
+<li>limitar pérdidas profundas;</li>
+<li>evitar que todas sus posiciones relevantes caigan por la misma causa;</li>
+<li>mantener liquidez suficiente;</li>
+<li>conservar razonablemente el poder adquisitivo;</li>
+<li>y disponer de activos capaces de recuperarse o beneficiarse cuando cambien las condiciones económicas.</li>
+</ul>
+<p>Por tanto, el objetivo no es construir una cartera inmóvil, es construir una cartera capaz de absorber distintos tipos de perturbación sin quedar comprometida por una sola de ellas.</p>
+<h3>5.2. Cada posición debe tener una función</h3>
+<p>Una forma sencilla de analizar una cartera consiste en asignar una función principal a cada posición.</p>
+<p>Por ejemplo:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Función</th><th>Qué busca aportar</th></tr></thead><tbody><tr><td>Liquidez</td><td>Disponibilidad inmediata de capital</td></tr><tr><td>Preservación nominal</td><td>Reducir la posibilidad de pérdidas visibles de capital</td></tr><tr><td>Protección frente a inflación</td><td>Evitar que el patrimonio pierda poder adquisitivo</td></tr><tr><td>Diversificación</td><td>Introducir un comportamiento diferente al resto de la cartera</td></tr><tr><td>Crecimiento</td><td>Generar rentabilidad a largo plazo</td></tr><tr><td>Recuperación</td><td>Participar en fases de expansión posteriores a una crisis</td></tr></tbody></table></div>
+<p>Una misma inversión puede desempeñar más de una función. Pero obligarnos a identificar cuál es su función principal evita una confusión habitual: tener un activo sin saber exactamente para qué está dentro de la cartera.</p>
+<h3>5.3. No todas las funciones deben maximizar rentabilidad</h3>
+<p>Una posición destinada a aportar liquidez no debería evaluarse con el mismo criterio que una posición destinada al crecimiento.</p>
+<p>Del mismo modo, un activo utilizado como diversificador puede justificar su presencia, aunque su rentabilidad aislada sea inferior si reduce la vulnerabilidad del conjunto.</p>
+<p>Esto modifica la forma de medir el éxito de cada inversión.</p>
+<p>La pregunta deja de ser únicamente: <em>¿cuánto ha ganado?</em></p>
+<p>y pasa a incluir: <em>¿ha cumplido la función para la que estaba dentro de la cartera?</em></p>
+<p>Un activo de crecimiento que cae durante una crisis puede estar haciendo exactamente lo que cabía esperar de él. El problema aparece si toda la cartera estaba construida sobre posiciones que reaccionan de la misma forma.</p>
+<h3>5.4. Una cartera puede parecer diversificada y no estarlo</h3>
+<p>Imaginemos una cartera compuesta por:</p>
+<ul>
+<li>varios fondos de renta variable;</li>
+<li>bonos de larga duración;</li>
+<li>deuda corporativa;</li>
+<li>y activos de crecimiento altamente sensibles a las condiciones financieras.</li>
+</ul>
+<p>Formalmente contiene diferentes productos, pero una subida intensa de tipos puede perjudicar simultáneamente a muchas de esas posiciones. La cartera está diversificada por nombres, no necesariamente por riesgos.</p>
+<p>La pregunta que debería hacerse el inversor es:</p>
+<blockquote class="idea-clave"><p><em>¿qué tendría que ocurrir para que varias de mis posiciones perdieran al mismo tiempo?</em></p></blockquote>
+<p>Si la respuesta es la misma para buena parte de la cartera, existe una concentración que la clasificación tradicional puede no mostrar.</p>
+<h3>5.5. El peso importa tanto como la elección del activo</h3>
+<p>La resistencia tampoco depende únicamente de qué activos contiene una cartera, depende de cuánto pesa cada uno. Un activo muy volátil puede formar parte de una cartera resistente si representa una proporción suficientemente pequeña. Del mismo modo, un activo considerado defensivo puede convertirse en una fuente importante de riesgo si concentra una parte excesiva del patrimonio.</p>
+<p>Esto introduce una idea básica:</p>
+<p class="formula"><strong>el riesgo de una posición depende de su comportamiento y de su peso dentro del conjunto.</strong></p>
+<p>Una caída del 50 % en una posición que representa el 5 % de la cartera tiene un impacto máximo aproximado del 2,5 % sobre el patrimonio total. La misma caída en una posición que representa el 40 % produce un impacto aproximado del 20 %. Por tanto, la arquitectura de cartera no consiste únicamente en seleccionar activos, también consiste en limitar cuánto daño puede provocar individualmente cada uno.</p>
+<h3>5.6. No existe una distribución universal</h3>
+<p>Los resultados de 2008, 2020 y 2022 no permiten deducir una combinación óptima válida para todos los inversores.</p>
+<p>El peso adecuado de cada función dependerá de factores como:</p>
+<ul>
+<li>horizonte temporal;</li>
+<li>necesidad de liquidez;</li>
+<li>tolerancia a las pérdidas;</li>
+<li>objetivos de rentabilidad;</li>
+<li>estabilidad de los ingresos;</li>
+<li>y capacidad para mantener posiciones durante periodos de deterioro.</li>
+</ul>
+<p>Una persona que pueda necesitar su capital en un año necesita una arquitectura distinta de otra cuyo horizonte sea de veinte años.</p>
+<p>Por tanto, hablar de cartera resistente sin considerar al inversor concreto sería repetir el mismo error que estamos intentando evitar con los activos refugio. La resistencia también es condicional.</p>
+<h3>5.7. Una arquitectura posible</h3>
+<p>Sin pretender establecer porcentajes óptimos, una cartera resistente podría pensarse como una combinación de bloques funcionales:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Bloque</th><th>Función principal</th></tr></thead><tbody><tr><td>Liquidez y renta fija muy corta</td><td>Estabilidad y disponibilidad de capital</td></tr><tr><td>Renta fija seleccionada</td><td>Rentabilidad defensiva, considerando duración y crédito</td></tr><tr><td>Renta variable</td><td>Crecimiento a largo plazo</td></tr><tr><td>Activos diversificadores</td><td>Reducir dependencia de Bolsa y bonos</td></tr><tr><td>Protección frente a inflación</td><td>Incorporar activos sensibles a los precios reales</td></tr><tr><td>Posiciones de alta volatilidad</td><td>Potencial de crecimiento con peso limitado</td></tr></tbody></table></div>
+<p>La utilidad de esta estructura no está en los nombres concretos. Está en que cada bloque responde a una pregunta diferente.</p>
+<h3>5.8. La idea central</h3>
+<p>La anatomía de una cartera resistente puede resumirse en una frase:</p>
+<blockquote class="idea-clave"><p><em>una cartera resistente no intenta adivinar cuál será el próximo refugio; intenta no depender de que una única forma de protección funcione siempre</em>.</p></blockquote>
+<p>Ese principio cambia la lógica de construcción. En lugar de buscar el activo seguro<strong>,</strong> se busca una combinación en la que diferentes activos tengan razones diferentes para comportarse bien o mal.</p>
+<p>La resistencia aparece entonces no como una característica de una posición individual, sino como una propiedad del conjunto. Y esa propiedad puede evaluarse de una forma muy concreta:</p>
+<blockquote class="idea-clave"><p><em>si llega una crisis diferente de la anterior, ¿qué parte de la cartera sigue teniendo una función útil?</em></p></blockquote>
+<p>Esa pregunta permite pasar de la teoría a la práctica. El siguiente capítulo reúne los activos analizados para comparar cómo cambia su función cuando cambia la naturaleza de la crisis.</p>
+<h2>6. Comparación del comportamiento de los activos en tres crisis</h2>
+<p>Hasta ahora hemos analizado cada crisis desde la perspectiva de los distintos activos. A continuación, los examinamos de forma conjunta para contrastar las funciones que habitualmente se les atribuyen: crecimiento, estabilidad, liquidez y protección.</p>
+<p>La comparación plantea una misma pregunta para todos: ¿cómo respondió cada activo y qué función cumplió en cada crisis?</p>
+<p>Este ejercicio no pretende construir una cartera óptima ni proponer una inversión concreta. Su objetivo es comprobar si la función atribuida a cada activo se mantiene o cambia según la naturaleza de la crisis.</p>
+<h3>6.1. Los activos y sus funciones</h3>
+<div class="tabla-scroll"><table><thead><tr><th>Activo</th><th>Función que aparentemente debería cumplir</th></tr></thead><tbody><tr><td>Efectivo</td><td>Liquidez y preservación nominal</td></tr><tr><td>Depósito a plazo</td><td>Preservación nominal con remuneración</td></tr><tr><td>Fondo monetario</td><td>Liquidez remunerada y muy baja volatilidad</td></tr><tr><td>Deuda pública corta</td><td>Estabilidad y baja sensibilidad a tipos</td></tr><tr><td>Deuda pública larga</td><td>Renta defensiva y posible protección en desaceleraciones</td></tr><tr><td>Bonos corporativos con grado de inversión</td><td>Rentabilidad defensiva con riesgo de crédito moderado</td></tr><tr><td>Bonos corporativos de alto rendimiento</td><td>Mayor rentabilidad aceptando mayor riesgo de crédito</td></tr><tr><td>Acciones diversificadas</td><td>Crecimiento patrimonial</td></tr><tr><td>Oro</td><td>Diversificación y posible refugio</td></tr><tr><td>Materias primas</td><td>Sensibilidad a los activos reales y a la inflación</td></tr><tr><td>Vivienda</td><td>Activo real y preservación patrimonial</td></tr><tr><td>Bitcoin</td><td>Activo alternativo y posible reserva de valor</td></tr></tbody></table></div>
+<ul>
+<li>Grado de inversión significa que la deuda cuenta con una calificación crediticia relativamente alta.</li>
+<li>Alto rendimiento designa deuda corporativa de menor calidad crediticia y, por ello, con mayor rendimiento esperado y mayor riesgo.</li>
+<li>Bitcoin no existía durante la crisis de 2008, por lo que aparecerá como no aplicable en ese episodio.</li>
+</ul>
+<p>El conjunto no representa una cartera que pudiera haberse comprado exactamente igual en 2007. Es una comparación aplicada a episodios históricos para los que no siempre existe la misma cantidad de información.</p>
+<h3>6.2. Cómo se realiza la comparación</h3>
+<p>La comparación utiliza las rentabilidades disponibles en euros cuando proceden de una fuente clara y permiten una comparación razonable. Cuando solo existe una descripción cualitativa, un índice inmobiliario o una rentabilidad publicada en dólares, el dato se mantiene en sus propios términos y no se presenta como una inversión reproducible en euros.</p>
+<p>Cada activo se somete a la misma pregunta:</p>
+<blockquote class="idea-clave"><p>¿Qué función cumplió durante la crisis y qué límites deben tenerse en cuenta al interpretar el resultado?</p></blockquote>
+<p>No buscamos descubrir qué combinación habría ganado más. Buscamos identificar qué función cumplió cada activo cuando llegó el problema.</p>
+<h3>6.3. Primera prueba: 2008</h3>
+<p>La crisis financiera proporciona la primera prueba.</p>
+<p>El crédito se deterioró, desapareció liquidez, aumentó la desconfianza entre instituciones y se produjo un proceso generalizado de desapalancamiento.</p>
+<p>El comportamiento fue muy diferente según el activo considerado.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Activo</th><th>Comportamiento observado en 2008</th><th>Lectura defensiva</th></tr></thead><tbody><tr><td>Efectivo</td><td>Conservó su valor nominal</td><td>Sí, en términos nominales</td></tr><tr><td>Depósito a plazo</td><td>Los datos disponibles se refieren a los tipos de nuevas operaciones, no a una rentabilidad anual comparable</td><td>No concluyente</td></tr><tr><td>Fondo monetario</td><td>Comportamiento positivo o defensivo, dependiendo del producto</td><td>Protección probable</td></tr><tr><td>Deuda pública de corto plazo</td><td>Comportamiento defensivo</td><td>Sí</td></tr><tr><td>Deuda pública de largo plazo</td><td>Se benefició posteriormente de la caída de los tipos</td><td>Sí, aunque depende del periodo considerado</td></tr><tr><td>Bonos corporativos con grado de inversión</td><td>Comportamiento relativamente resistente</td><td>Protección parcial</td></tr><tr><td>Bonos corporativos de alto rendimiento</td><td>Pérdidas importantes</td><td>No</td></tr><tr><td>Acciones diversificadas</td><td>Fuerte pérdida anual</td><td>No</td></tr><tr><td>Oro</td><td>Subida aproximada del 9,38 % en euros</td><td>Sí</td></tr><tr><td>Materias primas</td><td>Pérdidas importantes</td><td>No</td></tr><tr><td>Vivienda en España</td><td>Caída inicial del 5,4 % y ajuste posterior prolongado</td><td>Difícil de interpretar como protección</td></tr><tr><td>Bitcoin</td><td>No existía</td><td>No aplicable</td></tr></tbody></table></div>
+<p class="nota-tabla">* Como contexto, el Banco Central Europeo registraba un tipo medio del 4,28 % para nuevos depósitos de hogares de hasta un año en diciembre de 2007. Las observaciones posteriores de 2008 corresponden a nuevas operaciones en fechas distintas y no permiten construir la rentabilidad de un único depósito (Banco Central Europeo, 2009).</p>
+<h4><strong>Qué descubre 2008</strong></h4>
+<p>Hay una anomalía especialmente interesante.</p>
+<p><em>Dos inversiones denominadas renta fija terminaron en extremos completamente diferentes.</em></p>
+<p>Los bonos de empresas con buena calificación crediticia, también denominados bonos corporativos con grado de inversión, mostraron un comportamiento relativamente resistente, mientras que los bonos de alto rendimiento sufrieron pérdidas importantes. MSCI define estos últimos como deuda con una calificación inferior al grado de inversión, lo que confirma que el riesgo de crédito constituye una diferencia estructural dentro de la propia categoría (MSCI, s. f.-c).</p>
+<p>Por tanto, no fue la renta fija en general la que protegió, sino determinados segmentos de mayor calidad crediticia.</p>
+<p>El oro terminó el año en positivo en euros, mientras que la cesta amplia de materias primas no proporcionó la misma protección (World Gold Council, s. f.; S&amp;P Dow Jones Indices, s. f.).</p>
+<p>La vivienda introdujo otra dificultad: su caída inicial parecía pequeña comparada con la Bolsa, pero el ajuste del mercado inmobiliario español continuó durante años. La serie histórica del Índice de Precios de Vivienda permite observar ese proceso (Instituto Nacional de Estadística, s. f.-b).</p>
+<p>Conclusión de 2008: en una crisis de crédito y liquidez, no todo lo considerado defensivo protege. El efectivo, algunos instrumentos líquidos, la deuda de mayor calidad crediticia y el oro mostraron una resistencia relativa mayor, mientras que los bonos de alto rendimiento, las acciones y determinadas inversiones en activos reales sufrieron pérdidas importantes.</p>
+<h3>6.4. Segunda prueba: 2020</h3>
+<p>Doce años después cambia completamente el origen de la crisis.</p>
+<p>Esta vez el problema no nace inicialmente dentro del sistema financiero. Se produce una paralización repentina de la actividad y una venta generalizada y muy rápida de activos.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Activo</th><th>Comportamiento observado en 2020</th><th>Lectura defensiva</th></tr></thead><tbody><tr><td>Efectivo</td><td>Conservó su valor nominal</td><td>Sí, en términos nominales</td></tr><tr><td>Depósito a plazo</td><td>Rentabilidad muy reducida</td><td>Preservación nominal con escasa remuneración</td></tr><tr><td>Fondo monetario</td><td>Resultado próximo a cero o ligeramente negativo, según el producto</td><td>Estabilidad elevada, aunque no absoluta</td></tr><tr><td>Deuda pública de corto plazo</td><td>Aproximadamente −0,1 % en euros</td><td>Pérdida mínima; protección elevada</td></tr><tr><td>Deuda pública de 7–10 años</td><td>+4,2 % en euros</td><td>Sí protegió en el conjunto del año</td></tr><tr><td>Bonos corporativos con grado de inversión</td><td>Resultado positivo al cierre, después de sufrir tensiones en marzo</td><td>Protección al cierre, pero no plena durante el estrés</td></tr><tr><td>Bonos corporativos de alto rendimiento</td><td>Fuertes tensiones durante marzo</td><td>No protegió durante el episodio de tensión</td></tr><tr><td>Acciones mundiales</td><td>Fuerte caída en marzo y recuperación posterior; +6,33 % anual en euros</td><td>No ofrecieron protección inmediata, aunque cerraron el año en positivo</td></tr><tr><td>Oro</td><td>+14,02 % en euros</td><td>Sí protegió</td></tr><tr><td>Materias primas</td><td>Aproximadamente −24 % en dólares</td><td>No protegieron; resultado expresado en dólares</td></tr><tr><td>Vivienda en España</td><td>+1,5 % interanual en el cuarto trimestre</td><td>Resultado nominal positivo, pero basado en un índice no invertible</td></tr><tr><td>Bitcoin</td><td>Fuerte caída durante el episodio de tensión y recuperación posterior</td><td>No ofreció protección inmediata</td></tr></tbody></table></div>
+<p>La referencia utilizada para la deuda pública a corto plazo incluye bonos de gobiernos de la zona euro con vencimientos de entre uno y tres años y una calificación crediticia relativamente alta. Debido a su corto plazo, sus precios suelen variar menos ante los cambios de los tipos de interés que los de los bonos con vencimientos más largos (BlackRock, s. f.-a).</p>
+<p>Aquí aparece uno de los resultados más importantes de la comparación.</p>
+<p>La deuda pública de mayor duración terminó 2020 con un resultado favorable, beneficiada por la caída de las rentabilidades exigidas. El dato anual no describe por sí solo todo su comportamiento durante las ventas generalizadas de marzo.</p>
+<p>Pero también aparece una advertencia metodológica. Las acciones y Bitcoin pueden cerrar el año mucho mejor de lo que se comportaron cuando realmente se necesitaba protección. Por eso un activo no puede calificarse como refugio observando únicamente el 31 de diciembre. Recuperarse extraordinariamente bien no es lo mismo que proteger durante la crisis.</p>
+<p>Vuelve a producirse una separación entre el oro y las materias primas. El oro termina el año en positivo, mientras que las materias primas sufren ante la paralización de la actividad.</p>
+<p><strong>Conclusión de 2020:</strong> la liquidez y el oro mantuvieron una función defensiva, y la deuda pública de mayor duración también terminó favorecida por la caída de los tipos. Esta última protección, sin embargo, dependía precisamente de que los tipos descendieran.</p>
+<h3>6.5. Tercera prueba: 2022</h3>
+<p>En 2022 llega la prueba que altera buena parte de lo observado en 2020: la inflación se acelera y los bancos centrales elevan rápidamente los tipos. La comparación afronta ahora un problema diferente. No solo pueden caer las acciones; también pueden caer los bonos.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Activo</th><th>Comportamiento observado en 2022</th><th>Lectura defensiva</th></tr></thead><tbody><tr><td>Efectivo</td><td>Conservó su valor nominal, pero perdió poder adquisitivo por la inflación</td><td>Protección nominal, no real</td></tr><tr><td>Depósito a plazo</td><td>Baja remuneración al comienzo del año y mejora posterior</td><td>Preservación nominal, pero protección real insuficiente</td></tr><tr><td>Fondo monetario</td><td>Mejoró progresivamente con las subidas de los tipos</td><td>Estabilidad creciente a medida que subieron los tipos</td></tr><tr><td>Deuda pública de 1–3 años</td><td>−4,3 % en euros</td><td>Pérdida moderada; protección limitada</td></tr><tr><td>Deuda pública de 7–10 años</td><td>−20,1 % en euros</td><td>No protegió</td></tr><tr><td>Bonos corporativos con grado de inversión</td><td>Registró pérdidas</td><td>Protección insuficiente</td></tr><tr><td>Bonos corporativos de alto rendimiento</td><td>Registró pérdidas</td><td>No protegió</td></tr><tr><td>Acciones mundiales</td><td>−12,78 % en euros</td><td>No protegieron</td></tr><tr><td>Oro</td><td>Aproximadamente +6 % en euros</td><td>Sí protegió</td></tr><tr><td>Materias primas</td><td>Aproximadamente +26 % en dólares</td><td>Resultado positivo en dólares; efecto en euros no evaluado</td></tr><tr><td>Vivienda en España</td><td>Aproximadamente +5,5 % nominal en el índice</td><td>Resultado nominal positivo, pero no directamente invertible</td></tr><tr><td>Bitcoin</td><td>Pérdida anual muy elevada</td><td>No protegió</td></tr></tbody></table></div>
+<p class="nota-tabla">* El +26 % del S&amp;P GSCI está expresado en dólares y se mantiene separado de los resultados en euros para no crear una falsa precisión cambiaria.</p>
+<p>La deuda pública de corto plazo, representada en este análisis mediante una cartera de bonos soberanos de la zona euro con grado de inversión y vencimientos de uno a tres años, sufrió pérdidas mucho menores que la deuda de mayor duración. La diferencia fue especialmente visible en 2022: las subidas de tipos castigaron con mucha más intensidad a los bonos de vencimientos largos.</p>
+<p>Las materias primas pueden beneficiarse inicialmente en determinados episodios inflacionistas, especialmente cuando el aumento de precios procede de restricciones de oferta o del encarecimiento de la energía y otros bienes básicos. Sin embargo, ese mismo aumento puede reducir el consumo y la actividad, debilitando posteriormente su demanda. Por ello, su capacidad de protección frente a la inflación está condicionada por el origen y la duración del episodio.</p>
+<p>El oro volvió a cerrar el ejercicio en positivo en euros. Las cuentas del BCE registran un aumento de 1.600 millones de euros en el valor de sus tenencias de oro durante 2022 debido al incremento del precio del metal expresado en euros, mientras se mantenía constante el número de onzas (Banco Central Europeo, 2023b).</p>
+<h4><strong>Qué descubre 2022</strong></h4>
+<p>Aquí se produce probablemente el contraste más valioso del ejercicio comparativo:</p>
+<p>La deuda pública de larga duración, que había contribuido a proteger en 2020, se convirtió solo dos años después en una importante fuente de pérdidas. No se trataba de dos activos diferentes: cambió la crisis y cambió el comportamiento.</p>
+<p>También cambió el significado del efectivo: su importe permaneció intacto, pero permitió comprar menos.</p>
+<p>Las materias primas, que habían fracasado como protección durante el colapso de demanda de 2020, pasaron a situarse entre los activos más beneficiados.</p>
+<p><strong>Conclusión de 2022:</strong> la deuda pública de larga duración dejó de actuar como contrapeso y el efectivo conservó su importe nominal, pero perdió poder adquisitivo. El oro, la vivienda y las materias primas mostraron resultados de naturaleza diferente, lo que desaconseja agruparlos bajo una única etiqueta de «activo real».</p>
+<h3>6.6. Los tres episodios juntos</h3>
+<p>Ahora podemos hacer la comparación que realmente buscábamos.</p>
+<p>La comparación no identifica un grupo amplio de activos que pueda calificarse simplemente como refugio. Muestra funciones distintas: el efectivo preserva nominalmente y aporta liquidez; la deuda corta reduce la sensibilidad a los tipos; la deuda larga puede beneficiarse de su caída y sufrir con su subida; la calidad crediticia diferencia los bonos con grado de inversión de los bonos de alto rendimiento; y el oro, las materias primas, las acciones y Bitcoin responden a mecanismos económicos distintos.</p>
+<p>El resultado relevante no es una clasificación definitiva de ganadores y perdedores, sino la ausencia de una única forma de protección. Un activo puede cumplir una función defensiva frente a un riesgo y dejar de hacerlo cuando cambia la naturaleza de la crisis.</p>
+<h3>6.7. El resultado principal</h3>
+<p>El ejercicio muestra que «proteger» puede significar preservar el valor nominal, conservar poder adquisitivo, disponer de liquidez, limitar una caída o participar en la recuperación. Ningún activo analizado responde por igual a todas esas necesidades. La construcción de una cartera resistente exige, por tanto, definir primero qué función debe cumplir cada posición.</p>
+<h2>7. Conclusión</h2>
+<p>El resultado más importante del trabajo consiste en advertir que la propia palabra protección estaba ocultando varias funciones diferentes y que la pregunta más útil parece ser:</p>
+<blockquote class="idea-clave"><p><em> ¿De qué riesgo quiero protegerme? ¿Qué activo podría responder mejor ante él y por qué?    </em></p></blockquote>
+<p>Este cambio de perspectiva modifica también la idea de diversificación. Una cartera puede contener muchos productos y seguir dependiendo de una misma variable. Puede estar diversificada por clases de activos y, al mismo tiempo, concentrada por riesgo. Por ello, su resistencia no parece depender únicamente del número de activos ni de la presencia de productos considerados tradicionalmente defensivos.</p>
+<p>Depende de que sus posiciones no necesiten todas el mismo escenario para funcionar.</p>
+<p>La idea planteada al comienzo del artículo puede formularse ahora de manera más precisa:</p>
+<blockquote class="idea-clave"><p><em>La capacidad defensiva de un activo no es una propiedad absoluta del propio activo, sino una característica condicionada por la naturaleza del riesgo frente al que se pretende obtener protección.</em></p></blockquote>
+<p>Y de ella se deriva una segunda:</p>
+<blockquote class="idea-clave"><p><em>Una cartera resistente no es necesariamente aquella formada por los activos individualmente considerados más seguros, sino aquella cuya estructura evita que una misma fuente de riesgo deteriore simultáneamente todas sus posiciones relevantes.</em></p></blockquote>
+<p>Las conclusiones de este trabajo deben mantenerse dentro de los límites del ejercicio.</p>
+<p>Se han analizado únicamente tres episodios históricos. Son tres crisis especialmente útiles porque presentan configuraciones de riesgo diferentes, pero no abarcan todos los escenarios posibles.</p>
+<p>Los resultados tampoco permiten afirmar que el comportamiento pasado vaya a repetirse. No puede concluirse que el oro vaya a proteger en la próxima crisis, que la deuda corta vaya a ser siempre estable o que determinadas materias primas vayan a responder de nuevo de la misma manera ante inflación.</p>
+<p>Tampoco se ha intentado determinar una asignación óptima de activos.</p>
+<p>El objetivo no era construir la cartera que habría obtenido la mayor rentabilidad retrospectiva. Era comprobar si la clasificación tradicional de determinados activos como refugio o como defensivos sobrevivía cuando cambiaba la naturaleza de la crisis.</p>
+<h3>7.1. La pregunta que queda abierta</h3>
+<p>No sabemos cuál será la próxima crisis. Puede parecerse a 2008, a 2020 o a 2022, pero también puede surgir de una combinación completamente distinta de riesgos.</p>
+<p>Precisamente por eso, intentar construir una cartera preparada únicamente para repetir la última crisis puede ser una forma especialmente peligrosa de mirar hacia atrás.</p>
+<p>La conclusión de este artículo no consiste en identificar el activo que vaya a ganar cuando llegue la próxima perturbación. Consiste en algo más modesto:</p>
+<blockquote class="idea-clave"><p><em>comprender que buscar un único refugio para riesgos esencialmente distintos puede ser, en sí mismo, el error.</em></p></blockquote>
+<h2>Referencias</h2>
+<h3>Nota metodológica sobre las fuentes</h3>
+<p>Se ha priorizado el siguiente orden: organismos públicos y bancos centrales; proveedores oficiales de índices; documentación de gestoras; y otras fuentes especializadas cuando no existe una serie primaria equivalente. Las cifras en EUR corresponden a la perspectiva de un inversor cuya moneda de referencia es el euro. Las cifras disponibles únicamente en USD se mantienen identificadas y no se convierten sin una serie de divisa y una fecha de valoración comunes. Los fondos cotizados y los índices se emplean como aproximaciones históricas; su uso no implica que la comparación hubiera utilizado esos productos concretos. Las cifras cualitativas o sin una serie pública homogénea se presentan como aproximaciones y no como estimaciones puntuales reproducibles.</p>
+<p class="referencia">Banco Central Europeo (2009). Annual Report 2008. Frankfurt am Main. <a href="https://www.ecb.europa.eu/pub/pdf/annrep/ar2008en.pdf" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">Banco Central Europeo (2021). Annual Report 2020. Frankfurt am Main. <a href="https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/html/ar2020~4960fb81ae.en.html" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">Banco Central Europeo (2022). Monetary policy in a high inflation environment: commitment and clarity. Discurso, 4 de noviembre de 2022. <a href="https://www.ecb.europa.eu/press/key/date/2022/html/ecb.sp221104_1~8be9a4f4c1.en.html" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">Banco Central Europeo (2023a). Annual Report 2022. Frankfurt am Main. <a href="https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/html/ecb.ar2022~8ae51d163b.en.html" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">Banco Central Europeo (2023b). Annual Accounts 2022. Frankfurt am Main. <a href="https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/annual-accounts/html/ecb.annualaccounts2022~ee9329bf6f.en.html" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">Banco Central Europeo (2025). Gold demand: the role of the official sector and geopolitics. Financial Stability Review. <a href="https://www.ecb.europa.eu/pub/financial-stability/fsr/special/html/ecb.fsrart202505_02~1cc6b111b4.en.html" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">BlackRock (s. f.-a). iShares € Govt Bond 1–3yr UCITS ETF. Rentabilidades anuales en EUR, NAV y reinversión de ingresos. <a href="https://www.blackrock.com/uk/individual/products/251733/ishares-euro-government-bond-13yr-ucits-etf" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">BlackRock (s. f.-b). iShares € Govt Bond 7–10yr UCITS ETF EUR (Acc). Rentabilidades anuales en EUR, NAV y reinversión de ingresos. <a href="https://www.blackrock.com/uk/individual/products/253461/ishares-euro-government-bond-710-ucits-etf-acc-fund" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">Instituto Nacional de Estadística (s. f.-a). Índice de Precios de Consumo. <a href="https://www.ine.es/prensa/ipc_tabla.htm" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">Instituto Nacional de Estadística (s. f.-b). Índice de Precios de Vivienda. <a href="https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&amp;cid=1254736152838&amp;idp=1254735976607&amp;menu=resultados" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">MSCI (s. f.-a). MSCI EUR IG Value High Exposure Corporate Bond Index. Ficha del índice y serie histórica. <a href="https://www.msci.com/documents/1296102/20908564/MSCI%2BEUR%2BIG%2BValue%2BHigh%2BExposure%2BCorporate%2BBond%2BIndex.pdf/3ab325ac-ebe5-15bb-c266-0a45a2712bba" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">MSCI (s. f.-b). MSCI World Index. Metodología y series del índice. <a href="https://www.msci.com/indexes/index/990100/msci-world-index" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">MSCI (s. f.-c). MSCI EUR High Yield Corporate Bond Index. <a href="https://www.msci.com/indexes/index/733216/msci-eur-high-yield-selection-corporate-bond-index" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">S&amp;P Dow Jones Indices (s. f.). S&amp;P GSCI: documentación y series históricas. <a href="https://www.spglobal.com/spdji/en/indices/commodities/sp-gsci/" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+<p class="referencia">World Gold Council (s. f.). Gold prices: series históricas en distintas monedas, incluido EUR. <a href="https://www.gold.org/goldhub/data/gold-prices" target="_blank" rel="noopener noreferrer">Fuente en línea</a></p>
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Analista financiero · Asesor empresarial · Educador</div>
+    <div class="nav-articulos"><a href="articulo7.html">← Artículo anterior</a><a href="articulos.html">Todos los artículos →</a></div>
+  </main>
+</div>
+<div class="lang-block" id="lang-en" role="tabpanel" aria-labelledby="tab-en" hidden>
+  <main class="articulo-wrap">
+    <p class="articulo-tipo">Analysis article · August 2026</p>
+    <h1 class="articulo-titulo">Anatomy of a Portfolio Seeking Shelter</h1>
+    <p class="articulo-subtitulo">A comparative analysis of three crises and the limits of the concept of a defensive asset.</p>
+    <div class="articulo-separador"></div>
+    <img src="img-articulo8-en.png" alt="A briefcase sheltered by an umbrella on a rain-soaked cobblestone street" class="articulo-imagen">
+<h2>Introduction</h2>
+<p>In investment, expressions such as safe-haven asset, defensive asset or safe investment are frequently used to describe products that are expected to protect wealth during periods of crisis.</p>
+<p>Yet historical experience presents a difficulty: the same asset may offer protection in one crisis and behave very differently in another.</p>
+<p>This study explores that idea through three episodes of a different nature: the 2008 financial crisis, the shock caused by the COVID-19 pandemic in 2020, and the inflation and interest-rate episode of 2022.</p>
+<p>The analysis examines equities, fixed income of different maturities and credit quality, gold, cash, housing, commodities and Bitcoin. Whenever the data allow, it distinguishes between an asset’s behaviour during the most critical months of the crisis and its result at the end of the year.</p>
+<p>The aim is not to identify a universally safe asset or propose an optimal portfolio. The question is simpler:</p>
+<blockquote class="idea-clave"><p>Does it make sense to speak of safe-haven assets without first specifying the risk from which we want protection?</p></blockquote>
+<p>The evidence suggests that traditional labels can conceal important differences. Longer-dated bonds may benefit when interest rates fall but suffer substantial losses when rates rise. Fixed income may behave very differently depending on credit quality. Gold and commodities do not necessarily respond in the same way. Bitcoin can generate high returns during certain recovery phases without acting as a safe haven at the point of maximum stress.</p>
+<p>The central idea is that protection does not necessarily depend on including assets regarded as defensive, but on building a portfolio whose components respond differently to different sources of risk.</p>
+
+<h2>1. The problem: what do we mean by a safe haven?</h2>
+<p>When uncertainty rises, the same question almost always appears:</p>
+<blockquote class="idea-clave"><p>Where can I find shelter?</p></blockquote>
+<p>The answer usually relies on familiar categories: cash, fixed income, gold, housing or, more recently, Bitcoin.</p>
+<p>The expression <em>safe-haven asset</em> itself suggests something close to a permanent property: certain assets would provide protection while others would assume risk.</p>
+<p>But this classification begins to break down when we examine what happened in different crises.</p>
+<p>In 2008, some fixed-income segments held up well while others suffered very large losses.</p>
+<p>In 2020, longer-dated government debt benefited from the collapse in interest rates.</p>
+<p>In 2022, that same duration became an important source of losses when rates rose rapidly.</p>
+<p>The asset had not changed in nature; the conditions that determined its price had changed.</p>
+<p>This contrast raises a first doubt:</p>
+<blockquote class="idea-clave"><p>Are we calling the asset a safe haven, or the behaviour we expect from it under a particular set of conditions?</p></blockquote>
+<p>The distinction matters.</p>
+<p>If we confuse the two, we may end up automatically transferring a conclusion drawn from one crisis to a completely different one.</p>
+<p>Something similar happens with fixed income.</p>
+<p>It may be convenient to discuss it as a single category, but that label contains assets with very different exposures to credit risk and interest rates.</p>
+<p>A short-dated sovereign bond and a low-quality corporate bond both formally belong to fixed income, yet they may respond in radically different ways during a crisis.</p>
+<p>Housing presents another problem.</p>
+<p>Its price is not observed continuously, so it may create an impression of stability that does not necessarily match the evolution of its economic value.</p>
+<p>Cash presents the opposite difficulty: it may preserve its nominal amount perfectly while losing purchasing power when inflation is high.</p>
+<p>Even the concept of diversification can be misleading.</p>
+<p>A portfolio may contain many products and remain exposed to the same source of risk.</p>
+<p>Holding several assets does not guarantee that all of them will react differently when a crisis arrives.</p>
+<p>Perhaps, then, the error is not in the traditional categories. It may lie in attributing a permanent defensive capacity to them.</p>
+<p>This article starts from precisely that suspicion. It does not attempt to prove whether gold is or is not a safe haven, whether fixed income is or is not defensive, or whether Bitcoin can or cannot replace certain traditional assets.</p>
+<p>The prior question is:</p>
+<blockquote class="idea-clave"><p>What do we want each asset to protect us against?</p></blockquote>
+<p>To explore it, we will use three crises with different origins.</p>
+<p>If traditional labels were sufficient, assets regarded as defensive should have provided relatively stable protection in all three episodes.</p>
+<p>If their behaviour changes substantially when the nature of the crisis changes, then the relevant issue may not be which asset is a safe haven, but which risk we are trying to cover.</p>
+
+<h2>2. Three crises, three different risks</h2>
+<h3>2.1. Types of risk</h3>
+<p>Let us begin by defining what we mean by risk.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Source of risk</th><th>Meaning in this article</th></tr></thead><tbody>
+<tr><td>Market</td><td>The possibility of loss caused by a general fall in asset prices</td></tr>
+<tr><td>Credit</td><td>The risk that an issuer may fail to meet its obligations, or that the perceived probability of default may increase</td></tr>
+<tr><td>Interest rates</td><td>The risk of loss caused by changes in rates; it affects longer-duration bonds in particular</td></tr>
+<tr><td>Inflation</td><td>The risk that rising prices will reduce the purchasing power of wealth</td></tr>
+<tr><td>Liquidity</td><td>The risk of being unable to sell an asset quickly without accepting a substantial loss</td></tr>
+<tr><td>Concentration</td><td>The risk that too much of the portfolio depends on the same source of behaviour</td></tr>
+<tr><td>Currency</td><td>The risk arising from exchange-rate movements when an asset is denominated in a currency other than the euro</td></tr>
+</tbody></table></div>
+<p>These sources of risk are not mutually exclusive. A single crisis may activate several at once, and a single asset may be exposed to more than one.</p>
+<p>To determine whether the idea of a safe-haven asset depends on the nature of the crisis, we also need to compare sufficiently different episodes.</p>
+<p>That is why 2008, 2020 and 2022 were selected.</p>
+<p>Not because they were the three most important crises, or because they represent every possible scenario, but because each was dominated by a different combination of risks.</p>
+<p>The comparison is useful precisely because they were not alike.</p>
+
+<h3>2.2. 2008: a crisis of credit and liquidity</h3>
+<p>The 2008 crisis was closely connected to credit, high leverage, the deterioration of financial balance sheets and a loss of trust between institutions themselves.</p>
+<p>As these tensions intensified, the problem ceased to be confined to particular assets and began to affect the operation of the financial system.</p>
+<p>Liquidity became critical, and central banks had to intervene on an extraordinary scale to maintain funding in the system. The European Central Bank changed its refinancing operations and substantially expanded the provision of liquidity to institutions (European Central Bank, 2009).</p>
+<p>Four sources of risk came together in 2008:</p>
+<p class="formula">credit + liquidity + deleveraging + market decline</p>
+<p>The question is straightforward:</p>
+<blockquote class="idea-clave"><p>Which assets provided protection when the problem lay precisely in credit and in the operation of the financial system?</p></blockquote>
+
+<h3>2.3. 2020: an external shock and economic paralysis</h3>
+<p>The 2020 crisis had a completely different origin.</p>
+<p>The financial system did not initially create the shock, although that shock eventually produced liquidity and credit tensions as well.</p>
+<p>The spread of COVID-19 and the measures adopted to contain it caused an abrupt interruption in economic activity. Lockdowns affected supply and demand simultaneously, and the euro-area economy suffered an exceptional contraction during the year (European Central Bank, 2021).</p>
+<p>The effect on markets was extremely rapid.</p>
+<p>During March, substantial liquidity problems also appeared in segments usually regarded as highly liquid. The European Central Bank documented intense volatility and a significant deterioration in fixed-income market liquidity (European Central Bank, 2021).</p>
+<p>Yet the monetary and fiscal response was also extraordinarily rapid.</p>
+<p>For the purposes of this analysis, 2020 mainly represents:</p>
+<p class="formula">external shock + market decline + immediate need for liquidity</p>
+<p>The question changes:</p>
+<blockquote class="idea-clave"><p>Which assets provided protection when an unexpected halt in economic activity caused markets to fall abruptly?</p></blockquote>
+
+<h3>2.4. 2022: inflation and rising interest rates</h3>
+<p>In 2022, the setting changed again.</p>
+<p>Euro-area inflation reached an annual average of 8.4%, compared with 2.6% the previous year. The European Central Bank identified the sharp increase in energy and food prices, the war in Ukraine, persistent difficulties in global supply chains and rising production costs as the principal factors (European Central Bank, 2023a).</p>
+<p>The response was a rapid tightening of monetary policy.</p>
+<p>The European Central Bank began to raise its interest rates and delivered several large increases during the year in an effort to restrain inflation (European Central Bank, 2022).</p>
+<p>This created a particularly revealing setting for our study. Higher rates could harm equities and fixed income at the same time, particularly longer-duration bonds. Meanwhile, holding cash avoided a nominal loss but did not prevent inflation from reducing its purchasing power.</p>
+<p>For the purposes of this analysis, 2022 mainly represents:</p>
+<p class="formula">inflation + rising interest rates</p>
+<p>The question changes once more:</p>
+<blockquote class="idea-clave"><p>Where is the safe haven when equities and bonds can fall at the same time, and even preserving the amount of money intact entails a loss of purchasing power?</p></blockquote>
+
+<h3>2.5. The comparative exercise</h3>
+<p>The three episodes can be summarised as follows:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Crisis</th><th>Dominant source of risk</th><th>Question raised</th></tr></thead><tbody>
+<tr><td>2008</td><td>Credit, liquidity and deleveraging</td><td>What provides protection when the financial system fails?</td></tr>
+<tr><td>2020</td><td>External shock, market and liquidity</td><td>Which asset preserves liquidity when markets seize up?</td></tr>
+<tr><td>2022</td><td>Inflation and rising interest rates</td><td>What provides protection when equities and bonds fall at the same time?</td></tr>
+</tbody></table></div>
+<p>The table summarises the logic of the comparison. The aim is not to determine which asset produced the highest cumulative return, but to observe whether assets normally assigned a defensive role retained that role when the type of crisis changed.</p>
+<p>If the same asset provides protection in all three settings, we will have evidence of a relatively consistent defensive capacity.</p>
+<p>If it protects in one and fails in another, the safe-haven label will require an additional explanation.</p>
+<p>And if assets belonging to the same category react very differently, the category itself may be concealing relevant information.</p>
+<p>The three episodes are therefore not simply three historical examples. They are three different questions put to the same assets. Their answers may reveal what we are usually failing to see.</p>
+
+<h3>2.6. Comparison criteria and methodological limitations</h3>
+<p>In this article, saying that an asset “provided protection” does not simply mean that it made money. Four issues are considered: whether it preserved the original amount, whether it maintained purchasing power, how it behaved during the most critical months of each crisis, and what result it produced by the end of the year. The assessments in the tables therefore summarise the defensive role displayed by each asset. They are not statistical ratings and are not produced by a single formula.</p>
+<p>The analysis is conducted from the perspective of a euro-based investor. Returns available in euros are presented in that currency. If a source publishes a figure only in dollars, it remains in dollars, because a correct conversion requires the exchange-rate movement over the same dates. The data come from public institutions, index providers and financial products used as references. Because these sources do not always calculate returns in the same way or cover exactly the same periods, the tables identify broad patterns but do not reproduce a real investment made under identical conditions.</p>
+<p>Housing is represented by Spain’s House Price Index. The index reflects price movements but does not include rental income, purchase and sale costs, maintenance, taxes or the effect of a mortgage. For cash, only preservation of the amount is considered, without deducting the loss caused by inflation. The 2008 deposit rates are provided solely as context, because they do not correspond to a specific contract. Bitcoin is not included in the 2008 analysis because it did not yet exist as a tradable asset.</p>
+
+<h2>3. What happened</h2>
+<p>Comparing the three episodes allows us to observe which assets retained a defensive character and which ceased to provide protection when the dominant risk changed.</p>
+
+<h3>3.1. The overall picture</h3>
+<p>The following table summarises the behaviour observed across the main investment channels. It combines annual results, data from the period of stress and qualitative evidence; each case is identified in the relevant cell or in the notes. Its purpose is to show the pattern, not to offer a perfectly uniform statistical comparison.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Asset / channel</th><th>2008</th><th>2020</th><th>2022</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>Global equities</td><td>Large loss</td><td>+6.33% in EUR</td><td>−12.78% in EUR</td><td>Growth asset, not a safe haven</td></tr>
+<tr><td>Short-dated euro government debt</td><td>Defensive*</td><td>≈ −0.1%</td><td>−4.3%</td><td>Short duration: lower sensitivity to interest rates</td></tr>
+<tr><td>Long-dated euro government debt</td><td>Benefited from falling rates*</td><td>+4.2%</td><td>−20.1%</td><td>The same factor that protected in 2020 amplified losses in 2022</td></tr>
+<tr><td>Investment-grade corporate bonds (EUR)</td><td>Positive result (qualitative assessment)</td><td>Strong resilience</td><td>Moderate losses</td><td>Credit quality matters</td></tr>
+<tr><td>High-yield corporate bonds (EUR)</td><td>Large losses (qualitative assessment)</td><td>Severe stress in March</td><td>Losses</td><td>May behave like a risk asset</td></tr>
+<tr><td>Gold (EUR)</td><td>+9.38%</td><td>+14.02%</td><td>+6.00%</td><td>Differentiated behaviour in all three episodes</td></tr>
+<tr><td>Broad commodities</td><td>Large losses</td><td>≈ −24% in USD</td><td>≈ +26% in USD</td><td>Extremely dependent on the type of crisis</td></tr>
+<tr><td>Cash</td><td>0% nominal</td><td>0% nominal</td><td>0% nominal</td><td>Nominal preservation; vulnerable to inflation</td></tr>
+<tr><td>Housing in Spain</td><td>−5.4% initially; prolonged decline thereafter</td><td>+1.5% year on year in the fourth quarter</td><td>+5.5% nominal in the index</td><td>Because its price is not updated daily, losses may take time to become visible</td></tr>
+<tr><td>Bitcoin</td><td>Not applicable</td><td>Sharp fall during the stress episode followed by a recovery</td><td>Very large annual loss</td><td>High recovery potential, but not a consistent safe haven</td></tr>
+</tbody></table></div>
+<p class="nota-tabla"><strong>Key:</strong> EUR = euro; USD = US dollar; investment-grade corporate bonds = corporate debt with an investment-grade credit rating; high-yield corporate bonds = lower-quality corporate debt with a higher expected yield.</p>
+<ul>
+<li>For the two government-bond series, no equally consistent public reconstruction is available for 2008 as for 2020 and 2022. Their behaviour is therefore assessed qualitatively where no sufficiently traceable figure exists.</li>
+<li>MSCI World Index data show that global equities gained 6.33% in EUR in 2020 and lost 12.78% in EUR in 2022 (MSCI, n.d.-b).</li>
+<li>BlackRock’s ETF factsheets reveal the contrast between euro-area government debt maturing in one to three years and debt maturing in seven to ten years; both sets of returns are published in EUR and include reinvested income where applicable (BlackRock, n.d.-a; BlackRock, n.d.-b).</li>
+<li>The European Central Bank confirms that the euro value of its gold holdings increased in 2022 as a result of the rise in the euro-denominated price of the metal (European Central Bank, 2023b).</li>
+</ul>
+
+<h3>3.2. Fixed income did not always behave as a safe haven</h3>
+<p>The clearest contrast appears within fixed income itself.</p>
+<p>In 2008, investment-grade corporate bonds proved relatively resilient, while high-yield bonds suffered heavy losses. In the absence of a uniform and fully disaggregated public series for both segments, the comparison remains qualitative (MSCI, n.d.-a; MSCI, n.d.-c).</p>
+<p>Both were fixed-income assets. The principal difference lay in credit risk.</p>
+<p>Another division appeared in 2020.</p>
+<p>Short-duration government debt remained virtually stable (−0.1%), while the seven-to-ten-year reference returned +4.2% (BlackRock, n.d.-a; BlackRock, n.d.-b).</p>
+<p>Duration helped because interest rates and the yields required on bonds declined.</p>
+<p>In 2022, precisely the opposite occurred.</p>
+<p>Government debt maturing in one to three years lost approximately 4.3%, while debt maturing in seven to ten years lost close to 20.1%. Duration changed from a source of protection into a source of loss (BlackRock, n.d.-a; BlackRock, n.d.-b).</p>
+<p>Therefore:</p>
+<p class="formula">“Fixed income” does not adequately describe the risk assumed by the investor.</p>
+<p>Credit quality and duration may matter more than the label itself.</p>
+
+<h3>3.3. Gold displayed the greatest continuity</h3>
+<p>Among the assets analysed, gold shows the most stable behaviour across the three episodes:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Crisis</th><th>Annual change in gold in EUR</th></tr></thead><tbody>
+<tr><td>2008</td><td>+9.38%</td></tr>
+<tr><td>2020</td><td>+14.02%</td></tr>
+<tr><td>2022</td><td>+6.00%</td></tr>
+</tbody></table></div>
+<p class="nota-tabla"><strong>Key:</strong> EUR = euro.</p>
+<p>The result deserves attention because the three crises had very different characteristics, yet gold ended each year in positive territory.</p>
+<p>The European Central Bank regards gold as having historical store-of-value characteristics and notes that its behaviour can differ from that of other asset classes during periods of stress (European Central Bank, 2025).</p>
+<p>But the result does not prove that gold will always function as a safe haven. Three historical episodes do not constitute a law. Nor should gold’s behaviour be extrapolated to commodities as a whole, whose response differed greatly according to the nature of each crisis.</p>
+<p>What can be said is that, within the sample used in this article, gold was the asset that displayed the greatest continuity in its defensive behaviour.</p>
+
+<h3>3.4. Gold and commodities do not provide the same protection</h3>
+<p>Gold should not be used as a synonym for commodities as a whole. In 2020, gold ended the year with a positive return in euros, while a broad commodity basket fell by approximately 24% in dollars. In 2022, that basket gained around 26% in dollars, helped by higher energy prices and supply constraints (S&amp;P Dow Jones Indices, n.d.).</p>
+<p>The contrast shows that the category “real asset” is too broad to predict behaviour. Gold responds, among other factors, to perceptions of risk, real interest rates, currencies and demand from investors and central banks. Commodities depend more directly on the balance between supply and demand for energy, metals and agricultural products. The two may therefore perform different functions within a portfolio.</p>
+
+<h3>3.5. Bitcoin displayed a different function</h3>
+<p>Bitcoin offers a particularly useful contrast with gold.</p>
+<p>During March 2020, Bitcoin fell sharply alongside the collapse in markets. In 2022, it again recorded a very large annual loss. The absence of a specific price source in this article makes it advisable to keep the comparison qualitative.</p>
+<p>Its extraordinary recovery after March 2020 does not change what happened at the point of maximum stress.</p>
+<p>Bitcoin showed an enormous capacity to generate returns during certain recovery phases, but not an equivalent capacity to protect capital during the decline. The data therefore suggest two different functions:</p>
+<p class="formula">Gold: diversification and possible protection during periods of stress.</p>
+<p class="formula">Bitcoin: growth potential accompanied by high volatility.</p>
+<p>Treating them as substitutes merely because both may be used as alternative stores of value would conceal a fundamental difference in their observed behaviour.</p>
+
+<h3>3.6. Cash preserves the amount, but not always the value</h3>
+<p>Cash appears to have the simplest behaviour: its nominal amount remains intact.</p>
+<p>In 2008, and especially in 2020, this characteristic provided a high degree of protection.</p>
+<p>But 2022 revealed its limit. With Spanish inflation at 5.7% in December, retaining exactly the same balance meant losing purchasing power. Spain’s National Statistics Institute publishes the Consumer Price Index used for this adjustment (National Statistics Institute, n.d.-a).</p>
+<p>Nominal security and economic security are therefore not necessarily the same.</p>
+<p>Cash virtually eliminates immediate market risk, but it does not eliminate inflation risk.</p>
+
+<h3>3.7. Why housing losses can take time to become visible</h3>
+<p>Spanish housing initially fell by only 5.4% in 2008. Compared with the much larger losses recorded in equity markets, it seemed extraordinarily resilient. But its price continued to deteriorate for years.</p>
+<p>In 2020, by contrast, it ended the fourth quarter approximately 1.5% above the level of a year earlier.</p>
+<p>In 2022, it rose by around 5.5%, a figure very close to Spanish inflation over the same period.</p>
+<p>Spain’s National Statistics Institute maintains the historical House Price Index series used for these comparisons (National Statistics Institute, n.d.-b).</p>
+<p>Housing therefore raises another question:</p>
+<blockquote class="idea-clave"><p>Is the asset whose price changes less the less risky one, or is it the asset that suffers the smaller economic loss?</p></blockquote>
+<p>They are not necessarily the same.</p>
+
+<h2>4. What we were failing to see</h2>
+<p>After comparing 2008, 2020 and 2022, a pattern becomes difficult to ignore. Assets traditionally regarded as defensive did not always retain the same function. Some provided protection in one crisis and caused harm in another; others preserved nominal capital but not purchasing power. And some assets that ended a year with large gains had suffered losses at the point of maximum stress that were incompatible with the usual idea of a safe haven.</p>
+<p>The problem therefore appears to lie in the original question. If we ask:</p>
+<blockquote class="idea-clave"><p>Which asset is a safe haven?</p></blockquote>
+<p>the question may be too imprecise. The relevant question is:</p>
+<blockquote class="idea-clave"><p>Against which risk do we want that asset to act as a safe haven?</p></blockquote>
+
+<h3>4.1. A product’s label does not fully describe its risk</h3>
+<p>The first conclusion is that traditional categories contain assets whose behaviour differs too greatly for the category alone to predict their role during a crisis.</p>
+<p>Fixed income is the clearest example. In 2008, higher-quality corporate debt held up far better than high-yield bonds. In 2022, short-duration government debt lost far less than long-duration debt. In both cases, all the instruments could be described as fixed income. Yet that label did not explain what would happen when the crisis arrived.</p>
+<p>Understanding the difference required additional information:</p>
+<ul>
+<li>credit quality;</li>
+<li>duration;</li>
+<li>sensitivity to interest rates;</li>
+<li>liquidity;</li>
+<li>and exposure to the economic cycle.</li>
+</ul>
+<p>The label classified the product, but it was not enough to explain its risk.</p>
+
+<h3>4.2. What protects in one crisis may be vulnerable in the next</h3>
+<p>Long-dated government debt is probably the clearest example in the entire study.</p>
+<p>It produced a favourable result in 2020. Interest rates fell and the prices of longer-duration bonds benefited particularly strongly. Two years later, the opposite happened: inflation forced a rapid tightening of monetary policy, and that same duration amplified losses. The asset had not ceased to be defensive because its name had changed; the variable determining its behaviour had changed.</p>
+<p>This requires a fundamental distinction:</p>
+<blockquote class="idea-clave"><p>An asset may be defensive against one source of risk and vulnerable to another.</p></blockquote>
+<p>The consequence matters. Using as protection the asset that worked in the previous crisis may prepare a portfolio perfectly for the problem that has already occurred while leaving it exposed to the next one.</p>
+
+<h3>4.3. Diversifying products is not the same as diversifying risks</h3>
+<p>A portfolio may contain equities, fixed income, funds, commodities and alternative assets and still remain concentrated. The reason is simple: different products may depend on the same variables.</p>
+<ul>
+<li>A rise in interest rates may simultaneously harm equities with long economic duration and bonds with long financial duration.</li>
+<li>A deterioration in credit may affect both certain corporate bonds and highly indebted companies.</li>
+<li>A liquidity crisis may trigger simultaneous sales in assets that normally display low correlations.</li>
+</ul>
+<p>Counting products is therefore not an adequate way to measure diversification.</p>
+<p>The relevant question is:</p>
+<blockquote class="idea-clave"><p>What would have to happen for these positions to lose value at the same time?</p></blockquote>
+<p>If the answer is the same for many of them, the portfolio is more concentrated than it appears.</p>
+<p>This may be one of the article’s most important ideas.</p>
+<p>Real diversification is not only about owning different assets; it is about depending on different sources of risk.</p>
+
+<h3>4.4. An absence of volatility is not the same as safety</h3>
+<p>Spanish housing during the crisis that began in 2008 illustrates another source of confusion.</p>
+<p>While equity markets reflected large losses immediately, the aggregate price of housing declined much more gradually. At first sight, property appeared far more stable, but the adjustment continued for several years.</p>
+<p>The price moved less because it was observed less frequently and because the valuation process was different, not because the economic risk had disappeared. This distinction requires us to separate two concepts: visible volatility and loss of wealth.</p>
+<p>An asset whose price changes every day may appear riskier simply because we observe every movement. Another may suffer a slow and prolonged loss without producing the same impression of instability. A resilient portfolio should therefore not be built solely by seeking assets with little observable volatility.</p>
+
+<h3>4.5. Avoiding a monetary loss is not enough</h3>
+<p>Cash reveals the opposite problem. Its performance appears perfect in nominal terms:</p>
+<p class="formula">The nominal amount remains intact.</p>
+<p>But 2022 reminds us that the value of money does not depend solely on the figure shown in an account. If prices rise, purchasing power falls.</p>
+<p>This means that there are at least two different forms of protection:</p>
+<ul>
+<li>preserving nominal capital;</li>
+<li>preserving purchasing power.</li>
+</ul>
+<p>They do not always coincide. Saying that an asset “does not lose money” may therefore be true from an accounting perspective and false from an economic one.</p>
+
+<h3>4.6. Making money after a crisis does not turn an asset into a safe haven</h3>
+<p>Bitcoin introduces another important distinction.</p>
+<p>After the collapse of March 2020, it experienced an extraordinary recovery.</p>
+<p>But at the point of maximum stress, it fell sharply alongside risk assets.</p>
+<p>Confusing the two phases can produce the wrong conclusion.</p>
+<p>An asset may be excellent at capturing a recovery and very poor at providing protection during panic. They are different functions: the capacity to protect and the capacity to recover or grow.</p>
+<p>A safe-haven asset should be judged primarily by what happens when protection is needed, not only by its subsequent return.</p>
+
+<h3>4.7. Gold: the most consistent exception, not a definitive answer</h3>
+<p>Across the three episodes analysed, gold was the asset that displayed the greatest continuity.</p>
+<p>It ended 2008, 2020 and 2022 with positive returns in euros. This makes it a particularly interesting candidate for diversification, but even this result must be interpreted with caution.</p>
+<p>Three crises do not allow us to conclude that gold will provide protection against every future shock. Gold also has its own volatility and may suffer prolonged periods of loss outside the episodes studied. The finding is therefore not: “gold is the correct safe haven”.</p>
+<p>It is this:</p>
+<blockquote class="idea-clave"><p>Among the three crises studied, gold was the asset that displayed the most consistent defensive behaviour across different sources of risk.</p></blockquote>
+<p>The difference between the two statements matters. The first attempts to establish a rule. The second describes evidence.</p>
+
+<h3>4.8. A change in perspective</h3>
+<p>After examining the three episodes, it seems more useful to stop viewing a portfolio only through the types of product it contains and to begin asking what function each position performs and which risks determine its behaviour.</p>
+<p>It is not enough to know that a portfolio contains fixed income, gold, cash, housing or Bitcoin. What matters is understanding what we expect each asset to do when a crisis appears, and what might cause it to stop performing that function. The evidence now allows us to state more precisely the intuition that gave rise to this article.</p>
+<p>The error does not appear to lie in using concepts such as safe haven, defensive or safe. It arises when we treat them as permanent properties of an asset and forget to specify the risk against which we expect them to work.</p>
+<p>The 2008 crisis demonstrated the importance of credit and liquidity. The 2020 crisis showed the value of having liquidity during a general sale of assets, as well as the protection that duration could provide when interest rates were falling. The 2022 crisis revealed precisely the limit of that same protection once rates began to rise.</p>
+<p>The common pattern, therefore, is not an asset that always gains. It is the recognition that protection changes when the risk changes. If that is correct, the consequence for portfolio construction is immediate.</p>
+<p>A resilient portfolio should not depend on correctly predicting which asset will become the next safe haven.</p>
+<p>It should seek to ensure that no single source of risk can simultaneously damage an excessive share of the investor’s wealth.</p>
+<p>This change in perspective leads directly to the question that gives the next chapter its title:</p>
+<blockquote class="idea-clave"><p>What is the anatomy of a resilient portfolio?</p></blockquote>
+
+<h2>5. Anatomy of a resilient portfolio</h2>
+<p>If protection depends on the source of risk, a resilient portfolio should not be built by searching for a single asset capable of protecting against everything.</p>
+<p>It should be built by combining positions that perform different functions. The idea is simple:</p>
+<blockquote class="idea-clave"><p>The aim is not to accumulate assets regarded as defensive, but to combine investments that do not all react in the same way to the same crisis.</p></blockquote>
+
+<h3>5.1. Resilience does not mean an absence of losses</h3>
+<p>A resilient portfolio can lose money. Trying to eliminate every possibility of loss would, in practice, also mean giving up an important share of potential returns.</p>
+<p>Resilience should be understood differently.</p>
+<p>A portfolio becomes more resilient as its capacity increases to:</p>
+<ul>
+<li>limit deep losses;</li>
+<li>prevent all its significant positions from falling for the same reason;</li>
+<li>maintain sufficient liquidity;</li>
+<li>preserve purchasing power to a reasonable degree;</li>
+<li>and hold assets capable of recovering or benefiting when economic conditions change.</li>
+</ul>
+<p>The objective is not to build an immobile portfolio, but one capable of absorbing different types of shock without being compromised by any single one of them.</p>
+
+<h3>5.2. Every position should have a function</h3>
+<p>One simple way to analyse a portfolio is to assign a primary function to each position.</p>
+<p>For example:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Function</th><th>What it seeks to provide</th></tr></thead><tbody>
+<tr><td>Liquidity</td><td>Immediate availability of capital</td></tr>
+<tr><td>Nominal preservation</td><td>Reduce the possibility of visible capital losses</td></tr>
+<tr><td>Inflation protection</td><td>Prevent wealth from losing purchasing power</td></tr>
+<tr><td>Diversification</td><td>Introduce behaviour that differs from the rest of the portfolio</td></tr>
+<tr><td>Growth</td><td>Generate long-term returns</td></tr>
+<tr><td>Recovery</td><td>Participate in expansion phases after a crisis</td></tr>
+</tbody></table></div>
+<p>A single investment may perform more than one function. But forcing ourselves to identify its main purpose prevents a common source of confusion: owning an asset without knowing exactly why it is in the portfolio.</p>
+
+<h3>5.3. Not every function should maximise returns</h3>
+<p>A position intended to provide liquidity should not be assessed by the same criterion as one intended to generate growth.</p>
+<p>Similarly, an asset used for diversification may justify its presence even if its standalone return is lower, provided that it reduces the vulnerability of the portfolio as a whole.</p>
+<p>This changes the way the success of each investment is measured.</p>
+<p>The question is no longer only: <em>how much has it gained?</em></p>
+<p>It also becomes: <em>has it performed the function for which it was included in the portfolio?</em></p>
+<p>A growth asset that falls during a crisis may be doing exactly what could be expected of it. The problem arises if the entire portfolio was built from positions that react in the same way.</p>
+
+<h3>5.4. A portfolio may look diversified without being so</h3>
+<p>Imagine a portfolio containing:</p>
+<ul>
+<li>several equity funds;</li>
+<li>long-duration bonds;</li>
+<li>corporate debt;</li>
+<li>and growth assets highly sensitive to financial conditions.</li>
+</ul>
+<p>Formally, it contains different products, but a sharp rise in interest rates may harm many of those positions simultaneously. The portfolio is diversified by name, but not necessarily by risk.</p>
+<p>The question the investor should ask is:</p>
+<blockquote class="idea-clave"><p>What would have to happen for several of my positions to lose value at the same time?</p></blockquote>
+<p>If the answer is the same for a large part of the portfolio, there is a concentration that traditional classifications may fail to reveal.</p>
+
+<h3>5.5. Weight matters as much as asset selection</h3>
+<p>Resilience does not depend solely on which assets a portfolio contains; it also depends on how much each one weighs. A highly volatile asset may form part of a resilient portfolio if it represents a sufficiently small proportion. Conversely, an asset regarded as defensive may become an important source of risk if it accounts for too much of the investor’s wealth.</p>
+<p>This introduces a basic idea:</p>
+<p class="formula">The risk of a position depends on its behaviour and on its weight within the portfolio.</p>
+<p>A 50% fall in a position representing 5% of the portfolio has an approximate maximum impact of 2.5% on total wealth. The same fall in a position representing 40% produces an impact of approximately 20%. Portfolio architecture is therefore not only about selecting assets; it is also about limiting how much damage each one can cause on its own.</p>
+
+<h3>5.6. There is no universal allocation</h3>
+<p>The results of 2008, 2020 and 2022 do not allow us to infer an optimal combination valid for every investor.</p>
+<p>The appropriate weight of each function will depend on factors such as:</p>
+<ul>
+<li>time horizon;</li>
+<li>need for liquidity;</li>
+<li>tolerance for losses;</li>
+<li>return objectives;</li>
+<li>stability of income;</li>
+<li>and the ability to retain positions during periods of deterioration.</li>
+</ul>
+<p>A person who may need their capital in one year requires a different architecture from someone with a twenty-year horizon.</p>
+<p>Discussing a resilient portfolio without considering the particular investor would therefore repeat the same error we are trying to avoid with safe-haven assets. Resilience is conditional too.</p>
+
+<h3>5.7. One possible architecture</h3>
+<p>Without attempting to establish optimal percentages, a resilient portfolio could be conceived as a combination of functional blocks:</p>
+<div class="tabla-scroll"><table><thead><tr><th>Block</th><th>Primary function</th></tr></thead><tbody>
+<tr><td>Liquidity and very short-dated fixed income</td><td>Stability and availability of capital</td></tr>
+<tr><td>Selected fixed income</td><td>Defensive return, taking duration and credit into account</td></tr>
+<tr><td>Equities</td><td>Long-term growth</td></tr>
+<tr><td>Diversifying assets</td><td>Reduce dependence on equities and bonds</td></tr>
+<tr><td>Inflation protection</td><td>Introduce exposure to assets sensitive to real prices</td></tr>
+<tr><td>High-volatility positions</td><td>Growth potential with limited weight</td></tr>
+</tbody></table></div>
+<p>The usefulness of this structure does not lie in the specific names. It lies in the fact that each block answers a different question.</p>
+
+<h3>5.8. The central idea</h3>
+<p>The anatomy of a resilient portfolio can be summarised in one sentence:</p>
+<blockquote class="idea-clave"><p>A resilient portfolio does not try to guess the next safe haven; it tries not to depend on a single form of protection working every time.</p></blockquote>
+<p>This principle changes the logic of construction. Instead of searching for the safe asset, we seek a combination in which different assets have different reasons to perform well or badly.</p>
+<p>Resilience then appears not as a characteristic of an individual position, but as a property of the portfolio as a whole. That property can be assessed through a very concrete question:</p>
+<blockquote class="idea-clave"><p>If the next crisis differs from the previous one, which part of the portfolio still performs a useful function?</p></blockquote>
+<p>This question takes us from theory to practice. The next chapter brings the assets together to compare how their role changes when the nature of the crisis changes.</p>
+
+<h2>6. Comparing asset behaviour across three crises</h2>
+<p>So far, we have examined each crisis from the perspective of the different assets. We will now consider them together to contrast the functions normally attributed to them: growth, stability, liquidity and protection.</p>
+<p>The same question is put to each one: how did the asset respond, and what function did it perform in each crisis?</p>
+<p>This exercise does not seek to construct an optimal portfolio or propose a specific investment. Its purpose is to determine whether the function attributed to each asset remains stable or changes with the nature of the crisis.</p>
+
+<h3>6.1. The assets and their functions</h3>
+<div class="tabla-scroll"><table><thead><tr><th>Asset</th><th>Function it would normally be expected to perform</th></tr></thead><tbody>
+<tr><td>Cash</td><td>Liquidity and nominal preservation</td></tr>
+<tr><td>Term deposit</td><td>Nominal preservation with interest</td></tr>
+<tr><td>Money-market fund</td><td>Interest-bearing liquidity and very low volatility</td></tr>
+<tr><td>Short-dated government debt</td><td>Stability and low sensitivity to interest rates</td></tr>
+<tr><td>Long-dated government debt</td><td>Defensive income and possible protection during slowdowns</td></tr>
+<tr><td>Investment-grade corporate bonds</td><td>Defensive return with moderate credit risk</td></tr>
+<tr><td>High-yield corporate bonds</td><td>Higher return in exchange for greater credit risk</td></tr>
+<tr><td>Diversified equities</td><td>Growth of wealth</td></tr>
+<tr><td>Gold</td><td>Diversification and possible safe haven</td></tr>
+<tr><td>Commodities</td><td>Exposure to real assets and inflation</td></tr>
+<tr><td>Housing</td><td>Real asset and preservation of wealth</td></tr>
+<tr><td>Bitcoin</td><td>Alternative asset and possible store of value</td></tr>
+</tbody></table></div>
+<ul>
+<li><em>Investment grade</em> means that the debt has a relatively high credit rating.</li>
+<li><em>High yield</em> refers to lower-quality corporate debt and therefore a higher expected yield and greater risk.</li>
+<li>Bitcoin did not exist during the 2008 crisis and is therefore shown as not applicable for that episode.</li>
+</ul>
+<p>The set does not represent a portfolio that could have been purchased in precisely the same form in 2007. It is a comparison applied to historical episodes for which the same amount of information is not always available.</p>
+
+<h3>6.2. How the comparison is made</h3>
+<p>The comparison uses returns available in euros when they come from a clear source and allow a reasonable comparison. When only a qualitative description, a property index or a return published in dollars is available, the figure remains in its original terms and is not presented as an investment that could have been replicated in euros.</p>
+<p>Every asset is asked the same question:</p>
+<blockquote class="idea-clave"><p>What function did it perform during the crisis, and which limitations should be considered when interpreting the result?</p></blockquote>
+<p>We are not trying to discover which combination would have gained the most. We are trying to identify the function performed by each asset when the problem arrived.</p>
+
+<h3>6.3. First test: 2008</h3>
+<p>The financial crisis provides the first test.</p>
+<p>Credit deteriorated, liquidity disappeared, distrust between institutions increased and a widespread process of deleveraging began.</p>
+<p>Behaviour differed greatly from one asset to another.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Asset</th><th>Behaviour observed in 2008</th><th>Defensive assessment</th></tr></thead><tbody>
+<tr><td>Cash</td><td>Preserved its nominal value</td><td>Yes, in nominal terms</td></tr>
+<tr><td>Term deposit</td><td>The available data refer to rates on new business, not to a comparable annual return</td><td>Inconclusive</td></tr>
+<tr><td>Money-market fund</td><td>Positive or defensive behaviour, depending on the vehicle</td><td>Probable protection</td></tr>
+<tr><td>Short-dated government debt</td><td>Defensive behaviour</td><td>Yes</td></tr>
+<tr><td>Long-dated government debt</td><td>Subsequently benefited from falling interest rates</td><td>Yes, although dependent on the period considered</td></tr>
+<tr><td>Investment-grade corporate bonds</td><td>Relatively resilient behaviour</td><td>Partial protection</td></tr>
+<tr><td>High-yield corporate bonds</td><td>Large losses</td><td>No</td></tr>
+<tr><td>Diversified equities</td><td>Large annual loss</td><td>No</td></tr>
+<tr><td>Gold</td><td>Approximate increase of 9.38% in euros</td><td>Yes</td></tr>
+<tr><td>Commodities</td><td>Large losses</td><td>No</td></tr>
+<tr><td>Housing in Spain</td><td>Initial fall of 5.4% followed by a prolonged adjustment</td><td>Difficult to interpret as protection</td></tr>
+<tr><td>Bitcoin</td><td>Did not exist</td><td>Not applicable</td></tr>
+</tbody></table></div>
+<p class="nota-tabla">* For context, the European Central Bank recorded an average rate of 4.28% for new household deposits of up to one year in December 2007. Later observations in 2008 relate to new transactions on different dates and cannot be used to construct the return on a single deposit (European Central Bank, 2009).</p>
+<h4>What 2008 reveals</h4>
+<p>There is a particularly interesting anomaly.</p>
+<p>Two investments described as fixed income ended at opposite extremes.</p>
+<p>Bonds issued by companies with good credit ratings, also known as investment-grade corporate bonds, proved relatively resilient, while high-yield bonds suffered substantial losses. MSCI defines the latter as debt rated below investment grade, confirming that credit risk is a structural difference within the category itself (MSCI, n.d.-c).</p>
+<p>It was therefore not fixed income in general that provided protection, but particular higher-quality segments.</p>
+<p>Gold ended the year with a positive return in euros, while the broad commodity basket did not provide the same protection (World Gold Council, n.d.; S&amp;P Dow Jones Indices, n.d.).</p>
+<p>Housing introduced another difficulty: its initial fall seemed small compared with equities, but the adjustment in Spain’s property market continued for years. The historical House Price Index series reveals that process (National Statistics Institute, n.d.-b).</p>
+<p><strong>Conclusion for 2008:</strong> in a credit and liquidity crisis, not everything regarded as defensive provides protection. Cash, some liquid instruments, higher-quality debt and gold displayed greater relative resilience, while high-yield bonds, equities and certain real-asset investments suffered substantial losses.</p>
+
+<h3>6.4. Second test: 2020</h3>
+<p>Twelve years later, the origin of the crisis changed completely.</p>
+<p>This time, the problem did not initially originate within the financial system. Economic activity stopped abruptly, prompting a general and extremely rapid sale of assets.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Asset</th><th>Behaviour observed in 2020</th><th>Defensive assessment</th></tr></thead><tbody>
+<tr><td>Cash</td><td>Preserved its nominal value</td><td>Yes, in nominal terms</td></tr>
+<tr><td>Term deposit</td><td>Very low return</td><td>Nominal preservation with little interest</td></tr>
+<tr><td>Money-market fund</td><td>Result close to zero or slightly negative, depending on the vehicle</td><td>High, though not absolute, stability</td></tr>
+<tr><td>Short-dated government debt</td><td>Approximately −0.1% in euros</td><td>Minimal loss; strong protection</td></tr>
+<tr><td>Government debt, 7–10 years</td><td>+4.2% in euros</td><td>Provided protection over the year as a whole</td></tr>
+<tr><td>Investment-grade corporate bonds</td><td>Positive result at year-end after experiencing stress in March</td><td>Protection at year-end, but not complete protection during the stress</td></tr>
+<tr><td>High-yield corporate bonds</td><td>Severe stress during March</td><td>Did not provide protection during the stress episode</td></tr>
+<tr><td>Global equities</td><td>Sharp fall in March and subsequent recovery; +6.33% for the year in euros</td><td>No immediate protection, although they ended the year in positive territory</td></tr>
+<tr><td>Gold</td><td>+14.02% in euros</td><td>Provided protection</td></tr>
+<tr><td>Commodities</td><td>Approximately −24% in dollars</td><td>Did not provide protection; result expressed in dollars</td></tr>
+<tr><td>Housing in Spain</td><td>+1.5% year on year in the fourth quarter</td><td>Positive nominal result, but based on a non-investable index</td></tr>
+<tr><td>Bitcoin</td><td>Sharp fall during the stress episode followed by a recovery</td><td>No immediate protection</td></tr>
+</tbody></table></div>
+<p>The reference used for short-dated government debt includes bonds issued by euro-area governments, with maturities of between one and three years and a relatively high credit rating. Because of their short maturity, their prices tend to move less in response to changes in interest rates than those of longer-dated bonds (BlackRock, n.d.-a).</p>
+<p>One of the comparison’s most important findings appears here.</p>
+<p>Longer-dated government debt ended 2020 with a favourable result, benefiting from the decline in required yields. The annual figure alone does not describe its entire behaviour during the general selling in March.</p>
+<p>But a methodological warning also emerges. Equities and Bitcoin may end the year in a far better position than at the moment when protection was actually needed. An asset cannot therefore be classified as a safe haven solely by observing its value on 31 December. Recovering extraordinarily well is not the same as providing protection during the crisis.</p>
+<p>Gold and commodities diverged again. Gold ended the year in positive territory, while commodities suffered as economic activity came to a halt.</p>
+<p><strong>Conclusion for 2020:</strong> liquidity and gold retained a defensive function, while longer-dated government debt also ended the year supported by falling interest rates. That protection, however, depended precisely on rates declining.</p>
+
+<h3>6.5. Third test: 2022</h3>
+<p>In 2022 came the test that overturned much of what had been observed in 2020: inflation accelerated and central banks raised interest rates rapidly. The comparison now faced a different problem. Equities were not the only assets that could fall; bonds could fall too.</p>
+<div class="tabla-scroll"><table><thead><tr><th>Asset</th><th>Behaviour observed in 2022</th><th>Defensive assessment</th></tr></thead><tbody>
+<tr><td>Cash</td><td>Preserved its nominal value but lost purchasing power through inflation</td><td>Nominal protection, not real protection</td></tr>
+<tr><td>Term deposit</td><td>Low interest at the beginning of the year, improving later</td><td>Nominal preservation, but insufficient real protection</td></tr>
+<tr><td>Money-market fund</td><td>Improved progressively as interest rates rose</td><td>Increasing stability as rates rose</td></tr>
+<tr><td>Government debt, 1–3 years</td><td>−4.3% in euros</td><td>Moderate loss; limited protection</td></tr>
+<tr><td>Government debt, 7–10 years</td><td>−20.1% in euros</td><td>Did not provide protection</td></tr>
+<tr><td>Investment-grade corporate bonds</td><td>Recorded losses</td><td>Insufficient protection</td></tr>
+<tr><td>High-yield corporate bonds</td><td>Recorded losses</td><td>Did not provide protection</td></tr>
+<tr><td>Global equities</td><td>−12.78% in euros</td><td>Did not provide protection</td></tr>
+<tr><td>Gold</td><td>Approximately +6% in euros</td><td>Provided protection</td></tr>
+<tr><td>Commodities</td><td>Approximately +26% in dollars</td><td>Positive result in dollars; effect in euros not assessed</td></tr>
+<tr><td>Housing in Spain</td><td>Approximately +5.5% nominal in the index</td><td>Positive nominal result, but not directly investable</td></tr>
+<tr><td>Bitcoin</td><td>Very large annual loss</td><td>Did not provide protection</td></tr>
+</tbody></table></div>
+<p class="nota-tabla">* The S&amp;P GSCI return of +26% is expressed in dollars and is kept separate from the euro results to avoid creating false precision over currency effects.</p>
+<p>Short-dated government debt, represented here by a portfolio of investment-grade euro-area sovereign bonds maturing in one to three years, suffered far smaller losses than longer-dated debt. The difference was particularly visible in 2022: rate increases punished long-maturity bonds much more severely.</p>
+<p>Commodities may initially benefit during certain inflationary episodes, especially when price increases result from supply constraints or higher costs for energy and other basic goods. Yet that same increase may reduce consumption and activity, subsequently weakening demand. Their ability to provide inflation protection therefore depends on the origin and duration of the episode.</p>
+<p>Gold once again ended the year in positive territory in euros. The ECB’s accounts record a €1.6 billion increase in the value of its gold holdings during 2022, caused by the rise in the euro-denominated price of the metal while the number of ounces remained unchanged (European Central Bank, 2023b).</p>
+<h4>What 2022 reveals</h4>
+<p>This is probably where the most valuable contrast in the entire comparison appears:</p>
+<p>Long-dated government debt, which had contributed protection in 2020, became an important source of losses only two years later. These were not two different assets: the crisis changed, and their behaviour changed with it.</p>
+<p>The meaning of cash changed as well: the amount remained intact, but it bought less.</p>
+<p>Commodities, which had failed to protect during the collapse in demand in 2020, became some of the strongest-performing assets.</p>
+<p><strong>Conclusion for 2022:</strong> long-dated government debt ceased to act as a counterweight, while cash preserved its nominal amount but lost purchasing power. Gold, housing and commodities produced results of a different nature, which argues against grouping them under a single “real asset” label.</p>
+
+<h3>6.6. The three episodes together</h3>
+<p>We can now make the comparison we were actually seeking.</p>
+<p>The analysis does not identify a broad group of assets that can simply be called safe havens. It reveals different functions: cash preserves nominal value and provides liquidity; short-dated debt reduces sensitivity to interest rates; long-dated debt may benefit when rates fall and suffer when they rise; credit quality separates investment-grade from high-yield bonds; and gold, commodities, equities and Bitcoin respond to different economic mechanisms.</p>
+<p>The relevant result is not a definitive classification of winners and losers, but the absence of a single form of protection. An asset may perform a defensive function against one risk and cease to do so when the nature of the crisis changes.</p>
+
+<h3>6.7. The principal result</h3>
+<p>The exercise shows that “protection” may mean preserving nominal value, maintaining purchasing power, having liquidity available, limiting a decline or participating in the recovery. None of the assets analysed responds equally to all these needs. Building a resilient portfolio therefore requires us first to define the function that each position must perform.</p>
+
+<h2>7. Conclusion</h2>
+<p>The most important result of this article is the recognition that the word <em>protection</em> was concealing several different functions, and that the more useful questions appear to be:</p>
+<blockquote class="idea-clave"><p>Which risk do I want protection against? Which asset might respond better to it, and why?</p></blockquote>
+<p>This change in perspective also alters the idea of diversification. A portfolio may contain many products and still depend on the same variable. It may be diversified by asset class and concentrated by risk at the same time. Its resilience therefore appears to depend not only on the number of assets or the presence of products traditionally regarded as defensive.</p>
+<p>It depends on its positions not all requiring the same scenario in order to work.</p>
+<p>The idea presented at the beginning of the article can now be stated more precisely:</p>
+<blockquote class="idea-clave"><p>An asset’s defensive capacity is not an absolute property of the asset itself, but a characteristic conditioned by the nature of the risk against which protection is sought.</p></blockquote>
+<p>A second idea follows from the first:</p>
+<blockquote class="idea-clave"><p>A resilient portfolio is not necessarily one made up of the assets individually regarded as the safest, but one whose structure prevents a single source of risk from simultaneously damaging all its significant positions.</p></blockquote>
+<p>The conclusions of this article must remain within the limits of the exercise.</p>
+<p>Only three historical episodes have been analysed. They are particularly useful crises because they present different configurations of risk, but they do not cover every possible scenario.</p>
+<p>Nor do the results allow us to claim that past behaviour will be repeated. We cannot conclude that gold will protect in the next crisis, that short-dated debt will always be stable, or that particular commodities will respond in the same way to inflation again.</p>
+<p>The article has not attempted to determine an optimal asset allocation either.</p>
+<p>The objective was not to construct the portfolio that would have produced the highest return in hindsight. It was to test whether the traditional classification of certain assets as safe havens or defensive assets survived when the nature of the crisis changed.</p>
+
+<h3>7.1. The question that remains open</h3>
+<p>We do not know what the next crisis will be. It may resemble 2008, 2020 or 2022, but it may also emerge from a completely different combination of risks.</p>
+<p>Precisely for that reason, attempting to build a portfolio prepared only to repeat the most recent crisis may be a particularly dangerous way of looking backwards.</p>
+<p>The conclusion of this article is not the identification of the asset that will gain when the next shock arrives. It is something more modest:</p>
+<blockquote class="idea-clave"><p>To understand that searching for a single safe haven for fundamentally different risks may itself be the mistake.</p></blockquote>
+
+<h2>References</h2>
+<h3>Methodological note on sources</h3>
+<p>The following order of preference has been used: public institutions and central banks; official index providers; asset-manager documentation; and other specialist sources where no equivalent primary series exists. Figures in EUR reflect the perspective of an investor whose reference currency is the euro. Figures available only in USD remain clearly identified and are not converted without a common currency series and valuation date. Exchange-traded funds and indices are used as historical approximations; this does not imply that the comparison used those specific products. Qualitative figures, or figures without a uniform public series, are presented as approximations rather than reproducible point estimates.</p>
+<p class="referencia">European Central Bank (2009). <em>Annual Report 2008</em>. Frankfurt am Main. <a href="https://www.ecb.europa.eu/pub/pdf/annrep/ar2008en.pdf" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">European Central Bank (2021). <em>Annual Report 2020</em>. Frankfurt am Main. <a href="https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/html/ar2020~4960fb81ae.en.html" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">European Central Bank (2022). <em>Monetary policy in a high inflation environment: commitment and clarity</em>. Speech, 4 November 2022. <a href="https://www.ecb.europa.eu/press/key/date/2022/html/ecb.sp221104_1~8be9a4f4c1.en.html" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">European Central Bank (2023a). <em>Annual Report 2022</em>. Frankfurt am Main. <a href="https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/html/ecb.ar2022~8ae51d163b.en.html" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">European Central Bank (2023b). <em>Annual Accounts 2022</em>. Frankfurt am Main. <a href="https://www.ecb.europa.eu/press/annual-reports-financial-statements/annual/annual-accounts/html/ecb.annualaccounts2022~ee9329bf6f.en.html" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">European Central Bank (2025). “Gold demand: the role of the official sector and geopolitics”. <em>Financial Stability Review</em>. <a href="https://www.ecb.europa.eu/pub/financial-stability/fsr/special/html/ecb.fsrart202505_02~1cc6b111b4.en.html" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">BlackRock (n.d.-a). <em>iShares € Govt Bond 1–3yr UCITS ETF</em>. Annual returns in EUR, NAV and reinvested income. <a href="https://www.blackrock.com/uk/individual/products/251733/ishares-euro-government-bond-13yr-ucits-etf" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">BlackRock (n.d.-b). <em>iShares € Govt Bond 7–10yr UCITS ETF EUR (Acc)</em>. Annual returns in EUR, NAV and reinvested income. <a href="https://www.blackrock.com/uk/individual/products/253461/ishares-euro-government-bond-710-ucits-etf-acc-fund" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">National Statistics Institute (n.d.-a). <em>Consumer Price Index</em>. <a href="https://www.ine.es/prensa/ipc_tabla.htm" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">National Statistics Institute (n.d.-b). <em>House Price Index</em>. <a href="https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&amp;cid=1254736152838&amp;idp=1254735976607&amp;menu=resultados" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">MSCI (n.d.-a). <em>MSCI EUR IG Value High Exposure Corporate Bond Index</em>. Index factsheet and historical series. <a href="https://www.msci.com/documents/1296102/20908564/MSCI%2BEUR%2BIG%2BValue%2BHigh%2BExposure%2BCorporate%2BBond%2BIndex.pdf/3ab325ac-ebe5-15bb-c266-0a45a2712bba" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">MSCI (n.d.-b). <em>MSCI World Index</em>. Index methodology and series. <a href="https://www.msci.com/indexes/index/990100/msci-world-index" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">MSCI (n.d.-c). <em>MSCI EUR High Yield Corporate Bond Index</em>. <a href="https://www.msci.com/indexes/index/733216/msci-eur-high-yield-selection-corporate-bond-index" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">S&amp;P Dow Jones Indices (n.d.). <em>S&amp;P GSCI: documentation and historical series</em>. <a href="https://www.spglobal.com/spdji/en/indices/commodities/sp-gsci/" target="_blank" rel="noopener noreferrer">Online source</a></p>
+<p class="referencia">World Gold Council (n.d.). <em>Gold prices: historical series in different currencies, including EUR</em>. <a href="https://www.gold.org/goldhub/data/gold-prices" target="_blank" rel="noopener noreferrer">Online source</a></p>
+
+    <div class="articulo-firma">Víctor Saavedra &nbsp;·&nbsp; Financial analyst · Business adviser · Educator</div>
+    <div class="nav-articulos"><a href="articulo7.html">← Previous article</a><a href="articulos.html">All articles →</a></div>
+  </main>
+</div>
+<footer><span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canary Islands</span></footer>
+<script>
+  const pageData={
+    es:{title:'Anatomía de una cartera que busca refugio — Víctor Saavedra',description:'Un análisis comparado de 2008, 2020 y 2022 que muestra por qué ningún activo protege frente a todos los riesgos y cómo construir una cartera más resistente.',back:'← Artículos',navTitle:'Pensamientos publicados'},
+    en:{title:'Anatomy of a Portfolio Seeking Shelter — Víctor Saavedra',description:'A comparison of 2008, 2020 and 2022 showing why no asset protects against every risk and what makes a portfolio more resilient.',back:'← Articles',navTitle:'Published essays'}
+  };
+  function setLang(lang){
+    document.querySelectorAll('.lang-block').forEach(function(block){block.classList.remove('active');block.hidden=true;});
+    document.querySelectorAll('.lang-tab').forEach(function(tab){tab.classList.remove('active');tab.setAttribute('aria-selected','false');});
+    const block=document.getElementById('lang-'+lang); const tab=document.getElementById('tab-'+lang);
+    block.hidden=false; block.classList.add('active'); tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+    document.documentElement.lang=lang; document.title=pageData[lang].title;
+    document.getElementById('meta-description').setAttribute('content',pageData[lang].description);
+    document.getElementById('nav-back').textContent=pageData[lang].back; document.getElementById('nav-title').textContent=pageData[lang].navTitle;
+    history.replaceState(null,'','#'+lang); window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.addEventListener('DOMContentLoaded',function(){if(location.hash==='#en') setLang('en');});
+</script>
+<script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

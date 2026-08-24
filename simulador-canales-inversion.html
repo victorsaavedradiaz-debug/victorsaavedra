@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Canales de Inversión · Víctor Saavedra</title>
+<meta name="description" content="Simulador educativo: aprende los canales de inversión, elige un perfil o construye tu propia cartera, y reacciona a un entorno macroeconómico sintético que cambia con el tiempo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0b;
+    --bg-panel:#141416;
+    --bg-panel-2:#1a1a1d;
+    --border:#2a2a2d;
+    --border-soft:#1f1f22;
+    --text:#e9e6de;
+    --text-dim:#d6d2c6;
+    --text-faint:#a49e90;
+    --gold:#c9a227;
+    --gold-bright:#e0bc4a;
+    --gold-soft:rgba(201,162,39,.14);
+    --green:#5e8c5e;
+    --amber:#c07d2e;
+    --red:#a24343;
+    --font-display:'Cormorant Garamond', Georgia, serif;
+    --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
+  body{
+    font-family:var(--font-display);
+    font-size:19px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{max-width:920px;margin:0 auto;padding:0 28px 120px;}
+  a{color:var(--gold);}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    background:linear-gradient(var(--bg) 82%, transparent);
+    padding:28px 0 14px;
+  }
+  .brand{
+    font-family:var(--font-ui);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin-bottom:14px;
+  }
+  .brand strong{color:var(--gold);font-weight:600;}
+  .brand-back{
+    color:var(--gold);text-decoration:none;margin-right:14px;padding-right:14px;
+    border-right:1px solid var(--border);transition:color .2s;
+  }
+  .brand-back:hover{color:var(--gold-bright);}
+  .steps{display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .step{
+    flex:1;
+    font-family:var(--font-ui);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    padding:12px 6px;
+    text-align:center;
+    border-right:1px solid var(--border-soft);
+    cursor:pointer;
+    transition:color .3s, background .2s;
+  }
+  .step:last-child{border-right:none;}
+  .step:hover:not(.active){color:var(--text-dim);background:var(--gold-soft);}
+  .step .num{display:block;font-family:var(--font-display);font-size:15px;color:var(--text-faint);margin-bottom:2px;}
+  .step.active{color:var(--gold);cursor:default;}
+  .step.active .num{color:var(--gold-bright);}
+
+  /* ---------- Generic ---------- */
+  h1{font-size:44px;font-weight:600;line-height:1.08;margin:.2em 0 .3em;letter-spacing:-.01em;}
+  h2{font-size:30px;font-weight:600;margin:1.4em 0 .5em;color:var(--gold-bright);}
+  h3{font-size:22px;font-weight:600;margin:0 0 .3em;}
+  p{margin:0 0 1em;color:var(--text);}
+  .lede{font-size:22px;font-style:italic;color:var(--text-dim);max-width:640px;}
+  .eyebrow{
+    font-family:var(--font-ui);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:10px;
+  }
+  .muted{color:var(--text-dim);}
+  .faint{color:var(--text-dim);font-size:15px;}
+  hr.rule{border:none;border-top:1px solid var(--border);margin:36px 0;}
+
+  .btn{
+    font-family:var(--font-ui);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
+    background:transparent;border:1px solid var(--gold);color:var(--gold);
+    padding:12px 26px;cursor:pointer;transition:all .2s;
+  }
+  .btn:hover{background:var(--gold-soft);}
+  .btn.primary{background:var(--gold);color:#0a0a0a;font-weight:600;}
+  .btn.primary:hover{background:var(--gold-bright);}
+  .btn:disabled{opacity:.35;cursor:not-allowed;}
+  .btn.ghost{border-color:var(--border);color:var(--text-dim);}
+  .btn.ghost:hover{border-color:var(--text-dim);background:transparent;}
+  .actions{display:flex;justify-content:space-between;align-items:center;margin-top:40px;gap:16px;flex-wrap:wrap;}
+
+  /* ---------- Concept cards ---------- */
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:24px 0;}
+  @media(max-width:640px){.card-grid{grid-template-columns:1fr;}}
+  .card{background:var(--bg);padding:24px;}
+  .card .idx{font-family:var(--font-ui);font-size:11px;letter-spacing:.1em;color:var(--gold);margin-bottom:8px;}
+  .card h3{margin-bottom:6px;}
+  .card .risk{font-family:var(--font-ui);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;margin:10px 0 4px;}
+  .card .risk-val{font-family:var(--font-display);font-style:italic;color:var(--text-dim);font-size:16px;}
+  .card .sens{font-size:15px;color:var(--text-dim);margin-top:8px;border-top:1px solid var(--border-soft);padding-top:10px;}
+
+  /* ---------- Profile cards ---------- */
+  .profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0;}
+  @media(max-width:720px){.profile-grid{grid-template-columns:1fr;}}
+  .profile-card{border:1px solid var(--border);padding:22px 20px;cursor:pointer;transition:border-color .2s, background .2s;}
+  .profile-card:hover{border-color:var(--gold);background:var(--gold-soft);}
+  .profile-card.selected{border-color:var(--gold);background:var(--gold-soft);}
+  .profile-card h3{color:var(--gold-bright);}
+  .profile-bar{display:flex;height:10px;margin:14px 0 10px;border:1px solid var(--border-soft);}
+  .profile-bar span{height:100%;}
+  .profile-legend{font-family:var(--font-ui);font-size:11px;color:var(--text-faint);}
+
+  /* ---------- Sliders / allocation ---------- */
+  .alloc-group-title{font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin:26px 0 10px;}
+  .alloc-row{display:grid;grid-template-columns:170px 1fr 56px;align-items:center;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.alloc-row{grid-template-columns:110px 1fr 46px;gap:8px;}}
+  .alloc-row label{font-size:16px;color:var(--text);}
+  .alloc-row input[type=range]{
+    -webkit-appearance:none;appearance:none;height:2px;background:var(--border);outline:none;width:100%;
+  }
+  .alloc-row input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid #0a0a0a;
+  }
+  .alloc-row input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid #0a0a0a;}
+  .alloc-val{font-family:var(--font-ui);font-size:15px;text-align:right;color:var(--gold);}
+  .alloc-sum{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--font-ui);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
+    padding:14px 16px;border:1px solid var(--border);margin-top:18px;
+  }
+  .alloc-sum.ok{border-color:var(--green);color:var(--green);}
+  .alloc-sum.bad{border-color:var(--red);color:var(--red);}
+
+  /* ---------- Macro dashboard (gauges) ---------- */
+  .macro-panel{border:1px solid var(--border);padding:20px 22px;margin:18px 0;background:var(--bg-panel);}
+  .macro-panel-title{font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:14px;display:flex;justify-content:space-between;}
+  .macro-panel-hint{font-family:var(--font-ui);font-size:11px;color:var(--text-faint);margin-bottom:12px;font-style:italic;}
+  .gauge-item{border-bottom:1px solid var(--border-soft);}
+  .gauge-item:last-child{border-bottom:none;}
+  .gauge{display:grid;grid-template-columns:150px 1fr 78px 26px;align-items:center;gap:12px;padding:9px 0;cursor:pointer;}
+  .gauge:hover .name{color:var(--gold);}
+  .gauge.open .name{color:var(--gold-bright);}
+  .gauge .name{font-family:var(--font-ui);font-size:12.5px;color:var(--text-dim);transition:color .15s;}
+  .gauge .name .chevron{display:inline-block;margin-left:5px;font-size:9px;color:var(--text-faint);transition:transform .15s;}
+  .gauge.open .name .chevron{transform:rotate(90deg);color:var(--gold);}
+  .gauge-track{position:relative;height:6px;background:var(--bg-panel-2);border:1px solid var(--border-soft);}
+  .gauge-zone{position:absolute;top:0;bottom:0;opacity:.55;}
+  .gauge-mark{position:absolute;top:-4px;width:2px;height:14px;background:var(--gold-bright);box-shadow:0 0 6px var(--gold);}
+  .gauge .val{font-family:var(--font-ui);font-size:14px;text-align:right;color:var(--text);}
+  .gauge .delta{font-family:var(--font-ui);font-size:12px;text-align:right;}
+  .gauge .delta.up{color:var(--amber);}
+  .gauge .delta.down{color:#7a9ecf;}
+  .gauge .delta.flat{color:var(--text-faint);}
+  .gauge-def{display:none;font-size:14.5px;color:var(--text-dim);padding:0 0 14px 0;border-top:1px dashed var(--border-soft);margin-top:-2px;padding-top:10px;}
+  .gauge-def.open{display:block;}
+
+  /* ---------- Round narrative ---------- */
+  .round-tag{font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .narrative{
+    font-style:italic;color:var(--text-dim);font-size:19px;border-left:2px solid var(--gold);
+    padding-left:16px;margin:16px 0 22px;
+  }
+  .recap-panel{
+    border:1px solid var(--border);border-left:2px solid var(--text-faint);
+    padding:16px 18px;margin:20px 0 6px;background:var(--bg-panel);
+  }
+  .recap-title{font-family:var(--font-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:4px;}
+
+  /* ---------- Feedback ---------- */
+  .feedback{border:1px solid var(--border);border-left:2px solid var(--gold);padding:16px 18px;margin:10px 0;background:var(--bg-panel);}
+  .feedback .tag{font-family:var(--font-ui);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .feedback p{margin:0;font-size:16px;color:var(--text-dim);}
+  .no-feedback{color:var(--text-dim);font-style:italic;font-size:16px;}
+
+  /* ---------- Summary chart ---------- */
+  .chart-wrap{border:1px solid var(--border);padding:18px 20px;margin:14px 0;background:var(--bg-panel);}
+  .chart-title{font-family:var(--font-ui);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
+  .stack-row{display:flex;height:26px;margin-bottom:6px;border:1px solid var(--border-soft);}
+  .stack-row span{height:100%;}
+  .stack-label{font-family:var(--font-ui);font-size:11px;color:var(--text-faint);margin-bottom:2px;}
+
+  /* ---------- Setup extras ---------- */
+  .seed-row{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap;}
+  .seed-row input[type=text]{
+    background:var(--bg-panel);border:1px solid var(--border);color:var(--text);
+    font-family:var(--font-ui);font-size:13px;padding:9px 12px;width:220px;
+  }
+  .seed-row label{font-family:var(--font-ui);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em;}
+  .reflection-input{
+    width:100%;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);
+    font-family:var(--font-display);font-size:16px;line-height:1.5;padding:14px 16px;
+    resize:vertical;margin:6px 0 4px;
+  }
+  .reflection-input:focus{outline:none;border-color:var(--gold);}
+  .reflection-input::placeholder{color:var(--text-faint);font-style:italic;}
+  .reflection-quote{
+    border-left:2px solid var(--text-faint);padding-left:14px;margin:8px 0 14px;
+    font-style:italic;color:var(--text-dim);font-size:16px;
+  }
+  .alignment-tag{
+    display:inline-block;font-family:var(--font-ui);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 9px;border:1px solid var(--border);margin-bottom:8px;
+  }
+  .alignment-tag.coherente{color:var(--green);border-color:var(--green);}
+  .alignment-tag.contraria{color:var(--red);border-color:var(--red);}
+  .alignment-tag.neutra{color:var(--text-faint);border-color:var(--border);}
+
+  .disclaimer{
+    font-family:var(--font-ui);font-size:12px;color:var(--text-faint);
+    border-top:1px solid var(--border);margin-top:60px;padding-top:18px;line-height:1.6;
+  }
+
+  .legend-dot{display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:middle;}
+
+  ::selection{background:var(--gold-soft);color:var(--gold-bright);}
+
+  /* ---------- Glosario ---------- */
+  .glossary-btn{
+    position:relative;
+    font-family:var(--font-ui);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--gold);background:transparent;border:1px solid var(--border);
+    padding:8px 14px;cursor:pointer;margin-left:auto;display:inline-flex;align-items:center;gap:6px;
+  }
+  .glossary-btn:hover{border-color:var(--gold);background:var(--gold-soft);}
+  .topbar-row{display:flex;align-items:center;gap:14px;}
+  .glossary-overlay{
+    position:fixed;inset:0;background:rgba(6,6,7,.86);z-index:100;
+    display:none;align-items:flex-start;justify-content:center;
+    padding:56px 20px;overflow-y:auto;
+  }
+  .glossary-overlay.open{display:flex;}
+  .glossary-modal{
+    background:var(--bg-panel);border:1px solid var(--border);max-width:760px;width:100%;
+    padding:32px 34px 36px;position:relative;
+  }
+  .glossary-close{
+    position:absolute;top:18px;right:20px;
+    font-family:var(--font-ui);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text-dim);background:transparent;border:1px solid var(--border);
+    padding:6px 12px;cursor:pointer;
+  }
+  .glossary-close:hover{color:var(--gold);border-color:var(--gold);}
+  .glossary-modal h2{margin-top:0;}
+  .glossary-search{
+    width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);
+    font-family:var(--font-ui);font-size:14px;padding:11px 14px;margin:16px 0 22px;
+  }
+  .glossary-section-title{
+    font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);margin:22px 0 10px;border-top:1px solid var(--border-soft);padding-top:18px;
+  }
+  .glossary-section-title:first-of-type{border-top:none;padding-top:0;}
+  .glossary-term{margin-bottom:14px;}
+  .glossary-term dt{
+    font-size:18px;font-weight:600;color:var(--text);display:inline;
+  }
+  .glossary-term .abbr{font-family:var(--font-ui);font-size:12px;color:var(--text-faint);margin-left:6px;}
+  .glossary-term dd{margin:2px 0 0;font-size:15.5px;color:var(--text-dim);}
+  .glossary-empty{color:var(--text-faint);font-style:italic;font-size:15px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="topbar-row">
+      <div class="brand" style="margin-bottom:0;"><a href="simuladores.html" class="brand-back">← Volver</a>Víctor Saavedra · <strong>Simulador de Canales de Inversión</strong></div>
+      <button class="glossary-btn" id="glossary-open-btn">Glosario</button>
+    </div>
+    <nav class="steps" id="steps" style="margin-top:14px;"></nav>
+  </div>
+  <main id="main"></main>
+
+  <div class="glossary-overlay" id="glossary-overlay">
+    <div class="glossary-modal">
+      <button class="glossary-close" id="glossary-close-btn">Cerrar ✕</button>
+      <div class="eyebrow">Glosario</div>
+      <h2 style="margin-top:2px;">Términos del simulador</h2>
+      <input type="text" class="glossary-search" id="glossary-search" placeholder="Buscar un término (ej. VIX, MOVE, REIT)...">
+      <div id="glossary-body"></div>
+    </div>
+  </div>
+  <div class="disclaimer">
+    Simulador con fines exclusivamente educativos. Las variables macroeconómicas del entorno de simulación se generan de forma sintética y no reflejan datos de mercado reales ni previsiones. Ninguna decisión adoptada dentro de este simulador constituye, ni debe interpretarse como, asesoramiento o recomendación de inversión.
+  </div>
+</div>
+
+<script>
+(function(){
+
+/* =========================================================================
+   DATOS: CANALES DE INVERSIÓN
+   ========================================================================= */
+const CHANNELS = [
+  { id:'liquidez', name:'Liquidez / Monetario', group:'defensivo',
+    def:'Fondos monetarios y depósitos a corto plazo invertidos en deuda pública y bancaria de vencimiento inferior a un año. Prioriza la preservación de capital y la disponibilidad inmediata.',
+    risk:'Coste de oportunidad en fases de expansión',
+    sens:'Los tipos oficiales fijan directamente su rentabilidad. Suele recibir flujos cuando el PMI se deteriora o el VIX repunta con fuerza.',
+    color:'#7a9ecf' },
+  { id:'rf_gob', name:'Renta Fija Gobierno', group:'defensivo',
+    def:'Deuda soberana de países desarrollados, con vencimientos de corto a largo plazo.',
+    risk:'Riesgo de duración: el precio reacciona de forma inversa a los tipos',
+    sens:'Los tipos oficiales y el bono a 10 años marcan directamente su precio por efecto duración. La inflación erosiona su rentabilidad real.',
+    color:'#8fb08f' },
+  { id:'rf_corp', name:'Renta Fija Corporativa', group:'defensivo',
+    def:'Deuda emitida por empresas, con una prima sobre la deuda pública que compensa el riesgo de impago.',
+    risk:'Riesgo de crédito (spread) además del de duración',
+    sens:'Además del riesgo de duración, incorpora riesgo de crédito: se resiente cuando el PIB o el PMI se deterioran y las revisiones de beneficios empeoran.',
+    color:'#c07d2e' },
+  { id:'mixto', name:'Mixto Defensivo', group:'defensivo',
+    def:'Fondos que combinan renta fija y renta variable con objetivo de preservación de capital y baja volatilidad.',
+    risk:'Riesgo combinado moderado, dependiente de la gestión activa',
+    sens:'Sensibilidad atenuada al conjunto de variables; funciona como amortiguador entre fases de mercado.',
+    color:'#b09a6a' },
+  { id:'rv', name:'Renta Variable', group:'riesgo',
+    def:'Participación en el capital de empresas cotizadas.',
+    risk:'Riesgo de mercado y de beneficios empresariales',
+    sens:'El PMI y las revisiones de beneficios adelantan el ciclo de resultados. El VIX fija la prima de riesgo exigida; los tipos oficiales y el bono a 10 años, el coste de capital.',
+    color:'#c9a227' },
+  { id:'inmo', name:'Inmobiliario (REITs / SOCIMIs)', group:'riesgo',
+    def:'Vehículos cotizados que invierten en activos inmobiliarios y reparten rentas vía alquileres.',
+    risk:'Sensibilidad a tipos de interés y al ciclo económico',
+    sens:'El bono a 10 años y los tipos oficiales encarecen su financiación y presionan su valoración por descuento de flujos. El PIB determina la demanda de espacio.',
+    color:'#9c7a5a' },
+  { id:'oro', name:'Oro / Materias primas', group:'riesgo',
+    def:'Activos reales sin flujo de caja propio, empleados tradicionalmente como reserva de valor.',
+    risk:'No genera rentas; su precio depende de la demanda como cobertura',
+    sens:'VIX elevado (activo refugio en episodios de estrés), inflación al alza (cobertura), y el bono a 10 años como coste de oportunidad de mantenerlo.',
+    color:'#e0bc4a' },
+  { id:'cripto', name:'Criptoactivos', group:'riesgo',
+    def:'Activos digitales sin respaldo de flujos de caja ni de un emisor soberano o corporativo, de elevada volatilidad.',
+    risk:'Volatilidad extrema y ausencia de anclaje fundamental estable',
+    sens:'Correlación positiva reciente con el apetito global de riesgo (VIX) y con la liquidez (tipos oficiales), pero sin relación macro estable ni contrastada a largo plazo: es la variable menos predecible del conjunto.',
+    color:'#a24343' }
+];
+
+/* =========================================================================
+   DATOS: VARIABLES MACROECONÓMICAS
+   baseline / min / max acotan el generador. typicalMove es la unidad de
+   "movimiento típico trimestral" usada para normalizar los efectos de la
+   matriz causal (ver más abajo). zones: umbrales de semáforo (simplificación
+   pedagógica).
+   ========================================================================= */
+const MACRO_VARS = [
+  { id:'pib', name:'PIB real', unit:'%', dec:1, typicalMove:0.5,
+    def:'Producto Interior Bruto real: el crecimiento o la contracción de la economía, descontando el efecto de los precios. Variable coincidente y algo rezagada: confirma el ciclo más que lo anticipa.',
+    baseline:1.5, min:-3, max:5,
+    zones:[{to:0,c:'red'},{to:1.5,c:'amber'},{to:5,c:'green'}] },
+  { id:'inflacion', name:'Inflación', unit:'%', dec:1, typicalMove:0.6,
+    def:'Evolución general de los precios (IPC interanual). Condiciona el poder adquisitivo, la política monetaria y la valoración de los activos.',
+    baseline:2.2, min:-1, max:9,
+    zones:[{to:0,c:'amber'},{to:3,c:'green'},{to:5,c:'amber'},{to:9,c:'red'}] },
+  { id:'pmi', name:'PMI', unit:'', dec:1, typicalMove:2.0,
+    def:'Índice de difusión basado en encuestas a directores de compras, que anticipa la actividad empresarial a través de pedidos, producción y expectativas. Suele avisar de cambios de ciclo antes que el PIB.',
+    baseline:50, min:35, max:65,
+    zones:[{to:47,c:'red'},{to:52,c:'amber'},{to:65,c:'green'}] },
+  { id:'tipos', name:'Tipos oficiales', unit:'%', dec:2, typicalMove:0.4,
+    def:'Precio oficial del dinero fijado por el banco central. Afecta al coste de financiación, a los bonos y a la valoración de la renta variable.',
+    baseline:2.5, min:0, max:6,
+    zones:[{to:2,c:'green'},{to:3.5,c:'amber'},{to:6,c:'red'}] },
+  { id:'deficit', name:'Déficit público', unit:'% PIB', dec:1, typicalMove:0.5,
+    def:'Diferencia entre gastos e ingresos públicos, en porcentaje del PIB. Funciona como proxy del impulso fiscal: puede estimular la economía a corto plazo a costa de presionar la financiación pública.',
+    baseline:3.0, min:-1, max:10,
+    zones:[{to:2,c:'green'},{to:5,c:'amber'},{to:10,c:'red'}] },
+  { id:'bono10y', name:'Bono soberano 10 años', unit:'%', dec:2, typicalMove:0.35,
+    def:'Rentabilidad exigida por el mercado para prestar al Estado a diez años. Referencia central para el coste del dinero a largo plazo; afecta a bonos, acciones e inmobiliario.',
+    baseline:3.5, min:1, max:7,
+    zones:[{to:3,c:'green'},{to:4.5,c:'amber'},{to:7,c:'red'}] },
+  { id:'revisiones', name:'Revisiones de beneficios', unit:'%', dec:0, typicalMove:6,
+    def:'Balance neto entre analistas que elevan y que recortan sus estimaciones de beneficios empresariales. Síntesis de cómo la economía se traslada a las cuentas de las empresas.',
+    baseline:0, min:-30, max:30,
+    zones:[{to:-10,c:'red'},{to:5,c:'amber'},{to:30,c:'green'}] },
+  { id:'vix', name:'VIX', unit:'', dec:1, typicalMove:3,
+    def:'Índice de volatilidad implícita del S&P 500. Actúa principalmente como sensor de estrés financiero: consecuencia de otras variables más que motor de la economía.',
+    baseline:18, min:10, max:50,
+    zones:[{to:18,c:'green'},{to:28,c:'amber'},{to:50,c:'red'}] },
+];
+
+/* =========================================================================
+   MATRIZ CAUSAL DEL MOTOR (8 × 8)
+   Se define por causa: para cada variable, la lista de efectos que provoca
+   sobre las demás, con una intensidad (−3 a +3) y un desfase (0, 1 o 2
+   trimestres). Las relaciones "T0/T+1" del documento original se reparten
+   en dos entradas de intensidad mitad, una a cada desfase, para no contar
+   el mismo impulso dos veces.
+
+   Orden fijo de cálculo dentro de cada trimestre (necesario para las
+   relaciones T0, que requieren que la causa ya esté calculada ese mismo
+   trimestre):
+     PIB → Inflación → Déficit → Tipos oficiales → PMI → Bono 10Y →
+     Revisiones de beneficios → VIX
+
+   El VIX se calcula el último porque actúa como sensor de estrés, no como
+   motor. Esto deja dos relaciones T0 sin poder resolverse en el mismo
+   trimestre en el sentido inverso (VIX→PMI y VIX→Revisiones forman un
+   ciclo T0 con PMI→VIX y Revisiones→VIX). Para esas dos, únicamente, se
+   usa el VIX del trimestre anterior en vez del de este trimestre — una
+   degradación deliberada y señalada, coherente con el papel del VIX como
+   variable reactiva y no causal principal.
+   ========================================================================= */
+const CAUSAL_MATRIX = {
+  pib:        [ {to:'inflacion', i:2,  lag:1}, {to:'pmi', i:1, lag:0}, {to:'tipos', i:1, lag:1},
+                {to:'deficit', i:-2, lag:1}, {to:'bono10y', i:1, lag:0}, {to:'vix', i:-1, lag:0},
+                {to:'revisiones', i:3, lag:0} ],
+  inflacion:  [ {to:'pib', i:-1, lag:1}, {to:'pmi', i:-1, lag:1},
+                {to:'tipos', i:1.5, lag:0}, {to:'tipos', i:1.5, lag:1},
+                {to:'deficit', i:1, lag:1}, {to:'bono10y', i:3, lag:0}, {to:'vix', i:1, lag:0},
+                {to:'revisiones', i:-2, lag:1} ],
+  pmi:        [ {to:'pib', i:3, lag:1}, {to:'deficit', i:-1, lag:1}, {to:'vix', i:-1, lag:0},
+                {to:'revisiones', i:2, lag:0} ],
+  tipos:      [ {to:'pib', i:-3, lag:2}, {to:'inflacion', i:-3, lag:2}, {to:'pmi', i:-2, lag:1},
+                {to:'deficit', i:1, lag:1}, {to:'bono10y', i:3, lag:0}, {to:'vix', i:1, lag:0},
+                {to:'revisiones', i:-2, lag:1} ],
+  deficit:    [ {to:'pib', i:2, lag:1}, {to:'inflacion', i:1, lag:1}, {to:'pmi', i:1, lag:0},
+                {to:'tipos', i:1, lag:1}, {to:'bono10y', i:1, lag:0}, {to:'bono10y', i:1, lag:1},
+                {to:'vix', i:1, lag:0}, {to:'revisiones', i:1, lag:1} ],
+  bono10y:    [ {to:'pib', i:-2, lag:1}, {to:'pmi', i:-1, lag:1}, {to:'deficit', i:1, lag:1},
+                {to:'vix', i:1, lag:0}, {to:'revisiones', i:-1, lag:0}, {to:'revisiones', i:-1, lag:1} ],
+  revisiones: [ {to:'pib', i:1, lag:1}, {to:'pmi', i:1, lag:0}, {to:'deficit', i:-1, lag:1},
+                {to:'vix', i:-2, lag:0} ],
+  vix:        [ {to:'pib', i:-1, lag:1}, {to:'pmi', i:-1, lag:0, degraded:true},
+                {to:'revisiones', i:-1, lag:0, degraded:true} ],
+};
+
+// Índice inverso (por efecto) construido a partir de la matriz anterior.
+const CAUSES_OF = {};
+MACRO_VARS.forEach(v=> CAUSES_OF[v.id]=[]);
+Object.keys(CAUSAL_MATRIX).forEach(fromId=>{
+  CAUSAL_MATRIX[fromId].forEach(edge=>{
+    CAUSES_OF[edge.to].push({ from:fromId, i:edge.i, lag:edge.lag, degraded:!!edge.degraded });
+  });
+});
+
+const CALC_ORDER = ['pib','inflacion','deficit','tipos','pmi','bono10y','revisiones','vix'];
+
+// Constantes del motor de agregación (ver explicación al usuario: compresión
+// por saturación en vez de suma lineal, más inercia, reversión suave y ruido).
+const ENGINE = { AMPLITUDE:1.3, INERTIA:0.15, REVERSION:0.06, NOISE:0.35 };
+
+const PROFILES = {
+  conservador:{ label:'Conservador', desc:'Preservación de capital ante todo. Baja tolerancia a oscilaciones de valor.',
+    alloc:{ liquidez:30, rf_gob:30, rf_corp:15, mixto:15, rv:5, inmo:3, oro:2, cripto:0 } },
+  moderado:{ label:'Moderado', desc:'Busca crecimiento con amortiguadores defensivos activos.',
+    alloc:{ liquidez:15, rf_gob:20, rf_corp:15, mixto:15, rv:25, inmo:5, oro:4, cripto:1 } },
+  arriesgado:{ label:'Arriesgado', desc:'Prioriza el crecimiento a largo plazo y tolera oscilaciones significativas.',
+    alloc:{ liquidez:5, rf_gob:10, rf_corp:10, mixto:10, rv:45, inmo:8, oro:5, cripto:7 } }
+};
+
+/* =========================================================================
+   ESTADOS DEL MERCADO
+   El simulador elige uno de estos estados del mercado al azar (determinista
+   si hay semilla) al empezar la simulación, y no lo revela hasta el resumen
+   final. Cada estado define bias(round): un sesgo directo, en las mismas
+   unidades normalizadas que las relaciones de la matriz causal, inyectado
+   en la suma pre-compresión de una o varias variables concretas para ese
+   trimestre. Al entrar en la misma función de saturación que el resto de
+   causas, el sesgo tampoco puede disparar la variable sin límite.
+   ========================================================================= */
+const MARKET_STATES = [
+  { id:'equilibrado', label:'Aleatorio equilibrado',
+    desc:'Sin sesgo de partida: el motor se mueve solo por las relaciones causales y el ruido, con ambos simétricos durante todo el recorrido.',
+    bias:(round)=>({ varBias:{}, noiseMult:1 }) },
+  { id:'expansion', label:'Expansión con impulso económico',
+    desc:'Sesgo sostenido de mejora en crecimiento, actividad empresarial y beneficios, con volatilidad contenida.',
+    bias:(round)=>({ varBias:{ pib:0.32, pmi:0.32, revisiones:0.28, vix:-0.22 }, noiseMult:1 }) },
+  { id:'deterioro', label:'Deterioro progresivo',
+    desc:'Sesgo negativo sostenido y creciente en crecimiento, actividad y beneficios desde el primer trimestre: sin sorpresas bruscas, solo una tendencia que hay que saber leer a tiempo.',
+    bias:(round)=>({ varBias:{
+      pib:-0.12-0.035*round, pmi:-0.12-0.035*round,
+      revisiones:-0.10-0.03*round, vix:0.08+0.025*round
+    }, noiseMult:1 }) },
+  { id:'shock', label:'Shock repentino',
+    desc:'Entorno en calma que sufre un shock de aversión al riesgo fuerte y unidireccional en un trimestre concreto, con eco parcial al siguiente antes de que la reversión a la media haga su trabajo.',
+    bias:(round)=>{
+      if(round===3) return { varBias:{ vix:1.7, bono10y:0.9, pib:-0.5, pmi:-0.7 }, noiseMult:1 };
+      if(round===4) return { varBias:{ vix:0.5, bono10y:0.3 }, noiseMult:1 };
+      return { varBias:{}, noiseMult:1 };
+    } },
+  { id:'euforia', label:'Euforia y corrección',
+    desc:'Mejora sostenida de actividad y beneficios en los primeros trimestres, seguida de una reversión brusca de sentimiento hacia mitad de recorrido.',
+    bias:(round)=>{
+      if(round<=3) return { varBias:{ pmi:0.28, revisiones:0.28, vix:-0.22 }, noiseMult:0.9 };
+      if(round===4) return { varBias:{ vix:1.5, pmi:-0.55, revisiones:-0.45 }, noiseMult:1 };
+      return { varBias:{ vix:0.15 }, noiseMult:1 };
+    } },
+  { id:'fiscal', label:'Tensión fiscal',
+    desc:'El resto del panel se mantiene relativamente tranquilo mientras el déficit público y el bono a 10 años se tensionan de forma aislada y sostenida.',
+    bias:(round)=>({ varBias:{ deficit:0.45, bono10y:0.35 }, noiseMult:1 }) },
+  { id:'calma', label:'Calma prolongada',
+    desc:'Volatilidad de los shocks reducida en todas las variables durante todo el recorrido: el panel apenas pide nada.',
+    bias:(round)=>({ varBias:{}, noiseMult:0.4 }) },
+];
+
+function pickEstado(rand){
+  return MARKET_STATES[Math.floor(rand()*MARKET_STATES.length)];
+}
+
+const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)' };
+
+/* =========================================================================
+   GLOSARIO
+   Reúne los canales y variables ya definidos arriba y añade siglas y
+   términos que aparecen en la interfaz sin una definición propia en
+   otro punto de la app.
+   ========================================================================= */
+const GLOSSARY_EXTRA = [
+  { term:'BCE', abbr:'Banco Central Europeo', def:'Autoridad monetaria de la eurozona. Fija los tipos oficiales que, junto con los de la Fed, representa la variable "Tipos oficiales" del panel.' },
+  { term:'Fed', abbr:'Reserva Federal (Federal Reserve)', def:'Banco central de Estados Unidos. Fija su propio tipo oficial de referencia; junto con el del BCE, inspira la variable "Tipos oficiales" del panel.' },
+  { term:'Matriz causal', abbr:null, def:'Tabla que define cómo afecta cada indicador del panel a los demás dentro del motor del simulador: la fila es la causa, la columna es el efecto, con una intensidad (de −3 a +3) y un desfase temporal asociados a cada relación.' },
+  { term:'Desfase temporal (T0 / T+1 / T+2)', abbr:null, def:'Tiempo que tarda en manifestarse el efecto de una variable sobre otra. T0 significa que el efecto aparece en el mismo trimestre; T+1 y T+2, uno y dos trimestres después. Los bancos centrales señalan que los efectos de la política monetaria sobre la economía real se producen con retardos variables.' },
+  { term:'Punto básico (pb)', abbr:'Basis point', def:'Centésima parte de un punto porcentual (0,01%). Unidad habitual para medir spreads de crédito y diferenciales soberanos.' },
+  { term:'Duración', abbr:null, def:'Medida de la sensibilidad del precio de un bono a variaciones de los tipos de interés. A mayor duración, mayor variación de precio ante el mismo cambio de tipos.' },
+  { term:'Spread de crédito', abbr:null, def:'Diferencial de rentabilidad que exige el mercado a la deuda corporativa sobre la deuda pública equivalente, como compensación por el riesgo de impago.' },
+  { term:'REIT', abbr:'Real Estate Investment Trust', def:'Vehículo cotizado, de origen anglosajón, que invierte en activos inmobiliarios y está obligado a repartir la mayor parte de sus rentas como dividendo.' },
+  { term:'SOCIMI', abbr:'Sociedad Cotizada de Inversión en el Mercado Inmobiliario', def:'Equivalente español al REIT: vehículo cotizado con un marco fiscal específico centrado en el reparto de rentas inmobiliarias.' },
+  { term:'Fondo monetario', abbr:null, def:'Fondo de inversión que invierte en activos de deuda de muy corto plazo (letras, pagarés, depósitos), con el objetivo de preservar capital y ofrecer alta liquidez.' },
+  { term:'Renta fija', abbr:null, def:'Categoría de activos que representan deuda: el emisor se compromete a devolver el capital y pagar un interés pactado. Incluye deuda de gobiernos (RF Gobierno) y de empresas (RF Corporativa).' },
+  { term:'Renta variable', abbr:'RV', def:'Categoría de activos que representan participación en el capital de una empresa (acciones), sin rentabilidad garantizada.' },
+  { term:'Activo refugio', abbr:null, def:'Activo al que suelen dirigirse los inversores en episodios de incertidumbre o caídas de mercado, por su capacidad para conservar valor (ej. oro, deuda pública de alta calidad).' },
+  { term:'Estado del mercado', abbr:null, def:'Sesgo de fondo que el simulador aplica de forma oculta a una o varias variables del panel durante todo el recorrido o en un trimestre concreto, y que revela solo al final. No sustituye a la matriz causal: se suma a ella antes de aplicar la compresión del motor.' },
+];
+
+function buildGlossaryEntries(){
+  const entries = [];
+  CHANNELS.forEach(c=> entries.push({ group:'Canales de inversión', term:c.name, abbr:null, def:c.def }));
+  MACRO_VARS.forEach(v=> entries.push({ group:'Variables macro', term:v.name, abbr:null, def:v.def }));
+  GLOSSARY_EXTRA.filter(e=>!e.skip).forEach(e=> entries.push({ group:'Siglas y otros términos', term:e.term, abbr:e.abbr, def:e.def }));
+  return entries;
+}
+const GLOSSARY_ENTRIES = buildGlossaryEntries();
+const GLOSSARY_GROUPS = ['Canales de inversión','Variables macro','Siglas y otros términos'];
+
+function renderGlossary(filter){
+  const body = document.getElementById('glossary-body');
+  const q = (filter||'').trim().toLowerCase();
+  let html='';
+  GLOSSARY_GROUPS.forEach(group=>{
+    const items = GLOSSARY_ENTRIES.filter(e=> e.group===group && (!q || e.term.toLowerCase().includes(q) || (e.abbr&&e.abbr.toLowerCase().includes(q)) || e.def.toLowerCase().includes(q)));
+    if(items.length===0) return;
+    html += `<div class="glossary-section-title">${group}</div>`;
+    items.forEach(it=>{
+      html += `<dl class="glossary-term"><dt>${it.term}</dt>${it.abbr?`<span class="abbr">${it.abbr}</span>`:''}<dd>${it.def}</dd></dl>`;
+    });
+  });
+  if(!html) html = `<p class="glossary-empty">Ningún término coincide con la búsqueda.</p>`;
+  body.innerHTML = html;
+}
+
+function initGlossaryUI(){
+  const overlay = document.getElementById('glossary-overlay');
+  const openBtn = document.getElementById('glossary-open-btn');
+  const closeBtn = document.getElementById('glossary-close-btn');
+  const search = document.getElementById('glossary-search');
+
+  function open(){
+    renderGlossary('');
+    overlay.classList.add('open');
+    search.value='';
+    setTimeout(()=>search.focus(),0);
+  }
+  function close(){ overlay.classList.remove('open'); }
+
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', e=>{ if(e.target===overlay) close(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('open')) close(); });
+  search.addEventListener('input', e=> renderGlossary(e.target.value));
+}
+
+/* =========================================================================
+   PRNG con semilla (mulberry32) — permite repetir el mismo escenario
+   ========================================================================= */
+function mulberry32(a){
+  return function(){
+    a|=0; a=a+0x6D2B79F5|0;
+    let t=Math.imul(a^a>>>15,1|a);
+    t=t+Math.imul(t^t>>>7,61|t)^t;
+    return ((t^t>>>14)>>>0)/4294967296;
+  };
+}
+function hashSeed(str){
+  let h=1779033703^str.length;
+  for(let i=0;i<str.length;i++){
+    h=Math.imul(h^str.charCodeAt(i),3432918353);
+    h=h<<13|h>>>19;
+  }
+  return function(){
+    h=Math.imul(h^h>>>16,2246822507);
+    h=Math.imul(h^h>>>13,3266489909);
+    return (h^=h>>>16)>>>0;
+  };
+}
+function rng(seedStr){
+  if(!seedStr) return Math.random;
+  return mulberry32(hashSeed(seedStr)());
+}
+
+/* =========================================================================
+   ESTADO
+   ========================================================================= */
+const TOTAL_ROUNDS = 6;
+let state = {
+  phase:'portada', // portada, conceptos1, conceptos2, perfil, sim, resumen
+  profileKey:null,
+  seed:'',
+  rand:Math.random,
+  estado:null, // estado del mercado elegido al azar al empezar la simulación, oculto hasta el resumen
+  alloc:{}, // asignación actual del usuario
+  round:0,
+  macro:null, // valores macro actuales
+  moveHistory:{}, // moveHistory[varId][round] = movimiento normalizado (por typicalMove) realizado ese trimestre
+  history:[], // {round, macro:{...}, alloc:{...}, feedback:[...], reflection, alignment}
+  _pendingReflection:'',
+};
+
+function getMove(varId, round){
+  if(round<1) return 0;
+  const h = state.moveHistory[varId];
+  return (h && h[round]!==undefined) ? h[round] : 0;
+}
+
+function initAlloc(base){
+  state.alloc = Object.assign({}, base);
+}
+
+/* =========================================================================
+   MOTOR CAUSAL
+   Cada trimestre, para cada variable, en el orden fijo CALC_ORDER:
+     1. Se recogen todas las causas que le afectan (CAUSES_OF[id]), usando
+        el movimiento normalizado de cada causa en el trimestre y desfase
+        que le corresponda (T0 = este mismo trimestre si la causa ya se ha
+        calculado antes en el orden; T+1/T+2 = trimestres anteriores).
+     2. Se suman esas contribuciones (intensidad/3 × movimiento) más el
+        sesgo del estado del mercado para esa variable.
+     3. La suma se comprime con tanh antes de traducirla a unidades reales:
+        esto evita que varias causas alineadas disparen la variable sin
+        límite, y hace que señales que se cancelan entre sí no produzcan
+        un movimiento artificialmente grande.
+     4. Se añade inercia (fracción del movimiento del trimestre anterior),
+        una reversión suave hacia el valor base, y ruido acotado.
+     5. El resultado se acota al rango plausible de la variable.
+   ========================================================================= */
+function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
+
+function stepMacro(targetRound){
+  const r = state.rand;
+  const gauss = ()=> (r()+r()+r()+r()-2)/2; // aprox. normal(0,1) truncada
+
+  const b = (state.estado && state.estado.bias) ? state.estado.bias(targetRound) : { varBias:{}, noiseMult:1 };
+  const noiseMult = b.noiseMult!==undefined ? b.noiseMult : 1;
+  const varBias = b.varBias || {};
+
+  const prev = state.macro || {};
+  const next = {};
+  const thisMove = {}; // movimientos normalizados ya calculados este trimestre (para efectos T0)
+
+  CALC_ORDER.forEach(varId=>{
+    const v = MACRO_VARS.find(x=>x.id===varId);
+    const prevVal = (prev[varId]!==undefined) ? prev[varId] : v.baseline;
+    const edges = CAUSES_OF[varId] || [];
+
+    let acc = 0;
+    edges.forEach(e=>{
+      let sourceMove;
+      if(e.lag===0){
+        if(e.degraded){
+          // VIX→PMI y VIX→Revisiones: ciclo T0 irresoluble en el mismo trimestre.
+          // Se usa el VIX del trimestre anterior en su lugar (ver nota en CAUSAL_MATRIX).
+          sourceMove = getMove(e.from, targetRound-1);
+        } else if(thisMove[e.from] !== undefined){
+          sourceMove = thisMove[e.from];
+        } else {
+          sourceMove = getMove(e.from, targetRound-1); // salvaguarda si el orden no lo cubriera
+        }
+      } else {
+        sourceMove = getMove(e.from, targetRound - e.lag);
+      }
+      acc += (e.i/3) * sourceMove;
+    });
+    acc += (varBias[varId]||0);
+
+    const compressed = Math.tanh(acc);
+    const prevMove = getMove(varId, targetRound-1);
+    const delta = compressed*ENGINE.AMPLITUDE*v.typicalMove
+                + ENGINE.INERTIA*prevMove*v.typicalMove
+                - ENGINE.REVERSION*(prevVal - v.baseline)
+                + gauss()*v.typicalMove*ENGINE.NOISE*noiseMult;
+
+    const val = clamp(prevVal + delta, v.min, v.max);
+    next[varId] = val;
+    const normMove = (val - prevVal) / v.typicalMove;
+    thisMove[varId] = normMove;
+    if(!state.moveHistory[varId]) state.moveHistory[varId] = {};
+    state.moveHistory[varId][targetRound] = normMove;
+  });
+
+  state.macro = next;
+  return next;
+}
+
+/* =========================================================================
+   EFECTOS PENDIENTES NO RESUELTOS
+   Al terminar el recorrido, algunos efectos con desfase T+1/T+2 activados
+   en los últimos trimestres caerían fuera de las 6 rondas. Se listan en
+   vez de ocultarlos: es una limitación honesta del recorrido corto, no un
+   error del motor.
+   ========================================================================= */
+function pendingEffects(){
+  const results = [];
+  Object.keys(CAUSES_OF).forEach(toId=>{
+    CAUSES_OF[toId].forEach(e=>{
+      if(e.lag===0) return;
+      for(let originRound=Math.max(2, TOTAL_ROUNDS-e.lag+1); originRound<=TOTAL_ROUNDS; originRound++){
+        const move = getMove(e.from, originRound);
+        const landRound = originRound + e.lag;
+        if(landRound > TOTAL_ROUNDS && Math.abs(move) > 0.5){
+          results.push({ from:e.from, to:toId, lag:e.lag, originRound, landRound, weight: Math.abs(move*e.i) });
+        }
+      }
+    });
+  });
+  results.sort((a,b)=>b.weight-a.weight);
+  return results.slice(0,4);
+}
+
+function zoneOf(varDef, val){
+  for(const z of varDef.zones){ if(val<=z.to) return z.c; }
+  return varDef.zones[varDef.zones.length-1].c;
+}
+
+/* =========================================================================
+   MOTOR DE OBSERVACIONES (feedback educativo, no calificación)
+   ========================================================================= */
+function pick(arr){ return arr[Math.floor(state.rand()*arr.length)]; }
+
+function evaluateRound(prevAlloc, newAlloc, prevMacro, newMacro){
+  const dAlloc = id => (newAlloc[id]||0)-(prevAlloc[id]||0);
+  const dMacro = id => (newMacro[id]||0)-(prevMacro?.[id]||newMacro[id]);
+  const clampN = (x,a,b)=>Math.max(a,Math.min(b,x));
+
+  // Movimiento neto hacia canales de riesgo (positivo) o hacia defensivos (negativo).
+  const netRisk = Math.round(CHANNELS.filter(c=>c.group==='riesgo').reduce((s,c)=>s+dAlloc(c.id),0));
+
+  // Puntuación de estrés del trimestre a partir de las variables macro, acotada por componente.
+  let stress = 0;
+  if(prevMacro){
+    stress += clampN(-dMacro('pib')/0.6, -1, 1);
+    stress += clampN(-dMacro('pmi')/2.5, -1, 1);
+    stress += clampN(dMacro('tipos')/0.4, -1, 1);
+    stress += clampN(dMacro('bono10y')/0.4, -1, 1);
+    stress += clampN(dMacro('vix')/6, -1, 1);
+    stress += clampN(-dMacro('revisiones')/10, -1, 1);
+  }
+  const estado = stress>0.6 ? 'deterioro' : (stress<-0.6 ? 'mejora' : 'estable');
+  const scene = narrativeFor(newMacro, prevMacro);
+
+  let evalTxt, alignment;
+  if(Math.abs(netRisk)<=3){
+    evalTxt = pick([
+      `Cambio mínimo de perfil este trimestre (${netRisk>=0?'+':''}${netRisk} pts en riesgo).`,
+      `Tu cartera se mantuvo prácticamente estable (${netRisk>=0?'+':''}${netRisk} pts en riesgo).`,
+      `Ajuste marginal, sin una reasignación de fondo (${netRisk>=0?'+':''}${netRisk} pts en riesgo).`
+    ]);
+    alignment='neutra';
+  } else if(estado==='deterioro' && netRisk>0){
+    evalTxt = pick([
+      `Aun así, ampliaste tu exposición a activos de riesgo en ${netRisk} puntos: un movimiento a contracorriente del deterioro del panel.`,
+      `Pese al deterioro de las condiciones, sumaste ${netRisk} puntos de riesgo, una apuesta claramente a contracorriente.`,
+      `Subiste riesgo en ${netRisk} puntos justo cuando el panel se deterioraba: decisión en sentido contrario a la lectura del estado del mercado.`
+    ]);
+    alignment='contraria';
+  } else if(estado==='deterioro' && netRisk<0){
+    evalTxt = pick([
+      `Redujiste riesgo en ${Math.abs(netRisk)} puntos: dirección coherente con el deterioro del panel.`,
+      `Recortaste ${Math.abs(netRisk)} puntos de riesgo, en línea con el empeoramiento del entorno.`,
+      `Movimiento defensivo de ${Math.abs(netRisk)} puntos, coherente con la lectura de deterioro.`
+    ]);
+    alignment='coherente';
+  } else if(estado==='mejora' && netRisk>0){
+    evalTxt = pick([
+      `Ampliaste riesgo en ${netRisk} puntos, en línea con la mejora del entorno.`,
+      `Sumaste ${netRisk} puntos de riesgo, coherente con la mejora de las condiciones.`,
+      `Movimiento hacia riesgo de ${netRisk} puntos, alineado con el mejor tono del panel.`
+    ]);
+    alignment='coherente';
+  } else if(estado==='mejora' && netRisk<0){
+    evalTxt = pick([
+      `Sin embargo, redujiste tu exposición a riesgo en ${Math.abs(netRisk)} puntos pese a la mejora del entorno: postura defensiva a contracorriente.`,
+      `El entorno mejoró y aun así recortaste ${Math.abs(netRisk)} puntos de riesgo: prudencia a contracorriente.`,
+      `Redujiste riesgo en ${Math.abs(netRisk)} puntos justo cuando el panel mejoraba: movimiento defensivo a contracorriente.`
+    ]);
+    alignment='contraria';
+  } else {
+    evalTxt = pick([
+      `Moviste ${netRisk>0?'+':''}${netRisk} puntos hacia riesgo en un entorno sin una dirección dominante clara.`,
+      `Reasignaste ${Math.abs(netRisk)} puntos ${netRisk>0?'hacia':'fuera de'} activos de riesgo, sin que el panel marcara una tendencia clara.`,
+      `Cambio de ${netRisk>0?'+':''}${netRisk} puntos en riesgo en un trimestre mixto, sin señal dominante.`
+    ]);
+    alignment='neutra';
+  }
+  return { text:`${scene} ${evalTxt}`, alignment, netRisk, estado };
+}
+
+function buildFeedback(prevAlloc, newAlloc, prevMacro, newMacro, roundEval){
+  const obs=[];
+  const dAlloc = id => (newAlloc[id]||0)-(prevAlloc[id]||0);
+  const dMacro = id => (newMacro[id]||0)-(prevMacro?.[id]||newMacro[id]);
+
+  // Lectura base: siempre presente. Describe el trimestre y evalúa el movimiento del usuario
+  // frente al estado del mercado. La pregunta abierta vive ahora en el campo de reflexión, no aquí.
+  obs.push({tag:'Lectura del trimestre', text: roundEval.text});
+
+  const deterioroEconomico = dMacro('pib') < -0.5 || dMacro('pmi') < -2;
+  const tiposAlAlza = dMacro('tipos') > 0.3;
+  const benigno = newMacro.pib>1.5 && newMacro.pmi>52 && newMacro.vix<16;
+  const inflacionAlAlza = dMacro('inflacion') > 0.6;
+  const tensionFiscal = dMacro('deficit') > 0.5 && dMacro('bono10y') > 0.3;
+  const beneficiosDeterioro = dMacro('revisiones') < -7;
+  const vixExtremo = newMacro.vix > 30;
+
+  if(deterioroEconomico && (dAlloc('rv')>4 || dAlloc('rf_corp')>4 || dAlloc('cripto')>2)){
+    obs.push({tag:'Deterioro económico',
+      text:'Aumentaste exposición a activos sensibles al ciclo justo cuando el PIB o el PMI se deterioraban. Ambas son variables tempranas del ciclo: su caída suele preceder, no seguir, al deterioro de los beneficios. ¿Qué información justificó la decisión?'});
+  }
+  if(tiposAlAlza && dAlloc('rf_gob')>4){
+    obs.push({tag:'Tipos y duración',
+      text:'Aumentaste renta fija de gobierno mientras los tipos oficiales subían. Una subida de tipos presiona a la baja el precio de estos bonos por efecto duración, justo el canal donde más se nota.'});
+  }
+  if(benigno && (newAlloc.liquidez||0) > 45){
+    obs.push({tag:'Coste de oportunidad',
+      text:'Mantienes una posición muy defensiva (liquidez > 45%) en un entorno de crecimiento sólido, PMI expansivo y volatilidad contenida. Vale la pena valorar el coste de oportunidad de esa prudencia.'});
+  }
+  if(inflacionAlAlza && dAlloc('rf_gob')>4){
+    obs.push({tag:'Inflación y renta fija',
+      text:'Aumentaste renta fija de gobierno mientras la inflación repuntaba. La inflación erosiona la rentabilidad real de estos bonos y suele adelantar una respuesta más restrictiva del banco central.'});
+  }
+  if(tensionFiscal && dAlloc('rf_gob')>4){
+    obs.push({tag:'Presión fiscal',
+      text:'El déficit público se amplía y el bono a 10 años sube a la vez: el mercado empieza a exigir más rentabilidad por financiar ese impulso fiscal. Aun así, ampliaste tu posición en renta fija de gobierno.'});
+  }
+  if(beneficiosDeterioro && dAlloc('rv')>4){
+    obs.push({tag:'Beneficios empresariales',
+      text:'Aumentaste renta variable mientras las revisiones de beneficios empresariales se deterioraban. Vale la pena revisar si la decisión se apoya en algo distinto a la evolución de los beneficios esperados.'});
+  }
+  if(vixExtremo && (dAlloc('liquidez')<-4 || dAlloc('rf_gob')<-4)){
+    obs.push({tag:'Volatilidad',
+      text:'Redujiste posiciones defensivas con el VIX en zona de estrés elevado. Los picos de volatilidad suelen ir acompañados de huida hacia activos refugio, no de reducción de liquidez.'});
+  }
+  if((vixExtremo || inflacionAlAlza) && dAlloc('oro')>2){
+    obs.push({tag:'Cobertura',
+      text:'Elevaste la exposición a oro coincidiendo con un repunte de volatilidad o de inflación. Es coherente con su papel tradicional de activo de cobertura.'});
+  }
+  if(dAlloc('cripto')>3 && (deterioroEconomico || vixExtremo)){
+    obs.push({tag:'Volatilidad extrema',
+      text:'Ampliaste criptoactivos en un episodio de deterioro económico o de estrés de mercado. Es el canal con la relación macro menos estable de todos: la decisión pesa más sobre convicción que sobre lectura macro.'});
+  }
+  return obs;
+}
+
+/* =========================================================================
+   RENDER: navegación superior
+   ========================================================================= */
+const PHASES = [
+  {id:'conceptos1', label:'Canales', num:'I'},
+  {id:'conceptos2', label:'Variables macro', num:'II'},
+  {id:'perfil', label:'Tu perfil', num:'III'},
+  {id:'sim', label:'Simulación', num:'IV'},
+  {id:'resumen', label:'Resumen', num:'V'},
+];
+function goToPhase(id){
+  if(id==='sim' && !state.profileKey){
+    state.phase='perfil';
+  } else {
+    state.phase=id;
+  }
+  render();
+  window.scrollTo(0,0);
+}
+
+function renderSteps(){
+  const el=document.getElementById('steps');
+  el.innerHTML='';
+  PHASES.forEach(p=>{
+    const div=document.createElement('div');
+    div.className='step'+(p.id===state.phase?' active':'');
+    div.innerHTML=`<span class="num">${p.num}</span>${p.label}`;
+    div.addEventListener('click',()=> goToPhase(p.id));
+    el.appendChild(div);
+  });
+}
+
+/* =========================================================================
+   RENDER: PORTADA
+   ========================================================================= */
+function renderPortada(){
+  return `
+  <div class="eyebrow">Simulador educativo</div>
+  <h1>Canales de inversión<br>frente al ciclo macroeconómico</h1>
+  <p class="lede">Aprende qué es cada canal de inversión, elige o construye una cartera, y observa cómo reaccionarías tú cuando el entorno macroeconómico cambia con el tiempo.</p>
+  <hr class="rule">
+  <p>El recorrido tiene cuatro etapas:</p>
+  <div class="card-grid" style="grid-template-columns:1fr 1fr;">
+    <div class="card"><div class="idx">I</div><h3>Canales de inversión</h3><p class="faint">Qué son, qué riesgo asumen y a qué variables macro son sensibles.</p></div>
+    <div class="card"><div class="idx">II</div><h3>Variables macro</h3><p class="faint">Los indicadores que moverán el entorno de la simulación.</p></div>
+    <div class="card"><div class="idx">III</div><h3>Tu perfil</h3><p class="faint">Un perfil predefinido o una cartera construida por ti.</p></div>
+    <div class="card"><div class="idx">IV</div><h3>Simulación</h3><p class="faint">Seis rondas en las que el entorno cambia y tú decides cómo reasignar.</p></div>
+  </div>
+  <div class="actions">
+    <span></span>
+    <button class="btn primary" id="start-btn">Empezar</button>
+  </div>
+  `;
+}
+
+/* =========================================================================
+   RENDER: CONCEPTOS — CANALES
+   ========================================================================= */
+function renderConceptos1(){
+  const cards = CHANNELS.map((c,i)=>`
+    <div class="card">
+      <div class="idx">${String(i+1).padStart(2,'0')}</div>
+      <h3>${c.name}</h3>
+      <p class="faint">${c.def}</p>
+      <div class="risk">Riesgo principal</div>
+      <div class="risk-val">${c.risk}</div>
+      <div class="sens">${c.sens}</div>
+    </div>
+  `).join('');
+  return `
+  <div class="eyebrow">I. Conceptos</div>
+  <h1>Los canales de inversión</h1>
+  <p class="lede">Ocho vehículos con perfiles de riesgo y sensibilidad macro distintos. Entenderlos es el paso previo a decidir cómo combinarlos.</p>
+  <div class="card-grid">${cards}</div>
+  <div class="actions">
+    <button class="btn ghost" id="back-btn">Volver</button>
+    <button class="btn primary" id="next-btn">Continuar → Variables macro</button>
+  </div>
+  `;
+}
+
+/* =========================================================================
+   RENDER: CONCEPTOS — VARIABLES MACRO
+   ========================================================================= */
+function renderConceptos2(){
+  const cards = MACRO_VARS.map((v,i)=>`
+    <div class="card">
+      <div class="idx">${String(i+1).padStart(2,'0')}</div>
+      <h3>${v.name}</h3>
+      <p class="faint">${v.def}</p>
+    </div>
+  `).join('');
+  return `
+  <div class="eyebrow">II. Conceptos</div>
+  <h1>Las variables macro del simulador</h1>
+  <p class="lede">Ocho indicadores organizados en cinco canales: macroeconomía, política monetaria, política fiscal, mercados y beneficios empresariales. No se mueven de forma independiente: cada uno afecta a los demás según relaciones de causa y efecto, con distinta intensidad y con desfases de hasta dos trimestres.</p>
+  <div class="card-grid">${cards}</div>
+  <p class="faint" style="margin-top:14px;">Los umbrales de semáforo (verde / ámbar / rojo) usados en el simulador son una simplificación pedagógica y no sustituyen la lectura profesional de estos indicadores.</p>
+  <div class="actions">
+    <button class="btn ghost" id="back-btn">Volver</button>
+    <button class="btn primary" id="next-btn">Continuar → Tu perfil</button>
+  </div>
+  `;
+}
+
+/* =========================================================================
+   RENDER: PERFIL
+   ========================================================================= */
+function renderPerfil(){
+  const profileCards = Object.keys(PROFILES).map(key=>{
+    const p = PROFILES[key];
+    const bars = CHANNELS.map(c=>`<span style="width:${p.alloc[c.id]}%;background:${c.color};" title="${c.name}: ${p.alloc[c.id]}%"></span>`).join('');
+    const sel = state.profileKey===key ? ' selected':'';
+    return `
+    <div class="profile-card${sel}" data-key="${key}">
+      <h3>${p.label}</h3>
+      <p class="faint">${p.desc}</p>
+      <div class="profile-bar">${bars}</div>
+      <div class="profile-legend">Liquidez ${p.alloc.liquidez}% · RV ${p.alloc.rv}% · Cripto ${p.alloc.cripto}%</div>
+    </div>`;
+  }).join('');
+
+  const customSel = state.profileKey==='custom' ? ' selected':'';
+
+  return `
+  <div class="eyebrow">III. Tu punto de partida</div>
+  <h1>Elige un perfil o construye tu propia cartera</h1>
+  <p class="lede">Este será tu punto de partida antes de que el entorno macro empiece a moverse.</p>
+  <div class="profile-grid">${profileCards}</div>
+  <div class="profile-card${customSel}" data-key="custom" style="margin-top:4px;">
+    <h3>Caso propio</h3>
+    <p class="faint">Define tú mismo la asignación inicial entre los ocho canales.</p>
+  </div>
+
+  <div id="custom-alloc-wrap"></div>
+
+  <div class="seed-row">
+    <label for="seed-input">Semilla del escenario (opcional)</label>
+    <input type="text" id="seed-input" placeholder="ej. master-oct26-grupoA" value="${state.seed}">
+    <span class="faint" style="font-family:var(--font-ui);font-size:12px;">Misma semilla → mismo escenario. Útil para reproducir el ejercicio con un grupo.</span>
+  </div>
+
+  <div class="actions">
+    <button class="btn ghost" id="back-btn">Volver</button>
+    <button class="btn primary" id="next-btn" disabled>Empezar simulación</button>
+  </div>
+  `;
+}
+
+function renderCustomAllocEditor(container){
+  if(state.profileKey!=='custom'){ container.innerHTML=''; return; }
+  container.innerHTML = allocEditorHTML(state.alloc, 'custom');
+  bindAllocEditor(container, (newAlloc)=>{
+    state.alloc = newAlloc;
+    updateNextButtonState();
+  });
+}
+
+function allocEditorHTML(alloc, prefix){
+  const groupHTML = grp => CHANNELS.filter(c=>c.group===grp).map(c=>`
+    <div class="alloc-row" data-id="${c.id}">
+      <label>${c.name}</label>
+      <input type="range" min="0" max="100" step="1" value="${alloc[c.id]||0}" data-chan="${c.id}">
+      <div class="alloc-val" data-valfor="${c.id}">${alloc[c.id]||0}%</div>
+    </div>`).join('');
+  return `
+    <div class="alloc-group-title">Defensivos</div>
+    ${groupHTML('defensivo')}
+    <div class="alloc-group-title">Riesgo</div>
+    ${groupHTML('riesgo')}
+    <div class="alloc-sum" id="${prefix}-sum"></div>
+  `;
+}
+
+function bindAllocEditor(container, onChange){
+  const sumEl = container.querySelector('[id$="-sum"]');
+  function recompute(){
+    const rows = container.querySelectorAll('input[type=range]');
+    const alloc={};
+    let sum=0;
+    rows.forEach(r=>{ const v=parseInt(r.value,10); alloc[r.dataset.chan]=v; sum+=v; });
+    rows.forEach(r=>{
+      container.querySelector(`[data-valfor="${r.dataset.chan}"]`).textContent = r.value+'%';
+    });
+    sumEl.textContent = `Suma: ${sum}%  ${sum===100?'· lista':'· debe sumar 100%'}`;
+    sumEl.className = 'alloc-sum '+(sum===100?'ok':'bad');
+    onChange(alloc, sum);
+  }
+  container.querySelectorAll('input[type=range]').forEach(r=>{
+    r.addEventListener('input', recompute);
+  });
+  recompute();
+}
+
+function updateNextButtonState(){
+  const btn = document.getElementById('next-btn');
+  if(!btn) return;
+  if(state.phase==='perfil'){
+    const sum = Object.values(state.alloc).reduce((a,b)=>a+(b||0),0);
+    btn.disabled = !state.profileKey || (state.profileKey==='custom' && sum!==100);
+  }
+}
+
+/* =========================================================================
+   RENDER: SIMULACIÓN
+   ========================================================================= */
+function macroGaugeRowHTML(v, val, prevVal){
+  const zc = zoneOf(v, val);
+  const pct = (val - v.min)/(v.max-v.min)*100;
+  let zonesHTML='';
+  let lastTo = v.min;
+  v.zones.forEach(z=>{
+    const left = (lastTo-v.min)/(v.max-v.min)*100;
+    const width = (Math.min(z.to,v.max)-lastTo)/(v.max-v.min)*100;
+    zonesHTML += `<div class="gauge-zone" style="left:${left}%;width:${width}%;background:${ZONE_COLOR[z.c]};"></div>`;
+    lastTo = z.to;
+  });
+  let deltaHTML = `<span class="delta flat">—</span>`;
+  if(prevVal!==undefined){
+    const d = val-prevVal;
+    if(Math.abs(d) > (v.max-v.min)*0.01){
+      const cls = d>0?'up':'down';
+      const arrow = d>0?'▲':'▼';
+      deltaHTML = `<span class="delta ${cls}">${arrow} ${Math.abs(d).toFixed(v.dec)}</span>`;
+    } else {
+      deltaHTML = `<span class="delta flat">·</span>`;
+    }
+  }
+  return `
+  <div class="gauge-item">
+    <div class="gauge" data-macro-id="${v.id}">
+      <div class="name">${v.name}<span class="chevron">▸</span></div>
+      <div class="gauge-track">${zonesHTML}<div class="gauge-mark" style="left:${pct}%;"></div></div>
+      <div class="val">${val.toFixed(v.dec)}${v.unit}</div>
+      <div class="delta-wrap">${deltaHTML}</div>
+    </div>
+    <div class="gauge-def" data-def-for="${v.id}">${v.def}</div>
+  </div>`;
+}
+
+function macroDashboardHTML(){
+  const prev = state.history.length ? state.history[state.history.length-1].macro : null;
+  return `
+  <div class="macro-panel">
+    <div class="macro-panel-title"><span>Panel macro</span><span>Trimestre ${state.round} / ${TOTAL_ROUNDS}</span></div>
+    <div class="macro-panel-hint">Toca un indicador para ver su definición.</div>
+    ${MACRO_VARS.map(v=>macroGaugeRowHTML(v, state.macro[v.id], prev?prev[v.id]:undefined)).join('')}
+  </div>`;
+}
+
+function narrativeFor(macro, prevMacro){
+  if(!prevMacro) return 'Punto de partida del escenario. Observa el panel macro antes de fijar tu asignación.';
+  const dPib = macro.pib-prevMacro.pib;
+  const dPmi = macro.pmi-prevMacro.pmi;
+  const dTipos = macro.tipos-prevMacro.tipos;
+  const dBono10y = macro.bono10y-prevMacro.bono10y;
+  const dVix = macro.vix-prevMacro.vix;
+  const dRevisiones = macro.revisiones-prevMacro.revisiones;
+  const dInflacion = macro.inflacion-prevMacro.inflacion;
+  const dDeficit = macro.deficit-prevMacro.deficit;
+
+  if(dTipos>0.3 && dPmi<-2) return 'Los tipos oficiales suben y la actividad empresarial empieza a resentirse. El mercado empieza a descontar un frenazo del ciclo.';
+  if(dVix>5) return 'Repunte brusco de volatilidad. El apetito por el riesgo se contrae de forma generalizada.';
+  if(dPmi>2 && dRevisiones>7) return 'Mejora simultánea de la actividad empresarial y de las revisiones de beneficios. El entorno se vuelve más favorable al riesgo.';
+  if(dInflacion>0.6) return 'La inflación sorprende al alza. El mercado empieza a descontar una respuesta más restrictiva del banco central.';
+  if(dInflacion<-0.6) return 'La inflación afloja con rapidez, abriendo margen a una política monetaria más laxa.';
+  if(dDeficit>0.5 && dBono10y>0.3) return 'El impulso fiscal se amplía y el mercado empieza a exigir más rentabilidad por financiar esa expansión del gasto público.';
+  if(Math.abs(dPib)<0.2 && Math.abs(dPmi)<1 && Math.abs(dVix)<2) return 'Trimestre de calma relativa: pocas variables se mueven de forma significativa.';
+  return 'El entorno macro se ajusta sin un patrón dominante claro. Revisa el panel antes de decidir.';
+}
+
+function recapHTML(prevEntry){
+  if(!prevEntry) return '';
+  const alignLabel = {
+    coherente:'fue coherente con el estado del mercado de aquel momento',
+    contraria:'fue a contracorriente del estado del mercado de aquel momento',
+    neutra:'apenas movió tu perfil de riesgo'
+  }[prevEntry.alignment] || '';
+  const reflectionBlock = prevEntry.reflection
+    ? `<div class="reflection-quote" style="margin:8px 0 10px;">“${prevEntry.reflection}”</div>`
+    : `<p class="faint" style="font-style:italic;margin:6px 0 10px;">No dejaste anotado tu razonamiento en el trimestre anterior.</p>`;
+  return `
+  <div class="recap-panel">
+    <div class="recap-title">Antes de seguir: tu trimestre ${prevEntry.round}</div>
+    ${reflectionBlock}
+    <p class="faint" style="margin:0;">Ese movimiento ${alignLabel}. Compáralo con lo que ves ahora en el panel antes de decidir de nuevo.</p>
+  </div>`;
+}
+
+function renderSim(){
+  if(state.round===0){
+    state.macro = {};
+    state.moveHistory = {};
+    MACRO_VARS.forEach(v=>{
+      state.macro[v.id]=v.baseline;
+      state.moveHistory[v.id] = { 1:0 };
+    });
+    state.round = 1;
+    state.history = [];
+  }
+  const prevEntry = state.history[state.history.length-1];
+  const prevMacro = prevEntry ? prevEntry.macro : null;
+  const narrative = narrativeFor(state.macro, prevMacro);
+  const intro = state.round===1 ? `
+    <p class="lede" style="margin:-4px 0 22px;max-width:none;">Vas a atravesar <strong style="color:var(--gold-bright);font-style:normal;">6 rondas trimestrales</strong>. En cada ronda revisas el panel macro, que habrá cambiado respecto a la ronda anterior, y decides cómo reasignar tu cartera en respuesta. El simulador ha elegido un estado del mercado que no se revela hasta el resumen final: reacciona con lo que ves en el panel, no con lo que crees que "toca". Al terminar la sexta ronda verás un resumen con la evolución completa de tus decisiones, del entorno, y qué estado era en realidad.</p>` : '';
+  const recap = state.round>1 ? recapHTML(prevEntry) : '';
+
+  return `
+  <div class="eyebrow">IV. Simulación</div>
+  <div class="round-tag">Ronda ${state.round} de ${TOTAL_ROUNDS}</div>
+  <h1>El entorno cambia. ¿Cómo reasignas?</h1>
+  ${intro}
+  ${recap}
+  <p class="narrative">${narrative}</p>
+  ${macroDashboardHTML()}
+  <div class="alloc-group-title" style="margin-top:30px;">Tu asignación para esta ronda</div>
+  <div id="sim-alloc-wrap"></div>
+  <div class="alloc-group-title">Tu razonamiento (opcional)</div>
+  <textarea id="reflection-input" class="reflection-input" placeholder="¿Qué pesó más en esta decisión? Escríbelo antes de confirmar: al llegar al resumen podrás comparar tu razonamiento del momento con la lectura del panel." rows="3">${state._pendingReflection||''}</textarea>
+  <div class="actions">
+    <button class="btn ghost" id="abandon-btn">Terminar aquí y ver resumen</button>
+    <button class="btn primary" id="confirm-round-btn" disabled>Confirmar reasignación →</button>
+  </div>
+  `;
+}
+
+function renderSimAllocEditor(container){
+  container.innerHTML = allocEditorHTML(state.alloc,'sim');
+  bindAllocEditor(container, (newAlloc, sum)=>{
+    state._pendingAlloc = newAlloc;
+    const btn = document.getElementById('confirm-round-btn');
+    if(btn) btn.disabled = (sum!==100);
+  });
+}
+
+function confirmRound(){
+  const prevAlloc = Object.assign({}, state.alloc);
+  const prevMacro = Object.assign({}, state.macro);
+  const newAlloc = state._pendingAlloc || state.alloc;
+  const reflection = (document.getElementById('reflection-input')?.value || '').trim();
+
+  const priorMacro = state.history.length? state.history[state.history.length-1].macro : null;
+  const roundEval = evaluateRound(prevAlloc, newAlloc, priorMacro, prevMacro);
+  const feedback = buildFeedback(prevAlloc, newAlloc, priorMacro, prevMacro, roundEval);
+
+  state.history.push({ round:state.round, macro:prevMacro, alloc:newAlloc, feedback, reflection, alignment:roundEval.alignment });
+  state.alloc = newAlloc;
+  state._pendingReflection = '';
+
+  if(state.round >= TOTAL_ROUNDS){
+    state.phase='resumen';
+  } else {
+    stepMacro(state.round+1);
+    state.round += 1;
+  }
+  render();
+  window.scrollTo(0,0);
+}
+
+/* =========================================================================
+   RENDER: RESUMEN
+   ========================================================================= */
+function renderResumen(){
+  const rounds = state.history;
+
+  if(rounds.length===0){
+    return `
+    <div class="eyebrow">V. Resumen</div>
+    <h1>Todavía no hay nada que resumir</h1>
+    <p class="lede">Aún no has completado ninguna ronda de la simulación. Ve a la fase IV para empezar.</p>
+    <div class="actions">
+      <span></span>
+      <button class="btn primary" id="goto-sim-btn">Ir a la simulación →</button>
+    </div>
+    `;
+  }
+
+  const feedbackHTML = rounds.map(r=>{
+    const items = r.feedback.length
+      ? r.feedback.map(f=>`<div class="feedback"><div class="tag">${f.tag}</div><p>${f.text}</p></div>`).join('')
+      : `<div class="no-feedback">Sin observaciones relevantes en esta ronda.</div>`;
+    const alignLabel = {coherente:'Coherente con el estado del mercado', contraria:'A contracorriente del estado del mercado', neutra:'Movimiento neutro'}[r.alignment] || '';
+    const reflectionHTML = r.reflection
+      ? `<div class="reflection-quote">“${r.reflection}”</div>`
+      : `<p class="faint" style="font-style:italic;">No dejaste anotado tu razonamiento en esta ronda.</p>`;
+    return `
+      <h3 style="margin-top:26px;">Trimestre ${r.round}</h3>
+      <span class="alignment-tag ${r.alignment||'neutra'}">${alignLabel}</span>
+      <p class="faint" style="font-family:var(--font-ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:6px 0 2px;">Tu razonamiento en el momento</p>
+      ${reflectionHTML}
+      <p class="faint" style="font-family:var(--font-ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:14px 0 2px;">Lectura del simulador</p>
+      ${items}`;
+  }).join('');
+
+  const alignCounts = { coherente:0, contraria:0, neutra:0 };
+  rounds.forEach(r=>{ if(r.alignment) alignCounts[r.alignment] = (alignCounts[r.alignment]||0)+1; });
+  let styleReading;
+  if(alignCounts.coherente > alignCounts.contraria && alignCounts.coherente >= 3){
+    styleReading = `En ${alignCounts.coherente} de ${rounds.length} rondas moviste la cartera en la misma dirección que el estado del mercado (procíclico moderado o disciplinado, según cómo lo leas tú). ${alignCounts.contraria} fueron a contracorriente y ${alignCounts.neutra} prácticamente neutras.`;
+  } else if(alignCounts.contraria > alignCounts.coherente && alignCounts.contraria >= 3){
+    styleReading = `En ${alignCounts.contraria} de ${rounds.length} rondas te moviste a contracorriente del estado del mercado: perfil más contrarian que reactivo. ${alignCounts.coherente} fueron coherentes con el panel y ${alignCounts.neutra} neutras.`;
+  } else if(alignCounts.neutra >= 4){
+    styleReading = `En ${alignCounts.neutra} de ${rounds.length} rondas apenas moviste la cartera, con independencia de lo que marcara el panel: perfil predominantemente pasivo en este escenario.`;
+  } else {
+    styleReading = `Reparto sin patrón dominante: ${alignCounts.coherente} rondas coherentes con el estado del mercado, ${alignCounts.contraria} a contracorriente y ${alignCounts.neutra} neutras.`;
+  }
+
+  const stackHTML = rounds.map(r=>{
+    const bars = CHANNELS.map(c=>`<span style="width:${r.alloc[c.id]||0}%;background:${c.color};" title="${c.name}: ${r.alloc[c.id]||0}%"></span>`).join('');
+    return `<div class="stack-label">Trimestre ${r.round}</div><div class="stack-row">${bars}</div>`;
+  }).join('');
+
+  const macroSpark = MACRO_VARS.map(v=>{
+    const vals = rounds.map(r=>r.macro[v.id]);
+    const min=Math.min(...vals), max=Math.max(...vals);
+    const pts = vals.map((val,i)=>{
+      const x = (i/(vals.length-1||1))*280;
+      const y = 40 - ( (val-v.min)/(v.max-v.min) )*40;
+      return `${x},${y}`;
+    }).join(' ');
+    return `
+    <div class="chart-wrap">
+      <div class="chart-title">${v.name}</div>
+      <svg width="280" height="44" viewBox="0 0 280 44">
+        <polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+      </svg>
+      <div class="faint" style="font-family:var(--font-ui);font-size:12px;">de ${vals[0].toFixed(v.dec)} a ${vals[vals.length-1].toFixed(v.dec)}${v.unit}</div>
+    </div>`;
+  }).join('');
+
+  const legend = CHANNELS.map(c=>`<span class="faint" style="font-family:var(--font-ui);font-size:11px;margin-right:14px;"><span class="legend-dot" style="background:${c.color};"></span>${c.name}</span>`).join('');
+
+  const estadoHTML = state.estado ? `
+    <div class="feedback" style="margin-top:4px;">
+      <div class="tag">Estado del mercado de este recorrido (revelado ahora)</div>
+      <p><strong style="color:var(--gold-bright);font-style:normal;">${state.estado.label}.</strong> ${state.estado.desc}</p>
+    </div>` : '';
+
+  const pending = pendingEffects();
+  const pendingHTML = pending.length ? `
+    <div class="alloc-group-title">Efectos pendientes al cerrar el recorrido</div>
+    <p class="faint" style="margin-top:-2px;">Algunos movimientos de los últimos trimestres activaron efectos con desfase que caerían fuera de las 6 rondas simuladas. No se han aplicado: es una limitación honesta del recorrido corto, coherente con lo que señalan los propios bancos centrales sobre los retardos de la política monetaria.</p>
+    ${pending.map(p=>{
+      const fromName = MACRO_VARS.find(m=>m.id===p.from).name;
+      const toName = MACRO_VARS.find(m=>m.id===p.to).name;
+      return `<div class="feedback"><div class="tag">T+${p.lag} sin resolver</div><p>El movimiento de <strong style="font-style:normal;color:var(--text);">${fromName}</strong> en el trimestre ${p.originRound} iba a presionar <strong style="font-style:normal;color:var(--text);">${toName}</strong>, con efecto previsto para el trimestre ${p.landRound} — fuera del recorrido.</p></div>`;
+    }).join('')}
+  ` : '';
+
+  return `
+  <div class="eyebrow">V. Resumen</div>
+  <h1>Recorrido del escenario</h1>
+  <p class="lede">${TOTAL_ROUNDS} trimestres simulados${state.seed?` · semilla: ${state.seed}`:''}.</p>
+  ${estadoHTML}
+
+  <div class="alloc-group-title">Evolución de tu asignación</div>
+  <div class="chart-wrap">${stackHTML}</div>
+  <div style="margin:10px 0 30px;">${legend}</div>
+
+  <div class="alloc-group-title">Evolución de las variables macro</div>
+  <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr;">${macroSpark}</div>
+
+  <div class="alloc-group-title">Balance de comportamiento</div>
+  <div class="feedback"><div class="tag">Patrón dominante</div><p>${styleReading}</p></div>
+
+  ${pendingHTML}
+
+  <div class="alloc-group-title">Observaciones por ronda</div>
+  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu movimiento fue en la misma dirección que el estado del mercado de aquel momento, o en contra. No son un veredicto de acierto o error: eso solo se sabe con el tiempo, y moverse "a contracorriente" puede ser tan válido como seguir la corriente.</p>
+  ${feedbackHTML}
+
+  <div class="actions">
+    <button class="btn ghost" id="restart-btn">Reiniciar simulador</button>
+    <span></span>
+  </div>
+  `;
+}
+
+/* =========================================================================
+   RENDER PRINCIPAL + BINDINGS
+   ========================================================================= */
+function render(){
+  renderSteps();
+  const main = document.getElementById('main');
+  let html='';
+  switch(state.phase){
+    case 'portada': html=renderPortada(); break;
+    case 'conceptos1': html=renderConceptos1(); break;
+    case 'conceptos2': html=renderConceptos2(); break;
+    case 'perfil': html=renderPerfil(); break;
+    case 'sim': html=renderSim(); break;
+    case 'resumen': html=renderResumen(); break;
+  }
+  main.innerHTML = html;
+  bindPhase();
+  window.scrollTo({top:0,behavior:'instant' in window ? 'instant':'auto'});
+}
+
+function bindPhase(){
+  const $ = sel => document.getElementById(sel);
+
+  if(state.phase==='portada'){
+    $('start-btn')?.addEventListener('click', ()=>{ state.phase='conceptos1'; render(); });
+  }
+  if(state.phase==='conceptos1'){
+    $('back-btn')?.addEventListener('click', ()=>{ state.phase='portada'; render(); });
+    $('next-btn')?.addEventListener('click', ()=>{ state.phase='conceptos2'; render(); });
+  }
+  if(state.phase==='conceptos2'){
+    $('back-btn')?.addEventListener('click', ()=>{ state.phase='conceptos1'; render(); });
+    $('next-btn')?.addEventListener('click', ()=>{ state.phase='perfil'; render(); });
+  }
+  if(state.phase==='perfil'){
+    document.querySelectorAll('.profile-card').forEach(card=>{
+      card.addEventListener('click', ()=>{
+        const key = card.dataset.key;
+        state.profileKey = key;
+        if(key==='custom'){
+          if(!state.alloc || Object.keys(state.alloc).length===0){
+            const zero={}; CHANNELS.forEach(c=>zero[c.id]=0); initAlloc(zero);
+          }
+        } else {
+          initAlloc(PROFILES[key].alloc);
+        }
+        render();
+      });
+    });
+    renderCustomAllocEditor($('custom-alloc-wrap'));
+    $('seed-input')?.addEventListener('input', e=>{ state.seed = e.target.value; });
+    $('back-btn')?.addEventListener('click', ()=>{ state.phase='conceptos2'; render(); });
+    $('next-btn')?.addEventListener('click', ()=>{
+      state.rand = rng(state.seed);
+      state.estado = pickEstado(state.rand);
+      state.round = 0;
+      state.phase='sim';
+      render();
+    });
+    updateNextButtonState();
+  }
+  if(state.phase==='sim'){
+    renderSimAllocEditor($('sim-alloc-wrap'));
+    $('confirm-round-btn')?.addEventListener('click', confirmRound);
+    $('abandon-btn')?.addEventListener('click', ()=>{ state.phase='resumen'; render(); });
+    $('reflection-input')?.addEventListener('input', e=>{ state._pendingReflection = e.target.value; });
+  }
+  if(state.phase==='resumen'){
+    $('restart-btn')?.addEventListener('click', ()=>{
+      state = { phase:'portada', profileKey:null, seed:'', rand:Math.random, estado:null, alloc:{}, round:0, macro:null, moveHistory:{}, history:[], _pendingReflection:'' };
+      render();
+    });
+    $('goto-sim-btn')?.addEventListener('click', ()=> goToPhase('sim'));
+  }
+}
+
+function initMacroPanelUI(){
+  document.addEventListener('click', e=>{
+    const g = e.target.closest('.gauge[data-macro-id]');
+    if(!g) return;
+    const item = g.closest('.gauge-item');
+    const def = item?.querySelector('.gauge-def');
+    if(!def) return;
+    const willOpen = !def.classList.contains('open');
+    def.classList.toggle('open', willOpen);
+    g.classList.toggle('open', willOpen);
+  });
+}
+
+initGlossaryUI();
+initMacroPanelUI();
+render();
+})();
+</script>
+</body>
+</html>

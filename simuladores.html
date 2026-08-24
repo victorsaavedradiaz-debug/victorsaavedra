@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="Simuladores interactivos de pedagogía financiera: entornos cerrados donde aprender tomando decisiones, no leyendo sobre ellas." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Simuladores — Víctor Saavedra</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&amp;family=Montserrat:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --oro: #c9a84c;
+    --oro-tenue: #8a6f2e;
+    --blanco: #f5f0ea;
+    --fondo: #0b0b0b;
+    --fondo-card: #131313;
+    --fondo-card2: #181818;
+    --borde: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fondo);
+    color: #f0ece6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,11,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+  }
+
+  .nav-back {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #e8e2d9;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-back:hover { color: var(--oro); }
+
+  .nav-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e8e2d9;
+    font-weight: 400;
+  }
+
+  /* CABECERA */
+  .cabecera {
+    padding: 6rem 4rem 5rem;
+    border-bottom: 0.5px solid var(--borde);
+    max-width: 860px;
+  }
+
+  .cabecera-tipo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .cabecera-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--blanco);
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+  }
+
+  .cabecera-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: #e8e2d9;
+    line-height: 1.7;
+    max-width: 620px;
+    font-weight: 400;
+  }
+
+  /* BLOQUES */
+  .bloque {
+    padding: 5rem 4rem;
+    border-bottom: 0.5px solid var(--borde);
+  }
+
+  .bloque-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--oro);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .bloque-label::after {
+    content: '';
+    display: block;
+    height: 0.5px;
+    width: 60px;
+    background: var(--oro-tenue);
+  }
+
+  /* TARJETA */
+  .tarjeta {
+    display: block;
+    background: var(--fondo-card);
+    border: 0.5px solid #333;
+    padding: 2.5rem;
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+    max-width: 700px;
+  }
+
+  .tarjeta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--oro);
+    transition: height 0.4s ease;
+  }
+
+  .tarjeta:hover { background: var(--fondo-card2); border-color: #bbb; }
+  .tarjeta:hover::before { height: 100%; }
+  .tarjeta + .tarjeta { margin-top: 1.5rem; }
+
+  .tarjeta-tipo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ccc;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+  }
+
+  .tarjeta-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--blanco);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .tarjeta-desc {
+    font-size: 15px;
+    color: #e8e2d9;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .tarjeta-accion {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--oro);
+    border-bottom: 0.5px solid var(--oro-tenue);
+    padding-bottom: 2px;
+  }
+
+  /* PRÓXIMAMENTE */
+  .tarjeta-proximamente {
+    max-width: 700px;
+    background: transparent;
+    border: 0.5px dashed #333;
+    padding: 2.5rem;
+    opacity: 0.6;
+  }
+
+  .tarjeta-proximamente .tarjeta-tipo { color: #888; }
+  .tarjeta-proximamente .tarjeta-titulo { color: #999; }
+  .tarjeta-proximamente .tarjeta-desc { color: #888; margin-bottom: 0; }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 4rem;
+    border-top: 0.5px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: #bbb;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-titulo { display: none; }
+    .cabecera { padding: 3.5rem 1.5rem 3rem; }
+    .cabecera-titulo { font-size: 38px; }
+    .bloque { padding: 3rem 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+<a class="nav-back" href="victor-saavedra.html">← Volver</a>
+<span class="nav-titulo">Simuladores</span>
+</nav>
+<div class="cabecera">
+<p class="cabecera-tipo">Simuladores</p>
+<h1 class="cabecera-titulo">Aprender<br/>tomando decisiones</h1>
+<p class="cabecera-desc">Entornos cerrados donde cada indicador afecta a los demás con causa, intensidad y desfase propios. Nada de leer sobre cómo se invierte o cómo se gestiona una empresa: se decide, y solo después se entiende por qué salió como salió.</p>
+</div>
+<div class="bloque">
+<p class="bloque-label">Inversión</p>
+<a class="tarjeta" href="simulador-canales-inversion.html">
+<p class="tarjeta-tipo">Nivel Básico · 8 indicadores · 6 trimestres</p>
+<h2 class="tarjeta-titulo">Simulador de Canales de Inversión</h2>
+<p class="tarjeta-desc">Un motor de causa y efecto entre PIB, inflación, PMI, tipos oficiales, déficit público, bono soberano, beneficios empresariales y volatilidad. Eliges perfil o construyes tu propia cartera, y reasignas trimestre a trimestre sin saber qué estado del mercado te ha tocado hasta el final.</p>
+<span class="tarjeta-accion">Entrar al simulador</span>
+</a>
+</div>
+<div class="bloque">
+<p class="bloque-label">Próximamente</p>
+<div class="tarjeta-proximamente">
+<p class="tarjeta-tipo">En desarrollo</p>
+<h2 class="tarjeta-titulo">Simulador de gestión empresarial</h2>
+<p class="tarjeta-desc">La misma lógica de causa y efecto, esta vez aplicada a las decisiones de una empresa: precio, capacidad, plantilla, financiación.</p>
+</div>
+</div>
+<footer>
+<span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+</footer>
+<script async="" data-goatcounter="https://victorsaavedra.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

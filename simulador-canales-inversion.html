@@ -1200,7 +1200,13 @@ function renderSim(){
 }
 
 function renderSimAllocEditor(container){
-  container.innerHTML = allocEditorHTML(state.alloc,'sim');
+  // La ronda 1 arranca siempre con las barras a cero, independientemente del
+  // perfil elegido: el perfil sigue siendo la referencia con la que se compara
+  // esta primera decisión (ver confirmRound), pero no se le regala al jugador
+  // como número ya calculado. A partir de la ronda 2 se parte de la posición
+  // real de la ronda anterior, que es donde vive la medición de inercia.
+  const startAlloc = state.round===1 ? Object.fromEntries(CHANNELS.map(c=>[c.id,0])) : state.alloc;
+  container.innerHTML = allocEditorHTML(startAlloc,'sim');
   bindAllocEditor(container, (newAlloc, sum)=>{
     state._pendingAlloc = newAlloc;
     const btn = document.getElementById('confirm-round-btn');

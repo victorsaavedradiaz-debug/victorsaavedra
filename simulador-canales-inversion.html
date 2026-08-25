@@ -361,11 +361,11 @@ const MACRO_VARS = [
   { id:'pib', name:'PIB real', unit:'%', dec:1, typicalMove:0.5,
     def:'Producto Interior Bruto real: el crecimiento o la contracción de la economía, descontando el efecto de los precios. Variable coincidente y algo rezagada: confirma el ciclo más que lo anticipa.',
     baseline:1.5, min:-3, max:5,
-    zones:[{to:0,c:'red'},{to:1.5,c:'amber'},{to:5,c:'green'}] },
+    zones:[{to:0.3,c:'red'},{to:1.9,c:'amber'},{to:5,c:'green'}] },
   { id:'inflacion', name:'Inflación', unit:'%', dec:1, typicalMove:0.6,
     def:'Evolución general de los precios (IPC interanual). Condiciona el poder adquisitivo, la política monetaria y la valoración de los activos.',
     baseline:2.2, min:-1, max:9,
-    zones:[{to:0,c:'amber'},{to:3,c:'green'},{to:5,c:'amber'},{to:9,c:'red'}] },
+    zones:[{to:0.8,c:'amber'},{to:3,c:'green'},{to:5,c:'amber'},{to:9,c:'red'}] },
   { id:'pmi', name:'PMI', unit:'', dec:1, typicalMove:2.0,
     def:'Índice de difusión basado en encuestas a directores de compras, que anticipa la actividad empresarial a través de pedidos, producción y expectativas. Suele avisar de cambios de ciclo antes que el PIB.',
     baseline:50, min:35, max:65,
@@ -373,7 +373,7 @@ const MACRO_VARS = [
   { id:'tipos', name:'Tipos oficiales', unit:'%', dec:2, typicalMove:0.4,
     def:'Precio oficial del dinero fijado por el banco central. Afecta al coste de financiación, a los bonos y a la valoración de la renta variable.',
     baseline:2.5, min:0, max:6,
-    zones:[{to:2,c:'green'},{to:3.5,c:'amber'},{to:6,c:'red'}] },
+    zones:[{to:1.6,c:'green'},{to:3.8,c:'amber'},{to:6,c:'red'}] },
   { id:'deficit', name:'Déficit público', unit:'% PIB', dec:1, typicalMove:0.5,
     def:'Diferencia entre gastos e ingresos públicos, en porcentaje del PIB. Funciona como proxy del impulso fiscal: puede estimular la economía a corto plazo a costa de presionar la financiación pública.',
     baseline:3.0, min:-1, max:10,
@@ -381,7 +381,7 @@ const MACRO_VARS = [
   { id:'bono10y', name:'Bono soberano 10 años', unit:'%', dec:2, typicalMove:0.35,
     def:'Rentabilidad exigida por el mercado para prestar al Estado a diez años. Referencia central para el coste del dinero a largo plazo; afecta a bonos, acciones e inmobiliario.',
     baseline:3.5, min:1, max:7,
-    zones:[{to:3,c:'green'},{to:4.5,c:'amber'},{to:7,c:'red'}] },
+    zones:[{to:2.6,c:'green'},{to:4.6,c:'amber'},{to:7,c:'red'}] },
   { id:'revisiones', name:'Revisiones de beneficios', unit:'%', dec:0, typicalMove:6,
     def:'Balance neto entre analistas que elevan y que recortan sus estimaciones de beneficios empresariales. Síntesis de cómo la economía se traslada a las cuentas de las empresas.',
     baseline:0, min:-30, max:30,
@@ -389,7 +389,7 @@ const MACRO_VARS = [
   { id:'vix', name:'VIX', unit:'', dec:1, typicalMove:3,
     def:'Índice de volatilidad implícita del S&P 500. Actúa principalmente como sensor de estrés financiero: consecuencia de otras variables más que motor de la economía.',
     baseline:18, min:10, max:50,
-    zones:[{to:18,c:'green'},{to:28,c:'amber'},{to:50,c:'red'}] },
+    zones:[{to:20,c:'green'},{to:30,c:'amber'},{to:50,c:'red'}] },
 ];
 
 /* =========================================================================
@@ -451,7 +451,7 @@ const CALC_ORDER = ['pib','inflacion','deficit','tipos','pmi','bono10y','revisio
 
 // Constantes del motor de agregación (ver explicación al usuario: compresión
 // por saturación en vez de suma lineal, más inercia, reversión suave y ruido).
-const ENGINE = { AMPLITUDE:1.3, INERTIA:0.15, REVERSION:0.06, NOISE:0.35 };
+const ENGINE = { AMPLITUDE:1.7, HEADLINE_AMPLITUDE:4.2, INERTIA:0.18, REVERSION:0.035, NOISE:0.35 };
 
 const PROFILES = {
   conservador:{ label:'Conservador', desc:'Preservación de capital ante todo. Baja tolerancia a oscilaciones de valor.',
@@ -463,52 +463,103 @@ const PROFILES = {
 };
 
 /* =========================================================================
-   ESTADOS DEL MERCADO
-   El simulador elige uno de estos estados del mercado al azar (determinista
-   si hay semilla) al empezar la simulación, y no lo revela hasta el resumen
-   final. Cada estado define bias(round): un sesgo directo, en las mismas
-   unidades normalizadas que las relaciones de la matriz causal, inyectado
-   en la suma pre-compresión de una o varias variables concretas para ese
-   trimestre. Al entrar en la misma función de saturación que el resto de
-   causas, el sesgo tampoco puede disparar la variable sin límite.
+   ARQUETIPOS DE MANUAL
+   Cada una de las 6 rondas de la simulación se ancla a uno de estos casos,
+   elegidos sin repetir al empezar la partida (determinista si hay semilla).
+   Cada arquetipo inyecta un sesgo fuerte y deliberado sobre una o dos
+   variables "titulares" — lo bastante intenso como para que, tras pasar
+   por la misma compresión por saturación que el resto del motor, el
+   resultado sea inequívoco, no una posibilidad entre varias. El resto de
+   variables se sigue moviendo por las relaciones causales normales, así
+   que el panel nunca deja de estar interconectado.
+
+   `optimal` describe el ajuste habitual de manual para ese caso: qué
+   canales se esperaría ampliar o reducir, y por qué. No es una nota ni
+   una única respuesta correcta — es la referencia con la que el jugador
+   compara su propio razonamiento en la ronda siguiente.
    ========================================================================= */
-const MARKET_STATES = [
-  { id:'equilibrado', label:'Aleatorio equilibrado',
-    desc:'Sin sesgo de partida: el motor se mueve solo por las relaciones causales y el ruido, con ambos simétricos durante todo el recorrido.',
-    bias:(round)=>({ varBias:{}, noiseMult:1 }) },
-  { id:'expansion', label:'Expansión con impulso económico',
-    desc:'Sesgo sostenido de mejora en crecimiento, actividad empresarial y beneficios, con volatilidad contenida.',
-    bias:(round)=>({ varBias:{ pib:0.32, pmi:0.32, revisiones:0.28, vix:-0.22 }, noiseMult:1 }) },
-  { id:'deterioro', label:'Deterioro progresivo',
-    desc:'Sesgo negativo sostenido y creciente en crecimiento, actividad y beneficios desde el primer trimestre: sin sorpresas bruscas, solo una tendencia que hay que saber leer a tiempo.',
-    bias:(round)=>({ varBias:{
-      pib:-0.12-0.035*round, pmi:-0.12-0.035*round,
-      revisiones:-0.10-0.03*round, vix:0.08+0.025*round
-    }, noiseMult:1 }) },
-  { id:'shock', label:'Shock repentino',
-    desc:'Entorno en calma que sufre un shock de aversión al riesgo fuerte y unidireccional en un trimestre concreto, con eco parcial al siguiente antes de que la reversión a la media haga su trabajo.',
-    bias:(round)=>{
-      if(round===3) return { varBias:{ vix:1.7, bono10y:0.9, pib:-0.5, pmi:-0.7 }, noiseMult:1 };
-      if(round===4) return { varBias:{ vix:0.5, bono10y:0.3 }, noiseMult:1 };
-      return { varBias:{}, noiseMult:1 };
-    } },
-  { id:'euforia', label:'Euforia y corrección',
-    desc:'Mejora sostenida de actividad y beneficios en los primeros trimestres, seguida de una reversión brusca de sentimiento hacia mitad de recorrido.',
-    bias:(round)=>{
-      if(round<=3) return { varBias:{ pmi:0.28, revisiones:0.28, vix:-0.22 }, noiseMult:0.9 };
-      if(round===4) return { varBias:{ vix:1.5, pmi:-0.55, revisiones:-0.45 }, noiseMult:1 };
-      return { varBias:{ vix:0.15 }, noiseMult:1 };
-    } },
-  { id:'fiscal', label:'Tensión fiscal',
-    desc:'El resto del panel se mantiene relativamente tranquilo mientras el déficit público y el bono a 10 años se tensionan de forma aislada y sostenida.',
-    bias:(round)=>({ varBias:{ deficit:0.45, bono10y:0.35 }, noiseMult:1 }) },
-  { id:'calma', label:'Calma prolongada',
-    desc:'Volatilidad de los shocks reducida en todas las variables durante todo el recorrido: el panel apenas pide nada.',
-    bias:(round)=>({ varBias:{}, noiseMult:0.4 }) },
+const ARCHETYPES = [
+  { id:'deterioro_credito', label:'Deterioro de crédito',
+    desc:'El PMI cae con fuerza y las revisiones de beneficios empiezan a deteriorarse: síntomas de manual de un ciclo que se enfría antes de que lo confirme el PIB.',
+    varBias:{ pmi:-1.8, revisiones:-1.6, vix:0.8 },
+    optimal:{ up:['liquidez','rf_gob'], down:['rv','rf_corp','cripto'],
+      rationale:'Cuando el ciclo se enfría, la renta variable y el crédito corporativo son los primeros en sufrir; la liquidez y la deuda pública de calidad son el refugio clásico.' } },
+  { id:'sorpresa_inflacion', label:'Sorpresa de inflación',
+    desc:'La inflación sorprende al alza muy por encima de lo esperado: el manual dice que esto presiona los tipos y penaliza a la renta fija de duración larga.',
+    varBias:{ inflacion:1.8 },
+    optimal:{ up:['oro'], down:['rf_gob'],
+      rationale:'La inflación erosiona la rentabilidad real de los bonos y suele adelantar subidas de tipos; el oro es la cobertura tradicional.' } },
+  { id:'boom_beneficios', label:'Boom de beneficios',
+    desc:'El PMI se dispara y las revisiones de beneficios mejoran con fuerza: expansión de libro de texto, con la volatilidad contenida.',
+    varBias:{ pmi:1.8, revisiones:1.8, vix:-0.9 },
+    optimal:{ up:['rv'], down:['liquidez'],
+      rationale:'En una expansión clara con volatilidad baja, mantener mucha liquidez tiene un coste de oportunidad real.' } },
+  { id:'shock_tipos', label:'Shock de tipos al alza',
+    desc:'El banco central sube los tipos oficiales con fuerza y sin ambigüedad: el manual de transmisión monetaria dice que esto golpea primero a la duración y a la financiación inmobiliaria.',
+    varBias:{ tipos:1.8 },
+    optimal:{ up:['liquidez'], down:['rf_gob','inmo'],
+      rationale:'Una subida de tipos abrupta penaliza el precio de los bonos de duración larga y encarece la financiación inmobiliaria; la liquidez se beneficia directamente.' } },
+  { id:'bajada_tipos', label:'Bajada de tipos',
+    desc:'El banco central relaja su política de tipos con claridad: caso de manual de estímulo monetario.',
+    varBias:{ tipos:-1.8 },
+    optimal:{ up:['rf_gob','inmo'], down:['liquidez'],
+      rationale:'Una bajada de tipos revaloriza los bonos existentes de mayor duración y abarata la financiación inmobiliaria.' } },
+  { id:'tension_fiscal', label:'Tensión fiscal',
+    desc:'El déficit público se dispara y el bono a 10 años exige más rentabilidad para financiarlo: manual de estrés de la deuda soberana.',
+    varBias:{ deficit:2.2, bono10y:1.4 },
+    optimal:{ up:[], down:['rf_gob'],
+      rationale:'Cuando el mercado exige más prima por financiar al Estado, el precio de la deuda pública existente cae.' } },
+  { id:'panico_mercado', label:'Pánico de mercado',
+    desc:'El VIX se dispara sin que ninguna otra variable lo anticipe: un episodio de aversión al riesgo puro, el caso de manual para los activos refugio.',
+    varBias:{ vix:2.2 },
+    optimal:{ up:['liquidez','oro'], down:['rv','cripto'],
+      rationale:'En un pico de volatilidad puro, los activos de mayor riesgo se penalizan primero; liquidez y oro son los refugios clásicos.' } },
+  { id:'deflacion', label:'Enfriamiento de precios',
+    desc:'La inflación cae con fuerza, muy por debajo de lo esperado: el manual anticipa margen para una política monetaria más laxa.',
+    varBias:{ inflacion:-1.8 },
+    optimal:{ up:['rf_gob'], down:[],
+      rationale:'Una inflación a la baja suele preceder bajadas de tipos, que revalorizan la deuda pública ya emitida.' } },
+  { id:'recorte_beneficios', label:'Recorte de beneficios',
+    desc:'Los analistas recortan con fuerza sus estimaciones de beneficios empresariales, sin que el resto del panel se haya movido todavía: la señal más directa sobre la renta variable.',
+    varBias:{ revisiones:-2.0 },
+    optimal:{ up:[], down:['rv'],
+      rationale:'Las revisiones de beneficios son el termómetro más directo de lo que vale una acción; un recorte fuerte anticipa presión sobre las cotizaciones.' } },
+  { id:'estabilidad', label:'Estabilidad',
+    desc:'Ningún indicador se mueve de forma relevante este trimestre: el manual dice que, sin una señal clara, la respuesta prudente es no tocar la cartera.',
+    varBias:{}, noiseMult:0.5,
+    optimal:{ up:[], down:[],
+      rationale:'No hay una señal de manual que justifique un movimiento; reaccionar sin motivo también es un error de principiante.' } },
 ];
 
-function pickEstado(rand){
-  return MARKET_STATES[Math.floor(rand()*MARKET_STATES.length)];
+function shuffleArchetypes(rand){
+  const pool = ARCHETYPES.slice();
+  for(let i=pool.length-1; i>0; i--){
+    const j = Math.floor(rand()*(i+1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  // Selección con preferencia por no repetir variable titular: dos casos que
+  // compiten por la misma variable (p.ej. "Deterioro de crédito" y "Recorte
+  // de beneficios", ambos sobre revisiones) contaminan el punto de partida
+  // del segundo si caen en la misma partida. Se evita mientras el resto del
+  // fondo lo permita; si no queda más remedio para completar las 6 rondas,
+  // se acepta la repetición antes que dejar huecos.
+  const chosen = [];
+  const usedVars = new Set();
+  const leftover = [];
+  pool.forEach(a=>{
+    const vars = Object.keys(a.varBias);
+    const conflict = vars.some(id=>usedVars.has(id));
+    if(!conflict && chosen.length<TOTAL_ROUNDS){
+      chosen.push(a);
+      vars.forEach(id=>usedVars.add(id));
+    } else {
+      leftover.push(a);
+    }
+  });
+  while(chosen.length<TOTAL_ROUNDS && leftover.length){
+    chosen.push(leftover.shift());
+  }
+  return chosen.slice(0, TOTAL_ROUNDS);
 }
 
 const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)' };
@@ -520,6 +571,7 @@ const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)
    otro punto de la app.
    ========================================================================= */
 const GLOSSARY_EXTRA = [
+  { term:'Caso de manual', abbr:null, def:'Cada una de las 6 rondas de la simulación se ancla a una situación deliberadamente clara e inequívoca, elegida de una biblioteca de patrones reconocibles (deterioro de crédito, shock de tipos, pánico de mercado...). El simulador no revela cuál es hasta la ronda siguiente, junto con el ajuste que suele hacerse en ese caso, para comparar con tu propia decisión. El panel está formado por ocho indicadores conectados entre sí por relaciones de causa y efecto: lo que le pasa a uno influye en los demás, trimestre a trimestre. La única excepción es el indicador (o los dos indicadores) que protagoniza cada caso concreto — distinto según qué caso te toque esa ronda: por ejemplo, los tipos oficiales en "Shock de tipos", el VIX en "Pánico de mercado". Ese indicador arranca sin memoria de lo que le pasó antes, para que el caso se lea sin ambigüedad; el resto mantiene su conexión causal completa. Es una simplificación deliberada; en la realidad ningún indicador económico funciona así.' },
   { term:'BCE', abbr:'Banco Central Europeo', def:'Autoridad monetaria de la eurozona. Fija los tipos oficiales que, junto con los de la Fed, representa la variable "Tipos oficiales" del panel.' },
   { term:'Fed', abbr:'Reserva Federal (Federal Reserve)', def:'Banco central de Estados Unidos. Fija su propio tipo oficial de referencia; junto con el del BCE, inspira la variable "Tipos oficiales" del panel.' },
   { term:'Matriz causal', abbr:null, def:'Tabla que define cómo afecta cada indicador del panel a los demás dentro del motor del simulador: la fila es la causa, la columna es el efecto, con una intensidad (de −3 a +3) y un desfase temporal asociados a cada relación.' },
@@ -620,7 +672,7 @@ let state = {
   profileKey:null,
   seed:'',
   rand:Math.random,
-  estado:null, // estado del mercado elegido al azar al empezar la simulación, oculto hasta el resumen
+  archetypes:[], // los 6 arquetipos de manual asignados a esta partida, uno por ronda
   alloc:{}, // asignación actual del usuario
   round:0,
   macro:null, // valores macro actuales
@@ -647,7 +699,7 @@ function initAlloc(base){
         que le corresponda (T0 = este mismo trimestre si la causa ya se ha
         calculado antes en el orden; T+1/T+2 = trimestres anteriores).
      2. Se suman esas contribuciones (intensidad/3 × movimiento) más el
-        sesgo del estado del mercado para esa variable.
+        sesgo del arquetipo de manual asignado a esa ronda para esa variable.
      3. La suma se comprime con tanh antes de traducirla a unidades reales:
         esto evita que varias causas alineadas disparen la variable sin
         límite, y hace que señales que se cancelan entre sí no produzcan
@@ -657,14 +709,15 @@ function initAlloc(base){
      5. El resultado se acota al rango plausible de la variable.
    ========================================================================= */
 function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
+function gaussFrom(rand){ return (rand()+rand()+rand()+rand()-2)/2; } // aprox. normal(0,1) truncada
 
 function stepMacro(targetRound){
   const r = state.rand;
-  const gauss = ()=> (r()+r()+r()+r()-2)/2; // aprox. normal(0,1) truncada
+  const gauss = ()=> gaussFrom(r);
 
-  const b = (state.estado && state.estado.bias) ? state.estado.bias(targetRound) : { varBias:{}, noiseMult:1 };
-  const noiseMult = b.noiseMult!==undefined ? b.noiseMult : 1;
-  const varBias = b.varBias || {};
+  const archetype = state.archetypes[targetRound-1] || { varBias:{}, noiseMult:1 };
+  const globalNoiseMult = archetype.noiseMult!==undefined ? archetype.noiseMult : 1;
+  const varBias = archetype.varBias || {};
 
   const prev = state.macro || {};
   const next = {};
@@ -674,31 +727,61 @@ function stepMacro(targetRound){
     const v = MACRO_VARS.find(x=>x.id===varId);
     const prevVal = (prev[varId]!==undefined) ? prev[varId] : v.baseline;
     const edges = CAUSES_OF[varId] || [];
+    const isHeadline = varBias[varId]!==undefined;
+    const isStabilityRound = Object.keys(varBias).length===0 && globalNoiseMult<1;
+
+    // "Estabilidad": en vez de equilibrar fuerzas que pueden chocar entre sí
+    // (herencia causal, inercia, reversión), se congela casi del todo el
+    // cálculo — un tirón fuerte hacia la línea base puede él mismo cruzar una
+    // zona en sentido contrario si la variable venía ya desplazada. Más simple
+    // y más fiable: casi ningún movimiento, deliberadamente.
+    if(isStabilityRound){
+      const val = clamp(prevVal + gaussFrom(r)*v.typicalMove*0.12, v.min, v.max);
+      next[varId] = val;
+      const normMove = (val - prevVal) / v.typicalMove;
+      thisMove[varId] = normMove;
+      if(!state.moveHistory[varId]) state.moveHistory[varId] = {};
+      state.moveHistory[varId][targetRound] = normMove;
+      return;
+    }
 
     let acc = 0;
-    edges.forEach(e=>{
-      let sourceMove;
-      if(e.lag===0){
-        if(e.degraded){
-          // VIX→PMI y VIX→Revisiones: ciclo T0 irresoluble en el mismo trimestre.
-          // Se usa el VIX del trimestre anterior en su lugar (ver nota en CAUSAL_MATRIX).
-          sourceMove = getMove(e.from, targetRound-1);
-        } else if(thisMove[e.from] !== undefined){
-          sourceMove = thisMove[e.from];
+    if(isHeadline){
+      // Variable titular de este arquetipo: su movimiento lo decide casi en
+      // exclusiva el caso de manual asignado a la ronda, no lo que arrastre la
+      // matriz causal de arquetipos anteriores. Es una simplificación deliberada
+      // — preferimos una señal legible y fiable a un realismo que diluye el caso.
+      acc = varBias[varId];
+    } else {
+      edges.forEach(e=>{
+        let sourceMove;
+        if(e.lag===0){
+          if(e.degraded){
+            // VIX→PMI y VIX→Revisiones: ciclo T0 irresoluble en el mismo trimestre.
+            // Se usa el VIX del trimestre anterior en su lugar (ver nota en CAUSAL_MATRIX).
+            sourceMove = getMove(e.from, targetRound-1);
+          } else if(thisMove[e.from] !== undefined){
+            sourceMove = thisMove[e.from];
+          } else {
+            sourceMove = getMove(e.from, targetRound-1); // salvaguarda si el orden no lo cubriera
+          }
         } else {
-          sourceMove = getMove(e.from, targetRound-1); // salvaguarda si el orden no lo cubriera
+          sourceMove = getMove(e.from, targetRound - e.lag);
         }
-      } else {
-        sourceMove = getMove(e.from, targetRound - e.lag);
-      }
-      acc += (e.i/3) * sourceMove;
-    });
-    acc += (varBias[varId]||0);
+        acc += (e.i/3) * sourceMove;
+      });
+    }
+
+    // Las variables "titulares" del arquetipo de esta ronda llevan menos ruido:
+    // el objetivo es una señal limpia y legible, no una más entre varias posibles.
+    const noiseMult = globalNoiseMult * (isHeadline ? 0.4 : 1);
 
     const compressed = Math.tanh(acc);
     const prevMove = getMove(varId, targetRound-1);
-    const delta = compressed*ENGINE.AMPLITUDE*v.typicalMove
-                + ENGINE.INERTIA*prevMove*v.typicalMove
+    const amplitude = isHeadline ? ENGINE.HEADLINE_AMPLITUDE : ENGINE.AMPLITUDE;
+    const inertiaMult = isHeadline ? 0.3 : 1;
+    const delta = compressed*amplitude*v.typicalMove
+                + ENGINE.INERTIA*prevMove*v.typicalMove*inertiaMult
                 - ENGINE.REVERSION*(prevVal - v.baseline)
                 + gauss()*v.typicalMove*ENGINE.NOISE*noiseMult;
 
@@ -749,72 +832,58 @@ function zoneOf(varDef, val){
    ========================================================================= */
 function pick(arr){ return arr[Math.floor(state.rand()*arr.length)]; }
 
-function evaluateRound(prevAlloc, newAlloc, prevMacro, newMacro){
+function evaluateRound(prevAlloc, newAlloc, prevMacro, newMacro, archetype){
   const dAlloc = id => (newAlloc[id]||0)-(prevAlloc[id]||0);
-  const dMacro = id => (newMacro[id]||0)-(prevMacro?.[id]||newMacro[id]);
-  const clampN = (x,a,b)=>Math.max(a,Math.min(b,x));
+  const upIds = archetype.optimal.up, downIds = archetype.optimal.down;
+  const noRecommendation = upIds.length===0 && downIds.length===0;
 
-  // Movimiento neto hacia canales de riesgo (positivo) o hacia defensivos (negativo).
-  const netRisk = Math.round(CHANNELS.filter(c=>c.group==='riesgo').reduce((s,c)=>s+dAlloc(c.id),0));
+  // Puntuación de coincidencia: positiva si el movimiento va en el sentido del
+  // ajuste de manual (subir lo que había que subir, bajar lo que había que
+  // bajar), negativa si va en sentido contrario.
+  let score = 0, anyTouched = false;
+  upIds.forEach(id=>{ const d=dAlloc(id); score+=d; if(Math.abs(d)>1) anyTouched=true; });
+  downIds.forEach(id=>{ const d=dAlloc(id); score-=d; if(Math.abs(d)>1) anyTouched=true; });
 
-  // Puntuación de estrés del trimestre a partir de las variables macro, acotada por componente.
-  let stress = 0;
-  if(prevMacro){
-    stress += clampN(-dMacro('pib')/0.6, -1, 1);
-    stress += clampN(-dMacro('pmi')/2.5, -1, 1);
-    stress += clampN(dMacro('tipos')/0.4, -1, 1);
-    stress += clampN(dMacro('bono10y')/0.4, -1, 1);
-    stress += clampN(dMacro('vix')/6, -1, 1);
-    stress += clampN(-dMacro('revisiones')/10, -1, 1);
-  }
-  const estado = stress>0.6 ? 'deterioro' : (stress<-0.6 ? 'mejora' : 'estable');
-  const scene = narrativeFor(newMacro, prevMacro);
+  const totalMove = CHANNELS.reduce((s,c)=> s+Math.abs(dAlloc(c.id)), 0);
 
-  let evalTxt, alignment;
-  if(Math.abs(netRisk)<=3){
-    evalTxt = pick([
-      `Cambio mínimo de perfil este trimestre (${netRisk>=0?'+':''}${netRisk} pts en riesgo).`,
-      `Tu cartera se mantuvo prácticamente estable (${netRisk>=0?'+':''}${netRisk} pts en riesgo).`,
-      `Ajuste marginal, sin una reasignación de fondo (${netRisk>=0?'+':''}${netRisk} pts en riesgo).`
-    ]);
-    alignment='neutra';
-  } else if(estado==='deterioro' && netRisk>0){
-    evalTxt = pick([
-      `Aun así, ampliaste tu exposición a activos de riesgo en ${netRisk} puntos: un movimiento a contracorriente del deterioro del panel.`,
-      `Pese al deterioro de las condiciones, sumaste ${netRisk} puntos de riesgo, una apuesta claramente a contracorriente.`,
-      `Subiste riesgo en ${netRisk} puntos justo cuando el panel se deterioraba: decisión en sentido contrario a la lectura del estado del mercado.`
-    ]);
-    alignment='contraria';
-  } else if(estado==='deterioro' && netRisk<0){
-    evalTxt = pick([
-      `Redujiste riesgo en ${Math.abs(netRisk)} puntos: dirección coherente con el deterioro del panel.`,
-      `Recortaste ${Math.abs(netRisk)} puntos de riesgo, en línea con el empeoramiento del entorno.`,
-      `Movimiento defensivo de ${Math.abs(netRisk)} puntos, coherente con la lectura de deterioro.`
-    ]);
-    alignment='coherente';
-  } else if(estado==='mejora' && netRisk>0){
-    evalTxt = pick([
-      `Ampliaste riesgo en ${netRisk} puntos, en línea con la mejora del entorno.`,
-      `Sumaste ${netRisk} puntos de riesgo, coherente con la mejora de las condiciones.`,
-      `Movimiento hacia riesgo de ${netRisk} puntos, alineado con el mejor tono del panel.`
-    ]);
-    alignment='coherente';
-  } else if(estado==='mejora' && netRisk<0){
-    evalTxt = pick([
-      `Sin embargo, redujiste tu exposición a riesgo en ${Math.abs(netRisk)} puntos pese a la mejora del entorno: postura defensiva a contracorriente.`,
-      `El entorno mejoró y aun así recortaste ${Math.abs(netRisk)} puntos de riesgo: prudencia a contracorriente.`,
-      `Redujiste riesgo en ${Math.abs(netRisk)} puntos justo cuando el panel mejoraba: movimiento defensivo a contracorriente.`
-    ]);
-    alignment='contraria';
+  let alignment;
+  if(noRecommendation){
+    alignment = totalMove<=6 ? 'coherente' : 'contraria';
+  } else if(!anyTouched){
+    alignment = 'neutra';
+  } else if(score>3){
+    alignment = 'coherente';
+  } else if(score<-3){
+    alignment = 'contraria';
   } else {
-    evalTxt = pick([
-      `Moviste ${netRisk>0?'+':''}${netRisk} puntos hacia riesgo en un entorno sin una dirección dominante clara.`,
-      `Reasignaste ${Math.abs(netRisk)} puntos ${netRisk>0?'hacia':'fuera de'} activos de riesgo, sin que el panel marcara una tendencia clara.`,
-      `Cambio de ${netRisk>0?'+':''}${netRisk} puntos en riesgo en un trimestre mixto, sin señal dominante.`
-    ]);
-    alignment='neutra';
+    alignment = 'neutra';
   }
-  return { text:`${scene} ${evalTxt}`, alignment, netRisk, estado };
+
+  const chName = id => CHANNELS.find(c=>c.id===id).name;
+  let optimalTxt;
+  if(noRecommendation){
+    optimalTxt = 'El ajuste de manual aquí era no tocar la cartera: sin una señal clara, moverse por moverse también es un error de principiante.';
+  } else {
+    const parts = [];
+    if(upIds.length) parts.push('ampliar '+upIds.map(chName).join(' y '));
+    if(downIds.length) parts.push('reducir '+downIds.map(chName).join(' y '));
+    optimalTxt = `El ajuste de manual aquí: ${parts.join(', y ')}. ${archetype.optimal.rationale}`;
+  }
+
+  let comparisonTxt;
+  if(alignment==='coherente'){
+    comparisonTxt = noRecommendation
+      ? pick(['Y así lo hiciste: mantuviste la cartera prácticamente estable.', 'Y esa fue tu decisión: dejar la cartera como estaba.'])
+      : pick(['Tu cartera se movió en esa misma dirección.', 'Eso es justo lo que hiciste.', 'Tu ajuste coincide con esa lectura.']);
+  } else if(alignment==='contraria'){
+    comparisonTxt = noRecommendation
+      ? pick(['Aun así, moviste una parte notable de la cartera sin que el panel lo pidiera.', 'Pese a la calma del panel, reasignaste una parte considerable de la cartera.'])
+      : pick(['Tu cartera se movió en la dirección contraria.', 'Hiciste justo lo opuesto.', 'Tu ajuste va en sentido contrario a esa lectura.']);
+  } else {
+    comparisonTxt = pick(['No llegaste a mover de forma clara los canales relevantes en este caso.', 'Tocaste otros canales, pero no los que este caso señala como relevantes.']);
+  }
+
+  return { text:`${archetype.desc} ${optimalTxt} ${comparisonTxt}`, alignment, archetype };
 }
 
 function buildFeedback(prevAlloc, newAlloc, prevMacro, newMacro, roundEval){
@@ -823,7 +892,7 @@ function buildFeedback(prevAlloc, newAlloc, prevMacro, newMacro, roundEval){
   const dMacro = id => (newMacro[id]||0)-(prevMacro?.[id]||newMacro[id]);
 
   // Lectura base: siempre presente. Describe el trimestre y evalúa el movimiento del usuario
-  // frente al estado del mercado. La pregunta abierta vive ahora en el campo de reflexión, no aquí.
+  // frente al ajuste de manual del caso de esa ronda. La pregunta abierta vive ahora en el campo de reflexión, no aquí.
   obs.push({tag:'Lectura del trimestre', text: roundEval.text});
 
   const deterioroEconomico = dMacro('pib') < -0.5 || dMacro('pmi') < -2;
@@ -1123,61 +1192,46 @@ function macroDashboardHTML(){
   </div>`;
 }
 
-function narrativeFor(macro, prevMacro){
-  if(!prevMacro) return 'Punto de partida del escenario. Observa el panel macro antes de fijar tu asignación.';
-  const dPib = macro.pib-prevMacro.pib;
-  const dPmi = macro.pmi-prevMacro.pmi;
-  const dTipos = macro.tipos-prevMacro.tipos;
-  const dBono10y = macro.bono10y-prevMacro.bono10y;
-  const dVix = macro.vix-prevMacro.vix;
-  const dRevisiones = macro.revisiones-prevMacro.revisiones;
-  const dInflacion = macro.inflacion-prevMacro.inflacion;
-  const dDeficit = macro.deficit-prevMacro.deficit;
-
-  if(dTipos>0.3 && dPmi<-2) return 'Los tipos oficiales suben y la actividad empresarial empieza a resentirse. El mercado empieza a descontar un frenazo del ciclo.';
-  if(dVix>5) return 'Repunte brusco de volatilidad. El apetito por el riesgo se contrae de forma generalizada.';
-  if(dPmi>2 && dRevisiones>7) return 'Mejora simultánea de la actividad empresarial y de las revisiones de beneficios. El entorno se vuelve más favorable al riesgo.';
-  if(dInflacion>0.6) return 'La inflación sorprende al alza. El mercado empieza a descontar una respuesta más restrictiva del banco central.';
-  if(dInflacion<-0.6) return 'La inflación afloja con rapidez, abriendo margen a una política monetaria más laxa.';
-  if(dDeficit>0.5 && dBono10y>0.3) return 'El impulso fiscal se amplía y el mercado empieza a exigir más rentabilidad por financiar esa expansión del gasto público.';
-  if(Math.abs(dPib)<0.2 && Math.abs(dPmi)<1 && Math.abs(dVix)<2) return 'Trimestre de calma relativa: pocas variables se mueven de forma significativa.';
-  return 'El entorno macro se ajusta sin un patrón dominante claro. Revisa el panel antes de decidir.';
-}
-
 function recapHTML(prevEntry){
   if(!prevEntry) return '';
+  const a = prevEntry.archetype;
+  const chName = id => CHANNELS.find(c=>c.id===id).name;
+  const parts = [];
+  if(a.optimal.up.length) parts.push('ampliar '+a.optimal.up.map(chName).join(' y '));
+  if(a.optimal.down.length) parts.push('reducir '+a.optimal.down.map(chName).join(' y '));
+  const optimalShort = parts.length ? parts.join(', y ') : 'no tocar la cartera';
   const alignLabel = {
-    coherente:'fue coherente con el estado del mercado de aquel momento',
-    contraria:'fue a contracorriente del estado del mercado de aquel momento',
-    neutra:'apenas movió tu perfil de riesgo'
+    coherente:'coincidió con el ajuste de manual',
+    contraria:'fue en la dirección contraria al ajuste de manual',
+    neutra:'no llegó a moverse con claridad en los canales relevantes'
   }[prevEntry.alignment] || '';
   const reflectionBlock = prevEntry.reflection
     ? `<div class="reflection-quote" style="margin:8px 0 10px;">“${prevEntry.reflection}”</div>`
     : `<p class="faint" style="font-style:italic;margin:6px 0 10px;">No dejaste anotado tu razonamiento en el trimestre anterior.</p>`;
   return `
   <div class="recap-panel">
-    <div class="recap-title">Antes de seguir: tu trimestre ${prevEntry.round}</div>
+    <div class="recap-title">Antes de seguir: tu trimestre ${prevEntry.round} era un caso de manual — ${a.label}</div>
     ${reflectionBlock}
-    <p class="faint" style="margin:0;">Ese movimiento ${alignLabel}. Compáralo con lo que ves ahora en el panel antes de decidir de nuevo.</p>
+    <p class="faint" style="margin:0;">El ajuste habitual ahí era ${optimalShort}. Tu decisión ${alignLabel}. Compara tu razonamiento con esto antes de decidir de nuevo.</p>
   </div>`;
 }
 
 function renderSim(){
   if(state.round===0){
+    // El trimestre 1 también parte de un arquetipo de manual: se calcula igual
+    // que el resto de rondas, partiendo de la línea base de cada variable como
+    // si fuera un "trimestre 0" implícito.
     state.macro = {};
     state.moveHistory = {};
-    MACRO_VARS.forEach(v=>{
-      state.macro[v.id]=v.baseline;
-      state.moveHistory[v.id] = { 1:0 };
-    });
+    MACRO_VARS.forEach(v=>{ state.macro[v.id] = v.baseline; state.moveHistory[v.id] = {}; });
+    stepMacro(1);
     state.round = 1;
     state.history = [];
   }
   const prevEntry = state.history[state.history.length-1];
-  const prevMacro = prevEntry ? prevEntry.macro : null;
-  const narrative = narrativeFor(state.macro, prevMacro);
+  const narrative = state.archetypes[state.round-1].desc;
   const intro = state.round===1 ? `
-    <p class="lede" style="margin:-4px 0 22px;max-width:none;">Vas a atravesar <strong style="color:var(--gold-bright);font-style:normal;">6 rondas trimestrales</strong>. En cada ronda revisas el panel macro, que habrá cambiado respecto a la ronda anterior, y decides cómo reasignar tu cartera en respuesta. El simulador ha elegido un estado del mercado que no se revela hasta el resumen final: reacciona con lo que ves en el panel, no con lo que crees que "toca". Al terminar la sexta ronda verás un resumen con la evolución completa de tus decisiones, del entorno, y qué estado era en realidad.</p>` : '';
+    <p class="lede" style="margin:-4px 0 22px;max-width:none;">Vas a atravesar <strong style="color:var(--gold-bright);font-style:normal;">6 rondas trimestrales</strong>. Cada una plantea un caso de manual distinto: una situación deliberadamente clara, para que puedas relacionar lo que ves en el panel con la decisión que le corresponde. No te decimos cuál es el ajuste habitual hasta la ronda siguiente — reacciona primero con lo que ves. Al terminar la sexta ronda verás el recorrido completo, con el ajuste de manual de cada caso junto al tuyo.</p>` : '';
   const recap = state.round>1 ? recapHTML(prevEntry) : '';
 
   return `
@@ -1219,12 +1273,13 @@ function confirmRound(){
   const prevMacro = Object.assign({}, state.macro);
   const newAlloc = state._pendingAlloc || state.alloc;
   const reflection = (document.getElementById('reflection-input')?.value || '').trim();
+  const archetype = state.archetypes[state.round-1];
 
   const priorMacro = state.history.length? state.history[state.history.length-1].macro : null;
-  const roundEval = evaluateRound(prevAlloc, newAlloc, priorMacro, prevMacro);
+  const roundEval = evaluateRound(prevAlloc, newAlloc, priorMacro, prevMacro, archetype);
   const feedback = buildFeedback(prevAlloc, newAlloc, priorMacro, prevMacro, roundEval);
 
-  state.history.push({ round:state.round, macro:prevMacro, alloc:newAlloc, feedback, reflection, alignment:roundEval.alignment });
+  state.history.push({ round:state.round, macro:prevMacro, alloc:newAlloc, feedback, reflection, alignment:roundEval.alignment, archetype });
   state.alloc = newAlloc;
   state._pendingReflection = '';
 
@@ -1260,7 +1315,7 @@ function renderResumen(){
     const items = r.feedback.length
       ? r.feedback.map(f=>`<div class="feedback"><div class="tag">${f.tag}</div><p>${f.text}</p></div>`).join('')
       : `<div class="no-feedback">Sin observaciones relevantes en esta ronda.</div>`;
-    const alignLabel = {coherente:'Coherente con el estado del mercado', contraria:'A contracorriente del estado del mercado', neutra:'Movimiento neutro'}[r.alignment] || '';
+    const alignLabel = {coherente:'Coincide con el ajuste de manual', contraria:'Contrario al ajuste de manual', neutra:'Sin tocar los canales relevantes'}[r.alignment] || '';
     const reflectionHTML = r.reflection
       ? `<div class="reflection-quote">“${r.reflection}”</div>`
       : `<p class="faint" style="font-style:italic;">No dejaste anotado tu razonamiento en esta ronda.</p>`;
@@ -1277,13 +1332,13 @@ function renderResumen(){
   rounds.forEach(r=>{ if(r.alignment) alignCounts[r.alignment] = (alignCounts[r.alignment]||0)+1; });
   let styleReading;
   if(alignCounts.coherente > alignCounts.contraria && alignCounts.coherente >= 3){
-    styleReading = `En ${alignCounts.coherente} de ${rounds.length} rondas moviste la cartera en la misma dirección que el estado del mercado (procíclico moderado o disciplinado, según cómo lo leas tú). ${alignCounts.contraria} fueron a contracorriente y ${alignCounts.neutra} prácticamente neutras.`;
+    styleReading = `En ${alignCounts.coherente} de ${rounds.length} rondas tu ajuste coincidió con el que suele hacerse en ese caso de manual. ${alignCounts.contraria} fueron en la dirección contraria y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
   } else if(alignCounts.contraria > alignCounts.coherente && alignCounts.contraria >= 3){
-    styleReading = `En ${alignCounts.contraria} de ${rounds.length} rondas te moviste a contracorriente del estado del mercado: perfil más contrarian que reactivo. ${alignCounts.coherente} fueron coherentes con el panel y ${alignCounts.neutra} neutras.`;
+    styleReading = `En ${alignCounts.contraria} de ${rounds.length} rondas tu ajuste fue en la dirección contraria a la que suele hacerse en ese caso de manual. ${alignCounts.coherente} coincidieron y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
   } else if(alignCounts.neutra >= 4){
-    styleReading = `En ${alignCounts.neutra} de ${rounds.length} rondas apenas moviste la cartera, con independencia de lo que marcara el panel: perfil predominantemente pasivo en este escenario.`;
+    styleReading = `En ${alignCounts.neutra} de ${rounds.length} rondas no llegaste a mover con claridad los canales que cada caso señalaba como relevantes: perfil predominantemente pasivo en este recorrido.`;
   } else {
-    styleReading = `Reparto sin patrón dominante: ${alignCounts.coherente} rondas coherentes con el estado del mercado, ${alignCounts.contraria} a contracorriente y ${alignCounts.neutra} neutras.`;
+    styleReading = `Reparto sin patrón dominante: ${alignCounts.coherente} rondas coincidieron con el ajuste de manual, ${alignCounts.contraria} fueron en dirección contraria y ${alignCounts.neutra} no tocaron los canales relevantes.`;
   }
 
   const stackHTML = rounds.map(r=>{
@@ -1311,11 +1366,13 @@ function renderResumen(){
 
   const legend = CHANNELS.map(c=>`<span class="faint" style="font-family:var(--font-ui);font-size:11px;margin-right:14px;"><span class="legend-dot" style="background:${c.color};"></span>${c.name}</span>`).join('');
 
-  const estadoHTML = state.estado ? `
-    <div class="feedback" style="margin-top:4px;">
-      <div class="tag">Estado del mercado de este recorrido (revelado ahora)</div>
-      <p><strong style="color:var(--gold-bright);font-style:normal;">${state.estado.label}.</strong> ${state.estado.desc}</p>
-    </div>` : '';
+  const casesHTML = `
+    <div class="chart-wrap">
+      ${rounds.map(r=>{
+        const alignLabel = {coherente:'Coincidió', contraria:'Contrario', neutra:'Sin tocar'}[r.alignment] || '';
+        return `<div class="stack-label" style="display:flex;justify-content:space-between;"><span>Trimestre ${r.round} — ${r.archetype.label}</span><span class="alignment-tag ${r.alignment||'neutra'}" style="margin:0;">${alignLabel}</span></div>`;
+      }).join('')}
+    </div>`;
 
   const pending = pendingEffects();
   const pendingHTML = pending.length ? `
@@ -1332,7 +1389,9 @@ function renderResumen(){
   <div class="eyebrow">V. Resumen</div>
   <h1>Recorrido del escenario</h1>
   <p class="lede">${TOTAL_ROUNDS} trimestres simulados${state.seed?` · semilla: ${state.seed}`:''}.</p>
-  ${estadoHTML}
+
+  <div class="alloc-group-title">Recorrido de casos de manual</div>
+  ${casesHTML}
 
   <div class="alloc-group-title">Evolución de tu asignación</div>
   <div class="chart-wrap">${stackHTML}</div>
@@ -1347,7 +1406,7 @@ function renderResumen(){
   ${pendingHTML}
 
   <div class="alloc-group-title">Observaciones por ronda</div>
-  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu movimiento fue en la misma dirección que el estado del mercado de aquel momento, o en contra. No son un veredicto de acierto o error: eso solo se sabe con el tiempo, y moverse "a contracorriente" puede ser tan válido como seguir la corriente.</p>
+  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso de manual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable.</p>
   ${feedbackHTML}
 
   <div class="actions">
@@ -1411,7 +1470,7 @@ function bindPhase(){
     $('back-btn')?.addEventListener('click', ()=>{ state.phase='conceptos2'; render(); });
     $('next-btn')?.addEventListener('click', ()=>{
       state.rand = rng(state.seed);
-      state.estado = pickEstado(state.rand);
+      state.archetypes = shuffleArchetypes(state.rand);
       state.round = 0;
       state.phase='sim';
       render();
@@ -1426,7 +1485,7 @@ function bindPhase(){
   }
   if(state.phase==='resumen'){
     $('restart-btn')?.addEventListener('click', ()=>{
-      state = { phase:'portada', profileKey:null, seed:'', rand:Math.random, estado:null, alloc:{}, round:0, macro:null, moveHistory:{}, history:[], _pendingReflection:'' };
+      state = { phase:'portada', profileKey:null, seed:'', rand:Math.random, archetypes:[], alloc:{}, round:0, macro:null, moveHistory:{}, history:[], _pendingReflection:'' };
       render();
     });
     $('goto-sim-btn')?.addEventListener('click', ()=> goToPhase('sim'));

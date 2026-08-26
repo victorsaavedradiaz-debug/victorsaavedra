@@ -549,7 +549,15 @@ function shuffleArchetypes(rand){
   while(chosen.length<TOTAL_ROUNDS && leftover.length){
     chosen.push(leftover.shift());
   }
-  return chosen.slice(0, TOTAL_ROUNDS);
+  const result = chosen.slice(0, TOTAL_ROUNDS);
+  // "Estabilidad" no puede tocarle a la ronda 1: su mensaje ("no tocar la
+  // cartera") presupone una posición ya construida, y la ronda 1 arranca
+  // siempre a cero. Si el azar la puso ahí, se intercambia con otra ronda.
+  if(result[0] && result[0].id === 'estabilidad'){
+    const swapIdx = 1 + Math.floor(rand()*(result.length-1));
+    [result[0], result[swapIdx]] = [result[swapIdx], result[0]];
+  }
+  return result;
 }
 
 const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)' };

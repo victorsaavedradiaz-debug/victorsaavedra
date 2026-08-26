@@ -942,11 +942,23 @@ const PHASES = [
   {id:'resumen', label:'Resumen', num:'V'},
 ];
 function goToPhase(id){
-  if(id==='sim' && !state.profileKey){
-    state.phase='perfil';
-  } else {
-    state.phase=id;
+  if(id==='sim'){
+    if(!state.profileKey){
+      state.phase='perfil';
+      render();
+      window.scrollTo(0,0);
+      return;
+    }
+    // Si el usuario salta aquí desde el menú sin haber pulsado "Empezar
+    // simulación" en la fase de perfil, los arquetipos de la partida todavía
+    // no existen — hay que generarlos ahora, con la misma semilla que ya
+    // hubiera escrito, para no dejar la ronda 1 sin caso asignado.
+    if(state.archetypes.length===0){
+      state.rand = rng(state.seed);
+      state.archetypes = shuffleArchetypes(state.rand);
+    }
   }
+  state.phase=id;
   render();
   window.scrollTo(0,0);
 }

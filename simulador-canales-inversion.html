@@ -170,6 +170,7 @@
   .gauge .delta.flat{color:var(--text-faint);}
   .gauge-def{display:none;font-size:14.5px;color:var(--text-dim);padding:0 0 14px 0;border-top:1px dashed var(--border-soft);margin-top:-2px;padding-top:10px;}
   .gauge-def.open{display:block;}
+  .gauge-def-zones{font-family:var(--font-ui);font-size:12px;letter-spacing:.02em;color:var(--text-faint);margin-top:8px;}
 
   /* ---------- Round narrative ---------- */
   .round-tag{font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
@@ -203,17 +204,6 @@
     font-family:var(--font-ui);font-size:13px;padding:9px 12px;width:220px;
   }
   .seed-row label{font-family:var(--font-ui);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em;}
-  .reflection-input{
-    width:100%;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);
-    font-family:var(--font-display);font-size:16px;line-height:1.5;padding:14px 16px;
-    resize:vertical;margin:6px 0 4px;
-  }
-  .reflection-input:focus{outline:none;border-color:var(--gold);}
-  .reflection-input::placeholder{color:var(--text-faint);font-style:italic;}
-  .reflection-quote{
-    border-left:2px solid var(--text-faint);padding-left:14px;margin:8px 0 14px;
-    font-style:italic;color:var(--text-dim);font-size:16px;
-  }
   .alignment-tag{
     display:inline-block;font-family:var(--font-ui);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
     padding:3px 9px;border:1px solid var(--border);margin-bottom:8px;
@@ -361,31 +351,31 @@ const MACRO_VARS = [
   { id:'pib', name:'PIB real', unit:'%', dec:1, typicalMove:0.5,
     def:'Producto Interior Bruto real: el crecimiento o la contracción de la economía, descontando el efecto de los precios. Variable coincidente y algo rezagada: confirma el ciclo más que lo anticipa.',
     baseline:1.5, min:-3, max:5,
-    zones:[{to:0.3,c:'red'},{to:1.9,c:'amber'},{to:5,c:'green'}] },
+    zones:[{to:0,c:'red'},{to:0.8,c:'amber'},{to:5,c:'green'}] },
   { id:'inflacion', name:'Inflación', unit:'%', dec:1, typicalMove:0.6,
     def:'Evolución general de los precios (IPC interanual). Condiciona el poder adquisitivo, la política monetaria y la valoración de los activos.',
     baseline:2.2, min:-1, max:9,
-    zones:[{to:0.8,c:'amber'},{to:3,c:'green'},{to:5,c:'amber'},{to:9,c:'red'}] },
+    zones:[{to:-0.6,c:'red'},{to:1.4,c:'amber'},{to:3,c:'green'},{to:5,c:'amber'},{to:9,c:'red'}] },
   { id:'pmi', name:'PMI', unit:'', dec:1, typicalMove:2.0,
     def:'Índice de difusión basado en encuestas a directores de compras, que anticipa la actividad empresarial a través de pedidos, producción y expectativas. Suele avisar de cambios de ciclo antes que el PIB.',
     baseline:50, min:35, max:65,
-    zones:[{to:47,c:'red'},{to:52,c:'amber'},{to:65,c:'green'}] },
+    zones:[{to:44,c:'red'},{to:48,c:'amber'},{to:56,c:'green'},{to:65,c:'amber'}] },
   { id:'tipos', name:'Tipos oficiales', unit:'%', dec:2, typicalMove:0.4,
     def:'Precio oficial del dinero fijado por el banco central. Afecta al coste de financiación, a los bonos y a la valoración de la renta variable.',
     baseline:2.5, min:0, max:6,
-    zones:[{to:1.6,c:'green'},{to:3.8,c:'amber'},{to:6,c:'red'}] },
+    zones:[{to:1.2,c:'amber'},{to:3.5,c:'green'},{to:4.8,c:'amber'},{to:6,c:'red'}] },
   { id:'deficit', name:'Déficit público', unit:'% PIB', dec:1, typicalMove:0.5,
     def:'Diferencia entre gastos e ingresos públicos, en porcentaje del PIB. Funciona como proxy del impulso fiscal: puede estimular la economía a corto plazo a costa de presionar la financiación pública.',
     baseline:3.0, min:-1, max:10,
-    zones:[{to:2,c:'green'},{to:5,c:'amber'},{to:10,c:'red'}] },
+    zones:[{to:3.6,c:'green'},{to:6,c:'amber'},{to:10,c:'red'}] },
   { id:'bono10y', name:'Bono soberano 10 años', unit:'%', dec:2, typicalMove:0.35,
     def:'Rentabilidad exigida por el mercado para prestar al Estado a diez años. Referencia central para el coste del dinero a largo plazo; afecta a bonos, acciones e inmobiliario.',
     baseline:3.5, min:1, max:7,
-    zones:[{to:2.6,c:'green'},{to:4.6,c:'amber'},{to:7,c:'red'}] },
+    zones:[{to:3.9,c:'green'},{to:5.5,c:'amber'},{to:7,c:'red'}] },
   { id:'revisiones', name:'Revisiones de beneficios', unit:'%', dec:0, typicalMove:6,
     def:'Balance neto entre analistas que elevan y que recortan sus estimaciones de beneficios empresariales. Síntesis de cómo la economía se traslada a las cuentas de las empresas.',
     baseline:0, min:-30, max:30,
-    zones:[{to:-10,c:'red'},{to:5,c:'amber'},{to:30,c:'green'}] },
+    zones:[{to:-14,c:'red'},{to:-3,c:'amber'},{to:14,c:'green'},{to:30,c:'amber'}] },
   { id:'vix', name:'VIX', unit:'', dec:1, typicalMove:3,
     def:'Índice de volatilidad implícita del S&P 500. Actúa principalmente como sensor de estrés financiero: consecuencia de otras variables más que motor de la economía.',
     baseline:18, min:10, max:50,
@@ -463,7 +453,7 @@ const PROFILES = {
 };
 
 /* =========================================================================
-   ARQUETIPOS DE MANUAL
+   ARQUETIPOS HABITUALES
    Cada una de las 6 rondas de la simulación se ancla a uno de estos casos,
    elegidos sin repetir al empezar la partida (determinista si hay semilla).
    Cada arquetipo inyecta un sesgo fuerte y deliberado sobre una o dos
@@ -473,19 +463,19 @@ const PROFILES = {
    variables se sigue moviendo por las relaciones causales normales, así
    que el panel nunca deja de estar interconectado.
 
-   `optimal` describe el ajuste habitual de manual para ese caso: qué
+   `optimal` describe el ajuste habitual para ese caso: qué
    canales se esperaría ampliar o reducir, y por qué. No es una nota ni
    una única respuesta correcta — es la referencia con la que el jugador
    compara su propio razonamiento en la ronda siguiente.
    ========================================================================= */
 const ARCHETYPES = [
   { id:'deterioro_credito', label:'Deterioro de crédito',
-    desc:'El PMI cae con fuerza y las revisiones de beneficios empiezan a deteriorarse: síntomas de manual de un ciclo que se enfría antes de que lo confirme el PIB.',
+    desc:'El PMI cae con fuerza y las revisiones de beneficios empiezan a deteriorarse: síntomas habituales de un ciclo que se enfría antes de que lo confirme el PIB.',
     varBias:{ pmi:-1.8, revisiones:-1.6, vix:0.8 },
     optimal:{ up:['liquidez','rf_gob'], down:['rv','rf_corp','cripto'],
       rationale:'Cuando el ciclo se enfría, la renta variable y el crédito corporativo son los primeros en sufrir; la liquidez y la deuda pública de calidad son el refugio clásico.' } },
   { id:'sorpresa_inflacion', label:'Sorpresa de inflación',
-    desc:'La inflación sorprende al alza muy por encima de lo esperado: el manual dice que esto presiona los tipos y penaliza a la renta fija de duración larga.',
+    desc:'La inflación sorprende al alza muy por encima de lo esperado: esto suele presionar los tipos y penalizar a la renta fija de duración larga.',
     varBias:{ inflacion:1.8 },
     optimal:{ up:['oro'], down:['rf_gob'],
       rationale:'La inflación erosiona la rentabilidad real de los bonos y suele adelantar subidas de tipos; el oro es la cobertura tradicional.' } },
@@ -495,27 +485,27 @@ const ARCHETYPES = [
     optimal:{ up:['rv'], down:['liquidez'],
       rationale:'En una expansión clara con volatilidad baja, mantener mucha liquidez tiene un coste de oportunidad real.' } },
   { id:'shock_tipos', label:'Shock de tipos al alza',
-    desc:'El banco central sube los tipos oficiales con fuerza y sin ambigüedad: el manual de transmisión monetaria dice que esto golpea primero a la duración y a la financiación inmobiliaria.',
+    desc:'El banco central sube los tipos oficiales con fuerza y sin ambigüedad: la transmisión monetaria habitual golpea primero a la duración y a la financiación inmobiliaria.',
     varBias:{ tipos:1.8 },
     optimal:{ up:['liquidez'], down:['rf_gob','inmo'],
       rationale:'Una subida de tipos abrupta penaliza el precio de los bonos de duración larga y encarece la financiación inmobiliaria; la liquidez se beneficia directamente.' } },
   { id:'bajada_tipos', label:'Bajada de tipos',
-    desc:'El banco central relaja su política de tipos con claridad: caso de manual de estímulo monetario.',
+    desc:'El banco central relaja su política de tipos con claridad: caso habitual de estímulo monetario.',
     varBias:{ tipos:-1.8 },
     optimal:{ up:['rf_gob','inmo'], down:['liquidez'],
       rationale:'Una bajada de tipos revaloriza los bonos existentes de mayor duración y abarata la financiación inmobiliaria.' } },
   { id:'tension_fiscal', label:'Tensión fiscal',
-    desc:'El déficit público se dispara y el bono a 10 años exige más rentabilidad para financiarlo: manual de estrés de la deuda soberana.',
+    desc:'El déficit público se dispara y el bono a 10 años exige más rentabilidad para financiarlo: caso habitual de estrés de la deuda soberana.',
     varBias:{ deficit:2.2, bono10y:1.4 },
     optimal:{ up:[], down:['rf_gob'],
       rationale:'Cuando el mercado exige más prima por financiar al Estado, el precio de la deuda pública existente cae.' } },
   { id:'panico_mercado', label:'Pánico de mercado',
-    desc:'El VIX se dispara sin que ninguna otra variable lo anticipe: un episodio de aversión al riesgo puro, el caso de manual para los activos refugio.',
+    desc:'El VIX se dispara sin que ninguna otra variable lo anticipe: un episodio de aversión al riesgo puro, el caso habitual para los activos refugio.',
     varBias:{ vix:2.2 },
     optimal:{ up:['liquidez','oro'], down:['rv','cripto'],
       rationale:'En un pico de volatilidad puro, los activos de mayor riesgo se penalizan primero; liquidez y oro son los refugios clásicos.' } },
   { id:'deflacion', label:'Enfriamiento de precios',
-    desc:'La inflación cae con fuerza, muy por debajo de lo esperado: el manual anticipa margen para una política monetaria más laxa.',
+    desc:'La inflación cae con fuerza, muy por debajo de lo esperado: suele anticipar margen para una política monetaria más laxa.',
     varBias:{ inflacion:-1.8 },
     optimal:{ up:['rf_gob'], down:[],
       rationale:'Una inflación a la baja suele preceder bajadas de tipos, que revalorizan la deuda pública ya emitida.' } },
@@ -525,10 +515,10 @@ const ARCHETYPES = [
     optimal:{ up:[], down:['rv'],
       rationale:'Las revisiones de beneficios son el termómetro más directo de lo que vale una acción; un recorte fuerte anticipa presión sobre las cotizaciones.' } },
   { id:'estabilidad', label:'Estabilidad',
-    desc:'Ningún indicador se mueve de forma relevante este trimestre: el manual dice que, sin una señal clara, la respuesta prudente es no tocar la cartera.',
+    desc:'Ningún indicador se mueve de forma relevante este trimestre: lo habitual, sin una señal clara, es que la respuesta prudente sea no tocar la cartera.',
     varBias:{}, noiseMult:0.5,
     optimal:{ up:[], down:[],
-      rationale:'No hay una señal de manual que justifique un movimiento; reaccionar sin motivo también es un error de principiante.' } },
+      rationale:'No hay una señal clara que justifique un movimiento; reaccionar sin motivo también es un error de principiante.' } },
 ];
 
 function shuffleArchetypes(rand){
@@ -571,7 +561,7 @@ const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)
    otro punto de la app.
    ========================================================================= */
 const GLOSSARY_EXTRA = [
-  { term:'Caso de manual', abbr:null, def:'Cada una de las 6 rondas de la simulación se ancla a una situación deliberadamente clara e inequívoca, elegida de una biblioteca de patrones reconocibles (deterioro de crédito, shock de tipos, pánico de mercado...). El simulador no revela cuál es hasta la ronda siguiente, junto con el ajuste que suele hacerse en ese caso, para comparar con tu propia decisión. El panel está formado por ocho indicadores conectados entre sí por relaciones de causa y efecto: lo que le pasa a uno influye en los demás, trimestre a trimestre. La única excepción es el indicador (o los dos indicadores) que protagoniza cada caso concreto — distinto según qué caso te toque esa ronda: por ejemplo, los tipos oficiales en "Shock de tipos", el VIX en "Pánico de mercado". Ese indicador arranca sin memoria de lo que le pasó antes, para que el caso se lea sin ambigüedad; el resto mantiene su conexión causal completa. Es una simplificación deliberada; en la realidad ningún indicador económico funciona así.' },
+  { term:'Caso habitual', abbr:null, def:'Cada una de las 6 rondas de la simulación se ancla a una situación deliberadamente clara e inequívoca, elegida de una biblioteca de patrones reconocibles (deterioro de crédito, shock de tipos, pánico de mercado...). El simulador no revela cuál es hasta la ronda siguiente, junto con el ajuste que suele hacerse en ese caso, para comparar con tu propia decisión. El panel está formado por ocho indicadores conectados entre sí por relaciones de causa y efecto: lo que le pasa a uno influye en los demás, trimestre a trimestre. La única excepción es el indicador (o los dos indicadores) que protagoniza cada caso concreto — distinto según qué caso te toque esa ronda: por ejemplo, los tipos oficiales en "Shock de tipos", el VIX en "Pánico de mercado". Ese indicador arranca sin memoria de lo que le pasó antes, para que el caso se lea sin ambigüedad; el resto mantiene su conexión causal completa. Es una simplificación deliberada; en la realidad ningún indicador económico funciona así.' },
   { term:'BCE', abbr:'Banco Central Europeo', def:'Autoridad monetaria de la eurozona. Fija los tipos oficiales que, junto con los de la Fed, representa la variable "Tipos oficiales" del panel.' },
   { term:'Fed', abbr:'Reserva Federal (Federal Reserve)', def:'Banco central de Estados Unidos. Fija su propio tipo oficial de referencia; junto con el del BCE, inspira la variable "Tipos oficiales" del panel.' },
   { term:'Matriz causal', abbr:null, def:'Tabla que define cómo afecta cada indicador del panel a los demás dentro del motor del simulador: la fila es la causa, la columna es el efecto, con una intensidad (de −3 a +3) y un desfase temporal asociados a cada relación.' },
@@ -672,13 +662,12 @@ let state = {
   profileKey:null,
   seed:'',
   rand:Math.random,
-  archetypes:[], // los 6 arquetipos de manual asignados a esta partida, uno por ronda
+  archetypes:[], // los 6 arquetipos habituales asignados a esta partida, uno por ronda
   alloc:{}, // asignación actual del usuario
   round:0,
   macro:null, // valores macro actuales
   moveHistory:{}, // moveHistory[varId][round] = movimiento normalizado (por typicalMove) realizado ese trimestre
-  history:[], // {round, macro:{...}, alloc:{...}, feedback:[...], reflection, alignment}
-  _pendingReflection:'',
+  history:[], // {round, macro:{...}, alloc:{...}, feedback:[...], alignment}
 };
 
 function getMove(varId, round){
@@ -699,7 +688,7 @@ function initAlloc(base){
         que le corresponda (T0 = este mismo trimestre si la causa ya se ha
         calculado antes en el orden; T+1/T+2 = trimestres anteriores).
      2. Se suman esas contribuciones (intensidad/3 × movimiento) más el
-        sesgo del arquetipo de manual asignado a esa ronda para esa variable.
+        sesgo del arquetipo habitual asignado a esa ronda para esa variable.
      3. La suma se comprime con tanh antes de traducirla a unidades reales:
         esto evita que varias causas alineadas disparen la variable sin
         límite, y hace que señales que se cancelan entre sí no produzcan
@@ -748,7 +737,7 @@ function stepMacro(targetRound){
     let acc = 0;
     if(isHeadline){
       // Variable titular de este arquetipo: su movimiento lo decide casi en
-      // exclusiva el caso de manual asignado a la ronda, no lo que arrastre la
+      // exclusiva el caso habitual asignado a la ronda, no lo que arrastre la
       // matriz causal de arquetipos anteriores. Es una simplificación deliberada
       // — preferimos una señal legible y fiable a un realismo que diluye el caso.
       acc = varBias[varId];
@@ -827,6 +816,24 @@ function zoneOf(varDef, val){
   return varDef.zones[varDef.zones.length-1].c;
 }
 
+const ZONE_LABEL = { green:'Verde', amber:'Ámbar', red:'Rojo' };
+
+function zonesDescription(v){
+  const fmt = n => n.toFixed(v.dec);
+  const parts = [];
+  let lower = v.min;
+  v.zones.forEach((z, i)=>{
+    const isFirst = i===0, isLast = i===v.zones.length-1;
+    let range;
+    if(isFirst) range = `hasta ${fmt(z.to)}${v.unit}`;
+    else if(isLast) range = `más de ${fmt(lower)}${v.unit}`;
+    else range = `de ${fmt(lower)} a ${fmt(z.to)}${v.unit}`;
+    parts.push(`${ZONE_LABEL[z.c]}: ${range}`);
+    lower = z.to;
+  });
+  return parts.join(' · ');
+}
+
 /* =========================================================================
    MOTOR DE OBSERVACIONES (feedback educativo, no calificación)
    ========================================================================= */
@@ -838,7 +845,7 @@ function evaluateRound(prevAlloc, newAlloc, prevMacro, newMacro, archetype){
   const noRecommendation = upIds.length===0 && downIds.length===0;
 
   // Puntuación de coincidencia: positiva si el movimiento va en el sentido del
-  // ajuste de manual (subir lo que había que subir, bajar lo que había que
+  // ajuste habitual (subir lo que había que subir, bajar lo que había que
   // bajar), negativa si va en sentido contrario.
   let score = 0, anyTouched = false;
   upIds.forEach(id=>{ const d=dAlloc(id); score+=d; if(Math.abs(d)>1) anyTouched=true; });
@@ -862,12 +869,12 @@ function evaluateRound(prevAlloc, newAlloc, prevMacro, newMacro, archetype){
   const chName = id => CHANNELS.find(c=>c.id===id).name;
   let optimalTxt;
   if(noRecommendation){
-    optimalTxt = 'El ajuste de manual aquí era no tocar la cartera: sin una señal clara, moverse por moverse también es un error de principiante.';
+    optimalTxt = 'El ajuste habitual aquí era no tocar la cartera: sin una señal clara, moverse por moverse también es un error de principiante.';
   } else {
     const parts = [];
     if(upIds.length) parts.push('ampliar '+upIds.map(chName).join(' y '));
     if(downIds.length) parts.push('reducir '+downIds.map(chName).join(' y '));
-    optimalTxt = `El ajuste de manual aquí: ${parts.join(', y ')}. ${archetype.optimal.rationale}`;
+    optimalTxt = `El ajuste habitual aquí: ${parts.join(', y ')}. ${archetype.optimal.rationale}`;
   }
 
   let comparisonTxt;
@@ -892,7 +899,7 @@ function buildFeedback(prevAlloc, newAlloc, prevMacro, newMacro, roundEval){
   const dMacro = id => (newMacro[id]||0)-(prevMacro?.[id]||newMacro[id]);
 
   // Lectura base: siempre presente. Describe el trimestre y evalúa el movimiento del usuario
-  // frente al ajuste de manual del caso de esa ronda. La pregunta abierta vive ahora en el campo de reflexión, no aquí.
+  // frente al ajuste habitual del caso de esa ronda.
   obs.push({tag:'Lectura del trimestre', text: roundEval.text});
 
   const deterioroEconomico = dMacro('pib') < -0.5 || dMacro('pmi') < -2;
@@ -1178,7 +1185,7 @@ function macroGaugeRowHTML(v, val, prevVal){
       <div class="val">${val.toFixed(v.dec)}${v.unit}</div>
       <div class="delta-wrap">${deltaHTML}</div>
     </div>
-    <div class="gauge-def" data-def-for="${v.id}">${v.def}</div>
+    <div class="gauge-def" data-def-for="${v.id}">${v.def}<div class="gauge-def-zones">${zonesDescription(v)}</div></div>
   </div>`;
 }
 
@@ -1201,24 +1208,20 @@ function recapHTML(prevEntry){
   if(a.optimal.down.length) parts.push('reducir '+a.optimal.down.map(chName).join(' y '));
   const optimalShort = parts.length ? parts.join(', y ') : 'no tocar la cartera';
   const alignLabel = {
-    coherente:'coincidió con el ajuste de manual',
-    contraria:'fue en la dirección contraria al ajuste de manual',
+    coherente:'coincidió con el ajuste habitual',
+    contraria:'fue en la dirección contraria al ajuste habitual',
     neutra:'no llegó a moverse con claridad en los canales relevantes'
   }[prevEntry.alignment] || '';
-  const reflectionBlock = prevEntry.reflection
-    ? `<div class="reflection-quote" style="margin:8px 0 10px;">“${prevEntry.reflection}”</div>`
-    : `<p class="faint" style="font-style:italic;margin:6px 0 10px;">No dejaste anotado tu razonamiento en el trimestre anterior.</p>`;
   return `
   <div class="recap-panel">
-    <div class="recap-title">Antes de seguir: tu trimestre ${prevEntry.round} era un caso de manual — ${a.label}</div>
-    ${reflectionBlock}
-    <p class="faint" style="margin:0;">El ajuste habitual ahí era ${optimalShort}. Tu decisión ${alignLabel}. Compara tu razonamiento con esto antes de decidir de nuevo.</p>
+    <div class="recap-title">Antes de seguir: tu trimestre ${prevEntry.round} era un caso habitual — ${a.label}</div>
+    <p class="faint" style="margin:0;">El ajuste habitual ahí era ${optimalShort}. Tu decisión ${alignLabel}.</p>
   </div>`;
 }
 
 function renderSim(){
   if(state.round===0){
-    // El trimestre 1 también parte de un arquetipo de manual: se calcula igual
+    // El trimestre 1 también parte de un arquetipo habitual: se calcula igual
     // que el resto de rondas, partiendo de la línea base de cada variable como
     // si fuera un "trimestre 0" implícito.
     state.macro = {};
@@ -1231,7 +1234,7 @@ function renderSim(){
   const prevEntry = state.history[state.history.length-1];
   const narrative = state.archetypes[state.round-1].desc;
   const intro = state.round===1 ? `
-    <p class="lede" style="margin:-4px 0 22px;max-width:none;">Vas a atravesar <strong style="color:var(--gold-bright);font-style:normal;">6 rondas trimestrales</strong>. Cada una plantea un caso de manual distinto: una situación deliberadamente clara, para que puedas relacionar lo que ves en el panel con la decisión que le corresponde. No te decimos cuál es el ajuste habitual hasta la ronda siguiente — reacciona primero con lo que ves. Al terminar la sexta ronda verás el recorrido completo, con el ajuste de manual de cada caso junto al tuyo.</p>` : '';
+    <p class="lede" style="margin:-4px 0 22px;max-width:none;">Vas a atravesar <strong style="color:var(--gold-bright);font-style:normal;">6 rondas trimestrales</strong>. Cada una plantea un caso habitual distinto: una situación deliberadamente clara, para que puedas relacionar lo que ves en el panel con la decisión que le corresponde. No te decimos cuál es el ajuste habitual hasta la ronda siguiente — reacciona primero con lo que ves. Al terminar la sexta ronda verás el recorrido completo, con el ajuste habitual de cada caso junto al tuyo.</p>` : '';
   const recap = state.round>1 ? recapHTML(prevEntry) : '';
 
   return `
@@ -1244,8 +1247,6 @@ function renderSim(){
   ${macroDashboardHTML()}
   <div class="alloc-group-title" style="margin-top:30px;">Tu asignación para esta ronda</div>
   <div id="sim-alloc-wrap"></div>
-  <div class="alloc-group-title">Tu razonamiento (opcional)</div>
-  <textarea id="reflection-input" class="reflection-input" placeholder="¿Qué pesó más en esta decisión? Escríbelo antes de confirmar: al llegar al resumen podrás comparar tu razonamiento del momento con la lectura del panel." rows="3">${state._pendingReflection||''}</textarea>
   <div class="actions">
     <button class="btn ghost" id="abandon-btn">Terminar aquí y ver resumen</button>
     <button class="btn primary" id="confirm-round-btn" disabled>Confirmar reasignación →</button>
@@ -1272,16 +1273,14 @@ function confirmRound(){
   const prevAlloc = Object.assign({}, state.alloc);
   const prevMacro = Object.assign({}, state.macro);
   const newAlloc = state._pendingAlloc || state.alloc;
-  const reflection = (document.getElementById('reflection-input')?.value || '').trim();
   const archetype = state.archetypes[state.round-1];
 
   const priorMacro = state.history.length? state.history[state.history.length-1].macro : null;
   const roundEval = evaluateRound(prevAlloc, newAlloc, priorMacro, prevMacro, archetype);
   const feedback = buildFeedback(prevAlloc, newAlloc, priorMacro, prevMacro, roundEval);
 
-  state.history.push({ round:state.round, macro:prevMacro, alloc:newAlloc, feedback, reflection, alignment:roundEval.alignment, archetype });
+  state.history.push({ round:state.round, macro:prevMacro, alloc:newAlloc, feedback, alignment:roundEval.alignment, archetype });
   state.alloc = newAlloc;
-  state._pendingReflection = '';
 
   if(state.round >= TOTAL_ROUNDS){
     state.phase='resumen';
@@ -1311,57 +1310,47 @@ function renderResumen(){
     `;
   }
 
+  const pending = pendingEffects();
+  const pendingByRound = {};
+  pending.forEach(p=>{
+    if(!pendingByRound[p.originRound]) pendingByRound[p.originRound] = [];
+    pendingByRound[p.originRound].push(p);
+  });
+
   const feedbackHTML = rounds.map(r=>{
     const items = r.feedback.length
       ? r.feedback.map(f=>`<div class="feedback"><div class="tag">${f.tag}</div><p>${f.text}</p></div>`).join('')
       : `<div class="no-feedback">Sin observaciones relevantes en esta ronda.</div>`;
-    const alignLabel = {coherente:'Coincide con el ajuste de manual', contraria:'Contrario al ajuste de manual', neutra:'Sin tocar los canales relevantes'}[r.alignment] || '';
-    const reflectionHTML = r.reflection
-      ? `<div class="reflection-quote">“${r.reflection}”</div>`
-      : `<p class="faint" style="font-style:italic;">No dejaste anotado tu razonamiento en esta ronda.</p>`;
+    const alignLabel = {coherente:'Coincide con el ajuste habitual', contraria:'Contrario al ajuste habitual', neutra:'Sin tocar los canales relevantes'}[r.alignment] || '';
+    const pendingForRound = pendingByRound[r.round] || [];
+    const pendingItemsHTML = pendingForRound.map(p=>{
+      const fromName = MACRO_VARS.find(m=>m.id===p.from).name;
+      const toName = MACRO_VARS.find(m=>m.id===p.to).name;
+      return `<div class="feedback"><div class="tag">T+${p.lag} sin resolver</div><p>El movimiento de <strong style="font-style:normal;color:var(--text);">${fromName}</strong> en este trimestre iba a presionar <strong style="font-style:normal;color:var(--text);">${toName}</strong>, con efecto previsto para el trimestre ${p.landRound} — fuera del recorrido.</p></div>`;
+    }).join('');
     return `
       <h3 style="margin-top:26px;">Trimestre ${r.round}</h3>
       <span class="alignment-tag ${r.alignment||'neutra'}">${alignLabel}</span>
-      <p class="faint" style="font-family:var(--font-ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:6px 0 2px;">Tu razonamiento en el momento</p>
-      ${reflectionHTML}
-      <p class="faint" style="font-family:var(--font-ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:14px 0 2px;">Lectura del simulador</p>
-      ${items}`;
+      ${items}
+      ${pendingItemsHTML}`;
   }).join('');
 
   const alignCounts = { coherente:0, contraria:0, neutra:0 };
   rounds.forEach(r=>{ if(r.alignment) alignCounts[r.alignment] = (alignCounts[r.alignment]||0)+1; });
   let styleReading;
   if(alignCounts.coherente > alignCounts.contraria && alignCounts.coherente >= 3){
-    styleReading = `En ${alignCounts.coherente} de ${rounds.length} rondas tu ajuste coincidió con el que suele hacerse en ese caso de manual. ${alignCounts.contraria} fueron en la dirección contraria y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
+    styleReading = `En ${alignCounts.coherente} de ${rounds.length} rondas tu ajuste coincidió con el que suele hacerse en ese caso habitual. ${alignCounts.contraria} fueron en la dirección contraria y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
   } else if(alignCounts.contraria > alignCounts.coherente && alignCounts.contraria >= 3){
-    styleReading = `En ${alignCounts.contraria} de ${rounds.length} rondas tu ajuste fue en la dirección contraria a la que suele hacerse en ese caso de manual. ${alignCounts.coherente} coincidieron y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
+    styleReading = `En ${alignCounts.contraria} de ${rounds.length} rondas tu ajuste fue en la dirección contraria a la que suele hacerse en ese caso habitual. ${alignCounts.coherente} coincidieron y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
   } else if(alignCounts.neutra >= 4){
     styleReading = `En ${alignCounts.neutra} de ${rounds.length} rondas no llegaste a mover con claridad los canales que cada caso señalaba como relevantes: perfil predominantemente pasivo en este recorrido.`;
   } else {
-    styleReading = `Reparto sin patrón dominante: ${alignCounts.coherente} rondas coincidieron con el ajuste de manual, ${alignCounts.contraria} fueron en dirección contraria y ${alignCounts.neutra} no tocaron los canales relevantes.`;
+    styleReading = `Reparto sin patrón dominante: ${alignCounts.coherente} rondas coincidieron con el ajuste habitual, ${alignCounts.contraria} fueron en dirección contraria y ${alignCounts.neutra} no tocaron los canales relevantes.`;
   }
 
   const stackHTML = rounds.map(r=>{
     const bars = CHANNELS.map(c=>`<span style="width:${r.alloc[c.id]||0}%;background:${c.color};" title="${c.name}: ${r.alloc[c.id]||0}%"></span>`).join('');
     return `<div class="stack-label">Trimestre ${r.round}</div><div class="stack-row">${bars}</div>`;
-  }).join('');
-
-  const macroSpark = MACRO_VARS.map(v=>{
-    const vals = rounds.map(r=>r.macro[v.id]);
-    const min=Math.min(...vals), max=Math.max(...vals);
-    const pts = vals.map((val,i)=>{
-      const x = (i/(vals.length-1||1))*280;
-      const y = 40 - ( (val-v.min)/(v.max-v.min) )*40;
-      return `${x},${y}`;
-    }).join(' ');
-    return `
-    <div class="chart-wrap">
-      <div class="chart-title">${v.name}</div>
-      <svg width="280" height="44" viewBox="0 0 280 44">
-        <polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
-      </svg>
-      <div class="faint" style="font-family:var(--font-ui);font-size:12px;">de ${vals[0].toFixed(v.dec)} a ${vals[vals.length-1].toFixed(v.dec)}${v.unit}</div>
-    </div>`;
   }).join('');
 
   const legend = CHANNELS.map(c=>`<span class="faint" style="font-family:var(--font-ui);font-size:11px;margin-right:14px;"><span class="legend-dot" style="background:${c.color};"></span>${c.name}</span>`).join('');
@@ -1374,39 +1363,27 @@ function renderResumen(){
       }).join('')}
     </div>`;
 
-  const pending = pendingEffects();
-  const pendingHTML = pending.length ? `
-    <div class="alloc-group-title">Efectos pendientes al cerrar el recorrido</div>
-    <p class="faint" style="margin-top:-2px;">Algunos movimientos de los últimos trimestres activaron efectos con desfase que caerían fuera de las 6 rondas simuladas. No se han aplicado: es una limitación honesta del recorrido corto, coherente con lo que señalan los propios bancos centrales sobre los retardos de la política monetaria.</p>
-    ${pending.map(p=>{
-      const fromName = MACRO_VARS.find(m=>m.id===p.from).name;
-      const toName = MACRO_VARS.find(m=>m.id===p.to).name;
-      return `<div class="feedback"><div class="tag">T+${p.lag} sin resolver</div><p>El movimiento de <strong style="font-style:normal;color:var(--text);">${fromName}</strong> en el trimestre ${p.originRound} iba a presionar <strong style="font-style:normal;color:var(--text);">${toName}</strong>, con efecto previsto para el trimestre ${p.landRound} — fuera del recorrido.</p></div>`;
-    }).join('')}
-  ` : '';
+  const pendingNote = pending.length
+    ? `<p class="faint" style="margin:6px 0 0;">Algunos efectos con desfase, activados en trimestres cercanos al cierre, caerían fuera de las 6 rondas simuladas y no se han aplicado — señalados en su trimestre de origen más abajo. Es una limitación honesta del recorrido corto, coherente con lo que señalan los propios bancos centrales sobre los retardos de la política monetaria.</p>`
+    : '';
 
   return `
   <div class="eyebrow">V. Resumen</div>
   <h1>Recorrido del escenario</h1>
   <p class="lede">${TOTAL_ROUNDS} trimestres simulados${state.seed?` · semilla: ${state.seed}`:''}.</p>
 
-  <div class="alloc-group-title">Recorrido de casos de manual</div>
+  <div class="alloc-group-title">Recorrido de casos habituales</div>
   ${casesHTML}
 
   <div class="alloc-group-title">Evolución de tu asignación</div>
   <div class="chart-wrap">${stackHTML}</div>
   <div style="margin:10px 0 30px;">${legend}</div>
 
-  <div class="alloc-group-title">Evolución de las variables macro</div>
-  <div class="card-grid" style="grid-template-columns:1fr 1fr 1fr;">${macroSpark}</div>
-
   <div class="alloc-group-title">Balance de comportamiento</div>
   <div class="feedback"><div class="tag">Patrón dominante</div><p>${styleReading}</p></div>
 
-  ${pendingHTML}
-
   <div class="alloc-group-title">Observaciones por ronda</div>
-  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso de manual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable.</p>
+  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso habitual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable.${pendingNote}</p>
   ${feedbackHTML}
 
   <div class="actions">
@@ -1481,11 +1458,10 @@ function bindPhase(){
     renderSimAllocEditor($('sim-alloc-wrap'));
     $('confirm-round-btn')?.addEventListener('click', confirmRound);
     $('abandon-btn')?.addEventListener('click', ()=>{ state.phase='resumen'; render(); });
-    $('reflection-input')?.addEventListener('input', e=>{ state._pendingReflection = e.target.value; });
   }
   if(state.phase==='resumen'){
     $('restart-btn')?.addEventListener('click', ()=>{
-      state = { phase:'portada', profileKey:null, seed:'', rand:Math.random, archetypes:[], alloc:{}, round:0, macro:null, moveHistory:{}, history:[], _pendingReflection:'' };
+      state = { phase:'portada', profileKey:null, seed:'', rand:Math.random, archetypes:[], alloc:{}, round:0, macro:null, moveHistory:{}, history:[] };
       render();
     });
     $('goto-sim-btn')?.addEventListener('click', ()=> goToPhase('sim'));

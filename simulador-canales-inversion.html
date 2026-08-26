@@ -1317,15 +1317,30 @@ function renderResumen(){
 
   const alignCounts = { coherente:0, contraria:0, neutra:0 };
   rounds.forEach(r=>{ if(r.alignment) alignCounts[r.alignment] = (alignCounts[r.alignment]||0)+1; });
+
+  // Conjuga bien el cero y el uno en vez de usar el número como sujeto ("0 fueron"
+  // no es español natural): "ninguna fue" / "1 fue" / "3 fueron".
+  function countClause(n, verbSing, verbPlur, capitalize){
+    const subj = n===0 ? 'ninguna' : n===1 ? '1' : String(n);
+    const verb = n<=1 ? verbSing : verbPlur;
+    const text = `${subj} ${verb}`;
+    return capitalize ? text.charAt(0).toUpperCase()+text.slice(1) : text;
+  }
+  function countRoundsClause(n, verbSing, verbPlur){
+    const article = n===0 ? 'ninguna ronda' : n===1 ? '1 ronda' : `${n} rondas`;
+    const verb = n<=1 ? verbSing : verbPlur;
+    return `${article} ${verb}`;
+  }
+
   let styleReading;
   if(alignCounts.coherente > alignCounts.contraria && alignCounts.coherente >= 3){
-    styleReading = `En ${alignCounts.coherente} de ${rounds.length} rondas tu ajuste coincidió con el que suele hacerse en ese caso habitual. ${alignCounts.contraria} fueron en la dirección contraria y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
+    styleReading = `En ${alignCounts.coherente} de ${rounds.length} rondas tu ajuste coincidió con el que suele hacerse en ese caso habitual. ${countClause(alignCounts.contraria,'fue','fueron',true)} en la dirección contraria y ${countClause(alignCounts.neutra,'se quedó','se quedaron',false)} sin tocar con claridad los canales relevantes.`;
   } else if(alignCounts.contraria > alignCounts.coherente && alignCounts.contraria >= 3){
-    styleReading = `En ${alignCounts.contraria} de ${rounds.length} rondas tu ajuste fue en la dirección contraria a la que suele hacerse en ese caso habitual. ${alignCounts.coherente} coincidieron y ${alignCounts.neutra} no tocaron con claridad los canales relevantes.`;
+    styleReading = `En ${alignCounts.contraria} de ${rounds.length} rondas tu ajuste fue en la dirección contraria a la que suele hacerse en ese caso habitual. ${countClause(alignCounts.coherente,'coincidió','coincidieron',true)} y ${countClause(alignCounts.neutra,'se quedó','se quedaron',false)} sin tocar con claridad los canales relevantes.`;
   } else if(alignCounts.neutra >= 4){
     styleReading = `En ${alignCounts.neutra} de ${rounds.length} rondas no llegaste a mover con claridad los canales que cada caso señalaba como relevantes: perfil predominantemente pasivo en este recorrido.`;
   } else {
-    styleReading = `Reparto sin patrón dominante: ${alignCounts.coherente} rondas coincidieron con el ajuste habitual, ${alignCounts.contraria} fueron en dirección contraria y ${alignCounts.neutra} no tocaron los canales relevantes.`;
+    styleReading = `Reparto sin patrón dominante: ${countRoundsClause(alignCounts.coherente,'coincidió','coincidieron')} con el ajuste habitual, ${countClause(alignCounts.contraria,'fue','fueron',false)} en dirección contraria y ${countClause(alignCounts.neutra,'se quedó','se quedaron',false)} sin tocar los canales relevantes.`;
   }
 
   const stackHTML = rounds.map(r=>{

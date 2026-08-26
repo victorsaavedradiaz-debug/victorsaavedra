@@ -565,7 +565,6 @@ const GLOSSARY_EXTRA = [
   { term:'BCE', abbr:'Banco Central Europeo', def:'Autoridad monetaria de la eurozona. Fija los tipos oficiales que, junto con los de la Fed, representa la variable "Tipos oficiales" del panel.' },
   { term:'Fed', abbr:'Reserva Federal (Federal Reserve)', def:'Banco central de Estados Unidos. Fija su propio tipo oficial de referencia; junto con el del BCE, inspira la variable "Tipos oficiales" del panel.' },
   { term:'Matriz causal', abbr:null, def:'Tabla que define cómo afecta cada indicador del panel a los demás dentro del motor del simulador: la fila es la causa, la columna es el efecto, con una intensidad (de −3 a +3) y un desfase temporal asociados a cada relación.' },
-  { term:'Desfase temporal (T0 / T+1 / T+2)', abbr:null, def:'Tiempo que tarda en manifestarse el efecto de una variable sobre otra. T0 significa que el efecto aparece en el mismo trimestre; T+1 y T+2, uno y dos trimestres después. Los bancos centrales señalan que los efectos de la política monetaria sobre la economía real se producen con retardos variables.' },
   { term:'Punto básico (pb)', abbr:'Basis point', def:'Centésima parte de un punto porcentual (0,01%). Unidad habitual para medir spreads de crédito y diferenciales soberanos.' },
   { term:'Duración', abbr:null, def:'Medida de la sensibilidad del precio de un bono a variaciones de los tipos de interés. A mayor duración, mayor variación de precio ante el mismo cambio de tipos.' },
   { term:'Spread de crédito', abbr:null, def:'Diferencial de rentabilidad que exige el mercado a la deuda corporativa sobre la deuda pública equivalente, como compensación por el riesgo de impago.' },
@@ -784,31 +783,6 @@ function stepMacro(targetRound){
 
   state.macro = next;
   return next;
-}
-
-/* =========================================================================
-   EFECTOS PENDIENTES NO RESUELTOS
-   Al terminar el recorrido, algunos efectos con desfase T+1/T+2 activados
-   en los últimos trimestres caerían fuera de las 6 rondas. Se listan en
-   vez de ocultarlos: es una limitación honesta del recorrido corto, no un
-   error del motor.
-   ========================================================================= */
-function pendingEffects(){
-  const results = [];
-  Object.keys(CAUSES_OF).forEach(toId=>{
-    CAUSES_OF[toId].forEach(e=>{
-      if(e.lag===0) return;
-      for(let originRound=Math.max(2, TOTAL_ROUNDS-e.lag+1); originRound<=TOTAL_ROUNDS; originRound++){
-        const move = getMove(e.from, originRound);
-        const landRound = originRound + e.lag;
-        if(landRound > TOTAL_ROUNDS && Math.abs(move) > 0.5){
-          results.push({ from:e.from, to:toId, lag:e.lag, originRound, landRound, weight: Math.abs(move*e.i) });
-        }
-      }
-    });
-  });
-  results.sort((a,b)=>b.weight-a.weight);
-  return results.slice(0,4);
 }
 
 function zoneOf(varDef, val){
@@ -1310,29 +1284,15 @@ function renderResumen(){
     `;
   }
 
-  const pending = pendingEffects();
-  const pendingByRound = {};
-  pending.forEach(p=>{
-    if(!pendingByRound[p.originRound]) pendingByRound[p.originRound] = [];
-    pendingByRound[p.originRound].push(p);
-  });
-
   const feedbackHTML = rounds.map(r=>{
     const items = r.feedback.length
       ? r.feedback.map(f=>`<div class="feedback"><div class="tag">${f.tag}</div><p>${f.text}</p></div>`).join('')
       : `<div class="no-feedback">Sin observaciones relevantes en esta ronda.</div>`;
     const alignLabel = {coherente:'Coincide con el ajuste habitual', contraria:'Contrario al ajuste habitual', neutra:'Sin tocar los canales relevantes'}[r.alignment] || '';
-    const pendingForRound = pendingByRound[r.round] || [];
-    const pendingItemsHTML = pendingForRound.map(p=>{
-      const fromName = MACRO_VARS.find(m=>m.id===p.from).name;
-      const toName = MACRO_VARS.find(m=>m.id===p.to).name;
-      return `<div class="feedback"><div class="tag">T+${p.lag} sin resolver</div><p>El movimiento de <strong style="font-style:normal;color:var(--text);">${fromName}</strong> en este trimestre iba a presionar <strong style="font-style:normal;color:var(--text);">${toName}</strong>, con efecto previsto para el trimestre ${p.landRound} — fuera del recorrido.</p></div>`;
-    }).join('');
     return `
       <h3 style="margin-top:26px;">Trimestre ${r.round}</h3>
       <span class="alignment-tag ${r.alignment||'neutra'}">${alignLabel}</span>
-      ${items}
-      ${pendingItemsHTML}`;
+      ${items}`;
   }).join('');
 
   const alignCounts = { coherente:0, contraria:0, neutra:0 };
@@ -1363,10 +1323,6 @@ function renderResumen(){
       }).join('')}
     </div>`;
 
-  const pendingNote = pending.length
-    ? `<p class="faint" style="margin:6px 0 0;">Algunos efectos con desfase, activados en trimestres cercanos al cierre, caerían fuera de las 6 rondas simuladas y no se han aplicado — señalados en su trimestre de origen más abajo. Es una limitación honesta del recorrido corto, coherente con lo que señalan los propios bancos centrales sobre los retardos de la política monetaria.</p>`
-    : '';
-
   return `
   <div class="eyebrow">V. Resumen</div>
   <h1>Recorrido del escenario</h1>
@@ -1383,7 +1339,7 @@ function renderResumen(){
   <div class="feedback"><div class="tag">Patrón dominante</div><p>${styleReading}</p></div>
 
   <div class="alloc-group-title">Observaciones por ronda</div>
-  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso habitual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable.${pendingNote}</p>
+  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso habitual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable.</p>
   ${feedbackHTML}
 
   <div class="actions">

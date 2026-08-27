@@ -64,4 +64,8 @@
     <loc>https://victorsaavedra.com/simulador-canales-inversion.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://victorsaavedra.com/simulador-canales-inversion-intermedio.html</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>

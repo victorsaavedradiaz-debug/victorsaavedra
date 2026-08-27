@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulador de Canales de Inversión · Víctor Saavedra</title>
+<title>Simulador de Canales de Inversión · Nivel Intermedio · Víctor Saavedra</title>
 <meta name="description" content="Simulador educativo: aprende los canales de inversión, elige un perfil o construye tu propia cartera, y reacciona a un entorno macroeconómico sintético que cambia con el tiempo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -270,7 +270,7 @@
 <div class="app">
   <div class="topbar">
     <div class="topbar-row">
-      <div class="brand" style="margin-bottom:0;"><a href="simuladores.html" class="brand-back">← Volver</a>Víctor Saavedra · <strong>Simulador de Canales de Inversión</strong></div>
+      <div class="brand" style="margin-bottom:0;"><a href="simuladores.html" class="brand-back">← Volver</a>Víctor Saavedra · <strong>Simulador de Canales de Inversión · Nivel Intermedio</strong></div>
       <button class="glossary-btn" id="glossary-open-btn">Glosario</button>
     </div>
     <nav class="steps" id="steps" style="margin-top:14px;"></nav>
@@ -301,17 +301,17 @@ const CHANNELS = [
   { id:'liquidez', name:'Liquidez / Monetario', group:'defensivo',
     def:'Fondos monetarios y depósitos a corto plazo invertidos en deuda pública y bancaria de vencimiento inferior a un año. Prioriza la preservación de capital y la disponibilidad inmediata.',
     risk:'Coste de oportunidad en fases de expansión',
-    sens:'Los tipos oficiales fijan directamente su rentabilidad. Suele recibir flujos cuando el PMI se deteriora o el VIX repunta con fuerza.',
+    sens:'Los tipos oficiales fijan directamente su rentabilidad. Suele recibir flujos cuando el PMI se deteriora, sube el paro o el VIX repunta con fuerza.',
     color:'#7a9ecf' },
   { id:'rf_gob', name:'Renta Fija Gobierno', group:'defensivo',
     def:'Deuda soberana de países desarrollados, con vencimientos de corto a largo plazo.',
     risk:'Riesgo de duración: el precio reacciona de forma inversa a los tipos',
-    sens:'Los tipos oficiales y el bono a 10 años marcan directamente su precio por efecto duración. La inflación erosiona su rentabilidad real.',
+    sens:'Los tipos oficiales, el bono a 10 años y las expectativas de tipos marcan directamente su precio por efecto duración. La inflación subyacente erosiona su rentabilidad real, y la deuda pública acumulada presiona la prima exigida a largo plazo.',
     color:'#8fb08f' },
   { id:'rf_corp', name:'Renta Fija Corporativa', group:'defensivo',
     def:'Deuda emitida por empresas, con una prima sobre la deuda pública que compensa el riesgo de impago.',
     risk:'Riesgo de crédito (spread) además del de duración',
-    sens:'Además del riesgo de duración, incorpora riesgo de crédito: se resiente cuando el PIB o el PMI se deterioran y las revisiones de beneficios empeoran.',
+    sens:'Además del riesgo de duración, incorpora riesgo de crédito: se resiente cuando el spread de crédito corporativo se ensancha, el PIB o el PMI se deterioran, o las revisiones de beneficios empeoran.',
     color:'#c07d2e' },
   { id:'mixto', name:'Mixto Defensivo', group:'defensivo',
     def:'Fondos que combinan renta fija y renta variable con objetivo de preservación de capital y baja volatilidad.',
@@ -321,7 +321,7 @@ const CHANNELS = [
   { id:'rv', name:'Renta Variable', group:'riesgo',
     def:'Participación en el capital de empresas cotizadas.',
     risk:'Riesgo de mercado y de beneficios empresariales',
-    sens:'El PMI y las revisiones de beneficios adelantan el ciclo de resultados. El VIX fija la prima de riesgo exigida; los tipos oficiales y el bono a 10 años, el coste de capital.',
+    sens:'El PMI y las revisiones de beneficios adelantan el ciclo de resultados; la tasa de paro lo confirma con rezago. El VIX fija la prima de riesgo exigida; los tipos oficiales, las expectativas de tipos y el bono a 10 años, el coste de capital.',
     color:'#c9a227' },
   { id:'inmo', name:'Inmobiliario (REITs / SOCIMIs)', group:'riesgo',
     def:'Vehículos cotizados que invierten en activos inmobiliarios y reparten rentas vía alquileres.',
@@ -331,7 +331,7 @@ const CHANNELS = [
   { id:'oro', name:'Oro / Materias primas', group:'riesgo',
     def:'Activos reales sin flujo de caja propio, empleados tradicionalmente como reserva de valor.',
     risk:'No genera rentas; su precio depende de la demanda como cobertura',
-    sens:'VIX elevado (activo refugio en episodios de estrés), inflación al alza (cobertura), y el bono a 10 años como coste de oportunidad de mantenerlo.',
+    sens:'VIX elevado (activo refugio en episodios de estrés), inflación subyacente al alza (cobertura), y el bono a 10 años como coste de oportunidad de mantenerlo.',
     color:'#e0bc4a' },
   { id:'cripto', name:'Criptoactivos', group:'riesgo',
     def:'Activos digitales sin respaldo de flujos de caja ni de un emisor soberano o corporativo, de elevada volatilidad.',
@@ -349,83 +349,144 @@ const CHANNELS = [
    ========================================================================= */
 const MACRO_VARS = [
   { id:'pib', name:'PIB real', unit:'%', dec:1, typicalMove:0.5,
-    def:'Producto Interior Bruto real: el crecimiento o la contracción de la economía, descontando el efecto de los precios. Variable coincidente y algo rezagada: confirma el ciclo más que lo anticipa.',
+    def:'Producto Interior Bruto real: el crecimiento o la contracción de la economía, descontando el efecto de los precios. Marca el tono general del ciclo económico.',
     baseline:1.5, min:-3, max:5,
     zones:[{to:0,c:'red'},{to:0.8,c:'amber'},{to:5,c:'green'}] },
-  { id:'inflacion', name:'Inflación', unit:'%', dec:1, typicalMove:0.6,
-    def:'Evolución general de los precios (IPC interanual). Condiciona el poder adquisitivo, la política monetaria y la valoración de los activos.',
+  { id:'inflacion', name:'Inflación subyacente', unit:'%', dec:1, typicalMove:0.6,
+    def:'Presiones de precios más persistentes, excluyendo los componentes más volátiles (energía y alimentos frescos). Es la referencia que de verdad sigue un banco central para decidir sobre los tipos.',
     baseline:2.2, min:-1, max:9,
     zones:[{to:-0.6,c:'red'},{to:1.4,c:'amber'},{to:3,c:'green'},{to:5,c:'amber'},{to:9,c:'red'}] },
-  { id:'pmi', name:'PMI', unit:'', dec:1, typicalMove:2.0,
-    def:'Índice de difusión basado en encuestas a directores de compras, que anticipa la actividad empresarial a través de pedidos, producción y expectativas. Suele avisar de cambios de ciclo antes que el PIB.',
-    baseline:50, min:35, max:65,
-    zones:[{to:44,c:'red'},{to:48,c:'amber'},{to:56,c:'green'},{to:65,c:'amber'}] },
-  { id:'tipos', name:'Tipos oficiales', unit:'%', dec:2, typicalMove:0.4,
-    def:'Precio oficial del dinero fijado por el banco central. Afecta al coste de financiación, a los bonos y a la valoración de la renta variable.',
-    baseline:2.5, min:0, max:6,
-    zones:[{to:1.2,c:'amber'},{to:3.5,c:'green'},{to:4.8,c:'amber'},{to:6,c:'red'}] },
+  { id:'paro', name:'Tasa de paro', unit:'%', dec:1, typicalMove:0.4,
+    def:'Fortaleza o debilidad del mercado laboral. Afecta al consumo, a los salarios, y es uno de los mejores indicadores del riesgo de recesión.',
+    baseline:7.0, min:3, max:16,
+    zones:[{to:7.8,c:'green'},{to:10.5,c:'amber'},{to:16,c:'red'}] },
   { id:'deficit', name:'Déficit público', unit:'% PIB', dec:1, typicalMove:0.5,
-    def:'Diferencia entre gastos e ingresos públicos, en porcentaje del PIB. Funciona como proxy del impulso fiscal: puede estimular la economía a corto plazo a costa de presionar la financiación pública.',
+    def:'Diferencia entre gastos e ingresos públicos, en porcentaje del PIB. Puede estimular la economía a corto plazo, a costa de presionar la financiación pública.',
     baseline:3.0, min:-1, max:10,
     zones:[{to:3.6,c:'green'},{to:6,c:'amber'},{to:10,c:'red'}] },
+  { id:'deuda', name:'Deuda pública', unit:'% PIB', dec:0, typicalMove:3,
+    def:'Nivel acumulado de endeudamiento público, en porcentaje del PIB. A diferencia del déficit (el desequilibrio de un solo año), es una variable de fondo que se mueve despacio y afecta a la sostenibilidad fiscal y a la prima de riesgo exigida.',
+    baseline:95, min:60, max:150,
+    zones:[{to:105,c:'green'},{to:130,c:'amber'},{to:150,c:'red'}] },
+  { id:'tipos', name:'Tipos oficiales', unit:'%', dec:2, typicalMove:0.4,
+    def:'Precio oficial del dinero fijado por el banco central (BCE / Fed). Afecta al coste de financiación, a los bonos y a la valoración de la renta variable.',
+    baseline:2.5, min:0, max:6,
+    zones:[{to:1.2,c:'amber'},{to:3.5,c:'green'},{to:4.8,c:'amber'},{to:6,c:'red'}] },
+  { id:'pmi', name:'PMI compuesto', unit:'', dec:1, typicalMove:2.0,
+    def:'Índice compuesto basado en encuestas a directores de compras, que anticipa la actividad empresarial a través de pedidos, producción y expectativas. Suele avisar de cambios de ciclo antes que el PIB.',
+    baseline:50, min:35, max:65,
+    zones:[{to:44,c:'red'},{to:48,c:'amber'},{to:56,c:'green'},{to:65,c:'amber'}] },
+  { id:'expectativas', name:'Expectativas de tipos', unit:'pp', dec:2, typicalMove:0.3,
+    def:'Lo que el mercado descuenta sobre las próximas subidas o bajadas de tipos, no el tipo oficial vigente ahora mismo. Los activos suelen reaccionar antes al cambio esperado que al cambio efectivo.',
+    baseline:0, min:-2, max:2,
+    zones:[{to:0.5,c:'green'},{to:1.2,c:'amber'},{to:2,c:'red'}] },
   { id:'bono10y', name:'Bono soberano 10 años', unit:'%', dec:2, typicalMove:0.35,
     def:'Rentabilidad exigida por el mercado para prestar al Estado a diez años. Referencia central para el coste del dinero a largo plazo; afecta a bonos, acciones e inmobiliario.',
     baseline:3.5, min:1, max:7,
     zones:[{to:3.9,c:'green'},{to:5.5,c:'amber'},{to:7,c:'red'}] },
   { id:'revisiones', name:'Revisiones de beneficios', unit:'%', dec:0, typicalMove:6,
-    def:'Balance neto entre analistas que elevan y que recortan sus estimaciones de beneficios empresariales. Síntesis de cómo la economía se traslada a las cuentas de las empresas.',
+    def:'Balance neto entre analistas que elevan y que recortan sus estimaciones de beneficios empresariales. Uno de los mejores termómetros adelantados para la renta variable.',
     baseline:0, min:-30, max:30,
     zones:[{to:-14,c:'red'},{to:-3,c:'amber'},{to:14,c:'green'},{to:30,c:'amber'}] },
+  { id:'spread', name:'Spread de crédito corporativo', unit:'pb', dec:0, typicalMove:15,
+    def:'Prima que exige el mercado para prestar a empresas en vez de al Estado. Se amplía cuando se detecta un deterioro real del riesgo financiero y crediticio, con frecuencia antes de que se note en otros indicadores.',
+    baseline:90, min:40, max:350,
+    zones:[{to:110,c:'green'},{to:180,c:'amber'},{to:350,c:'red'}] },
   { id:'vix', name:'VIX', unit:'', dec:1, typicalMove:3,
-    def:'Índice de volatilidad implícita del S&P 500. Actúa principalmente como sensor de estrés financiero: consecuencia de otras variables más que motor de la economía.',
+    def:'Volatilidad implícita esperada de la renta variable. Mide la tensión y la aversión al riesgo del mercado; actúa más como sensor que como motor de la economía.',
     baseline:18, min:10, max:50,
     zones:[{to:20,c:'green'},{to:30,c:'amber'},{to:50,c:'red'}] },
 ];
 
 /* =========================================================================
-   MATRIZ CAUSAL DEL MOTOR (8 × 8)
-   Se define por causa: para cada variable, la lista de efectos que provoca
-   sobre las demás, con una intensidad (−3 a +3) y un desfase (0, 1 o 2
-   trimestres). Las relaciones "T0/T+1" del documento original se reparten
-   en dos entradas de intensidad mitad, una a cada desfase, para no contar
-   el mismo impulso dos veces.
+   MATRIZ CAUSAL DEL MOTOR (12 × 12) — NIVEL INTERMEDIO
+   Amplía la matriz de 8×8 del nivel Básico con cuatro indicadores nuevos
+   (Tasa de paro, Deuda pública, Expectativas de tipos, Spread de crédito
+   corporativo) y sus relaciones con el resto. Se recalibra además
+   Tipos→Bono10Y (de +3 a +2 T0), porque ahora Expectativas de tipos
+   asume el papel principal de mover el bono a corto plazo — el propio
+   documento de diseño señala que "los activos reaccionan antes al cambio
+   esperado que al cambio efectivo".
 
-   Orden fijo de cálculo dentro de cada trimestre (necesario para las
-   relaciones T0, que requieren que la causa ya esté calculada ese mismo
-   trimestre):
-     PIB → Inflación → Déficit → Tipos oficiales → PMI → Bono 10Y →
-     Revisiones de beneficios → VIX
+   Orden fijo de cálculo dentro de cada trimestre:
+     PIB → Inflación subyacente → Tasa de paro → Déficit público →
+     Deuda pública → Tipos oficiales → PMI compuesto → Expectativas de
+     tipos → Bono 10 años → Revisiones de beneficios → Spread de crédito
+     → VIX
 
-   El VIX se calcula el último porque actúa como sensor de estrés, no como
-   motor. Esto deja dos relaciones T0 sin poder resolverse en el mismo
-   trimestre en el sentido inverso (VIX→PMI y VIX→Revisiones forman un
-   ciclo T0 con PMI→VIX y Revisiones→VIX). Para esas dos, únicamente, se
-   usa el VIX del trimestre anterior en vez del de este trimestre — una
-   degradación deliberada y señalada, coherente con el papel del VIX como
-   variable reactiva y no causal principal.
+   El VIX se sigue calculando el último, como en Básico. Con 12 variables
+   aparece un segundo ciclo T0 además del de PMI/Revisiones ya conocido:
+   Bono10Y y Spread se necesitan mutuamente el mismo trimestre. Se resuelve
+   degradando Spread→Bono10Y a T+1 (en vez de T0), dejando Bono10Y→Spread
+   como la relación del mismo trimestre. El VIX mantiene la misma
+   degradación que en Básico, ahora sobre cuatro salidas en vez de dos
+   (PMI, Revisiones, Spread, Expectativas): todas usan el VIX del
+   trimestre anterior en vez del de este trimestre.
    ========================================================================= */
 const CAUSAL_MATRIX = {
-  pib:        [ {to:'inflacion', i:2,  lag:1}, {to:'pmi', i:1, lag:0}, {to:'tipos', i:1, lag:1},
-                {to:'deficit', i:-2, lag:1}, {to:'bono10y', i:1, lag:0}, {to:'vix', i:-1, lag:0},
-                {to:'revisiones', i:3, lag:0} ],
-  inflacion:  [ {to:'pib', i:-1, lag:1}, {to:'pmi', i:-1, lag:1},
-                {to:'tipos', i:1.5, lag:0}, {to:'tipos', i:1.5, lag:1},
-                {to:'deficit', i:1, lag:1}, {to:'bono10y', i:3, lag:0}, {to:'vix', i:1, lag:0},
-                {to:'revisiones', i:-2, lag:1} ],
-  pmi:        [ {to:'pib', i:3, lag:1}, {to:'deficit', i:-1, lag:1}, {to:'vix', i:-1, lag:0},
-                {to:'revisiones', i:2, lag:0} ],
-  tipos:      [ {to:'pib', i:-3, lag:2}, {to:'inflacion', i:-3, lag:2}, {to:'pmi', i:-2, lag:1},
-                {to:'deficit', i:1, lag:1}, {to:'bono10y', i:3, lag:0}, {to:'vix', i:1, lag:0},
-                {to:'revisiones', i:-2, lag:1} ],
-  deficit:    [ {to:'pib', i:2, lag:1}, {to:'inflacion', i:1, lag:1}, {to:'pmi', i:1, lag:0},
-                {to:'tipos', i:1, lag:1}, {to:'bono10y', i:1, lag:0}, {to:'bono10y', i:1, lag:1},
-                {to:'vix', i:1, lag:0}, {to:'revisiones', i:1, lag:1} ],
-  bono10y:    [ {to:'pib', i:-2, lag:1}, {to:'pmi', i:-1, lag:1}, {to:'deficit', i:1, lag:1},
-                {to:'vix', i:1, lag:0}, {to:'revisiones', i:-1, lag:0}, {to:'revisiones', i:-1, lag:1} ],
-  revisiones: [ {to:'pib', i:1, lag:1}, {to:'pmi', i:1, lag:0}, {to:'deficit', i:-1, lag:1},
-                {to:'vix', i:-2, lag:0} ],
-  vix:        [ {to:'pib', i:-1, lag:1}, {to:'pmi', i:-1, lag:0, degraded:true},
-                {to:'revisiones', i:-1, lag:0, degraded:true} ],
+  pib: [
+    {to:'inflacion', i:2, lag:1}, {to:'pmi', i:1, lag:0}, {to:'tipos', i:1, lag:1},
+    {to:'deficit', i:-2, lag:1}, {to:'bono10y', i:1, lag:0}, {to:'vix', i:-1, lag:0},
+    {to:'revisiones', i:3, lag:0}, {to:'paro', i:-2, lag:1}, {to:'expectativas', i:1, lag:0},
+    {to:'deuda', i:-1, lag:1}, {to:'spread', i:-1, lag:0},
+  ],
+  inflacion: [
+    {to:'pib', i:-1, lag:1}, {to:'pmi', i:-1, lag:1},
+    {to:'tipos', i:1.5, lag:0}, {to:'tipos', i:1.5, lag:1},
+    {to:'deficit', i:1, lag:1}, {to:'bono10y', i:3, lag:0}, {to:'vix', i:1, lag:0},
+    {to:'revisiones', i:-2, lag:1}, {to:'expectativas', i:2, lag:0},
+    {to:'deuda', i:-1, lag:1}, {to:'spread', i:1, lag:0},
+  ],
+  paro: [
+    {to:'pib', i:-2, lag:1}, {to:'inflacion', i:-1, lag:1}, {to:'deficit', i:2, lag:1},
+    {to:'bono10y', i:-1, lag:0}, {to:'spread', i:1, lag:0}, {to:'vix', i:1, lag:0},
+    {to:'revisiones', i:-2, lag:1},
+  ],
+  pmi: [
+    {to:'pib', i:3, lag:1}, {to:'deficit', i:-1, lag:1}, {to:'vix', i:-1, lag:0},
+    {to:'revisiones', i:2, lag:0}, {to:'paro', i:-2, lag:1}, {to:'expectativas', i:1, lag:0},
+    {to:'spread', i:-1, lag:0},
+  ],
+  tipos: [
+    {to:'pib', i:-3, lag:2}, {to:'inflacion', i:-3, lag:2}, {to:'pmi', i:-2, lag:1},
+    {to:'deficit', i:1, lag:1}, {to:'bono10y', i:2, lag:0}, {to:'vix', i:1, lag:0},
+    {to:'revisiones', i:-2, lag:1}, {to:'paro', i:2, lag:2}, {to:'deuda', i:1, lag:1},
+    {to:'spread', i:1, lag:0},
+  ],
+  expectativas: [
+    {to:'bono10y', i:3, lag:0}, {to:'spread', i:1, lag:0}, {to:'vix', i:1, lag:0},
+    {to:'revisiones', i:-1, lag:0}, {to:'tipos', i:2, lag:1},
+  ],
+  deficit: [
+    {to:'pib', i:2, lag:1}, {to:'inflacion', i:1, lag:1}, {to:'pmi', i:1, lag:0},
+    {to:'tipos', i:1, lag:1}, {to:'bono10y', i:1, lag:0}, {to:'bono10y', i:1, lag:1},
+    {to:'vix', i:1, lag:0}, {to:'revisiones', i:1, lag:1}, {to:'deuda', i:2, lag:0},
+    {to:'expectativas', i:1, lag:0},
+  ],
+  deuda: [
+    {to:'bono10y', i:2, lag:1}, {to:'spread', i:1, lag:1}, {to:'vix', i:1, lag:1},
+    {to:'deficit', i:-1, lag:2},
+  ],
+  bono10y: [
+    {to:'pib', i:-2, lag:1}, {to:'pmi', i:-1, lag:1}, {to:'deficit', i:1, lag:1},
+    {to:'vix', i:1, lag:0}, {to:'revisiones', i:-1, lag:0}, {to:'revisiones', i:-1, lag:1},
+    {to:'deuda', i:1, lag:1}, {to:'spread', i:1, lag:0},
+  ],
+  revisiones: [
+    {to:'pib', i:1, lag:1}, {to:'pmi', i:1, lag:0}, {to:'deficit', i:-1, lag:1},
+    {to:'vix', i:-2, lag:0}, {to:'spread', i:-2, lag:1}, {to:'paro', i:-1, lag:1},
+  ],
+  spread: [
+    {to:'pib', i:-2, lag:1}, {to:'pmi', i:-1, lag:1}, {to:'vix', i:2, lag:0},
+    {to:'revisiones', i:-2, lag:1}, {to:'bono10y', i:-1, lag:1},
+  ],
+  vix: [
+    {to:'pib', i:-1, lag:1},
+    {to:'pmi', i:-1, lag:0, degraded:true},
+    {to:'revisiones', i:-1, lag:0, degraded:true},
+    {to:'spread', i:1, lag:0, degraded:true},
+    {to:'expectativas', i:-1, lag:0, degraded:true},
+  ],
 };
 
 // Índice inverso (por efecto) construido a partir de la matriz anterior.
@@ -437,10 +498,12 @@ Object.keys(CAUSAL_MATRIX).forEach(fromId=>{
   });
 });
 
-const CALC_ORDER = ['pib','inflacion','deficit','tipos','pmi','bono10y','revisiones','vix'];
+const CALC_ORDER = ['pib','inflacion','paro','deficit','deuda','tipos','pmi','expectativas','bono10y','revisiones','spread','vix'];
 
-// Constantes del motor de agregación (ver explicación al usuario: compresión
-// por saturación en vez de suma lineal, más inercia, reversión suave y ruido).
+// Constantes del motor de agregación (compresión por saturación, inercia,
+// reversión suave y ruido). Se validan estadísticamente más abajo, igual
+// que en Básico — no se dan por buenas solo porque funcionaran con 8
+// variables.
 const ENGINE = { AMPLITUDE:1.7, HEADLINE_AMPLITUDE:4.2, INERTIA:0.18, REVERSION:0.035, NOISE:0.35 };
 
 const PROFILES = {
@@ -470,18 +533,13 @@ const PROFILES = {
    ========================================================================= */
 const ARCHETYPES = [
   { id:'deterioro_credito', label:'Deterioro de crédito',
-    desc:'El PMI cae con fuerza y las revisiones de beneficios empiezan a deteriorarse: síntomas habituales de un ciclo que se enfría antes de que lo confirme el PIB.',
-    varBias:{ pmi:-1.8, revisiones:-1.6, vix:0.8 },
+    desc:'El spread de crédito corporativo se ensancha y el VIX repunta a la vez: síntomas habituales de un deterioro real del riesgo financiero, con dos señales que cuentan la misma historia.',
+    varBias:{ spread:1.8, vix:1.4 },
     optimal:{ up:['liquidez','rf_gob'], down:['rv','rf_corp','cripto'],
-      rationale:'Cuando el ciclo se enfría, la renta variable y el crédito corporativo son los primeros en sufrir; la liquidez y la deuda pública de calidad son el refugio clásico.' } },
-  { id:'sorpresa_inflacion', label:'Sorpresa de inflación',
-    desc:'La inflación sorprende al alza muy por encima de lo esperado: esto suele presionar los tipos y penalizar a la renta fija de duración larga.',
-    varBias:{ inflacion:1.8 },
-    optimal:{ up:['oro'], down:['rf_gob'],
-      rationale:'La inflación erosiona la rentabilidad real de los bonos y suele adelantar subidas de tipos; el oro es la cobertura tradicional.' } },
+      rationale:'Cuando el crédito corporativo se deteriora de verdad, la renta variable y la propia renta fija corporativa son las primeras en sufrir; la liquidez y la deuda pública de calidad son el refugio clásico.' } },
   { id:'boom_beneficios', label:'Boom de beneficios',
-    desc:'El PMI se dispara y las revisiones de beneficios mejoran con fuerza: expansión de libro de texto, con la volatilidad contenida.',
-    varBias:{ pmi:1.8, revisiones:1.8, vix:-0.9 },
+    desc:'El PMI compuesto se dispara y las revisiones de beneficios mejoran con fuerza a la vez: expansión de libro de texto, con dos indicadores reforzando la misma lectura.',
+    varBias:{ pmi:1.8, revisiones:1.8 },
     optimal:{ up:['rv'], down:['liquidez'],
       rationale:'En una expansión clara con volatilidad baja, mantener mucha liquidez tiene un coste de oportunidad real.' } },
   { id:'shock_tipos', label:'Shock de tipos al alza',
@@ -495,8 +553,8 @@ const ARCHETYPES = [
     optimal:{ up:['rf_gob','inmo'], down:['liquidez'],
       rationale:'Una bajada de tipos revaloriza los bonos existentes de mayor duración y abarata la financiación inmobiliaria.' } },
   { id:'tension_fiscal', label:'Tensión fiscal',
-    desc:'El déficit público se dispara y el bono a 10 años exige más rentabilidad para financiarlo: caso habitual de estrés de la deuda soberana.',
-    varBias:{ deficit:2.2, bono10y:1.4 },
+    desc:'El déficit público se dispara y la deuda pública acumulada sube con él: caso habitual de estrés de la deuda soberana, con la variable de flujo y la de stock moviéndose juntas.',
+    varBias:{ deficit:2.2, deuda:1.6 },
     optimal:{ up:[], down:['rf_gob'],
       rationale:'Cuando el mercado exige más prima por financiar al Estado, el precio de la deuda pública existente cae.' } },
   { id:'panico_mercado', label:'Pánico de mercado',
@@ -504,8 +562,13 @@ const ARCHETYPES = [
     varBias:{ vix:2.2 },
     optimal:{ up:['liquidez','oro'], down:['rv','cripto'],
       rationale:'En un pico de volatilidad puro, los activos de mayor riesgo se penalizan primero; liquidez y oro son los refugios clásicos.' } },
+  { id:'sorpresa_inflacion', label:'Sorpresa de inflación',
+    desc:'La inflación subyacente sorprende al alza muy por encima de lo esperado: esto suele presionar los tipos y penalizar a la renta fija de duración larga.',
+    varBias:{ inflacion:1.8 },
+    optimal:{ up:['oro'], down:['rf_gob'],
+      rationale:'La inflación erosiona la rentabilidad real de los bonos y suele adelantar subidas de tipos; el oro es la cobertura tradicional.' } },
   { id:'deflacion', label:'Enfriamiento de precios',
-    desc:'La inflación cae con fuerza, muy por debajo de lo esperado: suele anticipar margen para una política monetaria más laxa.',
+    desc:'La inflación subyacente cae con fuerza, muy por debajo de lo esperado: suele anticipar margen para una política monetaria más laxa.',
     varBias:{ inflacion:-1.8 },
     optimal:{ up:['rf_gob'], down:[],
       rationale:'Una inflación a la baja suele preceder bajadas de tipos, que revalorizan la deuda pública ya emitida.' } },
@@ -514,6 +577,21 @@ const ARCHETYPES = [
     varBias:{ revisiones:-2.0 },
     optimal:{ up:[], down:['rv'],
       rationale:'Las revisiones de beneficios son el termómetro más directo de lo que vale una acción; un recorte fuerte anticipa presión sobre las cotizaciones.' } },
+  { id:'repunte_paro', label:'Repunte del paro',
+    desc:'La tasa de paro sube con fuerza y sin ambigüedad: un mercado laboral que se debilita de golpe, señal clásica de riesgo de recesión.',
+    varBias:{ paro:1.8 },
+    optimal:{ up:['liquidez','rf_gob'], down:['rv','cripto'],
+      rationale:'Un mercado laboral que se debilita anticipa menor consumo y mayor riesgo de recesión; los activos de riesgo son los primeros en descontarlo.' } },
+  { id:'giro_hawkish', label:'Giro hawkish',
+    desc:'Las expectativas de tipos suben con fuerza: el mercado empieza a descontar una política monetaria más restrictiva antes de que el banco central mueva nada todavía.',
+    varBias:{ expectativas:1.8 },
+    optimal:{ up:['liquidez'], down:['rf_gob','rv'],
+      rationale:'El mercado suele reaccionar antes al cambio esperado que al cambio efectivo; los activos de duración larga son los primeros en sufrirlo.' } },
+  { id:'estres_deuda', label:'Estrés de deuda soberana',
+    desc:'La deuda pública acumulada se dispara sin que lo explique el déficit de este trimestre concreto: una señal de sostenibilidad fiscal a largo plazo, no de un simple bache anual.',
+    varBias:{ deuda:1.8 },
+    optimal:{ up:[], down:['rf_gob'],
+      rationale:'Un nivel de deuda que preocupa por sí mismo, más allá del desequilibrio de un año, hace que el mercado exija más prima por financiar al Estado.' } },
   { id:'estabilidad', label:'Estabilidad',
     desc:'Ningún indicador se mueve de forma relevante este trimestre: lo habitual, sin una señal clara, es que la respuesta prudente sea no tocar la cartera.',
     varBias:{}, noiseMult:0.5,
@@ -561,6 +639,52 @@ function shuffleArchetypes(rand){
   return result;
 }
 
+/* =========================================================================
+   RENTABILIDADES TRIMESTRALES POR CASO HABITUAL (Nivel Intermedio)
+   Tabla fija de 13 casos × 8 canales, coherente con el "ajuste óptimo" ya
+   definido en cada arquetipo. No se calculan a partir del movimiento real
+   del panel — son una aproximación pedagógica fija y declarada como tal,
+   pensada para dar una idea de cómo habría evolucionado una cartera de
+   100.000€, no una simulación de mercado.
+   ========================================================================= */
+const ARCHETYPE_RETURNS = {
+  deterioro_credito: { liquidez:0.005, rf_gob:0.018, rf_corp:-0.022, mixto:-0.004, rv:-0.060, inmo:-0.025, oro:0.015, cripto:-0.120 },
+  boom_beneficios:    { liquidez:0.003, rf_gob:-0.005, rf_corp:0.010, mixto:0.020, rv:0.070, inmo:0.025, oro:-0.010, cripto:0.120 },
+  shock_tipos:        { liquidez:0.010, rf_gob:-0.035, rf_corp:-0.025, mixto:-0.012, rv:-0.030, inmo:-0.040, oro:-0.010, cripto:-0.050 },
+  bajada_tipos:       { liquidez:-0.003, rf_gob:0.035, rf_corp:0.025, mixto:0.015, rv:0.020, inmo:0.040, oro:0.010, cripto:0.030 },
+  tension_fiscal:     { liquidez:0.004, rf_gob:-0.032, rf_corp:-0.015, mixto:-0.006, rv:-0.015, inmo:-0.020, oro:0.020, cripto:-0.010 },
+  panico_mercado:     { liquidez:0.005, rf_gob:0.015, rf_corp:-0.010, mixto:-0.010, rv:-0.055, inmo:-0.020, oro:0.030, cripto:-0.140 },
+  sorpresa_inflacion: { liquidez:0.006, rf_gob:-0.030, rf_corp:-0.020, mixto:-0.008, rv:-0.015, inmo:-0.010, oro:0.040, cripto:-0.020 },
+  deflacion:          { liquidez:0.002, rf_gob:0.025, rf_corp:0.010, mixto:0.008, rv:-0.010, inmo:0.000, oro:0.005, cripto:-0.010 },
+  recorte_beneficios: { liquidez:0.004, rf_gob:0.005, rf_corp:-0.008, mixto:-0.005, rv:-0.050, inmo:-0.010, oro:0.005, cripto:-0.060 },
+  repunte_paro:       { liquidez:0.005, rf_gob:0.016, rf_corp:-0.012, mixto:-0.005, rv:-0.040, inmo:-0.015, oro:0.010, cripto:-0.080 },
+  giro_hawkish:       { liquidez:0.008, rf_gob:-0.025, rf_corp:-0.015, mixto:-0.010, rv:-0.035, inmo:-0.020, oro:-0.005, cripto:-0.040 },
+  estres_deuda:       { liquidez:0.004, rf_gob:-0.030, rf_corp:-0.012, mixto:-0.005, rv:-0.012, inmo:-0.015, oro:0.015, cripto:-0.010 },
+  estabilidad:        { liquidez:0.004, rf_gob:0.005, rf_corp:0.006, mixto:0.005, rv:0.010, inmo:0.007, oro:0.003, cripto:0.015 },
+};
+const PORTFOLIO_INITIAL = 100000;
+
+function portfolioTrajectory(rounds){
+  let value = PORTFOLIO_INITIAL;
+  const trail = [];
+  rounds.forEach(r=>{
+    const returns = ARCHETYPE_RETURNS[r.archetype.id] || {};
+    let periodReturn = 0;
+    CHANNELS.forEach(c=>{
+      const weight = (r.alloc[c.id]||0)/100;
+      periodReturn += weight * (returns[c.id]||0);
+    });
+    const before = value;
+    value = value * (1+periodReturn);
+    trail.push({ round:r.round, before, after:value, periodReturn });
+  });
+  return trail;
+}
+
+function formatEUR(n){
+  return Math.round(n).toLocaleString('es-ES') + '€';
+}
+
 const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)' };
 
 /* =========================================================================
@@ -570,7 +694,7 @@ const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)
    otro punto de la app.
    ========================================================================= */
 const GLOSSARY_EXTRA = [
-  { term:'Caso habitual', abbr:null, def:'Cada una de las 6 rondas de la simulación se ancla a una situación deliberadamente clara e inequívoca, elegida de una biblioteca de patrones reconocibles (deterioro de crédito, shock de tipos, pánico de mercado...). El simulador no revela cuál es hasta la ronda siguiente, junto con el ajuste que suele hacerse en ese caso, para comparar con tu propia decisión. El panel está formado por ocho indicadores conectados entre sí por relaciones de causa y efecto: lo que le pasa a uno influye en los demás, trimestre a trimestre. La única excepción es el indicador (o los dos indicadores) que protagoniza cada caso concreto — distinto según qué caso te toque esa ronda: por ejemplo, los tipos oficiales en "Shock de tipos", el VIX en "Pánico de mercado". Ese indicador arranca sin memoria de lo que le pasó antes, para que el caso se lea sin ambigüedad; el resto mantiene su conexión causal completa. Es una simplificación deliberada; en la realidad ningún indicador económico funciona así.' },
+  { term:'Caso habitual', abbr:null, def:'Cada una de las 6 rondas de la simulación se ancla a una situación deliberadamente clara e inequívoca, elegida de una biblioteca de patrones reconocibles (deterioro de crédito, shock de tipos, pánico de mercado...). El simulador no revela cuál es hasta la ronda siguiente, junto con el ajuste que suele hacerse en ese caso, para comparar con tu propia decisión. El panel está formado por doce indicadores conectados entre sí por relaciones de causa y efecto: lo que le pasa a uno influye en los demás, trimestre a trimestre. La única excepción es el indicador (o los dos indicadores) que protagoniza cada caso concreto — distinto según qué caso te toque esa ronda: por ejemplo, los tipos oficiales en "Shock de tipos", el VIX en "Pánico de mercado". Ese indicador arranca sin memoria de lo que le pasó antes, para que el caso se lea sin ambigüedad; el resto mantiene su conexión causal completa. Es una simplificación deliberada; en la realidad ningún indicador económico funciona así.' },
   { term:'BCE', abbr:'Banco Central Europeo', def:'Autoridad monetaria de la eurozona. Fija los tipos oficiales que, junto con los de la Fed, representa la variable "Tipos oficiales" del panel.' },
   { term:'Fed', abbr:'Reserva Federal (Federal Reserve)', def:'Banco central de Estados Unidos. Fija su propio tipo oficial de referencia; junto con el del BCE, inspira la variable "Tipos oficiales" del panel.' },
   { term:'Matriz causal', abbr:null, def:'Tabla que define cómo afecta cada indicador del panel a los demás dentro del motor del simulador: la fila es la causa, la columna es el efecto, con una intensidad (de −3 a +3) y un desfase temporal asociados a cada relación.' },
@@ -603,13 +727,14 @@ function renderGlossary(filter){
 
   // Los grupos que tengan algún término cuyo NOMBRE coincida con la búsqueda
   // se muestran primero — así una coincidencia casual dentro de la definición
-  // de un término de otro grupo no entierra el término que el usuario busca
-  // de verdad.
+  // de un término de otro grupo (p.ej. "deuda pública" mencionada al explicar
+  // la liquidez) no entierra el término que el usuario busca de verdad.
   const groupHasTermMatch = group => q && GLOSSARY_ENTRIES.some(e=> e.group===group && e.term.toLowerCase().includes(q));
   const groupsSorted = GLOSSARY_GROUPS.slice().sort((g1,g2)=> (groupHasTermMatch(g1)?0:1) - (groupHasTermMatch(g2)?0:1));
 
   groupsSorted.forEach(group=>{
     const items = GLOSSARY_ENTRIES.filter(e=> e.group===group && (!q || e.term.toLowerCase().includes(q) || (e.abbr&&e.abbr.toLowerCase().includes(q)) || e.def.toLowerCase().includes(q)));
+    // Dentro del propio grupo, igual criterio: coincidencia de nombre primero.
     items.sort((a,b)=> ((q && a.term.toLowerCase().includes(q))?0:1) - ((q && b.term.toLowerCase().includes(q))?0:1));
     if(items.length===0) return;
     html += `<div class="glossary-section-title">${group}</div>`;
@@ -990,7 +1115,7 @@ function renderSteps(){
    ========================================================================= */
 function renderPortada(){
   return `
-  <div class="eyebrow">Simulador educativo</div>
+  <div class="eyebrow">Simulador educativo · Nivel Intermedio</div>
   <h1>Canales de inversión<br>frente al ciclo macroeconómico</h1>
   <p class="lede">Aprende qué es cada canal de inversión, elige o construye una cartera, y observa cómo reaccionarías tú cuando el entorno macroeconómico cambia con el tiempo.</p>
   <hr class="rule">
@@ -1048,7 +1173,7 @@ function renderConceptos2(){
   return `
   <div class="eyebrow">II. Conceptos</div>
   <h1>Las variables macro del simulador</h1>
-  <p class="lede">Ocho indicadores organizados en cinco canales: macroeconomía, política monetaria, política fiscal, mercados y beneficios empresariales. No se mueven de forma independiente: cada uno afecta a los demás según relaciones de causa y efecto, con distinta intensidad y con desfases de hasta dos trimestres.</p>
+  <p class="lede">Doce indicadores organizados en cinco canales: macroeconomía, política monetaria, política fiscal, mercados y beneficios empresariales. No se mueven de forma independiente: cada uno afecta a los demás según relaciones de causa y efecto, con distinta intensidad y con desfases de hasta dos trimestres.</p>
   <div class="card-grid">${cards}</div>
   <p class="faint" style="margin-top:14px;">Los umbrales de semáforo (verde / ámbar / rojo) usados en el simulador son una simplificación pedagógica y no sustituyen la lectura profesional de estos indicadores.</p>
   <div class="actions">
@@ -1314,15 +1439,21 @@ function renderResumen(){
     `;
   }
 
+  const portfolioTrail = portfolioTrajectory(rounds);
+
   const feedbackHTML = rounds.map((r,i)=>{
     const items = r.feedback.length
       ? r.feedback.map(f=>`<div class="feedback"><div class="tag">${f.tag}</div><p>${f.text}</p></div>`).join('')
       : `<div class="no-feedback">Sin observaciones relevantes en esta ronda.</div>`;
     const alignLabel = {coherente:'Coincide con el ajuste habitual', contraria:'Contrario al ajuste habitual', neutra:'Sin tocar los canales relevantes'}[r.alignment] || '';
+    const pt = portfolioTrail[i];
+    const pct = (pt.periodReturn*100).toFixed(1);
+    const sign = pt.periodReturn>=0 ? '+' : '';
     return `
       <h3 style="margin-top:26px;">Trimestre ${r.round}</h3>
       <span class="alignment-tag ${r.alignment||'neutra'}">${alignLabel}</span>
-      ${items}`;
+      ${items}
+      <p class="faint" style="margin:8px 0 0;">Tu cartera pasó de ${formatEUR(pt.before)} a ${formatEUR(pt.after)} este trimestre (${sign}${pct}%).</p>`;
   }).join('');
 
   const alignCounts = { coherente:0, contraria:0, neutra:0 };
@@ -1368,10 +1499,20 @@ function renderResumen(){
       }).join('')}
     </div>`;
 
+  const finalValue = portfolioTrail[portfolioTrail.length-1].after;
+  const totalReturn = (finalValue/PORTFOLIO_INITIAL - 1) * 100;
+  const totalSign = totalReturn>=0 ? '+' : '';
+
   return `
   <div class="eyebrow">V. Resumen</div>
   <h1>Recorrido del escenario</h1>
   <p class="lede">${TOTAL_ROUNDS} trimestres simulados${state.seed?` · semilla: ${state.seed}`:''}.</p>
+
+  <div class="alloc-group-title">Así habría evolucionado tu cartera</div>
+  <div class="feedback">
+    <div class="tag">De ${formatEUR(PORTFOLIO_INITIAL)} a ${formatEUR(finalValue)} (${totalSign}${totalReturn.toFixed(1)}%)</div>
+    <p>Cada trimestre parte del resultado del anterior, con la rentabilidad típica que suele tener cada canal en el caso habitual de esa ronda — una aproximación fija y pedagógica, no un cálculo a partir de datos de mercado reales. El detalle trimestre a trimestre está más abajo, junto a cada caso.</p>
+  </div>
 
   <div class="alloc-group-title">Recorrido de casos habituales</div>
   ${casesHTML}

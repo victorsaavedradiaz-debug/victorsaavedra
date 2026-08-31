@@ -171,6 +171,17 @@
   .gauge-def{display:none;font-size:14.5px;color:var(--text-dim);padding:0 0 14px 0;border-top:1px dashed var(--border-soft);margin-top:-2px;padding-top:10px;}
   .gauge-def.open{display:block;}
   .gauge-def-zones{font-family:var(--font-ui);font-size:12px;letter-spacing:.02em;color:var(--text-faint);margin-top:8px;}
+  @media(max-width:640px){
+    .gauge{
+      grid-template-columns:1fr auto auto;
+      grid-template-areas:"name val delta" "track track track";
+      row-gap:8px;
+    }
+    .gauge .name{grid-area:name;}
+    .gauge-track{grid-area:track;height:8px;}
+    .gauge .val{grid-area:val;}
+    .gauge .delta-wrap{grid-area:delta;}
+  }
 
   /* ---------- Round narrative ---------- */
   .round-tag{font-family:var(--font-ui);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
@@ -808,7 +819,7 @@ function zoneOf(varDef, val){
   return varDef.zones[varDef.zones.length-1].c;
 }
 
-const ZONE_LABEL = { green:'Verde', amber:'Ámbar', red:'Rojo' };
+const ZONE_LABEL = { green:'Verde (lectura saludable)', amber:'Ámbar (atención)', red:'Rojo (alerta)' };
 
 function zonesDescription(v){
   const fmt = n => n.toFixed(v.dec);
@@ -1219,7 +1230,7 @@ function recapHTML(prevEntry){
   return `
   <div class="recap-panel">
     <div class="recap-title">Antes de seguir: tu trimestre ${prevEntry.round} era un caso habitual — ${a.label}</div>
-    <p class="faint" style="margin:0;">El ajuste habitual ahí era ${optimalShort}. Tu decisión ${alignLabel}.</p>
+    <p class="faint" style="margin:0;">El ajuste habitual ahí era ${optimalShort}. ${a.optimal.rationale} Tu decisión ${alignLabel}.</p>
   </div>`;
 }
 
@@ -1320,7 +1331,7 @@ function renderResumen(){
       : `<div class="no-feedback">Sin observaciones relevantes en esta ronda.</div>`;
     const alignLabel = {coherente:'Coincide con el ajuste habitual', contraria:'Contrario al ajuste habitual', neutra:'Sin tocar los canales relevantes'}[r.alignment] || '';
     return `
-      <h3 style="margin-top:26px;">Trimestre ${r.round}</h3>
+      <h3 style="margin-top:26px;">Trimestre ${r.round} — ${r.archetype.label}</h3>
       <span class="alignment-tag ${r.alignment||'neutra'}">${alignLabel}</span>
       ${items}`;
   }).join('');

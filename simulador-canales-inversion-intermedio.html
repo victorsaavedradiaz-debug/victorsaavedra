@@ -564,7 +564,7 @@ const ARCHETYPES = [
     optimal:{ up:['rf_gob','inmo'], down:['liquidez'],
       rationale:'Una bajada de tipos revaloriza los bonos existentes de mayor duración y abarata la financiación inmobiliaria.' } },
   { id:'tension_fiscal', label:'Tensión fiscal',
-    desc:'El déficit público se dispara y la deuda pública acumulada sube con él: caso habitual de estrés de la deuda soberana, con la variable de flujo y la de stock moviéndose juntas.',
+    desc:'El déficit público se dispara y arrastra con él a la deuda pública acumulada: la variable de flujo y la de stock moviéndose juntas, síntoma habitual de un impulso fiscal que empieza a pesar sobre las cuentas del Estado.',
     varBias:{ deficit:2.2, deuda:1.6 },
     optimal:{ up:[], down:['rf_gob'],
       rationale:'Cuando el mercado exige más prima por financiar al Estado, el precio de la deuda pública existente cae.' } },
@@ -1536,7 +1536,7 @@ function renderResumen(){
   <div class="feedback"><div class="tag">Patrón dominante</div><p>${styleReading}</p></div>
 
   <div class="alloc-group-title">Observaciones por ronda</div>
-  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso habitual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable.</p>
+  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso habitual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable. Tampoco garantizan un trimestre positivo en euros: el ajuste habitual señala el canal más afectado, no cómo mover toda la cartera, así que puedes coincidir con él y aun así perder dinero ese trimestre si el resto de canales también caen.</p>
   ${feedbackHTML}
 
   <div class="actions">

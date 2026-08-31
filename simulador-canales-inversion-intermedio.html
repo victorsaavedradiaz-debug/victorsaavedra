@@ -650,52 +650,6 @@ function shuffleArchetypes(rand){
   return result;
 }
 
-/* =========================================================================
-   RENTABILIDADES TRIMESTRALES POR CASO HABITUAL (Nivel Intermedio)
-   Tabla fija de 13 casos × 8 canales, coherente con el "ajuste óptimo" ya
-   definido en cada arquetipo. No se calculan a partir del movimiento real
-   del panel — son una aproximación pedagógica fija y declarada como tal,
-   pensada para dar una idea de cómo habría evolucionado una cartera de
-   100.000€, no una simulación de mercado.
-   ========================================================================= */
-const ARCHETYPE_RETURNS = {
-  deterioro_credito: { liquidez:0.005, rf_gob:0.018, rf_corp:-0.022, mixto:-0.004, rv:-0.060, inmo:-0.025, oro:0.015, cripto:-0.120 },
-  boom_beneficios:    { liquidez:0.003, rf_gob:-0.005, rf_corp:0.010, mixto:0.020, rv:0.070, inmo:0.025, oro:-0.010, cripto:0.120 },
-  shock_tipos:        { liquidez:0.010, rf_gob:-0.035, rf_corp:-0.025, mixto:-0.012, rv:-0.030, inmo:-0.040, oro:-0.010, cripto:-0.050 },
-  bajada_tipos:       { liquidez:-0.003, rf_gob:0.035, rf_corp:0.025, mixto:0.015, rv:0.020, inmo:0.040, oro:0.010, cripto:0.030 },
-  tension_fiscal:     { liquidez:0.004, rf_gob:-0.032, rf_corp:-0.015, mixto:-0.006, rv:-0.015, inmo:-0.020, oro:0.020, cripto:-0.010 },
-  panico_mercado:     { liquidez:0.005, rf_gob:0.015, rf_corp:-0.010, mixto:-0.010, rv:-0.055, inmo:-0.020, oro:0.030, cripto:-0.140 },
-  sorpresa_inflacion: { liquidez:0.006, rf_gob:-0.030, rf_corp:-0.020, mixto:-0.008, rv:-0.015, inmo:-0.010, oro:0.040, cripto:-0.020 },
-  deflacion:          { liquidez:0.002, rf_gob:0.025, rf_corp:0.010, mixto:0.008, rv:-0.010, inmo:0.000, oro:0.005, cripto:-0.010 },
-  recorte_beneficios: { liquidez:0.004, rf_gob:0.005, rf_corp:-0.008, mixto:-0.005, rv:-0.050, inmo:-0.010, oro:0.005, cripto:-0.060 },
-  repunte_paro:       { liquidez:0.005, rf_gob:0.016, rf_corp:-0.012, mixto:-0.005, rv:-0.040, inmo:-0.015, oro:0.010, cripto:-0.080 },
-  giro_hawkish:       { liquidez:0.008, rf_gob:-0.025, rf_corp:-0.015, mixto:-0.010, rv:-0.035, inmo:-0.020, oro:-0.005, cripto:-0.040 },
-  estres_deuda:       { liquidez:0.004, rf_gob:-0.030, rf_corp:-0.012, mixto:-0.005, rv:-0.012, inmo:-0.015, oro:0.015, cripto:-0.010 },
-  estabilidad:        { liquidez:0.004, rf_gob:0.005, rf_corp:0.006, mixto:0.005, rv:0.010, inmo:0.007, oro:0.003, cripto:0.015 },
-};
-const PORTFOLIO_INITIAL = 100000;
-
-function portfolioTrajectory(rounds){
-  let value = PORTFOLIO_INITIAL;
-  const trail = [];
-  rounds.forEach(r=>{
-    const returns = ARCHETYPE_RETURNS[r.archetype.id] || {};
-    let periodReturn = 0;
-    CHANNELS.forEach(c=>{
-      const weight = (r.alloc[c.id]||0)/100;
-      periodReturn += weight * (returns[c.id]||0);
-    });
-    const before = value;
-    value = value * (1+periodReturn);
-    trail.push({ round:r.round, before, after:value, periodReturn });
-  });
-  return trail;
-}
-
-function formatEUR(n){
-  return Math.round(n).toLocaleString('es-ES') + '€';
-}
-
 const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)' };
 
 /* =========================================================================
@@ -1450,21 +1404,15 @@ function renderResumen(){
     `;
   }
 
-  const portfolioTrail = portfolioTrajectory(rounds);
-
   const feedbackHTML = rounds.map((r,i)=>{
     const items = r.feedback.length
       ? r.feedback.map(f=>`<div class="feedback"><div class="tag">${f.tag}</div><p>${f.text}</p></div>`).join('')
       : `<div class="no-feedback">Sin observaciones relevantes en esta ronda.</div>`;
     const alignLabel = {coherente:'Coincide con el ajuste habitual', contraria:'Contrario al ajuste habitual', neutra:'Sin tocar los canales relevantes'}[r.alignment] || '';
-    const pt = portfolioTrail[i];
-    const pct = (pt.periodReturn*100).toFixed(1);
-    const sign = pt.periodReturn>=0 ? '+' : '';
     return `
       <h3 style="margin-top:26px;">Trimestre ${r.round} — ${r.archetype.label}</h3>
       <span class="alignment-tag ${r.alignment||'neutra'}">${alignLabel}</span>
-      ${items}
-      <p class="faint" style="margin:8px 0 0;">Tu cartera pasó de ${formatEUR(pt.before)} a ${formatEUR(pt.after)} este trimestre (${sign}${pct}%), aplicando a tu asignación de esa ronda la rentabilidad típica de cada canal en un caso de "${r.archetype.label}".</p>`;
+      ${items}`;
   }).join('');
 
   const alignCounts = { coherente:0, contraria:0, neutra:0 };
@@ -1510,20 +1458,10 @@ function renderResumen(){
       }).join('')}
     </div>`;
 
-  const finalValue = portfolioTrail[portfolioTrail.length-1].after;
-  const totalReturn = (finalValue/PORTFOLIO_INITIAL - 1) * 100;
-  const totalSign = totalReturn>=0 ? '+' : '';
-
   return `
   <div class="eyebrow">V. Resumen</div>
   <h1>Recorrido del escenario</h1>
   <p class="lede">${TOTAL_ROUNDS} trimestres simulados${state.seed?` · semilla: ${state.seed}`:''}.</p>
-
-  <div class="alloc-group-title">Así habría evolucionado tu cartera</div>
-  <div class="feedback">
-    <div class="tag">De ${formatEUR(PORTFOLIO_INITIAL)} a ${formatEUR(finalValue)} (${totalSign}${totalReturn.toFixed(1)}%)</div>
-    <p>Cada trimestre parte del resultado del anterior, con la rentabilidad típica que suele tener cada canal en el caso habitual de esa ronda — una aproximación fija y pedagógica, no un cálculo a partir de datos de mercado reales. El detalle trimestre a trimestre está más abajo, junto a cada caso.</p>
-  </div>
 
   <div class="alloc-group-title">Recorrido de casos habituales</div>
   ${casesHTML}
@@ -1536,7 +1474,7 @@ function renderResumen(){
   <div class="feedback"><div class="tag">Patrón dominante</div><p>${styleReading}</p></div>
 
   <div class="alloc-group-title">Observaciones por ronda</div>
-  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso habitual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable. Tampoco garantizan un trimestre positivo en euros: el ajuste habitual señala el canal más afectado, no cómo mover toda la cartera, así que puedes coincidir con él y aun así perder dinero ese trimestre si el resto de canales también caen.</p>
+  <p class="faint" style="margin-top:-2px;">Las etiquetas de cada ronda indican si tu ajuste coincidió con el que suele hacerse en ese caso habitual, o fue en dirección contraria. No son un veredicto de acierto o error — son la referencia con la que comparar tu propio razonamiento, no una respuesta única e incuestionable.</p>
   ${feedbackHTML}
 
   <div class="actions">

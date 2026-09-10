@@ -544,67 +544,67 @@ const PROFILES = {
    ========================================================================= */
 const ARCHETYPES = [
   { id:'deterioro_credito', label:'Deterioro de crédito',
-    desc:'El spread de crédito corporativo se ensancha y el VIX repunta a la vez: síntomas habituales de un deterioro real del riesgo financiero, con dos señales que cuentan la misma historia.',
+    desc:'El spread de crédito corporativo se ensancha y el VIX repunta, mientras el PIB todavía aguanta. ¿Pesa más la actividad presente o el deterioro adelantado de las condiciones financieras?',
     varBias:{ spread:1.8, vix:1.4 },
     optimal:{ up:['liquidez','rf_gob'], down:['rv','rf_corp','cripto'],
       rationale:'Cuando el crédito corporativo se deteriora de verdad, la renta variable y la propia renta fija corporativa son las primeras en sufrir; la liquidez y la deuda pública de calidad son el refugio clásico.' } },
   { id:'boom_beneficios', label:'Boom de beneficios',
-    desc:'El PMI compuesto se dispara y las revisiones de beneficios mejoran con fuerza a la vez: expansión de libro de texto, con dos indicadores reforzando la misma lectura.',
-    varBias:{ pmi:1.8, revisiones:1.8 },
+    desc:'El PMI compuesto y las revisiones de beneficios mejoran con fuerza, pero las expectativas de tipos también suben. El crecimiento gana impulso al mismo tiempo que aumenta el coste de capital esperado.',
+    varBias:{ pmi:1.8, revisiones:1.8, expectativas:0.9 },
     optimal:{ up:['rv'], down:['liquidez'],
       rationale:'En una expansión clara con volatilidad baja, mantener mucha liquidez tiene un coste de oportunidad real.' } },
   { id:'shock_tipos', label:'Shock de tipos al alza',
-    desc:'El banco central sube los tipos oficiales con fuerza y sin ambigüedad: la transmisión monetaria habitual golpea primero a la duración y a la financiación inmobiliaria.',
-    varBias:{ tipos:1.8 },
+    desc:'El banco central sube los tipos oficiales con fuerza, aunque las revisiones de beneficios siguen siendo positivas. La economía resiste, pero la financiación se encarece de inmediato.',
+    varBias:{ tipos:1.8, revisiones:0.9 },
     optimal:{ up:['liquidez'], down:['rf_gob','inmo'],
       rationale:'Una subida de tipos abrupta penaliza el precio de los bonos de duración larga y encarece la financiación inmobiliaria; la liquidez se beneficia directamente.' } },
   { id:'bajada_tipos', label:'Bajada de tipos',
-    desc:'El banco central relaja su política de tipos con claridad: caso habitual de estímulo monetario.',
-    varBias:{ tipos:-1.8 },
+    desc:'El banco central baja los tipos, pero la inflación subyacente continúa por encima de lo deseable. El estímulo favorece a los activos sensibles a financiación, aunque la señal de precios invita a moderar la convicción.',
+    varBias:{ tipos:-1.8, inflacion:0.9 },
     optimal:{ up:['rf_gob','inmo'], down:['liquidez'],
       rationale:'Una bajada de tipos revaloriza los bonos existentes de mayor duración y abarata la financiación inmobiliaria.' } },
   { id:'tension_fiscal', label:'Tensión fiscal',
-    desc:'El déficit público se dispara y arrastra con él a la deuda pública acumulada: la variable de flujo y la de stock moviéndose juntas, síntoma habitual de un impulso fiscal que empieza a pesar sobre las cuentas del Estado.',
+    desc:'El déficit y la deuda pública aumentan a la vez, mientras el PMI mejora por el impulso fiscal. La actividad recibe apoyo a corto plazo, pero la sostenibilidad de la financiación pública se deteriora.',
     varBias:{ deficit:2.2, deuda:1.6 },
     optimal:{ up:[], down:['rf_gob'],
       rationale:'Cuando el mercado exige más prima por financiar al Estado, el precio de la deuda pública existente cae.' } },
   { id:'panico_mercado', label:'Pánico de mercado',
-    desc:'El VIX se dispara sin que ninguna otra variable lo anticipe: un episodio de aversión al riesgo puro, el caso habitual para los activos refugio.',
-    varBias:{ vix:2.2 },
+    desc:'El VIX se dispara, pero el PMI y las revisiones de beneficios no confirman todavía un deterioro económico. Debes decidir si el episodio es ruido transitorio o una señal que exige protección.',
+    varBias:{ vix:2.2, pmi:0.7, revisiones:0.7 },
     optimal:{ up:['liquidez','oro'], down:['rv','cripto'],
       rationale:'En un pico de volatilidad puro, los activos de mayor riesgo se penalizan primero; liquidez y oro son los refugios clásicos.' } },
   { id:'sorpresa_inflacion', label:'Sorpresa de inflación',
-    desc:'La inflación subyacente sorprende al alza muy por encima de lo esperado: esto suele presionar los tipos y penalizar a la renta fija de duración larga.',
-    varBias:{ inflacion:1.8 },
+    desc:'La inflación subyacente sorprende al alza mientras las revisiones de beneficios permanecen fuertes. El crecimiento nominal ayuda a las empresas, pero aumenta el riesgo de tipos más altos.',
+    varBias:{ inflacion:1.8, revisiones:0.9 },
     optimal:{ up:['oro'], down:['rf_gob'],
       rationale:'La inflación erosiona la rentabilidad real de los bonos y suele adelantar subidas de tipos; el oro es la cobertura tradicional.' } },
   { id:'deflacion', label:'Enfriamiento de precios',
-    desc:'La inflación subyacente cae con fuerza, muy por debajo de lo esperado: suele anticipar margen para una política monetaria más laxa.',
-    varBias:{ inflacion:-1.8 },
+    desc:'La inflación subyacente cae con fuerza, pero también lo hace el PMI. El margen para una política monetaria más laxa aparece junto a una señal de debilitamiento del ciclo.',
+    varBias:{ inflacion:-1.8, pmi:-1.1 },
     optimal:{ up:['rf_gob'], down:[],
       rationale:'Una inflación a la baja suele preceder bajadas de tipos, que revalorizan la deuda pública ya emitida.' } },
   { id:'recorte_beneficios', label:'Recorte de beneficios',
-    desc:'Los analistas recortan con fuerza sus estimaciones de beneficios empresariales, sin que el resto del panel se haya movido todavía: la señal más directa sobre la renta variable.',
-    varBias:{ revisiones:-2.0 },
+    desc:'Los analistas recortan sus estimaciones de beneficios, aunque el PMI continúa en expansión. La actividad agregada parece firme, pero su traducción a resultados empresariales se debilita.',
+    varBias:{ revisiones:-2.0, pmi:0.9 },
     optimal:{ up:[], down:['rv'],
       rationale:'Las revisiones de beneficios son el termómetro más directo de lo que vale una acción; un recorte fuerte anticipa presión sobre las cotizaciones.' } },
   { id:'repunte_paro', label:'Repunte del paro',
-    desc:'La tasa de paro sube con fuerza y sin ambigüedad: un mercado laboral que se debilita de golpe, señal clásica de riesgo de recesión.',
-    varBias:{ paro:1.8 },
+    desc:'La tasa de paro sube con fuerza mientras las expectativas de tipos bajan. El mercado anticipa apoyo monetario, pero el deterioro del empleo amenaza al consumo.',
+    varBias:{ paro:1.8, expectativas:-0.9 },
     optimal:{ up:['liquidez','rf_gob'], down:['rv','cripto'],
       rationale:'Un mercado laboral que se debilita anticipa menor consumo y mayor riesgo de recesión; los activos de riesgo son los primeros en descontarlo.' } },
   { id:'giro_hawkish', label:'Giro hawkish',
-    desc:'Las expectativas de tipos suben con fuerza: el mercado empieza a descontar una política monetaria más restrictiva antes de que el banco central mueva nada todavía.',
-    varBias:{ expectativas:1.8 },
+    desc:'Las expectativas de tipos suben con fuerza aunque el tipo oficial todavía no cambia. El mercado endurece las condiciones antes que el banco central y obliga a distinguir entre el dato vigente y el que ya descuentan los precios.',
+    varBias:{ expectativas:1.8, tipos:-0.4 },
     optimal:{ up:['liquidez'], down:['rf_gob','rv'],
       rationale:'El mercado suele reaccionar antes al cambio esperado que al cambio efectivo; los activos de duración larga son los primeros en sufrirlo.' } },
   { id:'estres_deuda', label:'Estrés de deuda soberana',
-    desc:'La deuda pública acumulada se dispara sin que lo explique el déficit de este trimestre concreto: una señal de sostenibilidad fiscal a largo plazo, no de un simple bache anual.',
-    varBias:{ deuda:1.8 },
+    desc:'La deuda pública acumulada se dispara mientras el déficit corriente mejora. El flujo anual parece más sano, pero el stock de deuda sigue elevando el riesgo de financiación a largo plazo.',
+    varBias:{ deuda:1.8, deficit:-0.9 },
     optimal:{ up:[], down:['rf_gob'],
       rationale:'Un nivel de deuda que preocupa por sí mismo, más allá del desequilibrio de un año, hace que el mercado exija más prima por financiar al Estado.' } },
   { id:'estabilidad', label:'Estabilidad',
-    desc:'Ningún indicador se mueve de forma relevante este trimestre: lo habitual, sin una señal clara, es que la respuesta prudente sea no tocar la cartera.',
+    desc:'Los indicadores oscilan en direcciones distintas, pero ninguno cruza un umbral relevante. Decide si existe una señal suficientemente sólida o si el propio ruido es la información principal.',
     varBias:{}, noiseMult:0.5,
     optimal:{ up:[], down:[],
       rationale:'No hay una señal clara que justifique un movimiento; reaccionar sin motivo también es un error de principiante.' } },
@@ -659,7 +659,7 @@ const ZONE_COLOR = { green:'var(--green)', amber:'var(--amber)', red:'var(--red)
    otro punto de la app.
    ========================================================================= */
 const GLOSSARY_EXTRA = [
-  { term:'Caso habitual', abbr:null, def:'Cada una de las 6 rondas de la simulación se ancla a una situación deliberadamente clara e inequívoca, elegida de una biblioteca de patrones reconocibles (deterioro de crédito, shock de tipos, pánico de mercado...). El simulador no revela cuál es hasta la ronda siguiente, junto con el ajuste que suele hacerse en ese caso, para comparar con tu propia decisión. El panel está formado por doce indicadores conectados entre sí por relaciones de causa y efecto: lo que le pasa a uno influye en los demás, trimestre a trimestre. La única excepción es el indicador (o los dos indicadores) que protagoniza cada caso concreto — distinto según qué caso te toque esa ronda: por ejemplo, los tipos oficiales en "Shock de tipos", el VIX en "Pánico de mercado". Ese indicador arranca sin memoria de lo que le pasó antes, para que el caso se lea sin ambigüedad; el resto mantiene su conexión causal completa. Es una simplificación deliberada; en la realidad ningún indicador económico funciona así.' },
+  { term:'Caso habitual', abbr:null, def:'Cada una de las 6 rondas parte de un patrón reconocible (deterioro de crédito, shock de tipos, pánico de mercado...), pero combina varias señales que pueden reforzarse o entrar en tensión. El reto de este nivel es decidir cuál domina y con cuánta convicción actuar. El simulador no revela la lectura de referencia hasta la ronda siguiente, para que puedas compararla con tu propia decisión. El panel está formado por doce indicadores conectados entre sí por relaciones de causa y efecto, con intensidades y desfases distintos. Es una simplificación pedagógica; en la realidad ninguna interpretación es automática ni completamente aislable.' },
   { term:'BCE', abbr:'Banco Central Europeo', def:'Autoridad monetaria de la eurozona. Fija los tipos oficiales que, junto con los de la Fed, representa la variable "Tipos oficiales" del panel.' },
   { term:'Fed', abbr:'Reserva Federal (Federal Reserve)', def:'Banco central de Estados Unidos. Fija su propio tipo oficial de referencia; junto con el del BCE, inspira la variable "Tipos oficiales" del panel.' },
   { term:'Matriz causal', abbr:null, def:'Tabla que define cómo afecta cada indicador del panel a los demás dentro del motor del simulador: la fila es la causa, la columna es el efecto, con una intensidad (de −3 a +3) y un desfase temporal asociados a cada relación.' },
@@ -1089,7 +1089,7 @@ function renderPortada(){
     <div class="card"><div class="idx">I</div><h3>Canales de inversión</h3><p class="faint">Qué son, qué riesgo asumen y a qué variables macro son sensibles.</p></div>
     <div class="card"><div class="idx">II</div><h3>Variables macro</h3><p class="faint">Los indicadores que moverán el entorno de la simulación.</p></div>
     <div class="card"><div class="idx">III</div><h3>Tu perfil</h3><p class="faint">Un perfil predefinido o una cartera construida por ti.</p></div>
-    <div class="card"><div class="idx">IV</div><h3>Simulación</h3><p class="faint">Seis rondas en las que el entorno cambia y tú decides cómo reasignar.</p></div>
+    <div class="card"><div class="idx">IV</div><h3>Simulación</h3><p class="faint">Seis rondas con señales simultáneas: identifica cuál domina y decide con cuánta intensidad reasignar.</p></div>
   </div>
   <div class="actions">
     <span></span>
@@ -1328,7 +1328,7 @@ function renderSim(){
   const prevEntry = state.history[state.history.length-1];
   const narrative = state.archetypes[state.round-1].desc;
   const intro = state.round===1 ? `
-    <p class="lede" style="margin:-4px 0 22px;max-width:none;">Vas a atravesar <strong style="color:var(--gold-bright);font-style:normal;">6 rondas trimestrales</strong>. Cada una plantea un caso habitual distinto: una situación deliberadamente clara, para que puedas relacionar lo que ves en el panel con la decisión que le corresponde. No te decimos cuál es el ajuste habitual hasta la ronda siguiente — reacciona primero con lo que ves. Al terminar la sexta ronda verás el recorrido completo, con el ajuste habitual de cada caso junto al tuyo.</p>` : '';
+    <p class="lede" style="margin:-4px 0 22px;max-width:none;">Vas a atravesar <strong style="color:var(--gold-bright);font-style:normal;">6 rondas trimestrales</strong>. En este nivel aparecen varias señales a la vez: algunas se refuerzan y otras compiten. Tu reto no es reconocer una pista aislada, sino decidir cuál domina y cuánto justifica mover la cartera. La lectura de referencia se muestra en la ronda siguiente. Al terminar verás el recorrido completo junto a tus decisiones.</p>` : '';
   const recap = state.round>1 ? recapHTML(prevEntry) : '';
 
   return `
@@ -1354,7 +1354,10 @@ function renderSimAllocEditor(container){
   // esta primera decisión (ver confirmRound), pero no se le regala al jugador
   // como número ya calculado. A partir de la ronda 2 se parte de la posición
   // real de la ronda anterior, que es donde vive la medición de inercia.
-  const startAlloc = state.round===1 ? Object.fromEntries(CHANNELS.map(c=>[c.id,0])) : state.alloc;
+  // La primera ronda parte de la cartera elegida en la fase III. Así el
+  // usuario reasigna una posición real desde el principio, en vez de tener
+  // que reconstruir manualmente una cartera que ya había seleccionado.
+  const startAlloc = state.alloc;
   container.innerHTML = allocEditorHTML(startAlloc,'sim');
   bindAllocEditor(container, (newAlloc, sum)=>{
     state._pendingAlloc = newAlloc;

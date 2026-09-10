@@ -1275,7 +1275,10 @@ function renderSimAllocEditor(container){
   // esta primera decisión (ver confirmRound), pero no se le regala al jugador
   // como número ya calculado. A partir de la ronda 2 se parte de la posición
   // real de la ronda anterior, que es donde vive la medición de inercia.
-  const startAlloc = state.round===1 ? Object.fromEntries(CHANNELS.map(c=>[c.id,0])) : state.alloc;
+  // La primera ronda parte de la cartera elegida en la fase III. Así el
+  // usuario reasigna una posición real desde el principio, en vez de tener
+  // que reconstruir manualmente una cartera que ya había seleccionado.
+  const startAlloc = state.alloc;
   container.innerHTML = allocEditorHTML(startAlloc,'sim');
   bindAllocEditor(container, (newAlloc, sum)=>{
     state._pendingAlloc = newAlloc;

@@ -261,13 +261,23 @@
     .tarjeta-naf-acronimo { display: none; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
   }
+
+  .site-links { display:flex; align-items:center; gap:1.15rem; margin-left:auto; margin-right:1.5rem; }
+  .site-links a { color:#c9a84c; text-decoration:none; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:500; letter-spacing:.13em; text-transform:uppercase; }
+  .site-links a:hover { color:#f0ece6; }
+  @media (max-width:768px) {
+    .site-links { gap:.75rem; margin-right:0; }
+    .site-links a { font-size:9px; letter-spacing:.08em; }
+  }
+/* NAV_TITLE_SPACING */
+  nav .nav-titulo { margin-left:1.5rem; }
 </style>
 </head>
 <body>
 <nav>
-<a class="nav-back" href="victor-saavedra.html">← Volver</a>
+<a class="nav-back" href="/">← Volver</a>
 <span class="nav-titulo">Pensamientos publicados</span>
-</nav>
+<div class="site-links" aria-label="Navegación principal"><a href="/">Inicio</a><a href="articulos.html">Artículos</a><a href="simuladores.html">Simuladores</a></div></nav>
 <div class="cabecera">
 <p class="cabecera-tipo">Pensamientos publicados</p>
 <h1 class="cabecera-titulo">Artículos<br/>y reflexiones</h1>
@@ -325,7 +335,7 @@
 </a>
 </div>
 <footer>
-<span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+<span class="footer-copy">© 2026 Víctor Saavedra · La Laguna, Canarias</span>
 </footer>
 <script async="" data-goatcounter="https://victorsaavedra.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
 </body>

@@ -37,6 +37,16 @@
   .nav-articulos a { font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro); text-decoration: none; transition: color 0.25s; }
   .nav-articulos a:hover { color: #f0ece6; }
   .articulo-imagen { width: 100%; max-width: 420px; height: auto; display: block; margin: 0 auto 3rem; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+
+  .site-links { display:flex; align-items:center; gap:1.15rem; margin-left:auto; margin-right:1.5rem; }
+  .site-links a { color:#c9a84c; text-decoration:none; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:500; letter-spacing:.13em; text-transform:uppercase; }
+  .site-links a:hover { color:#f0ece6; }
+  @media (max-width:768px) {
+    .site-links { gap:.75rem; margin-right:0; }
+    .site-links a { font-size:9px; letter-spacing:.08em; }
+  }
+/* NAV_TITLE_SPACING */
+  nav .nav-titulo { margin-left:1.5rem; }
 </style>
 </head>
 <body>
@@ -44,7 +54,7 @@
 <nav>
   <a href="trilogia.html" class="nav-back">← Trilogía</a>
   <span class="nav-titulo">Las distorsiones del relato oficial</span>
-</nav>
+<div class="site-links" aria-label="Navegación principal"><a href="/">Inicio</a><a href="articulos.html">Artículos</a><a href="simuladores.html">Simuladores</a></div></nav>
 
 <div class="articulo-wrap">
   <p class="articulo-tipo">Trilogía · Artículo I</p>
@@ -96,7 +106,7 @@
 </div>
 
 <footer>
-  <span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canarias</span>
+  <span class="footer-copy">© 2026 Víctor Saavedra · La Laguna, Canarias</span>
 </footer>
 
 <script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

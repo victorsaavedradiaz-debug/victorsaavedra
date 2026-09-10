@@ -52,13 +52,23 @@
     .nav-articulos a:last-child { text-align: right; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
   }
+
+  .site-links { display:flex; align-items:center; gap:1.15rem; margin-left:auto; margin-right:1.5rem; }
+  .site-links a { color:#c9a84c; text-decoration:none; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:500; letter-spacing:.13em; text-transform:uppercase; }
+  .site-links a:hover { color:#f0ece6; }
+  @media (max-width:768px) {
+    .site-links { gap:.75rem; margin-right:0; }
+    .site-links a { font-size:9px; letter-spacing:.08em; }
+  }
+/* NAV_TITLE_SPACING */
+  nav .nav-titulo { margin-left:1.5rem; }
 </style>
 </head>
 <body>
 <nav>
   <a href="articulos.html" class="nav-back" id="nav-back">← Artículos</a>
   <span class="nav-titulo" id="nav-title">Pensamientos publicados</span>
-</nav>
+<div class="site-links" aria-label="Navegación principal"><a href="/">Inicio</a><a href="articulos.html">Artículos</a><a href="simuladores.html">Simuladores</a></div></nav>
 <div class="lang-switch" role="tablist" aria-label="Idioma / Language">
   <button class="lang-tab active" id="tab-es" role="tab" aria-selected="true" aria-controls="lang-es" onclick="setLang('es')">Español</button>
   <button class="lang-tab" id="tab-en" role="tab" aria-selected="false" aria-controls="lang-en" onclick="setLang('en')">English</button>
@@ -215,7 +225,7 @@
     <div class="nav-articulos"><a href="articulo4.html">← Previous article</a><a href="articulos.html">All articles →</a></div>
   </main>
 </div>
-<footer><span class="footer-copy">© 2025 Víctor Saavedra · La Laguna, Canary Islands</span></footer>
+<footer><span class="footer-copy">© 2026 Víctor Saavedra · La Laguna, Canary Islands</span></footer>
 <script>
   const pageData = {
     es: {

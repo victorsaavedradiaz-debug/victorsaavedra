@@ -104,34 +104,6 @@
     text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
   }
 
-  .hero-role {
-    margin-top: 1rem;
-    max-width: 580px;
-    color: #d8d2c8;
-    font-size: 16px;
-    line-height: 1.7;
-    text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
-  }
-
-  .hero-cta {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: .85rem 1.25rem;
-    border: 1px solid var(--oro-tenue);
-    color: var(--oro);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-  }
-
-  .start-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
-  .start-card { display:block; padding:1.7rem; border:1px solid var(--borde); background:var(--fondo-card); color:inherit; text-decoration:none; }
-  .start-card:hover { border-color:var(--oro-tenue); background:var(--fondo-card2); }
-  .start-card strong { display:block; color:var(--blanco); font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; margin:.3rem 0 .55rem; }
-  .start-card span { color:#c8c2b8; font-size:14px; line-height:1.6; }
-  .start-card small { color:var(--oro); text-transform:uppercase; letter-spacing:.16em; font-size:10px; }
-
   .hero-etiqueta {
     font-size: 16px;
     letter-spacing: 0.3em;
@@ -310,8 +282,6 @@
     .hero { padding: 4rem 1.5rem 3rem; }
     .hero-nombre { font-size: 48px; }
     .hero-tagline { font-size: 18px; }
-    .hero-role { font-size: 14px; }
-    .start-grid { grid-template-columns:1fr; }
     section { padding: 3.5rem 1.5rem; }
     .obra-grid { grid-template-columns: 1fr; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -322,7 +292,6 @@
 
 <nav>
   <ul class="nav-links">
-    <li><a href="#empezar">Empezar</a></li>
     <li><a href="#obra">Obra</a></li>
     <li><a href="#trayectoria">Trayectoria</a></li>
     <li><a href="#contacto">Contacto</a></li>
@@ -332,19 +301,7 @@
 <div class="hero">
   <h1 class="hero-nombre">Víctor<br>Saavedra</h1>
   <p class="hero-tagline">Con la fea costumbre de pensar fuera de la caja.</p>
-  <p class="hero-role">Analista financiero, autor y educador. Finanzas, inteligencia artificial y pensamiento crítico.</p>
-  <a class="hero-cta" href="#empezar">Explorar mi trabajo</a>
 </div>
-
-<section id="empezar">
-  <p class="section-label">Empieza aquí</p>
-  <div class="start-grid">
-    <a class="start-card" href="simulador-canales-inversion.html"><small>Aprender tomando decisiones</small><strong>Prueba el simulador básico</strong><span>Interpreta el entorno económico y reasigna una cartera durante seis trimestres.</span></a>
-    <a class="start-card" href="finanzas.html"><small>Descubrir una historia financiera</small><strong>Finanzas bajo sospecha</strong><span>Una experiencia narrativa donde cada cifra puede convertirse en una pista.</span></a>
-    <a class="start-card" href="articulo8.html"><small>Leer un análisis en profundidad</small><strong>Anatomía de una cartera que busca refugio</strong><span>Tres crisis para comprender por qué ningún activo protege frente a todos los riesgos.</span></a>
-    <a class="start-card" href="ensayo.html"><small>Conocer la tesis principal</small><strong>El inversor inteligente ha muerto</strong><span>Una revisión crítica de los límites actuales del análisis fundamental clásico.</span></a>
-  </div>
-</section>
 
 <section id="obra">
   <p class="section-label">Obra</p>

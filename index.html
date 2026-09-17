@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Analista, autor y pensador incómodo. Finanzas, inteligencia artificial y la fea costumbre de pensar fuera de la caja.">
+<meta name="description" content="Obra, análisis, investigación y aprendizaje. Con la fea costumbre de pensar fuera de la caja.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Víctor Saavedra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -266,15 +266,14 @@
     font-weight: 400;
   }
 
-  .footer-marca {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    color: #555;
-    font-style: italic;
-    letter-spacing: 0.05em;
-  }
 
   /* RESPONSIVE */
+  @media (min-width: 769px) and (max-width: 1200px) {
+    nav { padding-left: 2rem; padding-right: 2rem; }
+    .nav-links { gap: 1.25rem; }
+    .nav-links a { font-size: 12px; letter-spacing: 0.12em; }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; justify-content: flex-start; overflow-x:auto; }
     .nav-links { gap: 1rem; width:100%; justify-content:space-between; }
@@ -293,6 +292,9 @@
 <nav>
   <ul class="nav-links">
     <li><a href="#obra">Obra</a></li>
+    <li><a href="#analisis">Análisis</a></li>
+    <li><a href="#investigacion">Investigación</a></li>
+    <li><a href="#aprendizaje">Aprendizaje</a></li>
     <li><a href="#trayectoria">Trayectoria</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -308,24 +310,52 @@
   <div class="obra-grid">
 
     <div class="obra-card">
-      <p class="obra-tipo">Saga &nbsp;·&nbsp; Pedagogía financiera</p>
-      <h2 class="obra-titulo">Finanzas bajo sospecha</h2>
-      <p class="obra-desc">Una experiencia narrativa de formación financiera donde cada cifra es una pista y cada decisión revela una verdad empresarial.</p>
-      <a href="finanzas.html" class="obra-accion">Ver episodio piloto</a>
-    </div>
-
-    <div class="obra-card">
       <p class="obra-tipo">Ensayo</p>
       <h2 class="obra-titulo">El inversor inteligente ha muerto</h2>
       <p class="obra-desc">Un ensayo crítico sobre la supervivencia del inversor clásico en un mercado donde los algoritmos aceleran las decisiones y las métricas tradicionales llegan tarde para interpretar la inversión que construye el futuro.</p>
       <a href="ensayo.html" class="obra-accion">Leer introducción</a>
     </div>
 
+  </div>
+</section>
+
+<section id="analisis">
+  <p class="section-label">Análisis</p>
+  <div class="obra-grid">
+
     <div class="obra-card">
-      <p class="obra-tipo">Pensamientos publicados</p>
+      <p class="obra-tipo">Artículos &nbsp;·&nbsp; Reflexiones &nbsp;·&nbsp; Trilogías</p>
       <h2 class="obra-titulo">Artículos y reflexiones</h2>
       <p class="obra-desc">Una recopilación de artículos centrados en finanzas, inteligencia artificial y pensamiento crítico. Textos que combinan análisis, reflexión y una mirada propia sobre los cambios que están transformando la forma en que interpretamos la realidad económica, tecnológica y empresarial.</p>
       <a href="articulos.html" class="obra-accion">Para leer</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="investigacion">
+  <p class="section-label">Investigación</p>
+  <div class="obra-grid">
+
+    <div class="obra-card">
+      <p class="obra-tipo">Working Paper</p>
+      <h2 class="obra-titulo">Neural Arbitration Framework</h2>
+      <p class="obra-desc">Una propuesta arquitectónica sobre el problema de la alucinación en modelos de lenguaje. La alucinación no es un problema de conocimiento. Es un problema de arquitectura.</p>
+      <a href="naf.html" class="obra-accion">Leer abstract</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="aprendizaje">
+  <p class="section-label">Aprendizaje</p>
+  <div class="obra-grid">
+
+    <div class="obra-card">
+      <p class="obra-tipo">Saga &nbsp;·&nbsp; Pedagogía financiera</p>
+      <h2 class="obra-titulo">Finanzas bajo sospecha</h2>
+      <p class="obra-desc">Una experiencia narrativa de formación financiera donde cada cifra es una pista y cada decisión revela una verdad empresarial.</p>
+      <a href="finanzas.html" class="obra-accion">Ver episodio piloto</a>
     </div>
 
     <div class="obra-card">
@@ -360,7 +390,6 @@
 
 <footer>
   <span class="footer-copy">© 2026 Víctor Saavedra &nbsp;·&nbsp; La Laguna, Canarias</span>
-  <span class="footer-marca">Analista · Autor</span>
 </footer>
 
 <script data-goatcounter="https://victorsaavedra.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

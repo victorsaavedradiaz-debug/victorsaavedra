@@ -176,11 +176,12 @@
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
   }
 
-  .site-links { display:flex; align-items:center; gap:1.15rem; margin-left:auto; margin-right:1.5rem; }
+  .site-links { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:1.15rem; margin-left:auto; margin-right:1.5rem; }
   .site-links a { color:#c9a84c; text-decoration:none; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:500; letter-spacing:.13em; text-transform:uppercase; }
   .site-links a:hover { color:#f0ece6; }
   @media (max-width:768px) {
-    .site-links { gap:.75rem; margin-right:0; }
+    nav { flex-wrap:wrap; }
+    .site-links { width:100%; justify-content:center; gap:.75rem 1rem; margin:1rem 0 0; }
     .site-links a { font-size:9px; letter-spacing:.08em; }
   }
 /* NAV_TITLE_SPACING */
@@ -192,7 +193,7 @@
 <nav>
   <a href="/" class="nav-back">← Volver</a>
   <span class="nav-titulo">Finanzas bajo sospecha</span>
-<div class="site-links" aria-label="Navegación principal"><a href="/">Inicio</a><a href="articulos.html">Artículos</a><a href="simuladores.html">Simuladores</a></div></nav>
+<div class="site-links" aria-label="Navegación principal"><a href="index.html#obra">Obra</a><a href="index.html#analisis">Análisis</a><a href="index.html#investigacion">Investigación</a><a href="index.html#aprendizaje">Aprendizaje</a><a href="index.html#trayectoria">Trayectoria</a><a href="index.html#contacto">Contacto</a></div></nav>
 
 <div class="cabecera">
   <p class="cabecera-tipo">Saga · Pedagogía financiera</p>

@@ -19,6 +19,8 @@
     'Working Paper': 'Working Paper',
     'Leer el artículo': 'Read article',
     'Leer abstract': 'Read abstract',
+    'Abrir Neural Arbitration Framework': 'Open Neural Arbitration Framework',
+    'Portada de Neural Arbitration Framework: dos hemisferios cerebrales separados en un escaparate noir bajo la lluvia.': 'Cover of Neural Arbitration Framework: two separated brain hemispheres in a noir shop window under the rain.',
     'Leer introducción': 'Read introduction',
     'Para leer': 'Read',
     'Ver episodio piloto': 'View pilot episode',
@@ -576,14 +578,14 @@
         saveLanguage(selected);
         document.documentElement.lang = selected;
         updateMetadata(selected, page);
-        document.querySelectorAll('nav, footer').forEach(region => translateTree(region, selected, common));
+        document.querySelectorAll('nav, footer, .naf-hero').forEach(region => translateTree(region, selected, common));
       }
     }));
     const target = buttons.find(button => buttonLanguage(button) === lang);
     if (target && !target.classList.contains('active')) target.click();
     document.documentElement.lang = lang;
     updateMetadata(lang, page);
-    document.querySelectorAll('nav, footer').forEach(region => translateTree(region, lang, common));
+    document.querySelectorAll('nav, footer, .naf-hero').forEach(region => translateTree(region, lang, common));
   }
 
   function init() {

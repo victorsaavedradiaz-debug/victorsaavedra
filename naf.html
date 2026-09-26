@@ -5,6 +5,7 @@
 <meta name="description" content="Neural Arbitration Framework. Una propuesta arquitectónica sobre el problema de la alucinación en modelos de lenguaje.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neural Arbitration Framework — Víctor Saavedra</title>
+<link rel="preload" as="image" href="assets/naf/naf-cover-768.webp" imagesrcset="assets/naf/naf-cover-480.webp 480w, assets/naf/naf-cover-768.webp 768w, assets/naf/naf-cover-1024.webp 1024w" imagesizes="(max-width: 768px) calc(100vw - 3rem), 380px" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -25,7 +26,12 @@
   .nav-back:hover { color: var(--oro); }
   .nav-titulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #c8c2b8; font-weight: 400; }
 
-  .cabecera { padding: 5rem 4rem 4rem; border-bottom: 0.5px solid var(--borde); max-width: 860px; }
+  .naf-hero { display: grid; grid-template-columns: minmax(260px, 380px) minmax(0, 1fr); align-items: center; gap: clamp(3rem, 7vw, 7rem); padding: clamp(3rem, 6vw, 6rem) 4rem; border-bottom: 0.5px solid var(--borde); max-width: 1240px; }
+  .naf-cover { position: relative; margin: 0; line-height: 0; }
+  .naf-cover::before { content: ''; position: absolute; inset: -1px; border: 1px solid rgba(201,168,76,0.3); pointer-events: none; z-index: 1; }
+  .naf-cover::after { content: ''; position: absolute; inset: 8% -8% -5% 8%; border: 1px solid rgba(201,168,76,0.12); z-index: -1; }
+  .naf-cover img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; background: #090909; box-shadow: 0 2rem 5rem rgba(0,0,0,0.52); }
+  .cabecera { max-width: 680px; }
   .cabecera-tipo { font-family: 'Cormorant Garamond', serif; font-size: 20px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); font-weight: 500; margin-bottom: 1rem; }
   .cabecera-titulo { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--blanco); line-height: 1.05; margin-bottom: 0.5rem; }
   .cabecera-acronimo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--oro); font-weight: 400; margin-bottom: 1rem; }
@@ -58,7 +64,10 @@
 
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; } .nav-titulo { display: none; }
-    .cabecera { padding: 3rem 1.5rem 2.5rem; } .cabecera-titulo { font-size: 36px; }
+    .naf-hero { grid-template-columns: 1fr; gap: 2.75rem; padding: 2.5rem 1.5rem 3rem; }
+    .naf-cover { width: min(100%, 420px); justify-self: center; }
+    .naf-cover::after { inset: 5% -3% -3% 5%; }
+    .cabecera-titulo { font-size: 36px; }
     .tabs-wrap { padding: 2.5rem 1.5rem 0; }
     .descargas { padding: 2.5rem 1.5rem 4rem; }
     .descargas-grid { grid-template-columns: 1fr; }
@@ -84,12 +93,22 @@
   <span class="nav-titulo">Investigación</span>
 <div class="site-links" aria-label="Navegación principal"><a href="index.html#obra">Obra</a><a href="index.html#articulos">Artículos</a><a href="index.html#investigacion">Investigación</a><a href="index.html#aprendizaje">Aprendizaje</a><a href="index.html#trayectoria">Trayectoria</a><a href="index.html#contacto">Contacto</a></div></nav>
 
-<div class="cabecera">
-  <p class="cabecera-tipo">Working Paper</p>
-  <h1 class="cabecera-titulo">Neural Arbitration Framework</h1>
-  <p class="cabecera-acronimo">NAF</p>
-  <p class="cabecera-subtitulo">A Conceptual Architecture and Research Agenda for Epistemic Arbitration in Large Language Models</p>
-  <p class="cabecera-autor">Víctor Saavedra &nbsp;·&nbsp; Version 5.1 &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; SSRN Preprint</p>
+<div class="naf-hero">
+  <figure class="naf-cover">
+    <img src="assets/naf/naf-cover-768.webp"
+         srcset="assets/naf/naf-cover-480.webp 480w, assets/naf/naf-cover-768.webp 768w, assets/naf/naf-cover-1024.webp 1024w"
+         sizes="(max-width: 768px) calc(100vw - 3rem), 380px"
+         width="1024" height="1536"
+         alt="Portada de Neural Arbitration Framework: dos hemisferios cerebrales separados en un escaparate noir bajo la lluvia."
+         decoding="async" fetchpriority="high">
+  </figure>
+  <div class="cabecera">
+    <p class="cabecera-tipo">Working Paper</p>
+    <h1 class="cabecera-titulo">Neural Arbitration Framework</h1>
+    <p class="cabecera-acronimo">NAF</p>
+    <p class="cabecera-subtitulo">A Conceptual Architecture and Research Agenda for Epistemic Arbitration in Large Language Models</p>
+    <p class="cabecera-autor">Víctor Saavedra &nbsp;·&nbsp; Version 5.1 &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; SSRN Preprint</p>
+  </div>
 </div>
 
 <div class="tabs-wrap">

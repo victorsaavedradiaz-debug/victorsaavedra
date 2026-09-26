@@ -168,6 +168,13 @@
   .obra-card:hover { background: var(--fondo-card2); border-color: #444; }
   .obra-card:hover::before { height: 100%; }
 
+  .obra-card--naf { display: grid; grid-template-columns: minmax(190px, 260px) minmax(0, 1fr); padding: 0; }
+  .obra-card--naf::before { z-index: 2; }
+  .obra-card--naf .obra-contenido { padding: 2.5rem; align-self: center; }
+  .obra-cover-link { display: block; min-height: 360px; overflow: hidden; background: #080808; border-right: 0.5px solid #333; }
+  .obra-cover-link img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 43%; filter: contrast(1.03); transition: transform 0.55s ease, filter 0.35s ease; }
+  .obra-card--naf:hover .obra-cover-link img { transform: scale(1.025); filter: contrast(1.08); }
+
   .obra-tipo {
     font-size: 13px;
     letter-spacing: 0.2em;
@@ -283,6 +290,10 @@
     .hero-tagline { font-size: 18px; }
     section { padding: 3.5rem 1.5rem; }
     .obra-grid { grid-template-columns: 1fr; }
+    .obra-card--naf { grid-template-columns: 1fr; }
+    .obra-card--naf .obra-contenido { padding: 2rem; }
+    .obra-cover-link { min-height: 0; aspect-ratio: 16 / 11; border-right: 0; border-bottom: 0.5px solid #333; }
+    .obra-cover-link img { object-position: center 38%; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 </style>
@@ -336,11 +347,21 @@
   <p class="section-label">Investigación</p>
   <div class="obra-grid">
 
-    <div class="obra-card">
-      <p class="obra-tipo">Working Paper</p>
-      <h2 class="obra-titulo">Neural Arbitration Framework</h2>
-      <p class="obra-desc">Una propuesta arquitectónica sobre el problema de la alucinación en modelos de lenguaje. La alucinación no es un problema de conocimiento. Es un problema de arquitectura.</p>
-      <a href="naf.html" class="obra-accion">Leer abstract</a>
+    <div class="obra-card obra-card--naf">
+      <a href="naf.html" class="obra-cover-link" aria-label="Abrir Neural Arbitration Framework">
+        <img src="assets/naf/naf-cover-480.webp"
+             srcset="assets/naf/naf-cover-480.webp 480w, assets/naf/naf-cover-768.webp 768w"
+             sizes="(max-width: 768px) calc(100vw - 3rem), 260px"
+             width="1024" height="1536"
+             alt="Portada de Neural Arbitration Framework: dos hemisferios cerebrales separados en un escaparate noir bajo la lluvia."
+             loading="lazy" decoding="async">
+      </a>
+      <div class="obra-contenido">
+        <p class="obra-tipo">Working Paper</p>
+        <h2 class="obra-titulo">Neural Arbitration Framework</h2>
+        <p class="obra-desc">Una propuesta arquitectónica sobre el problema de la alucinación en modelos de lenguaje. La alucinación no es un problema de conocimiento. Es un problema de arquitectura.</p>
+        <a href="naf.html" class="obra-accion">Leer abstract</a>
+      </div>
     </div>
 
   </div>

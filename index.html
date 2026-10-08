@@ -146,6 +146,39 @@
     gap: 1.5px;
   }
 
+  .obra-categorias {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+
+  .obra-categoria {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .obra-categoria .obra-grid { flex: 1; }
+
+  .obra-categoria .obra-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .obra-categoria .obra-accion {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  .obra-categoria-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--blanco);
+    margin-bottom: 1rem;
+  }
+
   .obra-card {
     background: var(--fondo-card);
     border: 0.5px solid #333;
@@ -283,6 +316,7 @@
     .hero-tagline { font-size: 18px; }
     section { padding: 3.5rem 1.5rem; }
     .obra-grid { grid-template-columns: 1fr; }
+    .obra-categorias { grid-template-columns: 1fr; gap: 2.75rem; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 </style>
@@ -307,15 +341,30 @@
 
 <section id="obra">
   <p class="section-label">Obra</p>
-  <div class="obra-grid">
-
-    <div class="obra-card">
-      <p class="obra-tipo">Ensayo</p>
-      <h2 class="obra-titulo">El inversor inteligente ha muerto</h2>
-      <p class="obra-desc">Un ensayo crítico sobre la supervivencia del inversor clásico en un mercado donde los algoritmos aceleran las decisiones y las métricas tradicionales llegan tarde para interpretar la inversión que construye el futuro.</p>
-      <a href="ensayo.html" class="obra-accion">Leer introducción</a>
+  <div class="obra-categorias">
+    <div class="obra-categoria">
+      <h2 class="obra-categoria-titulo">Ensayos</h2>
+      <div class="obra-grid">
+        <article class="obra-card">
+          <p class="obra-tipo">Ensayo</p>
+          <h3 class="obra-titulo">El inversor inteligente ha muerto</h3>
+          <p class="obra-desc">Un ensayo crítico sobre la supervivencia del inversor clásico en un mercado donde los algoritmos aceleran las decisiones y las métricas tradicionales llegan tarde para interpretar la inversión que construye el futuro.</p>
+          <a href="ensayo.html" class="obra-accion">Leer introducción</a>
+        </article>
+      </div>
     </div>
 
+    <div class="obra-categoria">
+      <h2 class="obra-categoria-titulo">Narrativa documental</h2>
+      <div class="obra-grid">
+        <article class="obra-card">
+          <p class="obra-tipo">Narrativa documental</p>
+          <h3 class="obra-titulo">Niebla sobre el Estrecho</h3>
+          <p class="obra-desc">Una crisis en Ceuta abre una investigación sobre Marruecos, España y el equilibrio estratégico en el Estrecho.</p>
+          <a href="niebla-sobre-el-estrecho.html" class="obra-accion">Leer obra</a>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 

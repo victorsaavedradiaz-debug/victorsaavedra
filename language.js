@@ -1,3 +1,10 @@
+window.goatcounter = {
+  path: function () {
+    var path = location.pathname || '/';
+    return path === '/index.html' ? '/' : path;
+  }
+};
+
 (function () {
   'use strict';
 

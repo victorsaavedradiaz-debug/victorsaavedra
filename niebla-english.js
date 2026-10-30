@@ -4,6 +4,9 @@
   const story = document.getElementById('niebla-story');
   if (!story) return;
 
+  const cover = document.querySelector('.articulo-imagen');
+  const spanishCover = 'portada-niebla-sobre-el-estrecho.png';
+  const englishCover = 'portada-niebla-sobre-el-estrecho-en.png';
   const spanish = story.innerHTML;
   const english = `
 <h2>I. On the Ground</h2>
@@ -373,6 +376,12 @@
 
   function applyLanguage(lang) {
     story.innerHTML = lang === 'en' ? english : spanish;
+    if (cover) {
+      cover.src = lang === 'en' ? englishCover : spanishCover;
+      cover.alt = lang === 'en'
+        ? 'Black-and-white cover of Fog over the Strait'
+        : 'Portada en blanco y negro de Niebla sobre el Estrecho';
+    }
   }
 
   function currentLanguage() {

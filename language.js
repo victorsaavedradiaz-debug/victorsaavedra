@@ -56,6 +56,10 @@ window.goatcounter = {
         'Con la fea costumbre de pensar fuera de la caja.': 'With an inconvenient habit of thinking outside the box.',
         'El inversor inteligente ha muerto': 'The Intelligent Investor Is Dead',
         'Un ensayo crítico sobre la supervivencia del inversor clásico en un mercado donde los algoritmos aceleran las decisiones y las métricas tradicionales llegan tarde para interpretar la inversión que construye el futuro.': 'A critical essay on the survival of the classical investor in a market where algorithms accelerate decisions and traditional metrics arrive too late to interpret the investment that builds the future.',
+        'Narrativa documental': 'Documentary narrative',
+        'Niebla sobre el Estrecho': 'Fog over the Strait',
+        'Una crisis en Ceuta abre una investigación sobre Marruecos, España y el equilibrio estratégico en el Estrecho.': 'A crisis in Ceuta opens an investigation into Morocco, Spain and the strategic balance in the Strait.',
+        'Leer obra': 'Read the story',
         'Artículos y reflexiones': 'Articles & Reflections',
         'Una recopilación de artículos centrados en finanzas, inteligencia artificial y pensamiento crítico. Textos que combinan análisis, reflexión y una mirada propia sobre los cambios que están transformando la forma en que interpretamos la realidad económica, tecnológica y empresarial.': 'A collection of articles on finance, artificial intelligence and critical thinking. Essays that combine analysis, reflection and an independent view of the changes reshaping how we interpret economic, technological and business reality.',
         'Una propuesta arquitectónica sobre el problema de la alucinación en modelos de lenguaje. La alucinación no es un problema de conocimiento. Es un problema de arquitectura.': 'An architectural proposal addressing hallucination in language models. Hallucination is not a knowledge problem. It is an architecture problem.',
@@ -69,6 +73,19 @@ window.goatcounter = {
         'Con el tiempo, mi trabajo ha evolucionado hacia una visión más integradora: finanzas, pensamiento crítico, tecnología e inteligencia artificial. Sigo explorando nuevas formas de análisis y comunicación porque creo que la forma en que entendemos nuestro entorno determina lo que somos capaces de hacer con él.': 'Over time, my work has evolved towards a more integrated view of finance, critical thinking, technology and artificial intelligence. I continue to explore new forms of analysis and communication because I believe that how we understand our environment determines what we are able to do within it.',
         'Nada de este recorrido se ha construido en solitario. En cada idea, en cada pregunta y en cada forma de mirar hay algo de quienes compartieron conmigo su conocimiento, su confianza, sus dudas o su manera de entender el mundo. Esta página es también una forma de reunir parte de lo recibido y devolverlo convertido en pensamiento, relato y experiencia.': 'None of this journey was built alone. Every idea, every question and every way of seeing carries something from those who shared their knowledge, trust, doubts or understanding of the world with me. This website is also a way of gathering part of what I have received and returning it as thought, narrative and experience.',
         'Para consultas sobre derechos de uso de obra literaria, colaboraciones editoriales o cualquier otro asunto.': 'For enquiries about rights to use literary works, editorial collaborations or any other matter.'
+      }
+    },
+    'niebla-sobre-el-estrecho.html': {
+      title: 'Fog over the Strait — Víctor Saavedra',
+      description: 'A documentary narrative about a crisis in Ceuta and the strategic questions it raises for Spain, Morocco and the United States.',
+      strings: {
+        '← Obra': '← Work',
+        'Narrativa documental': 'Documentary narrative',
+        'Niebla sobre el Estrecho': 'Fog over the Strait',
+        'Portada en blanco y negro de Niebla sobre el Estrecho': 'Black-and-white cover of Fog over the Strait',
+        'Víctor Saavedra · Analista financiero · Asesor empresarial · Educador': 'Víctor Saavedra · Financial analyst · Business adviser · Educator',
+        'Volver a Obra →': 'Back to Work →',
+        '© 2026 Víctor Saavedra · La Laguna, Islas Canarias': '© 2026 Víctor Saavedra · La Laguna, Canary Islands'
       }
     },
     'victor-saavedra.html': { alias: 'index.html' },
